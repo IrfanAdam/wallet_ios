@@ -10,7 +10,9 @@ struct AnalyticsSheet: View {
                 SpendingSheetView()
             }
             .frame(maxWidth: .infinity, alignment: .topLeading) // aligns to top left
-            .padding()
+            .padding(0)
+            
+            VStack(spacing: 20) { ForEach(1...10, id: \.self) { i in Text("Item \(i)") .frame(maxWidth: .infinity) .cornerRadius(8) } }
         }
         .presentationDetents([.height(420), .medium, .large])
         .presentationDragIndicator(.visible)

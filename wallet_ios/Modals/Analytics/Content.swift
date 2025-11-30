@@ -1,86 +1,123 @@
 import SwiftUI
-import Charts
 
 struct SpendingData: Identifiable {
     let id = UUID()
     let month: String
     let spent: Double
     let received: Double
+    let isGhost: Bool    // For faded future months
+    
+    init(month: String, spent: Double, received: Double, isGhost: Bool = false) {
+            self.month = month
+            self.spent = spent
+            self.received = received
+            self.isGhost = isGhost
+        }
+}
+
+struct SpendingChartStyle {
+    var barWidth: CGFloat = 20
+    var barSpacing: CGFloat = 2
+    var chartHeight: CGFloat = 150
+    var cornerRadius: CGFloat = 6
+    var highlightPadding: CGFloat = 4
+    var highlightBorder: CGFloat = 3.2
+    var opacityGhost: CGFloat = 0.25
+    var verticalGap: CGFloat = 1.5
 }
 
 struct SpendingSheetView: View {
-    @State private var data: [SpendingData] = [
-        .init(month: "Apr", spent: 1200, received: 300),
-        .init(month: "May", spent: 900, received: 400),
-        .init(month: "Jun", spent: 800, received: 600),
-        .init(month: "Jul", spent: 1100, received: 500),
-        .init(month: "Aug", spent: 1200, received: 200),
+    @State private var selectedIndex: Int = 7   // August selected
+    
+    private var data: [SpendingData] = [
+        .init(month: "JAN", spent: 24, received: 120),
+        .init(month: "FEB", spent: 80, received: 32),
+        .init(month: "MAR", spent: 100, received: 42),
+        .init(month: "APR", spent: 200, received: 50),
+        .init(month: "MAY", spent: 120, received: 90),
+        .init(month: "JUN", spent: 80,  received: 60),
+        .init(month: "JUL", spent: 150, received: 70),
+        .init(month: "AUG", spent: 180, received: 100),
+        .init(month: "SEP", spent: 90,  received: 20, isGhost: true),
+        .init(month: "OCT", spent: 70,  received: 10, isGhost: true),
+        .init(month: "NOV", spent: 40,  received: 10, isGhost: true)
     ]
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Your Spendings")
-                .font(.title2)
-                .bold()
-            
-            // Chart
-            Chart {
-                ForEach(data) { entry in
-                    BarMark(
-                        x: .value("Month", entry.month),
-                        y: .value("Spent", entry.spent)
-                    )
-                    .foregroundStyle(Color.blue)
-                    
-                    BarMark(
-                        x: .value("Month", entry.month),
-                        y: .value("Received", entry.received)
-                    )
-                    .foregroundStyle(Color.green)
-                }
+    // Shared editable chart values
+    let style = SpendingChartStyle()
+    
+    private var maxValue: Double {
+            data.map { $0.spent + $0.received }.max() ?? 1
+        }
+        
+        var body: some View {
+            VStack(spacing: 16) {
+                chart
+                details
             }
-            .chartLegend(position: .bottom)
-            .frame(height: 220)
-            .padding(.horizontal)
-            
-            // Selected month summary
-            VStack(spacing: 8) {
-                HStack {
-                    Text("August 2025")
-                        .font(.headline)
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("- CFA 1200")
-                            .foregroundColor(.blue)
-                        Text("+ CFA 200")
-                            .foregroundColor(.green)
+            .padding(0)
+        }
+        
+        private var chart: some View {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .bottom, spacing: style.barSpacing) {
+                    ForEach(Array(data.enumerated()), id: \.1.id) { index, entry in
+                        VStack(spacing: 4) {
+                            HStack(alignment: .bottom, spacing: 2) {
+                                VStack(spacing: style.verticalGap) {
+                                    Color.green
+                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                                        .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
+                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                    
+         
+                                }
+                                .frame(width: style.barWidth)
+                                
+                                VStack(spacing: style.verticalGap) {
+                                    Color.blue
+                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                                        .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
+                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                    
+                                    Color.blue
+                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                                        .frame(height: CGFloat(entry.spent / maxValue) * style.chartHeight * 0.75)
+                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                }
+                                .frame(width: style.barWidth)
+                            }
+                            .padding(4)
+                            .background(
+                                RoundedRectangle(cornerRadius: style.cornerRadius)
+                                    .stroke(index == selectedIndex ? Color.black.opacity(1) : Color.clear,
+                                            lineWidth: style.highlightBorder)
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius))
+
+
+                            
+                            // Month label
+                            Text(entry.month)
+                                .font(.caption)
+                                .foregroundColor(.black.opacity(entry.isGhost ? 0.3 : 0.8))
+                        }
                     }
                 }
-                
-                Text("By adding additional CFA 800 this month you’re more likely to meet your set target in time")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    Button("I trust myself") { }
-                        .buttonStyle(.bordered)
-                    Button("Explore Loans") { }
-                        .buttonStyle(.borderedProminent)
-                }
+                .padding(0)
+                .frame(height: style.chartHeight + 30)
             }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            .padding()
-            
-            VStack(spacing: 20) {
-                ForEach(1...50, id: \.self) { i in
-                    Text("Item \(i)")
-                        .frame(maxWidth: .infinity)
-                        .cornerRadius(8)
-                }
+            .frame(height: style.chartHeight + 50)
+        }
+        
+        private var details: some View {
+            VStack(spacing: 12) {
+                Text("Details Section Placeholder")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                Divider()
             }
         }
-        .padding(.top)
-    }
 }
 
 #Preview {
