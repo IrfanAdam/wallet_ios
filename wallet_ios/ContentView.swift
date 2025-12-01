@@ -14,8 +14,6 @@ struct AppView: View {
                 }.sheet(isPresented: $showDetails) {
                     AnalyticsSheet()
                 }
-
-               Spacer()
             }
             .navigationTitle("Native Toolbar") // Native toolbar title
             .toolbar {

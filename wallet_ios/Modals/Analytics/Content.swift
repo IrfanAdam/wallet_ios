@@ -16,9 +16,9 @@ struct SpendingData: Identifiable {
 }
 
 struct SpendingChartStyle {
-    var barWidth: CGFloat = 20
-    var barSpacing: CGFloat = 2
-    var chartHeight: CGFloat = 150
+    var barWidth: CGFloat = 16
+    var barSpacing: CGFloat = 0
+    var chartHeight: CGFloat = 240
     var cornerRadius: CGFloat = 6
     var highlightPadding: CGFloat = 4
     var highlightBorder: CGFloat = 3.2
@@ -59,56 +59,65 @@ struct SpendingSheetView: View {
         }
         
         private var chart: some View {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .bottom, spacing: style.barSpacing) {
-                    ForEach(Array(data.enumerated()), id: \.1.id) { index, entry in
-                        VStack(spacing: 4) {
-                            HStack(alignment: .bottom, spacing: 2) {
-                                VStack(spacing: style.verticalGap) {
-                                    Color.green
-                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
-                                        .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
-                                    
-         
-                                }
-                                .frame(width: style.barWidth)
-                                
-                                VStack(spacing: style.verticalGap) {
-                                    Color.blue
-                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
-                                        .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
-                                    
-                                    Color.blue
-                                        .opacity(entry.isGhost ? style.opacityGhost : 1.0)
-                                        .frame(height: CGFloat(entry.spent / maxValue) * style.chartHeight * 0.75)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
-                                }
-                                .frame(width: style.barWidth)
-                            }
-                            .padding(4)
-                            .background(
-                                RoundedRectangle(cornerRadius: style.cornerRadius)
-                                    .stroke(index == selectedIndex ? Color.black.opacity(1) : Color.clear,
-                                            lineWidth: style.highlightBorder)
-                            )
-                            .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius))
-
-
-                            
-                            // Month label
-                            Text(entry.month)
-                                .font(.caption)
-                                .foregroundColor(.black.opacity(entry.isGhost ? 0.3 : 0.8))
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .bottom, spacing: style.barSpacing) {
+                        ForEach(Array(data.enumerated()), id: \.1.id) { index, entry in
+                            content(for: entry, index: index)
+                                .id(index)   // ← IMPORTANT
                         }
                     }
                 }
-                .padding(0)
-                .frame(height: style.chartHeight + 30)
+                .onAppear {
+                    // Jump to the last item
+                    if let lastIndex = data.indices.last {
+                        proxy.scrollTo(lastIndex, anchor: .trailing)
+                    }
+                }
             }
             .frame(height: style.chartHeight + 50)
+            
         }
+    
+        @ViewBuilder
+        private func content(for entry: SpendingData, index: Int) -> some View {
+            VStack(spacing: 4) {
+                HStack(alignment: .bottom, spacing: 2) {
+                    VStack(spacing: style.verticalGap) {
+                        Color.green
+                            .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                            .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
+                            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                    }
+                    .frame(width: style.barWidth)
+
+                    VStack(spacing: style.verticalGap) {
+                        Color.blue
+                            .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                            .frame(height: CGFloat(entry.received / maxValue) * style.chartHeight * 0.75)
+                            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+
+                        Color.blue
+                            .opacity(entry.isGhost ? style.opacityGhost : 1.0)
+                            .frame(height: CGFloat(entry.spent / maxValue) * style.chartHeight * 0.75)
+                            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                    }
+                    .frame(width: style.barWidth)
+                }
+                .padding(4)
+                .background(
+                    RoundedRectangle(cornerRadius: style.cornerRadius)
+                        .stroke(index == selectedIndex ? Color.black.opacity(1) : Color.clear,
+                                lineWidth: style.highlightBorder)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius))
+
+                Text(entry.month)
+                    .font(.caption)
+                    .foregroundColor(.black.opacity(entry.isGhost ? 0.3 : 0.8))
+            }
+        }
+
         
         private var details: some View {
             VStack(spacing: 12) {
