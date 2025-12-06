@@ -29,7 +29,7 @@ struct Level2View: View {
         }
         .padding()
         .sheet(isPresented: $showLevel3) {
-            Level3View()
+            Level2View()
                 .presentationSizing(.page)
                 .presentationDragIndicator(.visible)
         }

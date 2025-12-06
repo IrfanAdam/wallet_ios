@@ -1,18 +1,25 @@
 import SwiftUI
 
 struct BottomToPageDemo: View {
-    @State private var showBottomSheet = false
+	@State private var showBottomSheet = false
 
-    var body: some View {
-        Button("Open Bottom Sheet") {
-            showBottomSheet = true
-        }
-        .sheet(isPresented: $showBottomSheet) {
-            BottomSheetLevel()
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
-        }
-    }
+	var body: some View {
+		VStack(spacing: 20) {
+			Button("Open Bottom Sheet") {
+				showBottomSheet = true
+			}
+			Spacer()
+			Button("Open Bottom Sheet") {
+				showBottomSheet = true
+			}
+		}
+		.sheet(isPresented: $showBottomSheet) {
+			BottomSheetLevel()
+				.presentationDetents([.medium, .large])
+				.presentationDragIndicator(.visible)
+				.presentationBackgroundInteraction(.enabled)
+		}
+	}
 }
 
 struct BottomSheetLevel: View {
