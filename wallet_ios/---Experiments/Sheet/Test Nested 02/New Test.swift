@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct ContentView: View {
+struct TestSheet: View {
 	@State private var showSheet = false
 	@State private var sheetHeight: CGFloat = 200
-	@State private var currentView: SheetViewType = .viewA
-	
+	@State private var currentView: SheetView = .viewA
+
 	var body: some View {
 		Button("Open Sheet") {
 			showSheet = true
@@ -18,13 +18,13 @@ struct ContentView: View {
 }
 
 // MARK: - View Types
-enum SheetViewType: CaseIterable {
+enum SheetView: CaseIterable {
 	case viewA, viewB, viewC
 }
 
 // MARK: - Sheet Container (bottom-aligned fix)
 struct SheetContainer: View {
-	@Binding var currentView: SheetViewType
+	@Binding var currentView: SheetView
 	@Binding var sheetHeight: CGFloat
 
 	var body: some View {
@@ -33,17 +33,17 @@ struct SheetContainer: View {
 			// Content
 			Group {
 				switch currentView {
-				case .viewA: ViewA().transition(.blurReplace)
-				case .viewB: ViewB().transition(.blurReplace)
-				case .viewC: ViewC().transition(.blurReplace)
+				case .viewA: ViewA0().transition(.blurReplace)
+				case .viewB: ViewB0().transition(.blurReplace)
+				case .viewC: ViewC0().transition(.blurReplace)
 				}
 			}
 
 			// Controls stay fixed at bottom visually
 			Picker("Views", selection: $currentView) {
-				Text("A").tag(SheetViewType.viewA)
-				Text("B").tag(SheetViewType.viewB)
-				Text("C").tag(SheetViewType.viewC)
+				Text("A").tag(SheetView.viewA)
+				Text("B").tag(SheetView.viewB)
+				Text("C").tag(SheetView.viewC)
 			}
 			.pickerStyle(.segmented)
 			.padding(.horizontal)
@@ -56,7 +56,7 @@ struct SheetContainer: View {
 }
 
 // MARK: - Sample Views
-struct ViewA: View {
+struct ViewA0: View {
 	var body: some View {
 		Color.blue.opacity(0.48)
 			.frame(height: 150)
@@ -66,7 +66,7 @@ struct ViewA: View {
 	}
 }
 
-struct ViewB: View {
+struct ViewB0: View {
 	var body: some View {
 		Color.green.opacity(0.48)
 			.frame(height: 300)
@@ -76,7 +76,7 @@ struct ViewB: View {
 	}
 }
 
-struct ViewC: View {
+struct ViewC0: View {
 	var body: some View {
 		Color.orange.opacity(0.48)
 			.frame(height: 540)
@@ -138,5 +138,5 @@ extension View {
 
 // MARK: - Preview
 #Preview {
-	ContentView()
+	TestSheet()
 }

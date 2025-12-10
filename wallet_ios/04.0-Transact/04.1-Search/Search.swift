@@ -59,6 +59,7 @@ struct SearchPage: View {
 			.navigationTitle("Send Money To")
 
 			.toolbar { toolbarContent }
+
 			.toolbar(.visible, for: .navigationBar)
 			.toolbarBackground(.visible, for: .navigationBar)
 			.navigationDestination(isPresented: $showPaymentView) {

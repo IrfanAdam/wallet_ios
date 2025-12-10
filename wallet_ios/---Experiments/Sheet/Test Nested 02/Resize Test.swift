@@ -13,9 +13,9 @@ struct ContentView: View {
 				VStack(alignment: .trailing, spacing: 20) {
 					Group {
 						switch currentView {
-						case .viewA: ViewA()
-						case .viewB: ViewB()
-						case .viewC: ViewC()
+						case .viewA: ViewA().transition(.blurReplace)
+						case .viewB: ViewB().transition(.blurReplace)
+						case .viewC: ViewC().transition(.blurReplace)
 						}
 					}
 					.id(currentView)
@@ -63,7 +63,7 @@ struct DynamicSheet<Content: View>: View {
 			.onGeometryChange(for: CGSize.self) {
 				$0.size
 			} action: { newValue in
-				var newH = min(newValue.height, windowSize.height * 0.9)
+				let newH = min(newValue.height, windowSize.height * 0.9)
 				if sheetHeight == .zero {
 					sheetHeight = newH
 				} else {
