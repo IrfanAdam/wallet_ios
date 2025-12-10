@@ -50,6 +50,7 @@ struct HomeView: View {
 }
 
 struct PaymentActionsGrid: View {
+	@State private var detent: PresentationDetent = .large
 	@State private var showPageSheet = false
 	let actions: [PaymentAction] = [
 		PaymentAction(title: "Pay", icon: "arrow.up") { print("Pay tapped") },
@@ -77,8 +78,8 @@ struct PaymentActionsGrid: View {
 			.padding(.horizontal, 20)
 		}
 		.sheet(isPresented: $showPageSheet) {
-			SearchPage()
-				.presentationSizing(.page)
+			SearchPage(detent: $detent)
+				.presentationDetents([.medium, .large], selection: $detent)
 				.presentationDragIndicator(.visible)
 		}
 	}

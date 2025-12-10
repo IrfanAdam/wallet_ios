@@ -1,8 +1,11 @@
 import SwiftUI
 
 struct SearchPage: View {
+	@Binding var detent: PresentationDetent
 	@State private var selectedTab: Int = 0
+	@State private var showPaymentView = false
 	@Environment(\.dismiss) private var dismiss
+	@Namespace private var namespace
 
 	var body: some View {
 		NavigationStack {
@@ -21,6 +24,12 @@ struct SearchPage: View {
 							.padding(.horizontal, 0)
 							.padding(.vertical, 0)
 							.listRowInsets(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+							.onTapGesture {
+								detent = .medium
+								withAnimation(.easeInOut(duration: 0.28)) {
+									showPaymentView = true
+								}
+							}
 						}
 
 				} header: {
@@ -43,12 +52,18 @@ struct SearchPage: View {
 			.listSectionMargins(.vertical, 0)
 			.listSectionSpacing(0)
 			.listStyle(.plain)
+			.matchedGeometryEffect(id: "search_page", in: namespace)
 			.background(
 				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
 			)
 			.navigationTitle("Send Money To")
 
 			.toolbar { toolbarContent }
+			.toolbar(.visible, for: .navigationBar)
+			.toolbarBackground(.visible, for: .navigationBar)
+			.navigationDestination(isPresented: $showPaymentView) {
+				InitiatePayment().navigationTransition(.zoom(sourceID: "search_page", in: namespace))
+			}
 		}
 	}
 
@@ -102,5 +117,5 @@ struct SearchPage: View {
 }
 
 #Preview {
-	SearchPage()
+	SearchPage(detent: .constant(.large))
 }

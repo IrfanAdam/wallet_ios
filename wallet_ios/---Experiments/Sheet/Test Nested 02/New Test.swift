@@ -12,7 +12,6 @@ struct ContentView: View {
 		.sheet(isPresented: $showSheet) {
 			SheetContainer(currentView: $currentView,
 										 sheetHeight: $sheetHeight)
-			.background(Color.white)
 			.smoothSheetHeight($sheetHeight)
 		}
 	}
@@ -23,40 +22,43 @@ enum SheetViewType: CaseIterable {
 	case viewA, viewB, viewC
 }
 
-// MARK: - Sheet Container
+// MARK: - Sheet Container (bottom-aligned fix)
 struct SheetContainer: View {
 	@Binding var currentView: SheetViewType
 	@Binding var sheetHeight: CGFloat
-	
+
 	var body: some View {
-		VStack(alignment: .trailing, spacing: 20) {
+		VStack(spacing: 0) {
+
+			// Content
 			Group {
 				switch currentView {
-				case .viewA: ViewA()
-				case .viewB: ViewB()
-				case .viewC: ViewC()
+				case .viewA: ViewA().transition(.blurReplace)
+				case .viewB: ViewB().transition(.blurReplace)
+				case .viewC: ViewC().transition(.blurReplace)
 				}
 			}
-			
+
+			// Controls stay fixed at bottom visually
 			Picker("Views", selection: $currentView) {
 				Text("A").tag(SheetViewType.viewA)
 				Text("B").tag(SheetViewType.viewB)
 				Text("C").tag(SheetViewType.viewC)
 			}
 			.pickerStyle(.segmented)
-			.padding()
+			.padding(.horizontal)
+			.padding(.bottom, 14)
 		}
-		.background(Color.white)
 		.measureH($sheetHeight)
-		.animation(.easeInOut(duration: 0.2), value: sheetHeight)
-		.animation(.easeInOut(duration: 0.2), value: currentView)
+		.animation(.easeInOut(duration: 0.16), value: currentView)
+		.animation(.easeInOut(duration: 0.24), value: sheetHeight)
 	}
 }
 
 // MARK: - Sample Views
 struct ViewA: View {
 	var body: some View {
-		Color.blue.opacity(0.2)
+		Color.blue.opacity(0.48)
 			.frame(height: 150)
 			.overlay(Text("View A – 150px"))
 			.cornerRadius(12)
@@ -66,7 +68,7 @@ struct ViewA: View {
 
 struct ViewB: View {
 	var body: some View {
-		Color.green.opacity(0.2)
+		Color.green.opacity(0.48)
 			.frame(height: 300)
 			.overlay(Text("View B – 300px"))
 			.cornerRadius(12)
@@ -76,9 +78,9 @@ struct ViewB: View {
 
 struct ViewC: View {
 	var body: some View {
-		Color.orange.opacity(0.2)
-			.frame(height: 450)
-			.overlay(Text("View C – 450px"))
+		Color.orange.opacity(0.48)
+			.frame(height: 540)
+			.overlay(Text("View C – 540px"))
 			.cornerRadius(12)
 			.padding()
 	}
