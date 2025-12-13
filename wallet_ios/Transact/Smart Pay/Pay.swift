@@ -8,19 +8,18 @@ struct InitiatePayment: View {
 	var body: some View {
 		NavigationStack {
 			VStack(spacing: 20) {
-				Text("Payment Screen")
-					.font(.title)
-					.foregroundColor(.primary)
-
-				// Add UI here later
+				SimpleFlowWrap(
+					items: FlowSentenceRenderer.makeItems(
+						primary: "Jabari M. will send CFA 1500",
+						secondary: "for Groceries"
+					)
+				).padding(.horizontal)
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(
 				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
-			).navigationTitle("Payment To")
-				.navigationBarBackButtonHidden(true)
-				.navigationBarTitleDisplayMode(.large)
-				.toolbar { toolbarContent }
+			).navigationBarBackButtonHidden(true)
+			.toolbar { toolbarContent }
 		}
 	}
 
@@ -68,6 +67,39 @@ struct InitiatePayment: View {
 		}
 	}
 
+}
+
+struct FlowSentenceRenderer {
+	
+	static func makeItems(
+		primary: String,
+		secondary: String
+	) -> [AnyView] {
+		
+		let primaryWords = sentenceToAnyViewComponents(primary) { word in
+			AnyView(
+				Text(word)
+					.font(.custom("OpenRunde-Bold", size: 36))
+					.kerning(-0.2)
+					.foregroundStyle(Color(red: 0.11, green: 0.18, blue: 0.23))
+			)
+		}
+		
+		let secondaryWords = sentenceToAnyViewComponents(secondary) { word in
+			AnyView(
+				Text(word)
+					.font(.custom("OpenRunde-Bold", size: 36))
+					.kerning(-0.2)
+					.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
+			)
+		}
+		
+		return primaryWords
+		+ [AnyView(Pill(text: "Daylies"))]
+		+ secondaryWords
+		+ [AnyView(Pill(text: "Category"))]
+		+ secondaryWords
+	}
 }
 
 #Preview {

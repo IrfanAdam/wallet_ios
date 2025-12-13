@@ -43,6 +43,8 @@
 		15DA4B492EEBFD100046EBC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15DA4B252EEBFD100046EBC6 /* Assets.xcassets */; };
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
+		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
+		EE9C148A2EEDB2C8003A5926 /* DismissableSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurReplace.swift; sourceTree = "<group>"; };
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
+		EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 		15DA4B052EEBFD100046EBC6 /* Test Nested 02 */ = {
 			isa = PBXGroup;
 			children = (
+				EE9C14872EED7929003A5926 /* ToolbarMorph.swift */,
 				15DA4B002EEBFD100046EBC6 /* Draggable Version.swift */,
 				15DA4B012EEBFD100046EBC6 /* Morphy.swift */,
 				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
@@ -134,6 +139,7 @@
 				15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */,
 				15DA4B032EEBFD100046EBC6 /* New Test.swift */,
 				15DA4B042EEBFD100046EBC6 /* Resize Test.swift */,
+				EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */,
 			);
 			path = "Test Nested 02";
 			sourceTree = "<group>";
@@ -357,9 +363,11 @@
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* ActualUse.swift in Sources */,
+				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */,
 				15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */,
+				EE9C148A2EEDB2C8003A5926 /* DismissableSheet.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */,

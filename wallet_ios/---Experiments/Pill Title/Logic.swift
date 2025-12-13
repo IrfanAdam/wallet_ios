@@ -2,7 +2,8 @@ import SwiftUI
 
 struct SimpleFlowWrap: View {
 	let items: [AnyView]
-	let spacing: CGFloat = 6
+	let hSpacing: CGFloat = 6
+	let vSpacing: CGFloat = 0
 
 	 
 	@State private var sizes: [CGSize]
@@ -17,9 +18,9 @@ struct SimpleFlowWrap: View {
 			let maxWidth = geo.size.width
 			let rows = computeRows(maxWidth: maxWidth)
 
-			VStack(alignment: .leading, spacing: spacing) {
+			VStack(alignment: .leading, spacing: vSpacing) {
 				ForEach(rows.indices, id: \.self) { rowIndex in
-					HStack(spacing: spacing) {
+					HStack(spacing: hSpacing) {
 						ForEach(rows[rowIndex], id: \.self) { index in
 							items[index]
 								.fixedSize() // avoid unnecessary resizing
@@ -32,11 +33,13 @@ struct SimpleFlowWrap: View {
 								)
 						}
 					}
+					.padding(0)
 				}
 			}
+			.padding(0)
 			.frame(maxWidth: .infinity, alignment: .leading)
 		}
-		.padding()
+		.padding(0)
 	}
 
 	private func computeRows(maxWidth: CGFloat) -> [[Int]] {
@@ -47,13 +50,13 @@ struct SimpleFlowWrap: View {
 		for index in items.indices {
 			let itemWidth = sizes[index].width
 
-			if currentWidth + itemWidth + spacing > maxWidth {
+			if currentWidth + itemWidth + hSpacing > maxWidth {
 				rowIndex += 1
 				rows.append([index])
-				currentWidth = itemWidth + spacing
+				currentWidth = itemWidth + hSpacing
 			} else {
 				rows[rowIndex].append(index)
-				currentWidth += itemWidth + spacing
+				currentWidth += itemWidth + hSpacing
 			}
 		}
 		return rows

@@ -22,7 +22,7 @@ struct AppView: View {
 
 					}
 
-					Tab {RoundedDonut_Chart()} label: {
+					Tab {SeamlessPageNavDemo()} label: {
 
 							Image(systemName: "person.fill")
 							Text("Profile")
