@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct HomeView: View {
-
 	@State private var showDetails = false
 	var body: some View {
 		// First tab
@@ -50,6 +49,7 @@ struct HomeView: View {
 }
 
 struct PaymentActionsGrid: View {
+	@Namespace private var morphNS
 	@State private var detent: PresentationDetent = .large
 	@State private var showPageSheet = false
 	let actions: [PaymentAction] = [
@@ -78,7 +78,7 @@ struct PaymentActionsGrid: View {
 			.padding(.horizontal, 20)
 		}
 		.sheet(isPresented: $showPageSheet) {
-			SearchPage(detent: $detent)
+			SearchPage(detent: $detent, namespace: morphNS)
 				.presentationDetents([.medium, .large], selection: $detent)
 				.presentationDragIndicator(.visible)
 		}

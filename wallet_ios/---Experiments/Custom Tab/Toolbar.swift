@@ -84,7 +84,7 @@ struct CustomTab: View {
 		.background(
 				RoundedRectangle(cornerRadius: 32)
 					.fill(Color.blue.opacity(selectedTab == tag ? 0.18 : 0))
-					.frame(width: 80, height: 54)
+					.frame(width: 72, height: 54)
 					.transition(.scale.combined(with: .opacity)).glassEffect()
 		)
 	}

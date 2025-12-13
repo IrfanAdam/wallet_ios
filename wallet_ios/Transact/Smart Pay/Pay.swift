@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct InitiatePayment: View {
+	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
 	@Environment(\.dismiss) private var dismiss
 
@@ -70,5 +71,13 @@ struct InitiatePayment: View {
 }
 
 #Preview {
-	InitiatePayment()
+	PreviewContainer()
+}
+
+private struct PreviewContainer: View {
+	@Namespace var ns
+
+	var body: some View {
+		InitiatePayment(namespace: ns)
+	}
 }

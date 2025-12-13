@@ -7,40 +7,50 @@ struct AppView: View {
 	@State private var isSearchActive = false
 
 	var body: some View {
-		ZStack(alignment: .bottom) {
 			HStack(alignment: .bottom) {
 				TabView {
-					Tab("", systemImage: "house.fill") {
-						HomeView()
+					Tab {HomeView()} label: {
+							Image(systemName: "house.fill")
+							Text("Home")
+
 					}
 
-					Tab("", systemImage: "chart.bar.fill") {
-						RoundedDonut_Chart()
+					Tab {RoundedDonut_Chart()} label: {
+
+							Image(systemName: "chart.bar.fill")
+							Text("Analytics")
+
 					}
 
-					Tab("", systemImage: "person.fill") {
-						Text("Tab 3")
+					Tab {RoundedDonut_Chart()} label: {
+
+							Image(systemName: "person.fill")
+							Text("Profile")
+
 					}
 
-					Tab("Pay", systemImage: "qrcode.viewfinder", role: .search) {
-						NavigationStack {
-							List {
-								Text("Start typing to scan…")
+
+					Tab(role: .search) {NavigationStack {
+						List {
+							Text("Start typing to scan…")
+						}
+						.navigationTitle("Scan")
+						.searchable(text: $searchText, isPresented: $isSearchActive)
+						.onAppear {
+							// When user taps "Scan", auto-expand search
+							DispatchQueue.main.async {
+								isSearchActive = true
 							}
-							.navigationTitle("Scan")
-							.searchable(text: $searchText, isPresented: $isSearchActive)
-							.onAppear {
-								// When user taps "Scan", auto-expand search
-								DispatchQueue.main.async {
-									isSearchActive = true
-								}
-							}
+						}
+					}} label: {
+						VStack(spacing: 2) {
+							Image(systemName: "qrcode.viewfinder")
+							Text("Pay")
+								.font(.caption)
 						}
 					}
 				}
-
 			}
-		}
 	}
 }
 

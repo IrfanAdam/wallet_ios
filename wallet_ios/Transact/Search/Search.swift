@@ -1,18 +1,21 @@
 import SwiftUI
 
+
 struct SearchPage: View {
 	@Binding var detent: PresentationDetent
+	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
 	@State private var showPaymentView = false
 	@Environment(\.dismiss) private var dismiss
-	@Namespace private var namespace
+	@State private var selectedCard: String? = nil
 
 	var body: some View {
 		NavigationStack {
 			List {
 				Section {
 						// All contacts scroll under pinned header
-						ForEach(0..<10) { _ in
+						ForEach(0..<10) { index in
+							let cardID = "card\(index)"
 							ContactCard(
 								name: "Oluwaseun Oluwatoyin Ad...",
 								maskedID: "we******qe",
@@ -24,12 +27,20 @@ struct SearchPage: View {
 							.padding(.horizontal, 0)
 							.padding(.vertical, 0)
 							.listRowInsets(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+							.overlay(
+								// MATCH SOURCE — put the geometry on the card container
+								RoundedRectangle(cornerRadius: 16)
+									.fill(Color.clear)
+							)
+							.contentShape(Rectangle())
 							.onTapGesture {
+								selectedCard = cardID
 								detent = .medium
 								withAnimation(.easeInOut(duration: 0.28)) {
 									showPaymentView = true
 								}
 							}
+							.matchedTransitionSource(id: selectedCard, in: namespace)
 						}
 
 				} header: {
@@ -52,7 +63,6 @@ struct SearchPage: View {
 			.listSectionMargins(.vertical, 0)
 			.listSectionSpacing(0)
 			.listStyle(.plain)
-			.matchedGeometryEffect(id: "search_page", in: namespace)
 			.background(
 				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
 			)
@@ -63,7 +73,7 @@ struct SearchPage: View {
 			.toolbar(.visible, for: .navigationBar)
 			.toolbarBackground(.visible, for: .navigationBar)
 			.navigationDestination(isPresented: $showPaymentView) {
-				InitiatePayment().navigationTransition(.zoom(sourceID: "search_page", in: namespace))
+				InitiatePayment(namespace: namespace).navigationTransition(.zoom(sourceID: selectedCard, in: namespace))
 			}
 		}
 	}
@@ -118,5 +128,13 @@ struct SearchPage: View {
 }
 
 #Preview {
-	SearchPage(detent: .constant(.large))
+	PreviewContainer()
+}
+
+private struct PreviewContainer: View {
+	@Namespace var ns
+
+	var body: some View {
+		SearchPage(detent: .constant(.large), namespace: ns)
+	}
 }
