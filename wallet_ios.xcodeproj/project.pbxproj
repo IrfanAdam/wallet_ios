@@ -31,7 +31,6 @@
 		15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B142EEBFD100046EBC6 /* Home.swift */; };
 		15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B162EEBFD100046EBC6 /* Chart.swift */; };
 		15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B182EEBFD100046EBC6 /* ContactCard.swift */; };
-		15DA4B402EEBFD100046EBC6 /* Duplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B192EEBFD100046EBC6 /* Duplicate.swift */; };
 		15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B1A2EEBFD100046EBC6 /* Search.swift */; };
 		15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B1C2EEBFD100046EBC6 /* Pay.swift */; };
 		15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B242EEBFD100046EBC6 /* AppView.swift */; };
@@ -44,7 +43,7 @@
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
-		EE9C148A2EEDB2C8003A5926 /* DismissableSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */; };
+		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +71,6 @@
 		15DA4B142EEBFD100046EBC6 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		15DA4B162EEBFD100046EBC6 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		15DA4B182EEBFD100046EBC6 /* ContactCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCard.swift; sourceTree = "<group>"; };
-		15DA4B192EEBFD100046EBC6 /* Duplicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duplicate.swift; sourceTree = "<group>"; };
 		15DA4B1A2EEBFD100046EBC6 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		15DA4B1C2EEBFD100046EBC6 /* Pay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pay.swift; sourceTree = "<group>"; };
 		15DA4B1F2EEBFD100046EBC6 /* OpenRunde-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenRunde-Bold.otf"; sourceTree = "<group>"; };
@@ -86,7 +84,7 @@
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
-		EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableSheet.swift; sourceTree = "<group>"; };
+		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +137,6 @@
 				15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */,
 				15DA4B032EEBFD100046EBC6 /* New Test.swift */,
 				15DA4B042EEBFD100046EBC6 /* Resize Test.swift */,
-				EE9C14892EEDB2C2003A5926 /* DismissableSheet.swift */,
 			);
 			path = "Test Nested 02";
 			sourceTree = "<group>";
@@ -211,29 +208,21 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		15DA4B1B2EEBFD100046EBC6 /* Search */ = {
+		15DA4B1B2EEBFD100046EBC6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4B182EEBFD100046EBC6 /* ContactCard.swift */,
-				15DA4B192EEBFD100046EBC6 /* Duplicate.swift */,
-				15DA4B1A2EEBFD100046EBC6 /* Search.swift */,
+				EE9C148B2EEEC216003A5926 /* SearchTab.swift */,
 			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		15DA4B1D2EEBFD100046EBC6 /* Smart Pay */ = {
-			isa = PBXGroup;
-			children = (
-				15DA4B1C2EEBFD100046EBC6 /* Pay.swift */,
-			);
-			path = "Smart Pay";
+			path = Components;
 			sourceTree = "<group>";
 		};
 		15DA4B1E2EEBFD100046EBC6 /* Transact */ = {
 			isa = PBXGroup;
 			children = (
-				15DA4B1B2EEBFD100046EBC6 /* Search */,
-				15DA4B1D2EEBFD100046EBC6 /* Smart Pay */,
+				15DA4B1A2EEBFD100046EBC6 /* Search.swift */,
+				15DA4B1C2EEBFD100046EBC6 /* Pay.swift */,
+				15DA4B1B2EEBFD100046EBC6 /* Components */,
 			);
 			path = Transact;
 			sourceTree = "<group>";
@@ -362,12 +351,12 @@
 				15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
+				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* ActualUse.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */,
 				15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */,
-				EE9C148A2EEDB2C8003A5926 /* DismissableSheet.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */,
@@ -385,7 +374,6 @@
 				15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */,
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
-				15DA4B402EEBFD100046EBC6 /* Duplicate.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,

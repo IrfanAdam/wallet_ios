@@ -1,5 +1,35 @@
 import SwiftUI
 
+
+private struct SheetDismissKey: EnvironmentKey {
+	static let defaultValue: () -> Void = {}
+}
+
+struct SheetControl {
+	let dismiss: () -> Void
+	let setDetent: (PresentationDetent) -> Void
+}
+
+private struct SheetControlKey: EnvironmentKey {
+	static let defaultValue = SheetControl(
+		dismiss: {},
+		setDetent: { _ in }
+	)
+}
+
+extension EnvironmentValues {
+	var dismissCurrentSheet: () -> Void {
+		get { self[SheetDismissKey.self] }
+		set { self[SheetDismissKey.self] = newValue }
+	}
+	
+	var sheetControl: SheetControl {
+		get { self[SheetControlKey.self] }
+		set { self[SheetControlKey.self] = newValue }
+	}
+}
+
+
 struct HomeView: View {
 	@State private var showDetails = false
 	var body: some View {
@@ -81,7 +111,10 @@ struct PaymentActionsGrid: View {
 			SearchPage(detent: $detent, namespace: morphNS)
 				.presentationDetents([.medium, .large], selection: $detent)
 				.presentationDragIndicator(.visible)
-		}
+		}.environment(\.sheetControl, SheetControl(
+			dismiss: { showPageSheet = false },
+			setDetent: { detent = $0 }
+		))
 	}
 }
 

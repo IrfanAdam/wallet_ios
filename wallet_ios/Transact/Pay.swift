@@ -4,6 +4,7 @@ struct InitiatePayment: View {
 	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
 	@Environment(\.dismiss) private var dismiss
+	@Environment(\.sheetControl) private var sheetControl
 
 	var body: some View {
 		NavigationStack {
@@ -14,6 +15,9 @@ struct InitiatePayment: View {
 						secondary: "for Groceries"
 					)
 				).padding(.horizontal)
+			}
+			.onAppear {
+				sheetControl.setDetent(.medium)
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(
@@ -41,15 +45,15 @@ struct InitiatePayment: View {
 			}.onTapGesture {
 				dismiss()
 			}
-			.background(.ultraThinMaterial)         // glass-like look
+			.background(.ultraThinMaterial)
 			.clipShape(Capsule())
 		}
 
 		ToolbarSpacer(.flexible)
 
 		ToolbarItem(placement: .destructiveAction) {
-			Button("Close", systemImage: "xmark") {}.onTapGesture {
-				dismiss()
+			Button("Close", systemImage: "xmark") {
+				sheetControl.dismiss()
 			}
 		}
 	}
@@ -59,7 +63,7 @@ struct InitiatePayment: View {
 		let size: CGFloat = 36
 
 		var body: some View {
-			Image(imageName)                 // must exist in Assets.xcassets
+			Image(imageName)           
 				.resizable()
 				.scaledToFill()
 				.frame(width: size, height: size)

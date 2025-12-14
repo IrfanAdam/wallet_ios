@@ -5,51 +5,45 @@ struct SearchPage: View {
 	@Binding var detent: PresentationDetent
 	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
-	@State private var showPaymentView = false
 	@Environment(\.dismiss) private var dismiss
-	@State private var selectedCard: String? = nil
 
 	var body: some View {
 		NavigationStack {
 			List {
 				Section {
-						// All contacts scroll under pinned header
-						ForEach(0..<10) { index in
-							let cardID = "card\(index)"
+					ForEach(0..<10, id: \.self) { index in
+						let cardID = "card\(index)"
+						
+						NavigationLink {
+							InitiatePayment(namespace: namespace)
+								.navigationTransition(.zoom(sourceID: cardID, in: namespace))
+						} label: {
 							ContactCard(
 								name: "Oluwaseun Oluwatoyin Ad...",
 								maskedID: "we******qe",
 								number: "7127128312912",
 								imageURL: "https://source.unsplash.com/random/200x200?face,portrait"
 							)
-							.listRowSeparator(.hidden)       // no separators
-							.listRowBackground(Color.clear)
-							.padding(.horizontal, 0)
-							.padding(.vertical, 0)
-							.listRowInsets(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+							.contentShape(Rectangle())
 							.overlay(
-								// MATCH SOURCE — put the geometry on the card container
 								RoundedRectangle(cornerRadius: 16)
 									.fill(Color.clear)
 							)
-							.contentShape(Rectangle())
-							.onTapGesture {
-								selectedCard = cardID
-								detent = .medium
-								withAnimation(.easeInOut(duration: 0.28)) {
-									showPaymentView = true
-								}
-							}
-							.matchedTransitionSource(id: selectedCard, in: namespace)
+							.matchedTransitionSource(id: cardID, in: namespace)
 						}
+						.navigationLinkIndicatorVisibility(.hidden)
+						.listRowSeparator(.hidden)
+						.listRowBackground(Color.clear)
+						.listRowInsets(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+					}
 
 				} header: {
 					ScrollView(.horizontal, showsIndicators: false) {
 						HStack(spacing: 10) {
-							inboxTab("Primary", index: 0, icon: "tray.fill")
-							inboxTab("Promos", index: 1, icon: "tag.fill")
-							inboxTab("Updates", index: 2, icon: "bell.badge.fill")
-							inboxTab("More", index: 3, icon: "speaker.wave.2.fill")
+							SearchTab(title: "Primary", icon: "tray.fill", index: 0, selectedTab: $selectedTab)
+							SearchTab(title: "Promos", icon: "tag.fill", index: 1, selectedTab: $selectedTab)
+							SearchTab(title: "Updates", icon: "bell.badge.fill", index: 2, selectedTab: $selectedTab)
+							SearchTab(title: "More", icon: "speaker.wave.2.fill", index: 3, selectedTab: $selectedTab)
 						}
 						.padding(.horizontal, 0)
 						.padding(.top, 0)
@@ -72,9 +66,6 @@ struct SearchPage: View {
 
 			.toolbar(.visible, for: .navigationBar)
 			.toolbarBackground(.visible, for: .navigationBar)
-			.navigationDestination(isPresented: $showPaymentView) {
-				InitiatePayment(namespace: namespace).navigationTransition(.zoom(sourceID: selectedCard, in: namespace))
-			}
 		}
 	}
 
@@ -89,40 +80,13 @@ struct SearchPage: View {
 			Text("Help")
 			Button("Help", systemImage: "questionmark") {
 
-			}.background(Color.blue.opacity(0.8)) // background color
-			.overlay(
-				RoundedRectangle(cornerRadius: 10)
-					.stroke(Color.blue, lineWidth: 12) // border stroke
-			)
-			.cornerRadius(10)
+			}
 		}
 
 		ToolbarSpacer(.flexible)
 
 		ToolbarItem(placement: .confirmationAction) {
 			Button("Scan", systemImage: "qrcode.viewfinder") {}
-		}
-	}
-
-	func inboxTab(_ title: String, index: Int, icon: String) -> some View {
-		Button {
-			selectedTab = index
-		} label: {
-			HStack(spacing: 6) {
-				Image(systemName: icon)
-				if selectedTab == index {
-					Text(title)
-				}
-
-			}
-			.padding(.horizontal, 16)
-			.padding(.vertical, 12)
-			.background(
-				RoundedRectangle(cornerRadius: 14)
-					.fill(selectedTab == index ? Color.blue : Color.gray)
-			)
-			.foregroundStyle(selectedTab == index ? .white : .primary)
-			.animation(.easeInOut(duration: 0.2), value: selectedTab)
 		}
 	}
 }
