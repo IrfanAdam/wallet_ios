@@ -42,6 +42,8 @@
 		15DA4B492EEBFD100046EBC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15DA4B252EEBFD100046EBC6 /* Assets.xcassets */; };
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
+		15DA4B4F2EEFF0CF0046EBC6 /* FloatingBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */; };
+		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +84,8 @@
 		15DA4B262EEBFD100046EBC6 /* wallet_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wallet_iosApp.swift; sourceTree = "<group>"; };
 		15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurReplace.swift; sourceTree = "<group>"; };
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
+		15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBtn.swift; sourceTree = "<group>"; };
+		15DA4B502EF03A410046EBC6 /* Initiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initiate.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		15DA4AF72EEBFD100046EBC6 /* Custom Tab */ = {
 			isa = PBXGroup;
 			children = (
+				15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */,
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
 			path = "Custom Tab";
@@ -220,6 +225,7 @@
 		15DA4B1E2EEBFD100046EBC6 /* Transact */ = {
 			isa = PBXGroup;
 			children = (
+				15DA4B502EF03A410046EBC6 /* Initiate.swift */,
 				15DA4B1A2EEBFD100046EBC6 /* Search.swift */,
 				15DA4B1C2EEBFD100046EBC6 /* Pay.swift */,
 				15DA4B1B2EEBFD100046EBC6 /* Components */,
@@ -356,6 +362,7 @@
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */,
+				15DA4B4F2EEFF0CF0046EBC6 /* FloatingBtn.swift in Sources */,
 				15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
@@ -367,6 +374,7 @@
 				15DA4B372EEBFD100046EBC6 /* AnalyticsSheet.swift in Sources */,
 				15DA4B382EEBFD100046EBC6 /* Charts.swift in Sources */,
 				15DA4B392EEBFD100046EBC6 /* Data.swift in Sources */,
+				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
