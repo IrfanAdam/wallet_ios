@@ -44,6 +44,7 @@
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
+		EE9C148E2EEEE90C003A5926 /* Tab+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148D2EEEE907003A5926 /* Tab+Tool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
+		EE9C148D2EEEE907003A5926 /* Tab+Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab+Tool.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		15DA4AF72EEBFD100046EBC6 /* Custom Tab */ = {
 			isa = PBXGroup;
 			children = (
+				EE9C148D2EEEE907003A5926 /* Tab+Tool.swift */,
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
 			path = "Custom Tab";
@@ -173,12 +176,12 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		15DA4B0F2EEBFD100046EBC6 /* --Modals */ = {
+		15DA4B0F2EEBFD100046EBC6 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4B0E2EEBFD100046EBC6 /* Analytics */,
 			);
-			path = "--Modals";
+			path = Modals;
 			sourceTree = "<group>";
 		};
 		15DA4B122EEBFD100046EBC6 /* Components */ = {
@@ -245,10 +248,10 @@
 				15DA4B262EEBFD100046EBC6 /* wallet_iosApp.swift */,
 				15DA4B152EEBFD100046EBC6 /* Home */,
 				15DA4B172EEBFD100046EBC6 /* Analytics */,
+				15DA4B0F2EEBFD100046EBC6 /* Modals */,
 				15DA4B1E2EEBFD100046EBC6 /* Transact */,
 				15DA4B232EEBFD100046EBC6 /* Fonts */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
-				15DA4B0F2EEBFD100046EBC6 /* --Modals */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
@@ -354,6 +357,7 @@
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* ActualUse.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
+				EE9C148E2EEEE90C003A5926 /* Tab+Tool.swift in Sources */,
 				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */,
 				15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */,
