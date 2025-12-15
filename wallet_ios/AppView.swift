@@ -29,25 +29,11 @@ struct AppView: View {
 
 					}
 
+					Tab {FABCheck()} label: {
 
-					Tab(role: .search) {NavigationStack {
-						List {
-							Text("Start typing to scan…")
-						}
-						.navigationTitle("Scan")
-						.searchable(text: $searchText, isPresented: $isSearchActive)
-						.onAppear {
-							// When user taps "Scan", auto-expand search
-							DispatchQueue.main.async {
-								isSearchActive = true
-							}
-						}
-					}} label: {
-						VStack(spacing: 2) {
-							Image(systemName: "qrcode.viewfinder")
-							Text("Pay")
-								.font(.caption)
-						}
+						Image(systemName: "wrench.and.screwdriver.fill")
+						Text("Test")
+
 					}
 				}
 			}
