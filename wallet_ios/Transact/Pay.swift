@@ -4,6 +4,7 @@ struct InitiatePayment: View {
 	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
 	@Environment(\.dismiss) private var dismiss
+	@State private var amountValue: String = ""
 	@Environment(\.sheetControl) private var sheetControl
 
 	var body: some View {
@@ -15,6 +16,7 @@ struct InitiatePayment: View {
 						secondary: "for Groceries"
 					)
 				).padding(.horizontal)
+				CurrencyInput(placeholder: "Enter amount", amount: $amountValue).padding(.horizontal)
 			}
 			.onAppear {
 				sheetControl.setDetent(.medium)

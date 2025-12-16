@@ -4,7 +4,7 @@ struct FABCheck: View {
 	@State private var showScan = false
 	var body: some View {
 		NavigationStack {
-			List(0..<100) { i in
+			List(0..<32) { i in
 				Text("Item \(i)")
 			}
 			.navigationTitle("Fab Check")
@@ -19,7 +19,7 @@ struct FABCheck: View {
 				}
 				.buttonStyle(.glassProminent)
 				.padding(20)
-				.tint(.indigo)
+				.tint(.blue.opacity(0.82))
 			}
 			.fullScreenCover(isPresented: $showScan) {
 				transactOpts()
