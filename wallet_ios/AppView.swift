@@ -12,28 +12,21 @@ struct AppView: View {
 					Tab {HomeView()} label: {
 							Image(systemName: "house.fill")
 							Text("Home")
-
 					}
 
 					Tab {RoundedDonut_Chart()} label: {
-
 							Image(systemName: "chart.bar.fill")
 							Text("Analytics")
-
 					}
 
 					Tab {SeamlessPageNavDemo()} label: {
-
 							Image(systemName: "person.fill")
 							Text("Profile")
-
 					}
 
-					Tab {FABCheck()} label: {
-
+					Tab {SeamlessPageNavDemo()} label: {
 						Image(systemName: "wrench.and.screwdriver.fill")
 						Text("Test")
-
 					}
 				}
 			}

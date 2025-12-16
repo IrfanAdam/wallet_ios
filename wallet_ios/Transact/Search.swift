@@ -72,7 +72,7 @@ struct SearchPage: View {
 	@ToolbarContentBuilder
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItem(placement: .cancellationAction) {
-			Button("Cancel", systemImage: "xmark") {dismiss()}
+			Button("Cancel", systemImage: "chevron.down") {dismiss()}
 		}
 		
 

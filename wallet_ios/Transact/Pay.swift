@@ -4,25 +4,28 @@ struct InitiatePayment: View {
 	var namespace: Namespace.ID
 	@State private var selectedTab: Int = 0
 	@Environment(\.dismiss) private var dismiss
+	@State private var amountValue: String = ""
 	@Environment(\.sheetControl) private var sheetControl
 
 	var body: some View {
 		NavigationStack {
-			VStack(spacing: 20) {
+			VStack(alignment: .leading, spacing: 20) {
 				SimpleFlowWrap(
 					items: FlowSentenceRenderer.makeItems(
 						primary: "Jabari M. will send CFA 1500",
 						secondary: "for Groceries"
 					)
+				)
+				CurrencyInput(
+					placeholder: "Enter amount",
+					amount: $amountValue,
+					autoFocus: true
 				).padding(.horizontal)
 			}
 			.onAppear {
 				sheetControl.setDetent(.medium)
 			}
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
-			.background(
-				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
-			).navigationBarBackButtonHidden(true)
+			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
 		}
 	}
