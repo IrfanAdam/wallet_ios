@@ -21,26 +21,26 @@ struct AnalyticsSheet: View {
                     SpendingSheetView()
                     VStack(spacing: 20) { ForEach(1...10, id: \.self) { i in Text("Item \(i)") .frame(maxWidth: .infinity) .cornerRadius(8) } }
                 } header: {
-                    ZStack {
-                        // Liquid background
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(.ultraThinMaterial)        // or .thinMaterial
-                            .blur(radius: 0)                 // helps smooth edges
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                    .stroke(Color.white.opacity(0.1)) // soft highlight border
-                            )
-                            .shadow(color: .black.opacity(0.1), radius: 6, y: 2)
-
-                        Picker("", selection: $selectedTab) {
-                            ForEach(Period.allCases, id: \.self) { tab in
-                                Text(tab.rawValue)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(0) // spacing inside the glass
-                    }
-                    .padding(.horizontal)
+									ZStack {
+										// Liquid background
+										RoundedRectangle(cornerRadius: 14, style: .continuous)
+											.fill(.ultraThinMaterial)        // or .thinMaterial
+											.blur(radius: 0)                 // helps smooth edges
+											.overlay(
+												RoundedRectangle(cornerRadius: 14, style: .continuous)
+													.stroke(Color.white.opacity(0.1)) // soft highlight border
+											)
+											.shadow(color: .black.opacity(0.1), radius: 6, y: 2)
+										
+										Picker("", selection: $selectedTab) {
+											ForEach(Period.allCases, id: \.self) { tab in
+												Text(tab.rawValue)
+											}
+										}
+										.pickerStyle(.segmented)
+										.padding(0) // spacing inside the glass
+									}
+									.padding(.horizontal)
                 }
             }
         }
