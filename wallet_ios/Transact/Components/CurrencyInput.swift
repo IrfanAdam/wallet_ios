@@ -3,6 +3,8 @@ import SwiftUI
 struct CurrencyInput: View {
 	let placeholder: String
 	@Binding var amount: String   // parent can read & write value
+	var autoFocus: Bool = false   // 👈 pass intent
+	@FocusState private var isFocused: Bool
 
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
@@ -29,6 +31,7 @@ struct CurrencyInput: View {
 					.font(.custom("OpenRunde-Bold", size: 36))
 					.foregroundStyle(Color(red: 0.11, green: 0.18, blue: 0.23))
 					.kerning(-0.8)
+					.focused($isFocused)
 					.multilineTextAlignment(.leading)
 					.onChange(of: amount) { _, newValue in
 						let formatted = formatCurrencyInput(newValue)
@@ -36,6 +39,14 @@ struct CurrencyInput: View {
 							amount = formatted
 						}
 					}
+			}
+			.onAppear {
+				if autoFocus {
+					// small delay avoids keyboard race conditions
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+						isFocused = true
+					}
+				}
 			}
 		}
 	}

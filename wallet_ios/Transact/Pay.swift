@@ -9,22 +9,23 @@ struct InitiatePayment: View {
 
 	var body: some View {
 		NavigationStack {
-			VStack(spacing: 20) {
+			VStack(alignment: .leading, spacing: 20) {
 				SimpleFlowWrap(
 					items: FlowSentenceRenderer.makeItems(
 						primary: "Jabari M. will send CFA 1500",
 						secondary: "for Groceries"
 					)
+				)
+				CurrencyInput(
+					placeholder: "Enter amount",
+					amount: $amountValue,
+					autoFocus: true
 				).padding(.horizontal)
-				CurrencyInput(placeholder: "Enter amount", amount: $amountValue).padding(.horizontal)
 			}
 			.onAppear {
 				sheetControl.setDetent(.medium)
 			}
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
-			.background(
-				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
-			).navigationBarBackButtonHidden(true)
+			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
 		}
 	}

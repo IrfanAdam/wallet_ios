@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB62EF1386A00876D2D /* Charts.swift */; };
+		1549ECBB2EF1386A00876D2D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB72EF1386A00876D2D /* Data.swift */; };
+		1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */; };
+		1549ECBF2EF1598F00876D2D /* Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECBE2EF1598400876D2D /* Draggable.swift */; };
+		1549ECC52EF162D300876D2D /* wallet-ios-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1549ECC42EF162D300876D2D /* wallet-ios-Info.plist */; };
+		1549ECCA2EF177DC00876D2D /* pay_mock.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1549ECC92EF177DC00876D2D /* pay_mock.mp4 */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */; };
-		15DA4B2C2EEBFD100046EBC6 /* ActualUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFC2EEBFD100046EBC6 /* ActualUse.swift */; };
+		15DA4B2C2EEBFD100046EBC6 /* PillUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */; };
 		15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */; };
-		15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFE2EEBFD100046EBC6 /* Logic.swift */; };
-		15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B002EEBFD100046EBC6 /* Draggable Version.swift */; };
+		15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
 		15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B022EEBFD100046EBC6 /* Morphy2.swift */; };
 		15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B032EEBFD100046EBC6 /* New Test.swift */; };
@@ -22,9 +27,6 @@
 		15DA4B342EEBFD100046EBC6 /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B062EEBFD100046EBC6 /* Basic.swift */; };
 		15DA4B352EEBFD100046EBC6 /* ComplexStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B072EEBFD100046EBC6 /* ComplexStack.swift */; };
 		15DA4B362EEBFD100046EBC6 /* StackedNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B082EEBFD100046EBC6 /* StackedNav.swift */; };
-		15DA4B372EEBFD100046EBC6 /* AnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B0B2EEBFD100046EBC6 /* AnalyticsSheet.swift */; };
-		15DA4B382EEBFD100046EBC6 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B0C2EEBFD100046EBC6 /* Charts.swift */; };
-		15DA4B392EEBFD100046EBC6 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B0D2EEBFD100046EBC6 /* Data.swift */; };
 		15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B102EEBFD100046EBC6 /* DataWidget.swift */; };
 		15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B112EEBFD100046EBC6 /* DummyData.swift */; };
 		15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B132EEBFD100046EBC6 /* Card Declare.swift */; };
@@ -42,7 +44,6 @@
 		15DA4B492EEBFD100046EBC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15DA4B252EEBFD100046EBC6 /* Assets.xcassets */; };
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
-		15DA4B4F2EEFF0CF0046EBC6 /* FloatingBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */; };
 		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
 		15DA4B552EF0568F0046EBC6 /* CurrencyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B542EF0568A0046EBC6 /* CurrencyInput.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
@@ -50,14 +51,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSheet.swift; sourceTree = "<group>"; };
+		1549ECB62EF1386A00876D2D /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
+		1549ECB72EF1386A00876D2D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		1549ECBE2EF1598400876D2D /* Draggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draggable.swift; sourceTree = "<group>"; };
+		1549ECC42EF162D300876D2D /* wallet-ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wallet-ios-Info.plist"; sourceTree = "<group>"; };
+		1549ECC92EF177DC00876D2D /* pay_mock.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = pay_mock.mp4; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Version.swift"; sourceTree = "<group>"; };
-		15DA4AFC2EEBFD100046EBC6 /* ActualUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualUse.swift; sourceTree = "<group>"; };
+		15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillUse.swift; sourceTree = "<group>"; };
 		15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCut.swift; sourceTree = "<group>"; };
-		15DA4AFE2EEBFD100046EBC6 /* Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
-		15DA4B002EEBFD100046EBC6 /* Draggable Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Draggable Version.swift"; sourceTree = "<group>"; };
+		15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFlow.swift; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
 		15DA4B022EEBFD100046EBC6 /* Morphy2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy2.swift; sourceTree = "<group>"; };
 		15DA4B032EEBFD100046EBC6 /* New Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "New Test.swift"; sourceTree = "<group>"; };
@@ -65,9 +71,6 @@
 		15DA4B062EEBFD100046EBC6 /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 		15DA4B072EEBFD100046EBC6 /* ComplexStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexStack.swift; sourceTree = "<group>"; };
 		15DA4B082EEBFD100046EBC6 /* StackedNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedNav.swift; sourceTree = "<group>"; };
-		15DA4B0B2EEBFD100046EBC6 /* AnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSheet.swift; sourceTree = "<group>"; };
-		15DA4B0C2EEBFD100046EBC6 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
-		15DA4B0D2EEBFD100046EBC6 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		15DA4B102EEBFD100046EBC6 /* DataWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataWidget.swift; sourceTree = "<group>"; };
 		15DA4B112EEBFD100046EBC6 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		15DA4B132EEBFD100046EBC6 /* Card Declare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card Declare.swift"; sourceTree = "<group>"; };
@@ -85,7 +88,6 @@
 		15DA4B262EEBFD100046EBC6 /* wallet_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wallet_iosApp.swift; sourceTree = "<group>"; };
 		15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurReplace.swift; sourceTree = "<group>"; };
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
-		15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBtn.swift; sourceTree = "<group>"; };
 		15DA4B502EF03A410046EBC6 /* Initiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initiate.swift; sourceTree = "<group>"; };
 		15DA4B542EF0568A0046EBC6 /* CurrencyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInput.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,10 +106,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1549ECB82EF1386A00876D2D /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */,
+				1549ECB62EF1386A00876D2D /* Charts.swift */,
+				1549ECB72EF1386A00876D2D /* Data.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		1549ECB92EF1386A00876D2D /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				1549ECB82EF1386A00876D2D /* Analytics */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		1549ECBD2EF1596000876D2D /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				1549ECBE2EF1598400876D2D /* Draggable.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		1549ECC82EF177C300876D2D /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				1549ECC92EF177DC00876D2D /* pay_mock.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		1549ECCD2EF1A9B200876D2D /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */,
+				15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
 		15DA4AF72EEBFD100046EBC6 /* Custom Tab */ = {
 			isa = PBXGroup;
 			children = (
-				15DA4B4E2EEFF0C60046EBC6 /* FloatingBtn.swift */,
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
 			path = "Custom Tab";
@@ -126,9 +170,7 @@
 		15DA4AFF2EEBFD100046EBC6 /* Pill Title */ = {
 			isa = PBXGroup;
 			children = (
-				15DA4AFC2EEBFD100046EBC6 /* ActualUse.swift */,
-				15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */,
-				15DA4AFE2EEBFD100046EBC6 /* Logic.swift */,
+				15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */,
 			);
 			path = "Pill Title";
 			sourceTree = "<group>";
@@ -137,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				EE9C14872EED7929003A5926 /* ToolbarMorph.swift */,
-				15DA4B002EEBFD100046EBC6 /* Draggable Version.swift */,
 				15DA4B012EEBFD100046EBC6 /* Morphy.swift */,
 				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
 				15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */,
@@ -168,24 +209,6 @@
 				15DA4B092EEBFD100046EBC6 /* Sheet */,
 			);
 			path = "---Experiments";
-			sourceTree = "<group>";
-		};
-		15DA4B0E2EEBFD100046EBC6 /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				15DA4B0B2EEBFD100046EBC6 /* AnalyticsSheet.swift */,
-				15DA4B0C2EEBFD100046EBC6 /* Charts.swift */,
-				15DA4B0D2EEBFD100046EBC6 /* Data.swift */,
-			);
-			path = Analytics;
-			sourceTree = "<group>";
-		};
-		15DA4B0F2EEBFD100046EBC6 /* --Modals */ = {
-			isa = PBXGroup;
-			children = (
-				15DA4B0E2EEBFD100046EBC6 /* Analytics */,
-			);
-			path = "--Modals";
 			sourceTree = "<group>";
 		};
 		15DA4B122EEBFD100046EBC6 /* Components */ = {
@@ -231,6 +254,8 @@
 				15DA4B502EF03A410046EBC6 /* Initiate.swift */,
 				15DA4B1A2EEBFD100046EBC6 /* Search.swift */,
 				15DA4B1C2EEBFD100046EBC6 /* Pay.swift */,
+				1549ECBD2EF1596000876D2D /* Sheets */,
+				1549ECCD2EF1A9B200876D2D /* Function */,
 				15DA4B1B2EEBFD100046EBC6 /* Components */,
 			);
 			path = Transact;
@@ -255,9 +280,10 @@
 				15DA4B152EEBFD100046EBC6 /* Home */,
 				15DA4B172EEBFD100046EBC6 /* Analytics */,
 				15DA4B1E2EEBFD100046EBC6 /* Transact */,
+				1549ECC82EF177C300876D2D /* Videos */,
 				15DA4B232EEBFD100046EBC6 /* Fonts */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
-				15DA4B0F2EEBFD100046EBC6 /* --Modals */,
+				1549ECB92EF1386A00876D2D /* Modals */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
@@ -266,6 +292,7 @@
 		EE0E13F92EDAD5FA00092DAA = {
 			isa = PBXGroup;
 			children = (
+				1549ECC42EF162D300876D2D /* wallet-ios-Info.plist */,
 				15DA4B272EEBFD100046EBC6 /* wallet_ios */,
 				EE0E14032EDAD5FA00092DAA /* Products */,
 			);
@@ -340,6 +367,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1549ECCA2EF177DC00876D2D /* pay_mock.mp4 in Resources */,
+				1549ECC52EF162D300876D2D /* wallet-ios-Info.plist in Resources */,
 				15DA4B452EEBFD100046EBC6 /* OpenRunde-Bold.otf in Resources */,
 				15DA4B462EEBFD100046EBC6 /* OpenRunde-Medium.otf in Resources */,
 				15DA4B472EEBFD100046EBC6 /* OpenRunde-Regular.otf in Resources */,
@@ -356,17 +385,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
+				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
+				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
+				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
 				15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */,
 				15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
-				15DA4B2C2EEBFD100046EBC6 /* ActualUse.swift in Sources */,
+				15DA4B2C2EEBFD100046EBC6 /* PillUse.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
-				15DA4B2E2EEBFD100046EBC6 /* Logic.swift in Sources */,
-				15DA4B4F2EEFF0CF0046EBC6 /* FloatingBtn.swift in Sources */,
-				15DA4B2F2EEBFD100046EBC6 /* Draggable Version.swift in Sources */,
+				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */,
@@ -375,13 +405,11 @@
 				15DA4B552EF0568F0046EBC6 /* CurrencyInput.swift in Sources */,
 				15DA4B352EEBFD100046EBC6 /* ComplexStack.swift in Sources */,
 				15DA4B362EEBFD100046EBC6 /* StackedNav.swift in Sources */,
-				15DA4B372EEBFD100046EBC6 /* AnalyticsSheet.swift in Sources */,
-				15DA4B382EEBFD100046EBC6 /* Charts.swift in Sources */,
-				15DA4B392EEBFD100046EBC6 /* Data.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
+				1549ECBF2EF1598F00876D2D /* Draggable.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,
 				15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */,
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,

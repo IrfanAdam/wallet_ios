@@ -32,12 +32,13 @@ extension EnvironmentValues {
 
 struct HomeView: View {
 	@State private var showDetails = false
+	@State private var showScan = false
 	var body: some View {
 		// First tab
 		NavigationStack {
 			VStack {
 				DataWidget()
-					.frame(maxWidth: 200, maxHeight: 220)
+					.frame(maxWidth: 200)
 					.onTapGesture {
 						showDetails = true
 					}
@@ -73,6 +74,23 @@ struct HomeView: View {
 							.font(.title2)
 					}
 				}
+			}
+			.safeAreaInset(edge: .bottom, alignment: .trailing) {
+				Button {
+					showScan = true
+				} label: {
+					Image(systemName: "qrcode.viewfinder")
+						.font(.title.weight(.semibold))
+						.padding(.horizontal, 8)
+						.padding(.vertical, 8)
+				}
+				.buttonStyle(.glassProminent)
+				.padding(.horizontal, 24)
+				.padding(.vertical, 16)
+				.tint(.blue.opacity(0.9))
+			}
+			.fullScreenCover(isPresented: $showScan) {
+				transactOpts().ignoresSafeArea()
 			}
 		}
 	}
