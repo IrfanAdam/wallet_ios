@@ -178,12 +178,12 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		15DA4B0F2EEBFD100046EBC6 /* --Modals */ = {
+		15DA4B0F2EEBFD100046EBC6 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4B0E2EEBFD100046EBC6 /* Analytics */,
 			);
-			path = "--Modals";
+			path = Modals;
 			sourceTree = "<group>";
 		};
 		15DA4B122EEBFD100046EBC6 /* Components */ = {
@@ -254,7 +254,7 @@
 				15DA4B1E2EEBFD100046EBC6 /* Transact */,
 				15DA4B232EEBFD100046EBC6 /* Fonts */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
-				15DA4B0F2EEBFD100046EBC6 /* --Modals */,
+				15DA4B0F2EEBFD100046EBC6 /* Modals */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
