@@ -60,12 +60,6 @@ struct ContactCard: View {
 		}
 		.padding(.horizontal, 16)
 		.padding(.vertical, 12)
-		.background(
-			RoundedRectangle(cornerRadius: 18, style: .continuous)
-				.fill(Color(.systemBackground))
-		)
-		.shadow(color: Color.black.opacity(0.04), radius: 2, y: 1)
-		.padding(.horizontal)
 	}
 }
 

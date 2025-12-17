@@ -13,7 +13,6 @@ struct SearchPage: View {
 				Section {
 					ForEach(0..<10, id: \.self) { index in
 						let cardID = "card\(index)"
-						
 						NavigationLink {
 							InitiatePayment(namespace: namespace)
 								.navigationTransition(.zoom(sourceID: cardID, in: namespace))
@@ -24,17 +23,17 @@ struct SearchPage: View {
 								number: "7127128312912",
 								imageURL: "https://source.unsplash.com/random/200x200?face,portrait"
 							)
-							.contentShape(Rectangle())
-							.overlay(
-								RoundedRectangle(cornerRadius: 16)
-									.fill(Color.clear)
-							)
+							.background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+								.fill(Color(.systemBackground)))
+							.clipShape(RoundedRectangle(cornerRadius: 20))
 							.matchedTransitionSource(id: cardID, in: namespace)
 						}
 						.navigationLinkIndicatorVisibility(.hidden)
 						.listRowSeparator(.hidden)
 						.listRowBackground(Color.clear)
-						.listRowInsets(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+						.listRowInsets(
+							EdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 8)
+						)
 					}
 
 				} header: {
@@ -57,13 +56,8 @@ struct SearchPage: View {
 			.listSectionMargins(.vertical, 0)
 			.listSectionSpacing(0)
 			.listStyle(.plain)
-			.background(
-				Color(red: 250/255, green: 248/255, blue: 245/255) // #FAF8F5
-			)
 			.navigationTitle("Send Money To")
-
 			.toolbar { toolbarContent }
-
 			.toolbar(.visible, for: .navigationBar)
 			.toolbarBackground(.visible, for: .navigationBar)
 		}

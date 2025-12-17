@@ -39,7 +39,7 @@ struct TransactOptions: View {
 			.navigationTitle(isLarge ? "Large Sheet" : "")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				if isLarge {
+//				if isLarge {
 					ToolbarItem(placement: .navigationBarLeading) {
 						Button {
 							// Snap back to medium detent
@@ -47,11 +47,15 @@ struct TransactOptions: View {
 						} label: {
 							Label("Minimize", systemImage: "chevron.down")
 						}
+						.opacity(isLarge ? 1 : 0)
+						.disabled(!isLarge)
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
 						Button("Scan") {}.buttonStyle(.glassProminent)
+							.opacity(isLarge ? 1 : 0)
+							.disabled(!isLarge)
 					}
-				}
+//				}
 			}
 			.toolbar(isLarge ? .visible : .hidden, for: .navigationBar)
 			.animation(.easeInOut(duration: 0.3), value: isLarge)
