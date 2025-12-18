@@ -129,6 +129,9 @@ struct PaymentActionsGrid: View {
 			SearchPage(detent: $detent, namespace: morphNS)
 				.presentationDetents([.medium, .large], selection: $detent)
 				.presentationDragIndicator(.visible)
+				.presentationBackground(
+					Color(red: 250/255, green: 248/255, blue: 245/255)
+				)
 		}.environment(\.sheetControl, SheetControl(
 			dismiss: { showPageSheet = false },
 			setDetent: { detent = $0 }
