@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 struct CurrencyInput: View {
 	let label: String
@@ -138,6 +139,17 @@ struct CurrencyInput2: View {
 	}
 
 	// MARK: - Formatting (2 decimals max)
+	// Industry standard formatter for currency
+	private static let currencyFormatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .currency // Handles commas, decimals, currency symbol placement
+		formatter.currencyCode = "USD" // Or whatever currency you need
+		formatter.maximumFractionDigits = 2
+		formatter.minimumFractionDigits = 2 // Ensures $10 shows as $10.00
+		return formatter
+	}()
+
+
 	private func formatAmount(_ value: String) -> String {
 		let filtered = value.filter { "0123456789.".contains($0) }
 		let parts = filtered.split(separator: ".", omittingEmptySubsequences: false)
@@ -172,7 +184,8 @@ struct PreviewField: View {
 					label: "will recieve",
 					placeholder: "Amount",
 					showsLabel: false,
-					amount: $amountValue
+					amount: $amountValue,
+					autoFocus: true
 				)
 				CurrencyInput2(
 					label: "will recieve",

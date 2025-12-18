@@ -42,32 +42,29 @@ struct InitiatePayment: View {
 								amount: $amountValue,
 								autoFocus: true
 							)
-							CurrencyInput(
-								label: "Will recieve",
-								placeholder: "00",
-								showsLabel: false,
-								amount: $amountValue,
-								autoFocus: true
-							)
 						}
 					}
 
-					HStack {
+					HStack(spacing: 4) {
 						Button {
 
 						} label: {
-							Text("🇮🇳") // India flag
-								.font(.title2)
-							Text("INR")
+							HStack(spacing: 4) { // Adds 10pt space between the image and text
+								Text("🇮🇳") // India flag
+									.font(.title2)
+								Text("INR")
+							}
 						}
 						.buttonStyle(.plain)
-						.padding(.horizontal, 12)
-						.padding(.vertical, 8)
+						.padding(.horizontal, 8)
+						.padding(.vertical, 4)
 						.background(.thinMaterial)
 						.clipped(antialiased: true)
 						.clipShape(Capsule())
 					}
 				}.padding(.horizontal)
+
+				CurrencyTwoFieldDemo()
 
 				Divider().padding(.horizontal)
 
