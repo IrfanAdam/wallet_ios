@@ -23,8 +23,9 @@ struct AppView: View {
 							Image(systemName: "person.fill")
 							Text("Profile")
 					}
+					
 
-					Tab {SeamlessPageNavDemo()} label: {
+					Tab(role: .search) {SeamlessPageNavDemo()} label: {
 						Image(systemName: "wrench.and.screwdriver.fill")
 						Text("Test")
 					}

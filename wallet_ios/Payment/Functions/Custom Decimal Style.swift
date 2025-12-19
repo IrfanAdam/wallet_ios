@@ -125,14 +125,8 @@ struct CurrencyTwoFieldDemo: View {
 						.kerning(-0.8)
 				}
 			}
-			.padding(.vertical, 8)
-			.padding(.horizontal, 12)
-			.background(Color.gray.opacity(0.12))
-			.cornerRadius(12)
-
-			Spacer()
 		}
-		.padding()
+		.padding(0)
 		.onAppear {
 			focus = .integer
 			initializeValues()

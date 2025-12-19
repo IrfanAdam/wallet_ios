@@ -12,6 +12,17 @@ struct InitiatePayment: View {
 	@State private var decimalPart: String = ""
 	@FocusState private var focusInteger: Bool
 	@FocusState private var focusDecimal: Bool
+	@State private var selectedCurrency = "INR"
+
+
+	private func flag(for currency: String) -> String {
+		switch currency {
+		case "INR": return "🇮🇳"
+		case "USD": return "🇺🇸"
+		case "EUR": return "🇪🇺"
+		default: return "🏳️"
+		}
+	}
 
 
 	var fullAmount: String {
@@ -20,40 +31,57 @@ struct InitiatePayment: View {
 	}
 
 
+	@ViewBuilder
+	private func currencyButton(_ code: String, _ name: String) -> some View {
+		Button {
+			selectedCurrency = code
+		} label: {
+			HStack {
+				Text("\(code) – \(name)")
+				Spacer()
+
+				if selectedCurrency == code {
+					Image(systemName: "checkmark")
+				}
+			}
+		}
+	}
+
+
 
 	var body: some View {
 		NavigationStack {
-			VStack(alignment: .leading, spacing: 4) {
+			VStack(alignment: .leading, spacing: 12) {
 				SimpleFlowWrap(
 					items: paymentFlowItems
 				)
-				HStack(alignment: .top) {
+
+				HStack(alignment: .bottom) {
 					HStack {
-						Text("CFA")
-							.font(.custom("OpenRunde-Bold", size: 36))
-							.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
-							.kerning(-0.8)
+//						Text("CFA")
+//							.font(.custom("OpenRunde-Bold", size: 36))
+//							.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
+//							.kerning(-0.8)
 
 						HStack(alignment: .firstTextBaseline, spacing: 0) {
-							CurrencyInput(
-								label: "Will recieve",
-								placeholder: "00",
-								showsLabel: false,
-								amount: $amountValue,
-								autoFocus: true
-							)
+							CurrencyTwoFieldDemo()
 						}
 					}
 
-					HStack(spacing: 4) {
-						Button {
+					Spacer()
 
-						} label: {
-							HStack(spacing: 4) { // Adds 10pt space between the image and text
-								Text("🇮🇳") // India flag
-									.font(.title2)
-								Text("INR")
-							}
+					Menu {
+						currencyButton("INR", "Indian Rupee")
+						currencyButton("USD", "US Dollar")
+						currencyButton("EUR", "Euro")
+					} label: {
+						HStack(spacing: 4) {
+							Text(flag(for: selectedCurrency))
+								.font(.title2)
+
+							Text(selectedCurrency)
+								.font(.body.weight(.medium))
+
 						}
 						.buttonStyle(.plain)
 						.padding(.horizontal, 8)
@@ -64,11 +92,10 @@ struct InitiatePayment: View {
 					}
 				}.padding(.horizontal)
 
-				CurrencyTwoFieldDemo()
-
-				Divider().padding(.horizontal)
+				Divider().padding(.horizontal).padding(.vertical, 0)
 
 				Spacer()
+
 			}
 			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
@@ -80,7 +107,7 @@ struct InitiatePayment: View {
 
 	private var paymentFlowItems: [AnyView] {
 		renderFlowItems([
-			.text("Jabari M. LastName will recieve", tone: .primary),
+			.text("Jabari M. Last Name", tone: .primary),
 //			.text("Jabari M. will recieve", tone: .primary),
 //			.text("CFA 1500", tone: .primary),
 //			.pill("Daylies"),
@@ -90,27 +117,30 @@ struct InitiatePayment: View {
 		])
 	}
 
+	private let avatars: [AvatarData] = [
+		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .icon(Image("ph_credit-card"))),
+	]
+
 
 	@ToolbarContentBuilder
 	private var toolbarContent: some ToolbarContent {
-		// Remove default back Chevron
 		ToolbarItem(placement: .topBarLeading) {
-			ZStack() {
-				HStack(spacing: overlapSpacing) {
-					CutoutAvatarView()
-					CutoutAvatarView()
-					StrokedIconView()
-				}
-				.overlay(
-					Capsule()
-						.stroke(Color.white, lineWidth: 2)
+			HStack(spacing: 0) {
+				AvatarStack(
+					avatars: avatars,
+					avatarSize: 32,
+					strokeWidth: 2.25,
+					showBackground: true
 				)
-				.compositingGroup()
+			}
+			.scaledToFill()
+			.clipShape(Capsule())
+			.background {
+				Capsule().fill(Color.blue)
 			}.onTapGesture {
 				dismiss()
 			}
-			.background(.ultraThinMaterial)
-			.clipShape(Capsule())
 		}
 
 		ToolbarSpacer(.flexible)

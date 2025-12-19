@@ -15,14 +15,14 @@
 		1549ECCA2EF177DC00876D2D /* pay_mock.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1549ECC92EF177DC00876D2D /* pay_mock.mp4 */; };
 		1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECCE2EF29E5300876D2D /* PseudoCamera.swift */; };
 		1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */; };
-		1549ECD52EF4038F00876D2D /* Custom Amount Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD42EF4038700876D2D /* Custom Amount Input.swift */; };
+		1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */; };
 		1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD82EF4220E00876D2D /* Integer Only.swift */; };
+		1549ECDD2EF5472500876D2D /* CapsuleCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECDC2EF5472000876D2D /* CapsuleCut.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */; };
 		15DA4B2C2EEBFD100046EBC6 /* PillUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */; };
-		15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */; };
 		15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
 		15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B022EEBFD100046EBC6 /* Morphy2.swift */; };
@@ -49,7 +49,6 @@
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
 		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
-		15DA4B552EF0568F0046EBC6 /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B542EF0568A0046EBC6 /* AmountInput.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 /* End PBXBuildFile section */
@@ -63,14 +62,14 @@
 		1549ECC92EF177DC00876D2D /* pay_mock.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = pay_mock.mp4; sourceTree = "<group>"; };
 		1549ECCE2EF29E5300876D2D /* PseudoCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PseudoCamera.swift; sourceTree = "<group>"; };
 		1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFlowComposer.swift; sourceTree = "<group>"; };
-		1549ECD42EF4038700876D2D /* Custom Amount Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Amount Input.swift"; sourceTree = "<group>"; };
+		1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Decimal Style.swift"; sourceTree = "<group>"; };
 		1549ECD82EF4220E00876D2D /* Integer Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Integer Only.swift"; sourceTree = "<group>"; };
+		1549ECDC2EF5472000876D2D /* CapsuleCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCut.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Version.swift"; sourceTree = "<group>"; };
 		15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillUse.swift; sourceTree = "<group>"; };
-		15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCut.swift; sourceTree = "<group>"; };
 		15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFlow.swift; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
 		15DA4B022EEBFD100046EBC6 /* Morphy2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy2.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurReplace.swift; sourceTree = "<group>"; };
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
 		15DA4B502EF03A410046EBC6 /* Initiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initiate.swift; sourceTree = "<group>"; };
-		15DA4B542EF0568A0046EBC6 /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
@@ -169,10 +167,9 @@
 			isa = PBXGroup;
 			children = (
 				1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */,
-				15DA4B542EF0568A0046EBC6 /* AmountInput.swift */,
-				1549ECD42EF4038700876D2D /* Custom Amount Input.swift */,
+				1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */,
 				1549ECD82EF4220E00876D2D /* Integer Only.swift */,
-				15DA4AFD2EEBFD100046EBC6 /* CapsuleCut.swift */,
+				1549ECDC2EF5472000876D2D /* CapsuleCut.swift */,
 				15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */,
 				15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */,
 			);
@@ -424,22 +421,21 @@
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* PillUse.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
-				15DA4B2D2EEBFD100046EBC6 /* CapsuleCut.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */,
 				15DA4B332EEBFD100046EBC6 /* Resize Test.swift in Sources */,
-				1549ECD52EF4038F00876D2D /* Custom Amount Input.swift in Sources */,
+				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,
 				15DA4B342EEBFD100046EBC6 /* Basic.swift in Sources */,
-				15DA4B552EF0568F0046EBC6 /* AmountInput.swift in Sources */,
 				15DA4B352EEBFD100046EBC6 /* ComplexStack.swift in Sources */,
 				15DA4B362EEBFD100046EBC6 /* StackedNav.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
+				1549ECDD2EF5472500876D2D /* CapsuleCut.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,

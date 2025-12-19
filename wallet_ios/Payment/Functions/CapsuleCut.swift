@@ -1,99 +1,163 @@
 import SwiftUI
 
-// MARK: - Global Constants for Sizing
+enum AvatarTokens {
+	static let size: CGFloat = 36
+	static let overlapRatio: CGFloat = 0.2
+	static let strokeWidth: CGFloat = 2.25
+}
 
-let avatarSize: CGFloat = 40.0
-// The overlap amount when stacking two avatar views together
-let overlapSpacing: CGFloat = -16.0
-// The size needed for the cutout circle to fully cover the avatar area
-let microGap: CGFloat = 3.2
-let cutoutCircleSize: CGFloat = avatarSize + microGap
+enum AvatarContent {
+	case image(Image)
+	case icon(Image, backgroundColor: Color = .white)
+}
 
+struct AvatarData: Identifiable {
+	let id = UUID()
+	let content: AvatarContent
+}
 
-// A reusable view that implements the CUTOUT effect, using global constants
-struct CutoutAvatarView: View {
-	var body: some View {
-		// Use a ZStack to manage internal layering for the cutout
-		ZStack {
-			Image("LargeDP")                 // must exist in Assets.xcassets
+@ViewBuilder
+func AvatarCircle(
+	size: CGFloat = AvatarTokens.size,
+	strokeWidth: CGFloat = AvatarTokens.strokeWidth,
+	image: Image? = nil,
+	icon: Image? = nil,
+	isCutout: Bool = false,
+	iconBackground: Color = .white,
+	strokeColor: Color = .white
+) -> some View {
+
+	let diameter = size
+	let overlap = AvatarTokens.overlapRatio
+
+	let cutoutDiameter = diameter + (strokeWidth * 2)
+	let cutoutOffset = (cutoutDiameter * (1 - overlap) - (strokeWidth * 2))
+
+	ZStack {
+		if let image {
+			image
 				.resizable()
 				.scaledToFill()
-				.frame(width: avatarSize, height: avatarSize)
-				.clipShape(Circle()) // Clip to a circle for a better visual match
+				.frame(width: diameter, height: diameter)
+				.clipped()
 
-			// The 'cutout' shape placed on top, but blended out
+		} else if let icon {
+			ZStack {
+				Circle().fill(iconBackground)
+
+				icon
+					.resizable()
+					.scaledToFit()
+					.padding(diameter * 0.2)
+					.foregroundColor(Color.blue)
+			}
+		}
+
+		if isCutout {
 			Circle()
-				.frame(width: cutoutCircleSize, height: cutoutCircleSize)
+				.frame(width: cutoutDiameter, height: cutoutDiameter)
 				.blendMode(.destinationOut)
-			// Offset the cutout circle to align with where the next avatar starts
-				.offset(x: -overlapSpacing + microGap)
+				.offset(x: cutoutOffset)
 		}
-		.compositingGroup() // Groups the blend mode operation
-		.frame(width: avatarSize, height: avatarSize)
 	}
+	.compositingGroup()
+	.frame(width: diameter, height: diameter)
+	.clipShape(Circle())
+	.overlay(
+		Group {
+			if !isCutout {
+				Circle()
+					.stroke(strokeColor, lineWidth: strokeWidth)
+			}
+		}
+	)
 }
 
-// A view for the final avatar in the sequence that includes the outer stroke
-struct StrokedAvatarView: View {
-	var body: some View {
-		ZStack {
-			Image("LargeDP")
-				.resizable()
-				.scaledToFill()
-				.frame(width: avatarSize, height: avatarSize)
-				.clipShape(Circle())
+struct AvatarStack: View {
+	let avatars: [AvatarData]
+	let avatarSize: CGFloat
+	let strokeWidth: CGFloat
+	let strokeColor: Color
+	let showBackground: Bool
 
+	init(
+		avatars: [AvatarData],
+		avatarSize: CGFloat = 34,
+		strokeWidth: CGFloat = AvatarTokens.strokeWidth,
+		strokeColor: Color = .blue,
+		showBackground: Bool = false
+	) {
+		self.avatars = avatars
+		self.avatarSize = avatarSize
+		self.strokeWidth = strokeWidth
+		self.strokeColor = strokeColor
+		self.showBackground = showBackground
+	}
+
+	var body: some View {
+		HStack(spacing: -(avatarSize * AvatarTokens.overlapRatio)) {
+			ForEach(Array(avatars.enumerated()), id: \.element.id) { index, avatar in
+				let isLast = index == avatars.count - 1
+
+				switch avatar.content {
+				case .image(let image):
+					AvatarCircle(
+						size: avatarSize,
+						strokeWidth: strokeWidth,
+						image: image,
+						isCutout: !isLast,
+						strokeColor: strokeColor
+					)
+
+				case .icon(let icon, let backgroundColor):
+					AvatarCircle(
+						size: avatarSize,
+						strokeWidth: strokeWidth,
+						icon: icon,
+						isCutout: !isLast,
+						iconBackground: backgroundColor,
+						strokeColor: strokeColor
+					)
+				}
+			}
 		}
-		.compositingGroup()
-		.frame(width: avatarSize, height: avatarSize)
-		// Add the white stroke to the final circle shape
+		.padding(2) // Inner padding for stroke
+		.background {
+			if showBackground {
+				RoundedRectangle(cornerRadius: 32, style: .continuous)
+					.fill(Color.white)
+			}
+		}
 		.overlay(
-			Circle()
-				.stroke(Color.white, lineWidth: 1.5)
+			Capsule()
+				.strokeBorder(strokeColor, lineWidth: strokeWidth)
 		)
+		.drawingGroup() // Single compositing operation for the entire stack
 	}
 }
 
-// A view for the final avatar in the sequence that includes the outer stroke
-struct StrokedIconView: View {
+struct CombinedStacksView: View {
+
+	private let avatars: [AvatarData] = [
+		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .icon(Image("ph_credit-card"))),
+	]
+
 	var body: some View {
-		ZStack {
-			Circle()
-				.fill(Color.white)
-				.frame(width: avatarSize, height: avatarSize)
-			Image("ph_credit-card")
-				.resizable()
-				.scaledToFill()
-				.frame(width: avatarSize-8, height: avatarSize-8)
-				.clipShape(Circle())
-
-		}
-		.foregroundColor(Color.black)
-		.compositingGroup()
-		.frame(width: avatarSize, height: avatarSize)
-		// Add the white stroke to the final circle shape
-	}
-}
-
-
-// This struct enables the Xcode Canvas Preview
-struct CombinedStacksView_Previews: PreviewProvider {
-	static var previews: some View {
 		NavigationStack {
 			ZStack {
 				Color.mint.ignoresSafeArea()
 
-				HStack(spacing: overlapSpacing) {
-					CutoutAvatarView()
-					CutoutAvatarView()
-					StrokedIconView()
-				}
-				.overlay(
-					Capsule()
-						.stroke(Color.white, lineWidth: 2)
+				AvatarStack(
+					avatars: avatars,
+					avatarSize: AvatarTokens.size,
+					showBackground: true
 				)
-				.compositingGroup()
 			}
 		}
 	}
+}
+
+#Preview {
+	CombinedStacksView()
 }
