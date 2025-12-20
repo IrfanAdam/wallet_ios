@@ -70,7 +70,7 @@ struct InitiatePayment: View {
 				}.padding(.horizontal)
 
 				Divider().padding(.horizontal)
-
+			
 				Spacer()
 			}
 			.navigationBarBackButtonHidden(true)
