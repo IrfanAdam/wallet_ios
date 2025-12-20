@@ -8,15 +8,23 @@ struct InitiatePayment: View {
 	@Environment(\.sheetControl) private var sheetControl
 	@State private var hasContinued: Bool = false
 	@State private var isAuthenticating: Bool = false
-
-
+	
 	@State private var integerPart: String = ""
 	@State private var decimalPart: String = ""
 	@FocusState private var focusInteger: Bool
 	@FocusState private var focusDecimal: Bool
 	@State private var selectedCurrency = "INR"
-
-
+	
+	// MARK: - Animation Configurations
+	// Ultra-fast for authentication transition
+	private let instantSpring = Animation.spring(response: 0.2, dampingFraction: 0.95, blendDuration: 0)
+	
+	// Snappy spring for quick interactions
+	private let snappySpring = Animation.spring(response: 0.25, dampingFraction: 0.92, blendDuration: 0)
+	
+	// Smooth spring for dismissals
+	private let smoothSpring = Animation.spring(response: 0.3, dampingFraction: 0.88, blendDuration: 0)
+	
 	private func flag(for currency: String) -> String {
 		switch currency {
 		case "INR": return "🇮🇳"
@@ -25,14 +33,12 @@ struct InitiatePayment: View {
 		default: return "🏳️"
 		}
 	}
-
-
+	
 	var fullAmount: String {
 		if decimalPart.isEmpty { integerPart }
 		else { integerPart + "." + decimalPart }
 	}
-
-
+	
 	@ViewBuilder
 	private func currencyButton(_ code: String, _ name: String) -> some View {
 		Button {
@@ -41,16 +47,14 @@ struct InitiatePayment: View {
 			HStack {
 				Text("\(code) – \(name)")
 				Spacer()
-
+				
 				if selectedCurrency == code {
 					Image(systemName: "checkmark")
 				}
 			}
 		}
 	}
-
-
-
+	
 	var body: some View {
 		NavigationStack {
 			VStack(alignment: .leading, spacing: 12) {
@@ -60,11 +64,6 @@ struct InitiatePayment: View {
 				
 				HStack(alignment: .bottom) {
 					HStack {
-						//						Text("CFA")
-						//							.font(.custom("OpenRunde-Bold", size: 36))
-						//							.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
-						//							.kerning(-0.8)
-						
 						HStack(alignment: .firstTextBaseline, spacing: 0) {
 							CurrencyTwoFieldDemo()
 						}
@@ -83,7 +82,6 @@ struct InitiatePayment: View {
 							
 							Text(selectedCurrency)
 								.font(.body.weight(.medium))
-							
 						}
 						.buttonStyle(.plain)
 						.padding(.horizontal, 8)
@@ -92,18 +90,19 @@ struct InitiatePayment: View {
 						.clipped(antialiased: true)
 						.clipShape(Capsule())
 					}
-				}.padding(.horizontal)
+				}
+				.padding(.horizontal)
 				
-				Divider().padding(.horizontal).padding(.vertical, 0)
+				Divider()
+					.padding(.horizontal)
+					.padding(.vertical, 0)
 				
 				Spacer()
 				
 				bottomActionArea
 					.padding(isAuthenticating ? [] : .horizontal)
 					.padding(isAuthenticating ? [] : .vertical)
-					.animation(.spring(response: 0.45, dampingFraction: 0.85),
-										 value: isAuthenticating)
-				
+					.animation(instantSpring, value: isAuthenticating)
 			}
 			.background(Color.clear)
 			.navigationBarBackButtonHidden(true)
@@ -116,25 +115,18 @@ struct InitiatePayment: View {
 		}
 		.ignoresSafeArea(edges: isAuthenticating ? .bottom : [])
 	}
-
+	
 	private var paymentFlowItems: [AnyView] {
 		renderFlowItems([
 			.text("Jabari M. Last Name", tone: .primary),
-//			.text("Jabari M. will recieve", tone: .primary),
-//			.text("CFA 1500", tone: .primary),
-//			.pill("Daylies"),
-//			.text("for Groceries", tone: .secondary),
-//			.pill("Category"),
-//			.pill("Hahahah")
 		])
 	}
-
+	
 	private let avatars: [AvatarData] = [
 		AvatarData(content: .image(Image("LargeDP"))),
 		AvatarData(content: .icon(Image("ph_credit-card"))),
 	]
-
-
+	
 	@ToolbarContentBuilder
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItem(placement: .topBarLeading) {
@@ -150,13 +142,14 @@ struct InitiatePayment: View {
 			.clipShape(Capsule())
 			.background {
 				Capsule().fill(Color.blue)
-			}.onTapGesture {
+			}
+			.onTapGesture {
 				dismiss()
 			}
 		}
-
+		
 		ToolbarSpacer(.flexible)
-
+		
 		ToolbarItem(placement: .destructiveAction) {
 			Button("Close", systemImage: "xmark") {
 				sheetControl.dismiss()
@@ -171,24 +164,24 @@ struct InitiatePayment: View {
 				amount: "\(selectedCurrency) \(fullAmount)",
 				namespace: namespace,
 				onDismiss: {
-					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
-						isAuthenticating = false   // <-- reset to initial state
+					withAnimation(smoothSpring) {
+						isAuthenticating = false
 					}
 				}
 			)
-			.transition(.opacity)
+			.transition(.move(edge: .bottom).combined(with: .opacity))
 		} else {
 			PaymentCTAView(
 				hasContinued: hasContinued,
 				isAuthenticating: isAuthenticating,
 				namespace: namespace,
 				onContinue: {
-					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+					withAnimation(snappySpring) {
 						hasContinued = true
 					}
 				},
 				onPayNow: {
-					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+					withAnimation(instantSpring) {
 						isAuthenticating = true
 					}
 				},
@@ -196,22 +189,22 @@ struct InitiatePayment: View {
 					// pay later logic
 				}
 			)
+			.transition(.move(edge: .bottom).combined(with: .opacity))
 		}
 	}
-
+	
 	struct ProfileImage: View {
 		let imageName: String
 		let size: CGFloat = 36
-
+		
 		var body: some View {
-			Image(imageName)           
+			Image(imageName)
 				.resizable()
 				.scaledToFill()
 				.frame(width: size, height: size)
 				.clipShape(Circle())
 		}
 	}
-
 }
 
 #Preview {
@@ -220,7 +213,7 @@ struct InitiatePayment: View {
 
 private struct PreviewContainer: View {
 	@Namespace var ns
-
+	
 	var body: some View {
 		InitiatePayment(namespace: ns)
 			.background(Color.black.ignoresSafeArea())
