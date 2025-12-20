@@ -6,6 +6,8 @@ struct InitiatePayment: View {
 	@Environment(\.dismiss) private var dismiss
 	@State private var amountValue: String = ""
 	@Environment(\.sheetControl) private var sheetControl
+	@State private var hasContinued: Bool = false
+	@State private var isAuthenticating: Bool = false
 
 
 	@State private var integerPart: String = ""
@@ -55,21 +57,21 @@ struct InitiatePayment: View {
 				SimpleFlowWrap(
 					items: paymentFlowItems
 				)
-
+				
 				HStack(alignment: .bottom) {
 					HStack {
-//						Text("CFA")
-//							.font(.custom("OpenRunde-Bold", size: 36))
-//							.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
-//							.kerning(-0.8)
-
+						//						Text("CFA")
+						//							.font(.custom("OpenRunde-Bold", size: 36))
+						//							.foregroundStyle(Color(red: 0.4, green: 0.47, blue: 0.53))
+						//							.kerning(-0.8)
+						
 						HStack(alignment: .firstTextBaseline, spacing: 0) {
 							CurrencyTwoFieldDemo()
 						}
 					}
-
+					
 					Spacer()
-
+					
 					Menu {
 						currencyButton("INR", "Indian Rupee")
 						currencyButton("USD", "US Dollar")
@@ -78,10 +80,10 @@ struct InitiatePayment: View {
 						HStack(spacing: 4) {
 							Text(flag(for: selectedCurrency))
 								.font(.title2)
-
+							
 							Text(selectedCurrency)
 								.font(.body.weight(.medium))
-
+							
 						}
 						.buttonStyle(.plain)
 						.padding(.horizontal, 8)
@@ -91,18 +93,28 @@ struct InitiatePayment: View {
 						.clipShape(Capsule())
 					}
 				}.padding(.horizontal)
-
+				
 				Divider().padding(.horizontal).padding(.vertical, 0)
-
+				
 				Spacer()
-
+				
+				bottomActionArea
+					.padding(isAuthenticating ? [] : .horizontal)
+					.padding(isAuthenticating ? [] : .vertical)
+					.animation(.spring(response: 0.45, dampingFraction: 0.85),
+										 value: isAuthenticating)
+				
 			}
+			.background(Color.clear)
 			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
+			.ignoresSafeArea(.container, edges: isAuthenticating ? .bottom : [])
+			.ignoresSafeArea(isAuthenticating ? .keyboard : [], edges: isAuthenticating ? .bottom : [])
 		}
 		.onAppear {
 			sheetControl.setDetent(.medium)
 		}
+		.ignoresSafeArea(edges: isAuthenticating ? .bottom : [])
 	}
 
 	private var paymentFlowItems: [AnyView] {
@@ -151,6 +163,41 @@ struct InitiatePayment: View {
 			}
 		}
 	}
+	
+	@ViewBuilder
+	private var bottomActionArea: some View {
+		if isAuthenticating {
+			PaymentAuthView(
+				amount: "\(selectedCurrency) \(fullAmount)",
+				namespace: namespace,
+				onDismiss: {
+					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+						isAuthenticating = false   // <-- reset to initial state
+					}
+				}
+			)
+			.transition(.opacity)
+		} else {
+			PaymentCTAView(
+				hasContinued: hasContinued,
+				isAuthenticating: isAuthenticating,
+				namespace: namespace,
+				onContinue: {
+					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+						hasContinued = true
+					}
+				},
+				onPayNow: {
+					withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+						isAuthenticating = true
+					}
+				},
+				onPayLater: {
+					// pay later logic
+				}
+			)
+		}
+	}
 
 	struct ProfileImage: View {
 		let imageName: String
@@ -176,5 +223,6 @@ private struct PreviewContainer: View {
 
 	var body: some View {
 		InitiatePayment(namespace: ns)
+			.background(Color.black.ignoresSafeArea())
 	}
 }

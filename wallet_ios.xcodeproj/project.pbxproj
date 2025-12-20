@@ -11,7 +11,6 @@
 		1549ECBB2EF1386A00876D2D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB72EF1386A00876D2D /* Data.swift */; };
 		1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */; };
 		1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECBE2EF1598400876D2D /* TransactionOptions.swift */; };
-		1549ECC52EF162D300876D2D /* wallet-ios-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1549ECC42EF162D300876D2D /* wallet-ios-Info.plist */; };
 		1549ECCA2EF177DC00876D2D /* pay_mock.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1549ECC92EF177DC00876D2D /* pay_mock.mp4 */; };
 		1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECCE2EF29E5300876D2D /* PseudoCamera.swift */; };
 		1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */; };
@@ -51,6 +50,8 @@
 		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
 		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
+		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
+		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,8 @@
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
+		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
+		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				15DA4B1C2EEBFD100046EBC6 /* Pay.swift */,
+				EE9C14922EF6C609003A5926 /* CTAs.swift */,
+				EE9C148F2EF6C039003A5926 /* Authenticate.swift */,
 				1549ECD12EF2D9F000876D2D /* Functions */,
 			);
 			path = Payment;
@@ -393,7 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1549ECCA2EF177DC00876D2D /* pay_mock.mp4 in Resources */,
-				1549ECC52EF162D300876D2D /* wallet-ios-Info.plist in Resources */,
 				15DA4B452EEBFD100046EBC6 /* OpenRunde-Bold.otf in Resources */,
 				15DA4B462EEBFD100046EBC6 /* OpenRunde-Medium.otf in Resources */,
 				15DA4B472EEBFD100046EBC6 /* OpenRunde-Regular.otf in Resources */,
@@ -422,6 +426,7 @@
 				15DA4B2C2EEBFD100046EBC6 /* PillUse.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
+				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
@@ -443,6 +448,7 @@
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
+				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
