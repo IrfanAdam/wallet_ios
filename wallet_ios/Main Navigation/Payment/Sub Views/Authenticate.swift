@@ -6,6 +6,7 @@ struct PaymentAuthView: View {
 	var onDismiss: (() -> Void)? = nil   // <-- new
 	
 	var body: some View {
+		let _ = Self._printChanges() 
 		VStack(spacing: 20) {
 			
 			HStack {
@@ -24,6 +25,10 @@ struct PaymentAuthView: View {
 					Text("Enter PIN to Pay")
 						.font(.headline)
 						.foregroundColor(.white)
+						.matchedGeometryEffect(
+							id: "action_title",
+							in: namespace
+						)
 					
 					Text(amount)
 						.font(.subheadline)
@@ -63,8 +68,8 @@ struct PaymentAuthView: View {
 		.background(
 			RoundedRectangle(cornerRadius: 48)
 				.fill(Color.blue)
-				.matchedGeometryEffect(id: "payment_container", in: namespace)
 		)
+		.matchedGeometryEffect(id: "payment_container", in: namespace)
 	}
 }
 
@@ -82,6 +87,5 @@ private struct PaymentAuthPreviewContainer: View {
 		)
 		.ignoresSafeArea(.container, edges: .bottom)
 		.padding(0)
-		.background(Color.black.opacity(0.05))
 	}
 }

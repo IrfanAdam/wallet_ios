@@ -40,7 +40,6 @@ struct PaymentCTAView: View {
 								.fill(Color.blue.opacity(0.08))
 						)
 				)
-				.transition(.move(edge: .leading).combined(with: .opacity))
 			}
 			
 			// Primary
@@ -48,6 +47,10 @@ struct PaymentCTAView: View {
 				Text(hasContinued ? "Pay Now" : "Continue")
 					.frame(maxWidth: .infinity)
 					.padding(.vertical, 14)
+					.matchedGeometryEffect(
+						id: "action_title",
+						in: namespace
+					)
 			}
 			.font(.system(size: 16, weight: .semibold))
 			.foregroundColor(.white)

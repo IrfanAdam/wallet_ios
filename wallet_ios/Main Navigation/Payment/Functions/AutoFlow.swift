@@ -44,7 +44,6 @@ struct SimpleFlowWrap: View {
 				computedHeight = height
 			}
 		}
-		.padding(.horizontal)
 		.frame(height: computedHeight)
 	}
 
