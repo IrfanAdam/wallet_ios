@@ -17,6 +17,9 @@ struct InitiatePayment: View {
 	@FocusState private var focusDecimal: Bool
 	@State private var selectedCurrency = "INR"
 	
+	@State private var note: String = ""
+	@State private var selectedTags: [PaymentTag] = [.remittance]
+	
 	// MARK: - Animations
 	private let instantSpring = Animation.spring(response: 0.2, dampingFraction: 0.95, blendDuration: 0)
 	private let snappySpring = Animation.spring(response: 0.25, dampingFraction: 0.92, blendDuration: 0)
@@ -41,7 +44,16 @@ struct InitiatePayment: View {
 					flag: flag(for:)
 				).padding(.horizontal)
 				
-				Divider().padding(.horizontal)
+				if hasContinued {
+					PaymentTagSection(
+						note: $note,
+						selectedTags: $selectedTags
+					)
+					.padding(.horizontal)
+					.transition(.move(edge: .bottom).combined(with: .opacity))
+				} else {
+					Divider().padding(.horizontal)
+				}
 				
 				Spacer()
 		

@@ -68,6 +68,7 @@ struct PaymentAuthView: View {
 		.background(
 			RoundedRectangle(cornerRadius: 48)
 				.fill(Color.blue)
+				.matchedGeometryEffect(id: "payment_bg", in: namespace)
 		)
 		.matchedGeometryEffect(id: "payment_container", in: namespace)
 	}

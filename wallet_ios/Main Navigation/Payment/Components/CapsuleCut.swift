@@ -7,7 +7,7 @@ enum AvatarTokens {
 	// All stroke and background concerns centralized here
 	static let strokeWidth: CGFloat = 1.5
 	static let strokeColor: Color = .blue
-	static let iconBackgroundColor: Color = .gray.opacity(0.2)
+	static let iconBackgroundColor: Color = .white.opacity(0.9)
 	static let stackBackgroundColor: Color = .white
 }
 
@@ -153,7 +153,7 @@ struct CombinedStacksView: View {
 				AvatarStack(
 					avatars: avatars,
 					avatarSize: AvatarTokens.size,
-					showBackground: true
+					showBackground: false
 				)
 			}
 		}

@@ -7,9 +7,8 @@ struct AvatarStackView: View {
 	]
 	
 	var body: some View {
-		AvatarStack(avatars: avatars, avatarSize: 32, showBackground: true)
+		AvatarStack(avatars: avatars, avatarSize: 32, showBackground: false)
 			.scaledToFill()
 			.clipShape(Capsule())
-			.background { Capsule().fill(Color.blue) }
 	}
 }

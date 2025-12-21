@@ -58,10 +58,11 @@ struct PaymentCTAView: View {
 				RoundedRectangle(cornerRadius: 28)
 					.fill(Color.blue)
 					.matchedGeometryEffect(
-						id: "payment_container",
+						id: "payment_bg",
 						in: namespace
 					)
 			)
+			.matchedGeometryEffect(id: "payment_container", in: namespace)
 		}
 	}
 }
