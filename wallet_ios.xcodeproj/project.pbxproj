@@ -16,7 +16,7 @@
 		1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */; };
 		1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */; };
 		1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD82EF4220E00876D2D /* Integer Only.swift */; };
-		1549ECDD2EF5472500876D2D /* CapsuleCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECDC2EF5472000876D2D /* CapsuleCut.swift */; };
+		1549ECDD2EF5472500876D2D /* PillCut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECDC2EF5472000876D2D /* PillCut.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -71,7 +71,7 @@
 		1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFlowComposer.swift; sourceTree = "<group>"; };
 		1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Decimal Style.swift"; sourceTree = "<group>"; };
 		1549ECD82EF4220E00876D2D /* Integer Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Integer Only.swift"; sourceTree = "<group>"; };
-		1549ECDC2EF5472000876D2D /* CapsuleCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCut.swift; sourceTree = "<group>"; };
+		1549ECDC2EF5472000876D2D /* PillCut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillCut.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -184,8 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				1549ECD22EF2ECC300876D2D /* AutoFlowComposer.swift */,
-				1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */,
-				1549ECD82EF4220E00876D2D /* Integer Only.swift */,
 				15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */,
 				15DA4AFC2EEBFD100046EBC6 /* PillUse.swift */,
 			);
@@ -318,7 +316,7 @@
 			children = (
 				15DA4B242EEBFD100046EBC6 /* AppView.swift */,
 				15DA4B262EEBFD100046EBC6 /* wallet_iosApp.swift */,
-				EE8802FA2EF8292A00A4D79D /* Main Navigation */,
+				EE8802FA2EF8292A00A4D79D /* Main */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
 				1549ECB92EF1386A00876D2D /* Modals */,
@@ -347,10 +345,11 @@
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1549ECDC2EF5472000876D2D /* PillCut.swift */,
+				1549ECD82EF4220E00876D2D /* Integer Only.swift */,
+				1549ECD42EF4038700876D2D /* Custom Decimal Style.swift */,
 				EE8802FD2EF839AA00A4D79D /* TagChip.swift */,
 				EE9C14922EF6C609003A5926 /* CTAs.swift */,
-				EE8802F32EF8039800A4D79D /* AmountInput.swift */,
-				1549ECDC2EF5472000876D2D /* CapsuleCut.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -358,6 +357,7 @@
 		EE8802F52EF81C8300A4D79D /* Sub Views */ = {
 			isa = PBXGroup;
 			children = (
+				EE8802F32EF8039800A4D79D /* AmountInput.swift */,
 				EE8802FB2EF8397E00A4D79D /* Tags.swift */,
 				EE8802F12EF8036700A4D79D /* BottomAction.swift */,
 				EE9C148F2EF6C039003A5926 /* Authenticate.swift */,
@@ -383,7 +383,7 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		EE8802FA2EF8292A00A4D79D /* Main Navigation */ = {
+		EE8802FA2EF8292A00A4D79D /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4B152EEBFD100046EBC6 /* Home */,
@@ -391,7 +391,7 @@
 				15DA4B172EEBFD100046EBC6 /* Analytics */,
 				15DA4B1E2EEBFD100046EBC6 /* Transact */,
 			);
-			path = "Main Navigation";
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,7 +504,7 @@
 				EE8802F02EF8026200A4D79D /* AvatarStack.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
-				1549ECDD2EF5472500876D2D /* CapsuleCut.swift in Sources */,
+				1549ECDD2EF5472500876D2D /* PillCut.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,

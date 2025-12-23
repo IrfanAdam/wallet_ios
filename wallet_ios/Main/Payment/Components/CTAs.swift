@@ -35,10 +35,7 @@ struct PaymentCTAView: View {
 				.background(
 					RoundedRectangle(cornerRadius: 28)
 						.stroke(Color.blue, lineWidth: 1.5)
-						.background(
-							RoundedRectangle(cornerRadius: 28)
-								.fill(Color.blue.opacity(0.08))
-						)
+						.fill(Color.blue.opacity(0.08))
 				)
 			}
 			

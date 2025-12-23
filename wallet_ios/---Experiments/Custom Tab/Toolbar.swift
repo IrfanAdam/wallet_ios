@@ -32,12 +32,12 @@ struct CustomTab: View {
 				}
 			}.toolbar {
 				ToolbarItemGroup(placement: .bottomBar) {
-					HStack(spacing: 14) {   // optional spacing for cleaner layout
+					HStack(spacing: 12) {   // optional spacing for cleaner layout
 						tabButton(title: "Home", systemImage: "house.fill", tag: 0)
 						tabButton(title: "Analytics", systemImage: "chart.bar.fill", tag: 1)
 						tabButton(title: "Profile", systemImage: "person.fill", tag: 2)
 					}
-					.padding(.horizontal, 16)
+					.padding(.horizontal, 12)
 					.padding(.vertical, 4)
 					.background(
 						RoundedRectangle(cornerRadius: 42)

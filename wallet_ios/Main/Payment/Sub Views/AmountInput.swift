@@ -1,25 +1,41 @@
 import SwiftUI
 
 struct AmountInputView: View {
-	@Binding var integerPart: String
-	@Binding var decimalPart: String
-	@FocusState var focusInteger: Bool
-	@FocusState var focusDecimal: Bool
-	@Binding var selectedCurrency: String
+	@Bindable var context: InitiatePaymentContext
+
+	@FocusState private var focusInteger: Bool
+	@FocusState private var focusDecimal: Bool
+
 	var flag: (String) -> String
-	
+
 	var body: some View {
 		HStack(alignment: .bottom) {
 			CurrencyTwoFieldDemo()
+
 			Spacer()
+
 			Menu {
-				CurrencySelectionButton(code: "INR", name: "Indian Rupee", selectedCurrency: $selectedCurrency)
-				CurrencySelectionButton(code: "USD", name: "US Dollar", selectedCurrency: $selectedCurrency)
-				CurrencySelectionButton(code: "EUR", name: "Euro", selectedCurrency: $selectedCurrency)
+				CurrencySelectionButton(
+					code: "INR",
+					name: "Indian Rupee",
+					selectedCurrency: $context.selectedCurrency
+				)
+				CurrencySelectionButton(
+					code: "USD",
+					name: "US Dollar",
+					selectedCurrency: $context.selectedCurrency
+				)
+				CurrencySelectionButton(
+					code: "EUR",
+					name: "Euro",
+					selectedCurrency: $context.selectedCurrency
+				)
 			} label: {
 				HStack(spacing: 4) {
-					Text(flag(selectedCurrency)).font(.title2)
-					Text(selectedCurrency).font(.body.weight(.medium))
+					Text(flag(context.selectedCurrency))
+						.font(.title2)
+					Text(context.selectedCurrency)
+						.font(.body.weight(.medium))
 				}
 				.buttonStyle(.plain)
 				.padding(.horizontal, 8)
@@ -29,6 +45,7 @@ struct AmountInputView: View {
 			}
 		}
 	}
+
 }
 
 private struct CurrencySelectionButton: View {
