@@ -41,6 +41,7 @@ struct AvatarStackView: View {
 	)
 
 	var body: some View {
+		let _ = Self._printChanges()
 		HStack {
 			AvatarStack(
 				avatars: avatars,
@@ -48,6 +49,8 @@ struct AvatarStackView: View {
 				showBackground: false,
 				style: style
 			)
+			.fixedSize(horizontal: true, vertical: true)
+			.transaction { t in t.animation = nil }
 //			Text("T Height: \(circleSize, specifier: "%.1f")")
 //				.font(.caption)
 //				.foregroundColor(.blue)

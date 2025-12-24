@@ -45,6 +45,7 @@ struct InitiatePayment: View {
 
 	private let minimumToolbarHeight: CGFloat = 36
 	@State private var toolbarHeight: CGFloat = 36
+	@State private var hasSetHeight = false  // NEW
 
 	// MARK: - Animations
 	private let instantSpring = Animation.spring(response: 0.2, dampingFraction: 0.95)
@@ -80,8 +81,11 @@ struct InitiatePayment: View {
 			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
 			.onPreferenceChange(ToolbarHeightKey.self) { height in
-				if toolbarHeight == 0 {
-					toolbarHeight = max(height, minimumToolbarHeight)
+				guard !hasSetHeight else { return }  // ← Stops all updates after first
+				let newHeight = max(height, minimumToolbarHeight)
+				if newHeight > minimumToolbarHeight {
+					toolbarHeight = newHeight
+					hasSetHeight = true  // ← Lock it forever
 				}
 			}
 		}
@@ -120,17 +124,16 @@ struct InitiatePayment: View {
 		ToolbarItemGroup(placement: .topBarLeading) {
 			ToolbarPill {
 				AvatarStackView(circleSize: toolbarHeight)
+					.transaction { t in t.animation = nil }
 			}
 			.padding(.horizontal, 0.75)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(
 				GeometryReader { geo in
-					Color.clear
-						.task(id: geo.size.height) {
-							// Only set if we haven't set it yet
-							guard toolbarHeight == minimumToolbarHeight else { return }
-							toolbarHeight = max(geo.size.height, minimumToolbarHeight)
-						}
+					Color.clear.preference(
+						key: ToolbarHeightKey.self,
+						value: geo.size.height
+					)
 				}
 			)
 			.onTapGesture { dismiss() }
