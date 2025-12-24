@@ -10,16 +10,10 @@ struct AvatarStyle {
 	static let `default` = AvatarStyle(
 		strokeWidth: 1.5,
 		strokeColor: .blue,
-		iconBackgroundColor: .white.opacity(0.9),
+		iconBackgroundColor: .blue,
 		stackBackgroundColor: .white,
 		overlapRatio: 0.2
 	)
-}
-
-
-enum AvatarContent {
-	case image(Image)
-	case icon(Image)
 }
 
 struct AvatarData: Identifiable {
@@ -30,62 +24,6 @@ struct AvatarData: Identifiable {
 	init(content: AvatarContent, hasBorder: Bool = true) {
 		self.content = content
 		self.hasBorder = hasBorder
-	}
-}
-
-@ViewBuilder
-func AvatarCircle(
-	size: CGFloat,
-	image: Image? = nil,
-	icon: Image? = nil,
-	isCutout: Bool = false,
-	hasBorder: Bool = true,
-	style: AvatarStyle
-) -> some View {
-
-	let diameter = size
-	let strokeWidth = style.strokeWidth
-	let overlap = style.overlapRatio
-
-	let cutoutDiameter = diameter + (strokeWidth * 2)
-	let cutoutOffset = (cutoutDiameter * (1 - overlap) - (strokeWidth * 2))
-
-	ZStack {
-		if let image {
-			image
-				.resizable()
-				.scaledToFill()
-				.frame(width: diameter, height: diameter)
-				.clipped()
-
-		} else if let icon {
-			ZStack {
-				Circle().fill(style.iconBackgroundColor)
-
-				icon
-					.renderingMode(.template)
-					.resizable()
-					.scaledToFit()
-					.padding(diameter * 0.2)
-					.foregroundColor(style.strokeColor)
-			}
-		}
-
-		if isCutout {
-			Circle()
-				.frame(width: cutoutDiameter, height: cutoutDiameter)
-				.blendMode(.destinationOut)
-				.offset(x: cutoutOffset)
-		}
-	}
-	.compositingGroup()
-	.frame(width: diameter, height: diameter)
-	.clipShape(Circle())
-	.overlay {
-		if !isCutout && hasBorder {
-			Circle()
-				.stroke(style.strokeColor, lineWidth: strokeWidth)
-		}
 	}
 }
 
@@ -143,6 +81,38 @@ struct AvatarStack: View {
 				.fill(style.stackBackgroundColor)
 			}
 		}
-		.drawingGroup()
+	}
+}
+
+
+#Preview {
+	AvatarStackViewPreview(circleSize: 120)
+}
+
+struct AvatarStackViewPreview: View {
+	let circleSize: CGFloat
+	private let avatars: [AvatarData] = [
+		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false),
+	]
+
+	private let style = AvatarStyle(
+		strokeWidth: 3.2,
+		strokeColor: .blue,
+		iconBackgroundColor: .green,
+		stackBackgroundColor: .white,
+		overlapRatio: 0.4
+	)
+
+	var body: some View {
+		HStack {
+			AvatarStack(
+				avatars: avatars,
+				avatarSize: circleSize - (4 * style.strokeWidth),
+				showBackground: false,
+				style: style
+			)
+		}
 	}
 }

@@ -27,7 +27,7 @@ final class InitiatePaymentContext {
 	var selectedTags: [PaymentTag] = [.remittance]
 
 	// Toolbar
-	var toolbarHeight: CGFloat = 0
+//	var toolbarHeight: CGFloat = 0
 
 	// Derived
 	var fullAmount: String {
@@ -44,6 +44,7 @@ struct InitiatePayment: View {
 	@Environment(\.sheetControl) private var sheetControl
 
 	private let minimumToolbarHeight: CGFloat = 36
+	@State private var toolbarHeight: CGFloat = 36
 
 	// MARK: - Animations
 	private let instantSpring = Animation.spring(response: 0.2, dampingFraction: 0.95)
@@ -79,10 +80,11 @@ struct InitiatePayment: View {
 			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
 			.onPreferenceChange(ToolbarHeightKey.self) { height in
-				context.toolbarHeight = max(height, minimumToolbarHeight)
+				if toolbarHeight == 0 {
+					toolbarHeight = max(height, minimumToolbarHeight)
+				}
 			}
 		}
-		.onAppear { sheetControl.setDetent(.medium) }
 		.safeAreaInset(edge: .bottom) {
 			BottomActionAreaView(
 				context: context,
@@ -91,7 +93,9 @@ struct InitiatePayment: View {
 				snappySpring: snappySpring,
 				smoothSpring: smoothSpring
 			)
-			.padding(0)
+		}
+		.task {
+			sheetControl.setDetent(.medium)
 		}
 	}
 
@@ -115,18 +119,17 @@ struct InitiatePayment: View {
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItemGroup(placement: .topBarLeading) {
 			ToolbarPill {
-				AvatarStackView(circleSize: context.toolbarHeight)
+				AvatarStackView(circleSize: toolbarHeight)
 			}
 			.padding(.horizontal, 0.75)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(
 				GeometryReader { geo in
 					Color.clear
-						.onAppear {
-							context.toolbarHeight = max(geo.size.height, minimumToolbarHeight)
-						}
-						.onChange(of: geo.size.height) { _, newValue in
-							context.toolbarHeight = max(newValue, minimumToolbarHeight)
+						.task(id: geo.size.height) {
+							// Only set if we haven't set it yet
+							guard toolbarHeight == minimumToolbarHeight else { return }
+							toolbarHeight = max(geo.size.height, minimumToolbarHeight)
 						}
 				}
 			)

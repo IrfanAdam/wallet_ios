@@ -28,3 +28,16 @@ struct TagChip: View {
 	}
 }
 
+
+// MARK: --- Example Pill ---
+struct Pill: View {
+	let text: String
+
+
+	var body: some View {
+		Text(text)
+			.padding(.horizontal, 8)
+			.padding(.vertical, 4)
+			.background(Capsule().stroke(Color.gray, lineWidth: 1))
+	}
+}

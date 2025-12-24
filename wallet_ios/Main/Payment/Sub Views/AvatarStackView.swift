@@ -29,13 +29,13 @@ struct AvatarStackView: View {
 	let circleSize: CGFloat 
 	private let avatars: [AvatarData] = [
 		AvatarData(content: .image(Image("LargeDP"))),
-		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false),
+		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 	]
 
 	private let style = AvatarStyle(
 		strokeWidth: 1.5,
 		strokeColor: .blue,
-		iconBackgroundColor: .white.opacity(0.9),
+		iconBackgroundColor: .white,
 		stackBackgroundColor: .white,
 		overlapRatio: 0.25
 	)
@@ -48,10 +48,10 @@ struct AvatarStackView: View {
 				showBackground: false,
 				style: style
 			)
-			//			Text("T Height: \(toolbarHeight, specifier: "%.1f")")
-			//				.font(.caption)
-			//				.foregroundColor(.blue)
-			//				.frame(width: 60)
+//			Text("T Height: \(circleSize, specifier: "%.1f")")
+//				.font(.caption)
+//				.foregroundColor(.blue)
+//				.frame(width: 60)
 		}
 	}
 }
