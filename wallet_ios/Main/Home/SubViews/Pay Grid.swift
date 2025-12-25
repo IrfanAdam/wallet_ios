@@ -2,8 +2,7 @@ import SwiftUI
 
 struct PaymentActionsGrid: View {
 	@Namespace private var morphNS
-	@State private var detent: PresentationDetent = .large
-	@State private var showPageSheet = false
+	@State private var activeSheet: SheetKind?
 	
 	let actions: [PaymentAction] = [
 		PaymentAction(title: "Pay", icon: "arrow.up"),
@@ -18,33 +17,67 @@ struct PaymentActionsGrid: View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack(spacing: 12) {
 				ForEach(actions) { action in
-					
 					PaymentActionCard(
 						title: action.title,
-						icon: action.icon,
-					  action: {
-							showPageSheet = true
-						}
-					)
+						icon: action.icon
+					) {
+						activeSheet = .search
+					}
 					.frame(width: 140)
 				}
 			}
 			.padding(.horizontal, 20)
 		}
-		.sheet(isPresented: $showPageSheet) {
-			SearchPage(detent: $detent, namespace: morphNS)
-				.presentationDetents([.medium, .large], selection: $detent)
-				.presentationDragIndicator(.visible)
-				.presentationBackground(
-					Color(red: 250/255, green: 248/255, blue: 245/255)
-				)
+		.sheet(item: $activeSheet) { sheet in
+			sheetView(for: sheet)
+			// Provide dismiss closure to wrapper
+				.environment(\.sheetControl, SheetControl(
+					dismiss: { activeSheet = nil },
+					setDetent: { _ in }
+				))
 		}
-		.environment(
-			\.sheetControl,
-			 SheetControl(
-				dismiss: { showPageSheet = false },
-				setDetent: { detent = $0 }
-			 )
-		)
+	}
+	
+	// MARK: - Sheet Content
+	@ViewBuilder
+	private func sheetView(for sheet: SheetKind) -> some View {
+		switch sheet {
+		case .search:
+			SearchPageWrapper(namespace: morphNS)
+		}
+	}
+}
+
+// Wrapper to isolate detent state inside the sheet
+private struct SearchPageWrapper: View {
+	@State private var detent: PresentationDetent = .large
+	@Environment(\.sheetControl) private var parentControl
+	let namespace: Namespace.ID
+	
+	var body: some View {
+		SearchPage(detent: $detent, namespace: namespace)
+			.presentationDetents([.medium, .large], selection: $detent)
+			.presentationDragIndicator(.visible)
+			.presentationBackground(
+				Color(red: 250/255, green: 248/255, blue: 245/255)
+			)
+		// Override only setDetent, keep parent's dismiss
+			.environment(\.sheetControl, SheetControl(
+				dismiss: parentControl.dismiss,
+				setDetent: { newDetent in
+					detent = newDetent
+				}
+			))
+	}
+}
+
+// MARK: - Sheet Kind
+private enum SheetKind: Identifiable {
+	case search
+	
+	var id: String {
+		switch self {
+		case .search: return "search"
+		}
 	}
 }

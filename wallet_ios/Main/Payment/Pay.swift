@@ -44,6 +44,7 @@ struct InitiatePayment: View {
 	@Environment(\.sheetControl) private var sheetControl
 
 	private let minimumToolbarHeight: CGFloat = 36
+	private let defaultToolbarHeight: CGFloat = 36
 	@State private var toolbarHeight: CGFloat = 36
 	@State private var hasSetHeight = false  // NEW
 
@@ -117,31 +118,56 @@ struct InitiatePayment: View {
 	private var paymentFlowItems: [AnyView] {
 		renderFlowItems([.text("Jabari M. Last Name", tone: .primary)])
 	}
-
-	// MARK: - Toolbar
+	
+	// MARK: - Toolbar (Optimized)
 	@ToolbarContentBuilder
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItemGroup(placement: .topBarLeading) {
-			ToolbarPill {
-				AvatarStackView(circleSize: toolbarHeight)
-					.transaction { t in t.animation = nil }
-			}
-			.padding(.horizontal, 0.75)
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
-			.background(
-				GeometryReader { geo in
-					Color.clear.preference(
-						key: ToolbarHeightKey.self,
-						value: geo.size.height
-					)
-				}
+			ToolbarLeadingContent(
+				toolbarHeight: $toolbarHeight,
+				defaultHeight: defaultToolbarHeight,
+				dismiss: dismiss
 			)
-			.onTapGesture { dismiss() }
 		}
 		ToolbarSpacer(.flexible)
 		ToolbarItem(placement: .destructiveAction) {
-			Button("Close", systemImage: "xmark") { sheetControl.dismiss() }
+			Button("Close", systemImage: "xmark") {
+				sheetControl.dismiss()
+			}
 		}
+	}
+}
+
+// MARK: - Toolbar Leading Content (Separate View)
+private struct ToolbarLeadingContent: View {
+	@Binding var toolbarHeight: CGFloat
+	let defaultHeight: CGFloat
+	let dismiss: DismissAction
+	
+	@State private var hasSetHeight = false
+	
+	var body: some View {
+		let _ = Self._printChanges()
+		ToolbarPill {
+			AvatarStackView(circleSize: toolbarHeight)
+				.animation(.none, value: toolbarHeight)
+		}
+		.padding(.horizontal, 0.75)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.overlay(
+			GeometryReader { geo in
+				Color.clear.preference(
+					key: ToolbarHeightKey.self,
+					value: geo.size.height
+				)
+			}
+		)
+		.onPreferenceChange(ToolbarHeightKey.self) { height in
+			guard !hasSetHeight, height > defaultHeight else { return }
+			toolbarHeight = height
+			hasSetHeight = true
+		}
+		.onTapGesture { dismiss() }
 	}
 }
 
