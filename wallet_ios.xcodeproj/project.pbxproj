@@ -18,6 +18,7 @@
 		1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD82EF4220E00876D2D /* Integer Only.swift */; };
 		1549ECDD2EF5472500876D2D /* AvatarStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECDC2EF5472000876D2D /* AvatarStack.swift */; };
 		1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE22EFC27C600876D2D /* AvatarCircle.swift */; };
+		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -75,6 +76,7 @@
 		1549ECD82EF4220E00876D2D /* Integer Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Integer Only.swift"; sourceTree = "<group>"; };
 		1549ECDC2EF5472000876D2D /* AvatarStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStack.swift; sourceTree = "<group>"; };
 		1549ECE22EFC27C600876D2D /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
+		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -193,6 +195,22 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
+		1549ECE42EFEB3F400876D2D /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */,
+			);
+			path = Advanced;
+			sourceTree = "<group>";
+		};
+		1549ECE72EFEB47C00876D2D /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				1549ECE52EFEB40000876D2D /* SheetController.swift */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
 		15DA4AF72EEBFD100046EBC6 /* Custom Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,7 +253,7 @@
 		15DA4B092EEBFD100046EBC6 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */,
+				1549ECE42EFEB3F400876D2D /* Advanced */,
 				15DA4B052EEBFD100046EBC6 /* Test Nested 02 */,
 				15DA4B062EEBFD100046EBC6 /* Basic.swift */,
 				15DA4B072EEBFD100046EBC6 /* ComplexStack.swift */,
@@ -323,6 +341,7 @@
 				EE8802FA2EF8292A00A4D79D /* Main */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
+				1549ECE72EFEB47C00876D2D /* Functions */,
 				1549ECB92EF1386A00876D2D /* Modals */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
@@ -506,6 +525,7 @@
 				EE8802FC2EF8398100A4D79D /* Tags.swift in Sources */,
 				15DA4B342EEBFD100046EBC6 /* Basic.swift in Sources */,
 				15DA4B352EEBFD100046EBC6 /* ComplexStack.swift in Sources */,
+				1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */,
 				15DA4B362EEBFD100046EBC6 /* StackedNav.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */,

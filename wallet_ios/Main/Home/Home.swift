@@ -33,6 +33,7 @@ extension EnvironmentValues {
 struct HomeView: View {
 	@State private var showDetails = false
 	@State private var showScan = false
+	let sheetController: AppSheetController
 	var body: some View {
 		// First tab
 		NavigationStack {
@@ -52,6 +53,10 @@ struct HomeView: View {
 						.padding(.horizontal, 20)
 
 					PaymentActionsGrid()
+				}
+
+				Button("Open Global Sheet") {
+					sheetController.present()
 				}
 			}
 			.navigationTitle("Home")
@@ -97,6 +102,6 @@ struct HomeView: View {
 }
 
 #Preview {
-	HomeView()
+	HomeView(sheetController: AppSheetController())
 }
 

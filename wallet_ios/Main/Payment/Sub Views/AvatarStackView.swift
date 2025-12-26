@@ -14,16 +14,8 @@ struct ToolbarPill<Content: View>: View {
 		self.strokeWidth = strokeWidth
 		self.content = content()
 	}
-	
-	@State private var checkCount = 0
 
 	var body: some View {
-		let _ = {
-			checkCount += 1
-			print("🟣 Render pass:", checkCount)
-			Self._printChanges()
-		}()
-		
 		content
 			.background(
 				Capsule()

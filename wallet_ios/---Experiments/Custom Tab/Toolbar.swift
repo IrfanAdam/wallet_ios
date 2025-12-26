@@ -11,7 +11,7 @@ struct CustomTab: View {
 				// Main content
 				switch selectedTab {
 				case 0:
-					HomeView()
+					HomeView(sheetController: AppSheetController())
 				case 1:
 					RoundedDonut_Chart()
 				case 2:
@@ -28,7 +28,7 @@ struct CustomTab: View {
 						}
 					}
 				default:
-					HomeView()
+					HomeView(sheetController: AppSheetController())
 				}
 			}.toolbar {
 				ToolbarItemGroup(placement: .bottomBar) {
