@@ -14,12 +14,21 @@ struct ToolbarPill<Content: View>: View {
 		self.strokeWidth = strokeWidth
 		self.content = content()
 	}
+	
+	@State private var checkCount = 0
 
 	var body: some View {
+		let _ = {
+			checkCount += 1
+			print("🟣 Render pass:", checkCount)
+			Self._printChanges()
+		}()
+		
 		content
-			.overlay(
+			.background(
 				Capsule()
 					.stroke(Color.blue, lineWidth: strokeWidth)
+					.fill(Color.white)
 			)
 			.contentShape(Capsule())
 	}
@@ -41,7 +50,6 @@ struct AvatarStackView: View {
 	)
 
 	var body: some View {
-		let _ = Self._printChanges()
 		HStack {
 			AvatarStack(
 				avatars: avatars,
@@ -51,6 +59,7 @@ struct AvatarStackView: View {
 			)
 			.fixedSize(horizontal: true, vertical: true)
 			.transaction { t in t.animation = nil }
+			.drawingGroup()
 //			Text("T Height: \(circleSize, specifier: "%.1f")")
 //				.font(.caption)
 //				.foregroundColor(.blue)

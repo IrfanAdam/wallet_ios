@@ -95,6 +95,7 @@ struct AvatarStackViewPreview: View {
 		AvatarData(content: .image(Image("LargeDP"))),
 		AvatarData(content: .image(Image("LargeDP"))),
 		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false),
+		AvatarData(content: .image(Image("LargeDP"))),
 	]
 
 	private let style = AvatarStyle(
@@ -114,5 +115,6 @@ struct AvatarStackViewPreview: View {
 				style: style
 			)
 		}
+		.background(.blue)
 	}
 }
