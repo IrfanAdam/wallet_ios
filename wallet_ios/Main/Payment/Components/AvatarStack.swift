@@ -115,6 +115,5 @@ struct AvatarStackViewPreview: View {
 				style: style
 			)
 		}
-		.background(.blue)
 	}
 }

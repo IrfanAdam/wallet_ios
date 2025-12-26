@@ -28,7 +28,6 @@ struct ToolbarPill<Content: View>: View {
 			.background(
 				Capsule()
 					.stroke(Color.blue, lineWidth: strokeWidth)
-					.fill(Color.white)
 			)
 			.contentShape(Capsule())
 	}
@@ -59,7 +58,6 @@ struct AvatarStackView: View {
 			)
 			.fixedSize(horizontal: true, vertical: true)
 			.transaction { t in t.animation = nil }
-			.drawingGroup()
 //			Text("T Height: \(circleSize, specifier: "%.1f")")
 //				.font(.caption)
 //				.foregroundColor(.blue)

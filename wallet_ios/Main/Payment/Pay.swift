@@ -154,7 +154,7 @@ private struct ToolbarLeadingContent: View {
 		}
 		.padding(.horizontal, 0.75)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.overlay(
+		.background(
 			GeometryReader { geo in
 				Color.clear.preference(
 					key: ToolbarHeightKey.self,
