@@ -26,9 +26,11 @@ struct ToolbarPill<Content: View>: View {
 }
 
 struct AvatarStackView: View {
-	let circleSize: CGFloat 
+	let circleSize: CGFloat
+	let shouldCutout: Bool
+	
 	private let avatars: [AvatarData] = [
-		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
 		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 	]
 
@@ -46,10 +48,9 @@ struct AvatarStackView: View {
 				avatars: avatars,
 				avatarSize: circleSize - (4 * style.strokeWidth),
 				showBackground: false,
-				style: style
+				style: style,
+				shouldCutout: shouldCutout
 			)
-			.fixedSize(horizontal: true, vertical: true)
-			.transaction { t in t.animation = nil }
 //			Text("T Height: \(circleSize, specifier: "%.1f")")
 //				.font(.caption)
 //				.foregroundColor(.blue)

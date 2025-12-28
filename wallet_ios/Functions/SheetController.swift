@@ -1,60 +1,56 @@
 import SwiftUI
 
-// MARK: - Imperative Sheet Controller (No Observation)
 @MainActor
 @Observable
 final class AppSheetController {
-
-	private(set) var isPresented: Bool = false
-	private(set) var availableDetents: [PresentationDetent] = [.medium, .large]
-	private(set) var selectedDetent: PresentationDetent = .medium
-
-	private var onChange: (() -> Void)?
-
-	func bind(onChange: @escaping () -> Void) {
-		self.onChange = onChange
+	
+	private(set) var isPresented = false
+	private(set) var sheetHeight: CGFloat = 0
+	private var _screenHeight: CGFloat = 0
+	
+	var screenHeight: CGFloat { _screenHeight }
+	
+	
+	func updateScreenHeight(_ height: CGFloat) {
+		_screenHeight = height
 	}
-
+	
+	func primeInitialHeight() {
+		guard sheetHeight == 0, screenHeight > 0 else { return }
+		
+		// Match UIKit's medium detent
+		sheetHeight = screenHeight * 0.5
+	}
+	
 	func present() {
-		guard !isPresented else { return }
+		sheetHeight = 0
 		isPresented = true
-		onChange?()
 	}
-
+	
 	func dismiss() {
-		guard isPresented else { return }
 		isPresented = false
-		onChange?()
 	}
-
-	func setDetent(_ detent: PresentationDetent) {
-		DispatchQueue.main.async {
-			if !self.availableDetents.contains(detent) {
-				self.availableDetents.append(detent)
-			}
-			self.selectedDetent = detent
-			self.onChange?()
+	
+	func setHeight(_ height: CGFloat) {
+		withAnimation(.snappy(duration: 0.25, extraBounce: 0.1)) {
+			sheetHeight = height
 		}
 	}
-
-
+	
+	func snapToMedium() {
+		guard screenHeight > 0 else { return }
+		setHeight(screenHeight * 0.5)
+	}
+	
+	func snapToLarge() {
+		guard screenHeight > 0 else { return }
+		setHeight(screenHeight * 0.9)
+	}
+	
 	var isPresentedBinding: Binding<Bool> {
 		Binding(
 			get: { self.isPresented },
-			set: { presented in
-				if !presented {
-					self.dismiss()
-				}
-			}
-		)
-	}
-
-	var detentSelectionBinding: Binding<PresentationDetent> {
-		Binding(
-			get: { self.selectedDetent },
-			set: { newValue in
-				self.setDetent(newValue)
-			}
+			set: { if !$0 { self.dismiss() } }
 		)
 	}
 }

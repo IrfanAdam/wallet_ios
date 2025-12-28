@@ -149,7 +149,7 @@ private struct ToolbarLeadingContent: View {
 	var body: some View {
 		let _ = Self._printChanges()
 		ToolbarPill {
-			AvatarStackView(circleSize: toolbarHeight)
+			AvatarStackView(circleSize: toolbarHeight, shouldCutout: false)
 				.animation(.none, value: toolbarHeight)
 		}
 		.padding(.horizontal, 0.75)

@@ -32,12 +32,12 @@ struct AppView: View {
 			}
 		}
 		.sheet(isPresented: sheetController.isPresentedBinding) {
-			DragResizableSheetRootView(
-				detents: sheetController.availableDetents,
-				selection: sheetController.detentSelectionBinding,
-				setDetent: sheetController.setDetent,
-				dismiss: sheetController.dismiss
-			)
+//			DragResizableSheetRootView(
+//				detents: sheetController.availableDetents,
+//				selection: sheetController.detentSelectionBinding,
+//				setDetent: sheetController.setDetent,
+//				dismiss: sheetController.dismiss
+//			)
 		}
 	}
 }

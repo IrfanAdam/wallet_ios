@@ -229,13 +229,6 @@
 			path = "Funky Donut";
 			sourceTree = "<group>";
 		};
-		15DA4AFF2EEBFD100046EBC6 /* Pill Title */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Pill Title";
-			sourceTree = "<group>";
-		};
 		15DA4B052EEBFD100046EBC6 /* Test Nested 02 */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +260,6 @@
 			children = (
 				15DA4AF72EEBFD100046EBC6 /* Custom Tab */,
 				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
-				15DA4AFF2EEBFD100046EBC6 /* Pill Title */,
 				15DA4B092EEBFD100046EBC6 /* Sheet */,
 			);
 			path = "---Experiments";

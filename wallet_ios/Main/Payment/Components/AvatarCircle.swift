@@ -64,7 +64,9 @@ struct AvatarCircle: View {
 					.offset(x: cutoutOffset)
 			}
 		}
-		.drawingGroup()
+		.if(isCutout) { view in
+			view.drawingGroup()
+		}
 		.frame(width: diameter, height: diameter)
 		.clipShape(Circle())
 		.if(isCutout) { view in
