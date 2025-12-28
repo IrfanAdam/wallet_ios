@@ -211,12 +211,12 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
-		15DA4AF72EEBFD100046EBC6 /* Custom Tab */ = {
+		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
-			path = "Custom Tab";
+			path = Toolbar;
 			sourceTree = "<group>";
 		};
 		15DA4AFB2EEBFD100046EBC6 /* Funky Donut */ = {
@@ -258,7 +258,7 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
-				15DA4AF72EEBFD100046EBC6 /* Custom Tab */,
+				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
 				15DA4B092EEBFD100046EBC6 /* Sheet */,
 			);
