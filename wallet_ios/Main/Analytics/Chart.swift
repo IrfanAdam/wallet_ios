@@ -109,33 +109,35 @@ struct RoundedDonut_Chart: View {
 		]
 
 		NavigationStack {
-			VStack {
-				VStack {
-					RoundedDonutChart(
-						segments: data,
-						lineWidth: 20,
-						gap: 10
-					)
-					.frame(width: 260, height: 260)
-					.padding()
-				}
-				VStack {
-					RoundedDonutChart(
-						segments: data,
-						lineWidth: 20,
-						gap: 10
-					)
-					.frame(width: 260, height: 260)
-					.padding()
-				}
-				VStack {
-					RoundedDonutChart(
-						segments: data,
-						lineWidth: 20,
-						gap: 10
-					)
-					.frame(width: 260, height: 260)
-					.padding()
+			ScrollView {
+				LazyVStack {
+					VStack {
+						RoundedDonutChart(
+							segments: data,
+							lineWidth: 20,
+							gap: 10
+						)
+						.frame(width: 260, height: 260)
+						.padding()
+					}
+					VStack {
+						RoundedDonutChart(
+							segments: data,
+							lineWidth: 20,
+							gap: 10
+						)
+						.frame(width: 260, height: 260)
+						.padding()
+					}
+					VStack {
+						RoundedDonutChart(
+							segments: data,
+							lineWidth: 20,
+							gap: 10
+						)
+						.frame(width: 260, height: 260)
+						.padding()
+					}
 				}
 			}
 			.navigationTitle("Analytics")

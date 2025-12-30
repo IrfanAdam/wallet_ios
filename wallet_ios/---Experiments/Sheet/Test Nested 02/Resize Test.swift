@@ -54,7 +54,7 @@ struct DynamicSheet<Content: View>: View {
 		}
 		return .zero
 	}
-	
+
 	var body: some View {
 		VStack(alignment: .trailing, spacing: 0) {
 			content
@@ -73,7 +73,7 @@ struct DynamicSheet<Content: View>: View {
 				}
 			}
 		}
-		.modifier(SetSheetHeight(height: sheetHeight))
+		.modifier(SetSheetHeight(height: sheetHeight, screenHeight: windowSize.height))
 	}
 }
 
@@ -106,20 +106,6 @@ struct ViewC: View {
 			.cornerRadius(12)
 			.padding()
 	}
-}
-
-
-fileprivate struct SetSheetHeight: ViewModifier, Animatable {
-	var height: CGFloat
-	var animatableData: CGFloat {
-		get { height }
-		set { height = newValue }
-	}
-	func body(content: Content) -> some View {
-		content.presentationDetents(height == .zero ? [.medium] : [.height(height)])
-	}
-	
-	
 }
 
 // MARK: - Preview

@@ -86,7 +86,7 @@ struct HomeView: View {
 				} label: {
 					Image(systemName: "qrcode.viewfinder")
 						.font(.title.weight(.semibold))
-						.padding(.horizontal, 8)
+						.padding(.horizontal, 4)
 						.padding(.vertical, 8)
 				}
 				.buttonStyle(.glassProminent)
