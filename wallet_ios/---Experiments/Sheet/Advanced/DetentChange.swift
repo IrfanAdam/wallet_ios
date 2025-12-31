@@ -205,17 +205,24 @@ struct LevelTwoContent: View {
 			.padding(.top)
 			.background(
 				GeometryReader { geometry in
-					let safeAreaTop = geometry.safeAreaInsets.top
-					let safeAreaBottom = geometry.safeAreaInsets.bottom
 					Color.clear
 						.onAppear {
-							print("🎯 GeometryReader safearea: \(geometry.safeAreaInsets)")
+							let insets: UIEdgeInsets =
+							UIApplication.shared.connectedScenes
+								.compactMap { $0 as? UIWindowScene }
+								.flatMap { $0.windows }
+								.first { $0.isKeyWindow }?
+								.safeAreaInsets ?? .zero
+
+							let topInset = insets.top
+							let bottomInset = insets.bottom
+
 							let contentHeight = geometry.size.height
 							guard !hasMeasured, contentHeight > 0 else {
 								return
 							}
 							hasMeasured = true
-							measuredHeight = contentHeight
+							measuredHeight = contentHeight + topInset + bottomInset
 							updateDetentHeight("l2", measuredHeight)
 						}
 				}.ignoresSafeArea()
