@@ -12,14 +12,9 @@ struct SheetDetentSpec: Identifiable, Hashable {
 struct DetentSnapProbeRootView: View {
 
 	@State private var isSheetVisible = false
-
-	// UIKit-backed detent
 	@State private var activeDetent: PresentationDetent = .medium
-
-	// Semantic detent intent
 	@State private var activeDetentID: SheetDetentSpec.ID? = nil
 
-	// Labeled custom detents
 	@State private var customDetents: [SheetDetentSpec] = [
 		.init(id: "l2", height: 420),
 		.init(id: "l3", height: 500),
@@ -38,6 +33,9 @@ struct DetentSnapProbeRootView: View {
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 		.sheet(isPresented: $isSheetVisible) {
+			// Reset to .large when sheet closes
+			activeDetent = .large
+		} content: {
 			DetentSnapProbeSheetView(
 				detentSelection: $activeDetent,
 				activeDetentID: $activeDetentID,
@@ -57,8 +55,6 @@ struct DetentSnapProbeRootView: View {
 		}
 	}
 
-	// MARK: - Detent Setter (Semantic → UIKit)
-
 	private func setCustomDetent(id: SheetDetentSpec.ID) {
 		guard let spec = customDetents.first(where: { $0.id == id }) else { return }
 
@@ -68,22 +64,20 @@ struct DetentSnapProbeRootView: View {
 		}
 	}
 
-	// MARK: - Detent Height Updater
-
 	private func updateDetentHeight(id: String, newHeight: CGFloat) {
 		guard let index = customDetents.firstIndex(where: { $0.id == id }) else { return }
 		customDetents[index] = SheetDetentSpec(id: id, height: newHeight)
+
+		// If this is the active detent, update it
+		if activeDetentID == id {
+			activeDetent = .height(newHeight)
+		}
 	}
 }
+
+// MARK: - Preference Keys
 
 struct ContentHeightKey: PreferenceKey {
-	static var defaultValue: CGFloat = 0
-	static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-		value = nextValue()
-	}
-}
-
-struct NavBarHeightKey: PreferenceKey {
 	static var defaultValue: CGFloat = 0
 	static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
 		value = nextValue()
@@ -96,14 +90,10 @@ struct DetentSnapProbeSheetView: View {
 
 	@Binding var detentSelection: PresentationDetent
 	@Binding var activeDetentID: SheetDetentSpec.ID?
-	@State private var sheetNewHeight: CGFloat = 0
-	@State private var hasSetInitialHeight = false
 
 	let customDetents: [SheetDetentSpec]
 	let setCustomDetent: (SheetDetentSpec.ID) -> Void
 	let updateDetentHeight: (String, CGFloat) -> Void
-
-	@State private var navBarHeight: CGFloat = 0
 
 	var body: some View {
 		NavigationStack {
@@ -119,75 +109,14 @@ struct DetentSnapProbeSheetView: View {
 				}
 
 				NavigationLink("Go to Level Two") {
-					NavigationStack {
-						VStack(spacing: 16) {
-							Text("You're in the wrong place!")
-
-							Button("Switch to Medium") {
-								activeDetentID = nil
-								detentSelection = .medium
-							}
-							.buttonStyle(.borderedProminent)
-
-							Button("Switch to Large") {
-								activeDetentID = nil
-								detentSelection = .large
-							}
-							.buttonStyle(.borderedProminent)
-
-							VStack {
-								ForEach(customDetents) { detent in
-									Button("Size \(detent.id.capitalized)") {
-										setCustomDetent(detent.id)
-									}
-									.buttonStyle(.bordered)
-								}
-							}
-
-							// 🔍 Display measured height
-							Text("Measured height: \(Int(sheetNewHeight)) pt")
-								.font(.footnote)
-								.foregroundColor(.gray)
-
-							Text("Measured Nav Height: \(Int(navBarHeight)) pt")
-								.font(.footnote)
-								.foregroundColor(.gray)
-
-							Text("Sheet Height: \(Int(sheetNewHeight + navBarHeight)) pt")
-								.font(.footnote)
-								.foregroundColor(.gray)
-						}
-						.background(
-							GeometryReader { proxy in
-								Color.clear
-								.preference(
-									key: ContentHeightKey.self,
-									value: proxy.size.height
-								)
-								.preference(
-									key: NavBarHeightKey.self,
-									value: proxy.safeAreaInsets.top
-								)
-							}
-							.onPreferenceChange(NavBarHeightKey.self) { safeInset in
-								navBarHeight = safeInset
-							}
-							.onPreferenceChange(ContentHeightKey.self) { newHeight in
-								sheetNewHeight = newHeight + navBarHeight
-								if !hasSetInitialHeight && newHeight > 0 {
-									hasSetInitialHeight = true
-									updateDetentHeight("l2", sheetNewHeight)
-								}
-							}
-						)
-						.background(Color.white)
-						.navigationTitle("Level Two")
-						.navigationBarTitleDisplayMode(.large)
-					}
-					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+					LevelTwoContent(
+						detentSelection: $detentSelection,
+						activeDetentID: $activeDetentID,
+						customDetents: customDetents,
+						setCustomDetent: setCustomDetent,
+						updateDetentHeight: updateDetentHeight
+					)
 				}
-
-				// MARK: - Labeled Custom Detents
 
 				ForEach(customDetents) { detent in
 					Button("Switch to \(detent.id.capitalized)") {
@@ -214,8 +143,6 @@ struct DetentSnapProbeSheetView: View {
 		}
 	}
 
-	// MARK: - Label Resolution
-
 	private var detentLabel: String {
 		if let id = activeDetentID {
 			return id.capitalized
@@ -225,6 +152,77 @@ struct DetentSnapProbeSheetView: View {
 		case .medium: return "Medium"
 		case .large: return "Large"
 		default: return "Custom"
+		}
+	}
+}
+
+// MARK: - Level Two Content
+
+struct LevelTwoContent: View {
+
+	@Binding var detentSelection: PresentationDetent
+	@Binding var activeDetentID: SheetDetentSpec.ID?
+
+	let customDetents: [SheetDetentSpec]
+	let setCustomDetent: (SheetDetentSpec.ID) -> Void
+	let updateDetentHeight: (String, CGFloat) -> Void
+
+	@State private var hasMeasured = false
+	@State private var measuredHeight: CGFloat = 0
+
+	var body: some View {
+		NavigationStack {
+			VStack(spacing: 16) {
+				Text("You're in the wrong place!")
+
+				Button("Switch to Medium") {
+					activeDetentID = nil
+					detentSelection = .medium
+				}
+				.buttonStyle(.borderedProminent)
+
+				Button("Switch to Large") {
+					activeDetentID = nil
+					detentSelection = .large
+				}
+				.buttonStyle(.borderedProminent)
+
+				HStack {
+					ForEach(customDetents) { detent in
+						Button("Size \(detent.id.capitalized)") {
+							setCustomDetent(detent.id)
+						}
+						.buttonStyle(.bordered)
+					}
+				}
+
+				// Debug info
+				Text("Measured Height: \(Int(measuredHeight)) pt")
+					.font(.footnote)
+					.foregroundColor(.gray)
+			}
+			.padding(.horizontal)
+			.padding(.top)
+			.background(
+				GeometryReader { geometry in
+					let safeAreaTop = geometry.safeAreaInsets.top
+					let safeAreaBottom = geometry.safeAreaInsets.bottom
+					Color.clear
+						.onAppear {
+							print("🎯 GeometryReader safearea: \(geometry.safeAreaInsets)")
+							let contentHeight = geometry.size.height
+							guard !hasMeasured, contentHeight > 0 else {
+								return
+							}
+							hasMeasured = true
+							measuredHeight = contentHeight
+							updateDetentHeight("l2", measuredHeight)
+						}
+				}.ignoresSafeArea()
+			)
+			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+			.navigationTitle("Level Two")
+			.navigationBarTitleDisplayMode(.large)
 		}
 	}
 }
