@@ -20,10 +20,8 @@ struct DetentSnapProbeRootView: View {
 				isSheetVisible = true
 			}
 			.buttonStyle(.borderedProminent)
-
-
-			Spacer()
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 		.sheet(isPresented: $isSheetVisible) {
 			DetentSnapProbeSheetView(
 				detentSelection: $activeDetent,
@@ -35,25 +33,24 @@ struct DetentSnapProbeRootView: View {
 				Set([.medium] + customHeights.map { .height($0) } + [.large]),
 				selection: $activeDetent
 			)
-			.presentationDragIndicator(.hidden)
-			.interactiveDismissDisabled(true)
-			.presentationBackground(Color.black)
+			.presentationBackground(Color.white)
 		}
 	}
 
 	// Smoothly update the detent
 	private func setCustomDetent(height: CGFloat) {
-		// Step 1: keep detent at current height to allow animation
-		if let current = currentCustomHeight {
-			activeDetent = .height(current)
+		// Step 1: Animate to intermediate custom height
+		withAnimation(.easeInOut(duration: 0.25)) {
+			currentCustomHeight = height
+			activeDetent = .height(height)
 		}
+	}
 
-		// Step 2: animate to new height after tiny delay
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-			withAnimation(.easeInOut(duration: 0.25)) {
-				currentCustomHeight = height
-				activeDetent = .height(height)
-			}
+	// Smooth transition to medium/large
+	private func setFinalDetent(_ detent: PresentationDetent) {
+		guard detent != .height(currentCustomHeight ?? 0) else { return }
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+			activeDetent = detent
 		}
 	}
 }
@@ -71,10 +68,7 @@ struct DetentSnapProbeSheetView: View {
 
 	var body: some View {
 		NavigationStack {
-			VStack(spacing: 28) {
-
-				Text("Sheet Test Area")
-					.font(.title)
+			VStack(spacing: 12) {
 
 				VStack(spacing: 8) {
 					Text("Current Detent")
@@ -85,7 +79,26 @@ struct DetentSnapProbeSheetView: View {
 						.bold()
 				}
 
-				Divider()
+				NavigationLink("Go to Level Two") {
+					VStack {
+						Text("You're in the wrong place!")
+						Button("Switch to Medium") {
+							detentSelection = .medium
+							currentCustomHeight = nil
+						}
+						.buttonStyle(.borderedProminent)
+
+						Button("Switch to Large") {
+							detentSelection = .large
+							currentCustomHeight = nil
+						}
+						.buttonStyle(.borderedProminent)
+					}
+					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+					.background(Color.white)
+					.navigationTitle("Level Two")
+					.navigationBarTitleDisplayMode(.inline)
+				}
 
 				// Buttons to switch heights
 				ForEach(customHeights, id: \.self) { height in
@@ -106,16 +119,13 @@ struct DetentSnapProbeSheetView: View {
 					currentCustomHeight = nil
 				}
 				.buttonStyle(.borderedProminent)
-
-				Spacer()
 			}
+			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+			.navigationTitle("Level one")
+			.navigationBarTitleDisplayMode(.inline)
 		}
-		.padding()
-		.frame(maxHeight: .infinity, alignment: .top)
-		.navigationBarTitleDisplayMode(.inline)
-		.toolbarVisibility(.hidden)
+		.padding(0)
 		.ignoresSafeArea()
-		.animation(.easeInOut(duration: 0.25), value: detentSelection)
 	}
 
 	// Show label safely without pattern matching

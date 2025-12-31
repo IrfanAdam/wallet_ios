@@ -94,7 +94,7 @@ struct SetSheetHeight: ViewModifier, Animatable {
 	}
 
 	func body(content: Content) -> some View {
-		let threshold = screenHeight * 0.9
+		let threshold = screenHeight * 0.85
 
 		// Compute detent safely
 		let detent: PresentationDetent = {
