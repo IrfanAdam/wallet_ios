@@ -10,7 +10,7 @@ struct ContentView: View {
 		}
 		.sheet(isPresented: $showSheet) {
 			DynamicSheet() {
-				VStack(alignment: .trailing, spacing: 20) {
+				VStack(spacing: 20) {
 					Group {
 						switch currentView {
 						case .viewA: ViewA().transition(.blurReplace)
@@ -30,6 +30,7 @@ struct ContentView: View {
 					.pickerStyle(.segmented)
 					.padding()
 				}
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
 			}
 		}
 	}
@@ -58,7 +59,6 @@ struct DynamicSheet<Content: View>: View {
 	var body: some View {
 		VStack(alignment: .trailing, spacing: 0) {
 			content
-			.frame(alignment: .bottom)
 			.fixedSize(horizontal: false, vertical: true)
 			.onGeometryChange(for: CGSize.self) {
 				$0.size

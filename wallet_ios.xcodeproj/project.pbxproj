@@ -20,7 +20,7 @@
 		1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE22EFC27C600876D2D /* AvatarCircle.swift */; };
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
-		1549ECEC2F03EE9A00876D2D /* DetentChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECEB2F03EE9100876D2D /* DetentChange.swift */; };
+		1549ECEC2F03EE9A00876D2D /* DetentChangeRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -52,6 +52,9 @@
 		15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */; };
 		15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */; };
 		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
+		EE1A4DF92F05A89900352395 /* DetentChangeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A4DF82F05A89800352395 /* DetentChangeSheet.swift */; };
+		EE1A4DFB2F05A8D300352395 /* DetentChangeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A4DFA2F05A8CC00352395 /* DetentChangeContent.swift */; };
+		EE1A4DFF2F067D5D00352395 /* Attempt999.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1A4DFE2F067D5600352395 /* Attempt999.swift */; };
 		EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
@@ -80,7 +83,7 @@
 		1549ECE22EFC27C600876D2D /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
-		1549ECEB2F03EE9100876D2D /* DetentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetentChange.swift; sourceTree = "<group>"; };
+		1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetentChangeRoot.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -113,6 +116,9 @@
 		15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransition.swift; sourceTree = "<group>"; };
 		15DA4B502EF03A410046EBC6 /* Initiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initiate.swift; sourceTree = "<group>"; };
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE1A4DF82F05A89800352395 /* DetentChangeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetentChangeSheet.swift; sourceTree = "<group>"; };
+		EE1A4DFA2F05A8CC00352395 /* DetentChangeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetentChangeContent.swift; sourceTree = "<group>"; };
+		EE1A4DFE2F067D5600352395 /* Attempt999.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt999.swift; sourceTree = "<group>"; };
 		EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStackView.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
@@ -202,17 +208,13 @@
 		1549ECE42EFEB3F400876D2D /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
-				1549ECEB2F03EE9100876D2D /* DetentChange.swift */,
+				EE1A4DFE2F067D5600352395 /* Attempt999.swift */,
+				1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */,
+				EE1A4DF82F05A89800352395 /* DetentChangeSheet.swift */,
+				EE1A4DFA2F05A8CC00352395 /* DetentChangeContent.swift */,
 				EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */,
 			);
 			path = Advanced;
-			sourceTree = "<group>";
-		};
-		1549ECE72EFEB47C00876D2D /* Functions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Functions;
 			sourceTree = "<group>";
 		};
 		1549ECE82F03D7B600876D2D /* Functions */ = {
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
+				EE9C14872EED7929003A5926 /* ToolbarMorph.swift */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -242,25 +245,20 @@
 			path = "Funky Donut";
 			sourceTree = "<group>";
 		};
-		15DA4B052EEBFD100046EBC6 /* Test Nested 02 */ = {
+		15DA4B052EEBFD100046EBC6 /* Modifier Resize */ = {
 			isa = PBXGroup;
 			children = (
-				EE9C14872EED7929003A5926 /* ToolbarMorph.swift */,
-				15DA4B012EEBFD100046EBC6 /* Morphy.swift */,
-				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
-				15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */,
-				15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */,
 				15DA4B032EEBFD100046EBC6 /* New Test.swift */,
 				15DA4B042EEBFD100046EBC6 /* Resize Test.swift */,
 			);
-			path = "Test Nested 02";
+			path = "Modifier Resize";
 			sourceTree = "<group>";
 		};
 		15DA4B092EEBFD100046EBC6 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
 				1549ECE42EFEB3F400876D2D /* Advanced */,
-				15DA4B052EEBFD100046EBC6 /* Test Nested 02 */,
+				15DA4B052EEBFD100046EBC6 /* Modifier Resize */,
 				15DA4B062EEBFD100046EBC6 /* Basic.swift */,
 				15DA4B072EEBFD100046EBC6 /* ComplexStack.swift */,
 				15DA4B082EEBFD100046EBC6 /* StackedNav.swift */,
@@ -271,6 +269,7 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
 				15DA4B092EEBFD100046EBC6 /* Sheet */,
@@ -292,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				15DA4B142EEBFD100046EBC6 /* Home.swift */,
+				1549ECB92EF1386A00876D2D /* Modals */,
 				EE8802F62EF820E500A4D79D /* SubViews */,
 				1549ECE82F03D7B600876D2D /* Functions */,
 				15DA4B122EEBFD100046EBC6 /* Components */,
@@ -347,8 +347,6 @@
 				EE8802FA2EF8292A00A4D79D /* Main */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
-				1549ECE72EFEB47C00876D2D /* Functions */,
-				1549ECB92EF1386A00876D2D /* Modals */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
@@ -369,6 +367,17 @@
 				EE0E14022EDAD5FA00092DAA /* wallet_ios.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EE1A4E022F06B5F600352395 /* PageTransition */ = {
+			isa = PBXGroup;
+			children = (
+				15DA4B4A2EEC4E120046EBC6 /* BlurReplace.swift */,
+				15DA4B4C2EEC5A080046EBC6 /* PageTransition.swift */,
+				15DA4B012EEBFD100046EBC6 /* Morphy.swift */,
+				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
+			);
+			path = PageTransition;
 			sourceTree = "<group>";
 		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
@@ -519,6 +528,7 @@
 				15DA4B2C2EEBFD100046EBC6 /* PillUsePreview.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
+				EE1A4DFF2F067D5D00352395 /* Attempt999.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				EEA520D12EFD6C9F005BEBCD /* DeepDismiss.swift in Sources */,
@@ -527,7 +537,7 @@
 				15DA4B322EEBFD100046EBC6 /* New Test.swift in Sources */,
 				15DA4B332EEBFD100046EBC6 /* Resize Test.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
-				1549ECEC2F03EE9A00876D2D /* DetentChange.swift in Sources */,
+				1549ECEC2F03EE9A00876D2D /* DetentChangeRoot.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,
 				EE8802FC2EF8398100A4D79D /* Tags.swift in Sources */,
 				15DA4B342EEBFD100046EBC6 /* Basic.swift in Sources */,
@@ -547,11 +557,13 @@
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,
 				1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
+				EE1A4DF92F05A89900352395 /* DetentChangeSheet.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
+				EE1A4DFB2F05A8D300352395 /* DetentChangeContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
