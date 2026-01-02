@@ -18,9 +18,9 @@ struct PeripheralLaunchSurface: View {
 
 	// State-driven height variants (collection)
 	@State private var heightVariants: [HeightVariant] = [
-		.init(id: "medium", height: 120),
-		.init(id: "tall", height: 320),
-		.init(id: "large", height: 720)
+		.init(id: "s", height: 140),
+		.init(id: "m", height: 320),
+		.init(id: "l", height: 720)
 	]
 
 	// Track logical selection (optional but keeps intent clear)
@@ -47,10 +47,11 @@ struct PeripheralLaunchSurface: View {
 				activeDetent: $activeDetent
 			)
 			.presentationDetents(
-				Set(heightVariants.map { .height($0.height) } + [.large]),
+				Set(heightVariants.map { .height($0.height) } + [.large, .medium]),
 				selection: $activeDetent
 			)
 			.presentationBackground(Color.black)
+			.presentationDragIndicator(.hidden)
 		}
 	}
 }
@@ -65,7 +66,7 @@ struct AuxiliaryPresentationPlane: View {
 
 	var body: some View {
 		VStack(spacing: 20) {
-			HStack(spacing: 16) {
+			HStack(spacing: 12) {
 				ForEach(heightVariants) { variant in
 					Button(variant.id.capitalized) {
 						select(variant)
@@ -76,9 +77,19 @@ struct AuxiliaryPresentationPlane: View {
 				Button() {
 					activeDetent = .large
 				} label: {
-					Text("Make Large")
+					Text("Native Large")
+				}
+
+				Button() {
+					setVariantAndSelect(id: "m", newHeight: 260)
+				} label: {
+					Text("Custom")
 				}
 			}
+
+//			NavigationLink("Go to Level Two") {
+//				Text("Look ma we made it")
+//			}.buttonStyle(.glassProminent)
 
 		}
 		.padding(32)
@@ -94,6 +105,19 @@ struct AuxiliaryPresentationPlane: View {
 	private func select(_ variant: HeightVariant) {
 		activeVariantID = variant.id
 		activeDetent = .height(variant.height)
+	}
+
+	private func setVariantAndSelect(id: String, newHeight: CGFloat) {
+		guard let index = heightVariants.firstIndex(where: { $0.id == id }) else {
+			return
+		}
+
+		// 1. Mutate variant
+		heightVariants[index].height = newHeight
+
+		// 2. Select that variant
+		activeVariantID = id
+		activeDetent = .height(newHeight)
 	}
 
 	private func heightBinding(for variant: HeightVariant) -> Binding<Double> {
