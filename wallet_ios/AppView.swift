@@ -28,6 +28,11 @@ struct AppView: View {
 				Image(systemName: "wallet.bifold.fill")
 				Text("Wallet")
 			}
+			
+			Tab {PeripheralLaunchSurface()} label: {
+				Image(systemName: "wrench.fill")
+				Text("Test")
+			}
 
 			Tab(role: .search) {SeamlessPageNavDemo()} label: {
 				if let uiImage = UIImage(named: "LargeDP")?.circularImage(size: 48) {

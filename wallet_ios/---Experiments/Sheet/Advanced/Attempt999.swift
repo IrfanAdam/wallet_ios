@@ -7,6 +7,11 @@ struct HeightVariant: Identifiable, Hashable {
 	var height: CGFloat
 }
 
+struct SheetGeometry {
+	let size: CGSize
+	let safeAreaInsets: EdgeInsets
+}
+
 // MARK: - Root View
 
 struct PeripheralLaunchSurface: View {
@@ -41,12 +46,34 @@ struct PeripheralLaunchSurface: View {
 		}
 		.padding()
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
+//			NavigationStack {
+//				AuxiliaryPresentationPlane(
+//					heightVariants: $heightVariants,
+//					activeIndex: $activeIndex,
+//					activeDetent: $activeDetent
+//				)
+//			}
+//			.presentationDetents(
+//				Set(heightVariants.map { .height($0.height) } + [.medium, .large]),
+//				selection: $activeDetent
+//			)
+//			.presentationBackground(Color.white)
+//			.presentationDragIndicator(.hidden)
+
+
 			NavigationStack {
-				AuxiliaryPresentationPlane(
-					heightVariants: $heightVariants,
-					activeIndex: $activeIndex,
-					activeDetent: $activeDetent
-				)
+				GeometryReader { contentProxy in
+					let sheetGeometry = SheetGeometry(
+						size: contentProxy.size,
+						safeAreaInsets: contentProxy.safeAreaInsets
+					)
+					AuxiliaryPresentationPlane(
+						heightVariants: $heightVariants,
+						activeIndex: $activeIndex,
+						activeDetent: $activeDetent,
+						sheetGeometry: sheetGeometry
+					)
+				}
 			}
 			.presentationDetents(
 				Set(heightVariants.map { .height($0.height) } + [.medium, .large]),
@@ -66,6 +93,9 @@ struct AuxiliaryPresentationPlane: View {
 	@Binding var activeIndex: Int
 	@Binding var activeDetent: PresentationDetent
 
+	@State private var contentHeight: CGFloat = 0
+	let sheetGeometry: SheetGeometry
+
 	var body: some View {
 
 		VStack(spacing: 20) {
@@ -83,11 +113,10 @@ struct AuxiliaryPresentationPlane: View {
 				}
 			}
 
-
-				NavigationLink("Go L2") {
-					levelTwo
-				}
-				.buttonStyle(.glassProminent)
+			NavigationLink("Go L2") {
+				levelTwo
+			}
+			.buttonStyle(.glassProminent)
 
 		}
 		.toolbarVisibility(.visible, for: .navigationBar)
@@ -113,6 +142,10 @@ struct AuxiliaryPresentationPlane: View {
 				Button("Native Large") {
 					activeDetent = .large
 				}
+
+				Button("Content") {
+					rotateAndResize(to: contentHeight)
+				}
 			}
 
 			Button("Resize → 420") {
@@ -122,8 +155,23 @@ struct AuxiliaryPresentationPlane: View {
 			Button("Resize → 480") {
 				rotateAndResize(to: 480)
 			}
+
+			Text("Measured Height: \(Int(contentHeight)) pt")
+				.font(.footnote)
+				.foregroundColor(.gray)
+				.background(Color.black)
 		}
-		.padding()
+		.padding(.horizontal)
+		.background(
+			GeometryReader { proxy in
+				Color.clear
+					.onAppear {
+						print("proxy:", sheetGeometry)
+						contentHeight = proxy.size.height + sheetGeometry.safeAreaInsets.top + sheetGeometry.safeAreaInsets.bottom
+					}
+			}
+		)
+		.fixedSize(horizontal: false, vertical: true)
 		.frame(
 			maxWidth: .infinity,
 			maxHeight: .infinity,
@@ -131,6 +179,9 @@ struct AuxiliaryPresentationPlane: View {
 		)
 		.background(Color.white)
 		.navigationTitle("Look ma we made it")
+		.onAppear {
+			rotateAndResize(to: contentHeight)
+		}
 	}
 
 	// MARK: - Helpers
@@ -140,10 +191,6 @@ struct AuxiliaryPresentationPlane: View {
 		activeDetent = .height(heightVariants[index].height)
 	}
 
-	/// Core trick:
-	/// - advance index
-	/// - mutate *next* detent
-	/// - select it
 	private func rotateAndResize(to newHeight: CGFloat) {
 		let nextIndex = (activeIndex + 1) % heightVariants.count
 
