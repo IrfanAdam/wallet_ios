@@ -46,21 +46,6 @@ struct PeripheralLaunchSurface: View {
 		}
 		.padding()
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
-//			NavigationStack {
-//				AuxiliaryPresentationPlane(
-//					heightVariants: $heightVariants,
-//					activeIndex: $activeIndex,
-//					activeDetent: $activeDetent
-//				)
-//			}
-//			.presentationDetents(
-//				Set(heightVariants.map { .height($0.height) } + [.medium, .large]),
-//				selection: $activeDetent
-//			)
-//			.presentationBackground(Color.white)
-//			.presentationDragIndicator(.hidden)
-
-
 			NavigationStack {
 				GeometryReader { contentProxy in
 					let sheetGeometry = SheetGeometry(
@@ -164,14 +149,13 @@ struct AuxiliaryPresentationPlane: View {
 		.padding(.horizontal)
 		.background(
 			GeometryReader { proxy in
-				Color.clear
+				Color.white
 					.onAppear {
 						print("proxy:", sheetGeometry)
 						contentHeight = proxy.size.height + sheetGeometry.safeAreaInsets.top + sheetGeometry.safeAreaInsets.bottom
 					}
 			}
 		)
-		.fixedSize(horizontal: false, vertical: true)
 		.frame(
 			maxWidth: .infinity,
 			maxHeight: .infinity,
