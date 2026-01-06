@@ -21,6 +21,7 @@
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
 		1549ECEC2F03EE9A00876D2D /* DetentChangeRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */; };
+		15A79E3F2F0D4A46000C6B4E /* Attempt93898.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E3E2F0D4A36000C6B4E /* Attempt93898.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -84,6 +85,7 @@
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
 		1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetentChangeRoot.swift; sourceTree = "<group>"; };
+		15A79E3E2F0D4A36000C6B4E /* Attempt93898.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt93898.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		1549ECE42EFEB3F400876D2D /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
+				15A79E3E2F0D4A36000C6B4E /* Attempt93898.swift */,
 				EE1A4DFE2F067D5600352395 /* Attempt999.swift */,
 				1549ECEB2F03EE9100876D2D /* DetentChangeRoot.swift */,
 				EE1A4DF82F05A89800352395 /* DetentChangeSheet.swift */,
@@ -544,6 +547,7 @@
 				15DA4B352EEBFD100046EBC6 /* ComplexStack.swift in Sources */,
 				1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */,
 				15DA4B362EEBFD100046EBC6 /* StackedNav.swift in Sources */,
+				15A79E3F2F0D4A46000C6B4E /* Attempt93898.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */,
 				EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */,

@@ -61,7 +61,7 @@ struct PeripheralLaunchSurface: View {
 				}
 			}
 			.presentationDetents(
-				Set(heightVariants.map { .height($0.height) } + [.medium, .large]),
+				Set(heightVariants.map { .height($0.height) } + [/*.medium, */.large]),
 				selection: $activeDetent
 			)
 			.presentationBackground(Color.white)
@@ -81,6 +81,10 @@ struct AuxiliaryPresentationPlane: View {
 	@State private var contentHeight: CGFloat = 0
 	let sheetGeometry: SheetGeometry
 
+	@Namespace private var navNamespace
+	private let zoomID = "levelTwoZoom"
+
+
 	var body: some View {
 
 		VStack(spacing: 20) {
@@ -99,18 +103,35 @@ struct AuxiliaryPresentationPlane: View {
 			}
 
 			NavigationLink("Go L2") {
-				levelTwo
+				levelTwo.navigationTransition(
+					.zoom(sourceID: zoomID, in: navNamespace)
+				)
 			}
-			.buttonStyle(.glassProminent)
+			.buttonStyle(.glassProminent).matchedGeometryEffect(
+				id: zoomID,
+				in: navNamespace
+			)
 
 		}
 		.toolbarVisibility(.visible, for: .navigationBar)
 		.padding(.horizontal)
+		.background(
+			GeometryReader { proxy in
+				Color.white
+					.onAppear {
+						print("proxy:", sheetGeometry)
+						contentHeight = proxy.size.height + sheetGeometry.safeAreaInsets.top + sheetGeometry.safeAreaInsets.bottom
+						rotateAndResize(to: contentHeight)
+					}
+			}
+		)
 		.frame(
 			maxWidth: .infinity,
 			maxHeight: .infinity,
 			alignment: .topLeading
 		)
+		.fixedSize(horizontal: false, vertical: true)
+
 	}
 
 	// MARK: - Level Two
@@ -144,15 +165,33 @@ struct AuxiliaryPresentationPlane: View {
 			Text("Measured Height: \(Int(contentHeight)) pt")
 				.font(.footnote)
 				.foregroundColor(.gray)
-				.background(Color.black)
+
+			HStack(spacing: 8) {
+				Button("Previous") {
+
+				}
+				.buttonStyle(.bordered)
+				.buttonSizing(.flexible)
+				.controlSize(.large)
+
+				Button("Next") {
+
+				}
+				.buttonStyle(.borderedProminent)
+				.buttonSizing(.flexible)
+				.controlSize(.large)
+			}
+			.padding(.horizontal, 8)
+			.offset(y: sheetGeometry.safeAreaInsets.bottom/2)
 		}
 		.padding(.horizontal)
+		.padding(.vertical, 0)
 		.background(
 			GeometryReader { proxy in
 				Color.white
 					.onAppear {
 						print("proxy:", sheetGeometry)
-						contentHeight = proxy.size.height + sheetGeometry.safeAreaInsets.top + sheetGeometry.safeAreaInsets.bottom
+						contentHeight = proxy.size.height + sheetGeometry.safeAreaInsets.top /*+ sheetGeometry.safeAreaInsets.bottom*/
 					}
 			}
 		)
