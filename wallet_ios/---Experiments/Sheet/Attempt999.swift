@@ -89,6 +89,16 @@ struct PeripheralLaunchSurface: View {
 					.environment(sheetMetrics)
 				}
 			}
+			.toolbar {
+				ToolbarItemGroup(placement: .topBarLeading) {
+					Button {
+//						rotateAndResize(to: 320)
+//						dismiss()
+					} label: {
+						Label("Dismiss", systemImage: "chevron.down")
+					}
+				}
+			}
 			.presentationDetents(
 				Set(heightVariants.map { .height($0.height) } + [.large]),
 				selection: $activeDetent
@@ -126,7 +136,7 @@ struct AuxiliaryPresentationPlane: View {
 			.buttonStyle(.glassProminent)
 		}
 		.toolbar {
-			ToolbarItem(placement: .navigationBarLeading) {
+			ToolbarItem(id: "Morph This", placement: .topBarLeading) {
 				Button {
 					rotateAndResize(to: 320)
 					dismiss()
@@ -199,13 +209,9 @@ struct LevelTwoView: View {
 	let sheetGeometry: SheetGeometry
 
 	var body: some View {
-		VStack(spacing: 14) {
+		VStack(spacing: 16) {
 
 			detentRow
-
-			Button("Content") {
-				rotateAndResize(to: contentHeight)
-			}
 
 			Button("Resize → 420") {
 				rotateAndResize(to: 420)
@@ -218,25 +224,19 @@ struct LevelTwoView: View {
 			Text("Measured Height: \(Int(contentHeight)) pt")
 				.font(.footnote)
 				.foregroundColor(.gray)
-
-			Button("Back") {
-				rotateAndResize(to: contentHeight)
-				route = .levelOne
-			}
-			.buttonStyle(.borderedProminent)
 		}
-		.navigationTitle("Level Two")
 		.toolbar {
-			ToolbarItem(placement: .navigationBarLeading) {
+			ToolbarItem(id: "Morph This", placement: .topBarLeading) {
 				Button {
 					rotateAndResize(to: contentHeight)
 					route = .levelOne
 				} label: {
-					Label("Back", systemImage: "chevron.left")
+//					Label("Back", systemImage: "chevron.left")
+					AvatarStackView(circleSize: 42, shouldCutout: false)
 				}
+				.padding(.horizontal, -8)
 			}
 		}
-		.toolbarTitleDisplayMode(.inlineLarge)
 		.padding()
 		.background(
 			GeometryReader { proxy in
@@ -267,6 +267,9 @@ struct LevelTwoView: View {
 			}
 			Button("Native Large") {
 				activeDetent = .large
+			}
+			Button("Content") {
+				rotateAndResize(to: contentHeight)
 			}
 		}
 	}
