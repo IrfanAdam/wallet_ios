@@ -15,40 +15,34 @@ struct SheetGeometry {
 
 @Observable
 final class SheetMetrics {
-
 	var height: CGFloat = 0
 	var size: CGSize = .zero
 	var safeAreaInsets: EdgeInsets = .init()
-
-
 }
 
+// MARK: - Routing
 
+enum AuxiliaryRoute {
+	case levelOne
+	case levelTwo
+}
 
 // MARK: - Root View
 
 struct PeripheralLaunchSurface: View {
 
-	@State private var isAuxiliaryPlanePresented: Bool = false
-
-	// UIKit-backed selection
-	@State private var activeDetent: PresentationDetent
-
+	@State private var isAuxiliaryPlanePresented = false
+	@State private var activeDetent: PresentationDetent = .height(240)
 	@State private var sheetMetrics = SheetMetrics()
 
-	// Ring of detents (acts like a buffer)
 	@State private var heightVariants: [HeightVariant] = [
 		.init(id: "s", height: 140),
 		.init(id: "m", height: 320),
 		.init(id: "l", height: 720)
 	]
 
-	// Track which slot is currently selected
 	@State private var activeIndex: Int = 1
-
-	init() {
-		_activeDetent = State(initialValue: .height(240))
-	}
+	@State private var route: AuxiliaryRoute = .levelOne
 
 	var body: some View {
 		VStack(spacing: 24) {
@@ -63,134 +57,154 @@ struct PeripheralLaunchSurface: View {
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
 			NavigationStack {
 				GeometryReader { contentProxy in
-					let sheetGeometry = SheetGeometry(
+					let geometry = SheetGeometry(
 						size: contentProxy.size,
 						safeAreaInsets: contentProxy.safeAreaInsets
 					)
-					AuxiliaryPresentationPlane(
-						heightVariants: $heightVariants,
-						activeIndex: $activeIndex,
-						activeDetent: $activeDetent,
-						sheetGeometry: sheetGeometry
-					)
+
+					ZStack {
+						if route == .levelOne {
+							AuxiliaryPresentationPlane(
+								heightVariants: $heightVariants,
+								activeIndex: $activeIndex,
+								activeDetent: $activeDetent,
+								route: $route,
+								sheetGeometry: geometry
+							)
+							.transition(.blurReplace)
+						}
+
+						if route == .levelTwo {
+							LevelTwoView(
+								heightVariants: $heightVariants,
+								activeIndex: $activeIndex,
+								activeDetent: $activeDetent,
+								route: $route,
+								sheetGeometry: geometry
+							)
+							.transition(.blurReplace)
+						}
+					}
+					.animation(.easeInOut(duration: 0.35), value: route)
+					.environment(sheetMetrics)
 				}
 			}
-			.frame(height: sheetMetrics.height)
-			.environment(sheetMetrics)
 			.presentationDetents(
-				Set(heightVariants.map { .height($0.height) } + [/*.medium, */.large]),
+				Set(heightVariants.map { .height($0.height) } + [.large]),
 				selection: $activeDetent
 			)
-			.presentationBackground(Color.white)
+			.presentationBackground(.white)
 			.presentationDragIndicator(.hidden)
 		}
 	}
 }
 
-// MARK: - Sheet Content
+// MARK: - Level One
 
 struct AuxiliaryPresentationPlane: View {
 
 	@Binding var heightVariants: [HeightVariant]
 	@Binding var activeIndex: Int
 	@Binding var activeDetent: PresentationDetent
+	@Binding var route: AuxiliaryRoute
+
+	@Environment(SheetMetrics.self) private var sheetMetrics
+	@Environment(\.dismiss) private var dismiss
+
+	@State private var contentHeight: CGFloat = 320
+	let sheetGeometry: SheetGeometry
+
+	var body: some View {
+		VStack(spacing: 20) {
+
+			detentRow
+
+			Button("Go L2") {
+				rotateAndResize(to: contentHeight)
+				route = .levelTwo
+			}
+			.buttonStyle(.glassProminent)
+		}
+		.toolbar {
+			ToolbarItem(placement: .navigationBarLeading) {
+				Button {
+					rotateAndResize(to: 320)
+					dismiss()
+				} label: {
+					Label("Dismiss", systemImage: "chevron.down")
+				}
+			}
+		}
+		.padding()
+		.background(
+			GeometryReader { proxy in
+				Color.clear.onAppear {
+					let measured =
+					proxy.size.height
+					+ sheetGeometry.safeAreaInsets.top
+					+ sheetGeometry.safeAreaInsets.bottom
+
+					contentHeight = measured
+					sheetMetrics.height = measured
+				}
+			}
+		)
+		.task(id: contentHeight) {
+			guard contentHeight > 0 else { return }
+			rotateAndResize(to: contentHeight)
+		}
+	}
+
+	private var detentRow: some View {
+		HStack(spacing: 12) {
+			ForEach(heightVariants.indices, id: \.self) { index in
+				Button(heightVariants[index].id.capitalized) {
+					select(index)
+				}
+				.buttonStyle(.borderedProminent)
+			}
+			Button("Native Large") {
+				activeDetent = .large
+			}
+		}
+	}
+
+	private func select(_ index: Int) {
+		activeIndex = index
+		activeDetent = .height(heightVariants[index].height)
+	}
+
+	private func rotateAndResize(to newHeight: CGFloat) {
+		let next = (activeIndex + 1) % heightVariants.count
+		withAnimation(.easeInOut(duration: 0.35)) {
+			heightVariants[next].height = newHeight
+			activeIndex = next
+			activeDetent = .height(newHeight)
+		}
+	}
+}
+
+// MARK: - Level Two
+
+struct LevelTwoView: View {
+
+	@Binding var heightVariants: [HeightVariant]
+	@Binding var activeIndex: Int
+	@Binding var activeDetent: PresentationDetent
+	@Binding var route: AuxiliaryRoute
 
 	@Environment(SheetMetrics.self) private var sheetMetrics
 
 	@State private var contentHeight: CGFloat = 0
 	let sheetGeometry: SheetGeometry
 
-	@State private var contentOpacity: Double = 0
-
-	@Namespace private var navNamespace
-	private let zoomID = "levelTwoZoom"
-
-	@State private var navigateToL2 = false
-
-
 	var body: some View {
+		VStack(spacing: 14) {
 
-		VStack(spacing: 20) {
+			detentRow
 
-			HStack(spacing: 12) {
-				ForEach(heightVariants.indices, id: \.self) { index in
-					Button(heightVariants[index].id.capitalized) {
-						select(index)
-					}
-					.buttonStyle(.borderedProminent)
-				}
-
-				Button("Native Large") {
-					activeDetent = .large
-				}
-			}
-
-			Button("Go L2") {
-				// PREPARE the height first
+			Button("Content") {
 				rotateAndResize(to: contentHeight)
-
-				// Then navigate in the same run loop
-				navigateToL2 = true
-			}
-			.buttonStyle(.glassProminent)
-			.matchedGeometryEffect(id: zoomID, in: navNamespace)
-			.navigationDestination(isPresented: $navigateToL2) {
-				levelTwo
-					.navigationTransition(
-						.zoom(sourceID: zoomID, in: navNamespace)
-					)
-//					.navigationTransition(.automatic)
-			}
-
-		}
-		.toolbarVisibility(.visible, for: .navigationBar)
-		.padding(.horizontal)
-		.background(
-			GeometryReader { proxy in
-				Color.clear
-					.onAppear {
-						print("proxy:", sheetGeometry)
-
-						let measured =
-						proxy.size.height
-						+ sheetGeometry.safeAreaInsets.top
-						+ sheetGeometry.safeAreaInsets.bottom
-
-						sheetMetrics.height = measured
-						contentHeight = measured
-					}
-			}
-		)
-		.onAppear() {
-			rotateAndResize(to: contentHeight)
-		}
-		.frame(
-			maxWidth: .infinity,
-			maxHeight: .infinity,
-			alignment: .topLeading
-		)
-		.fixedSize(horizontal: false, vertical: true)
-		.background(Color.white)
-	}
-
-	// MARK: - Level Two
-
-	private var levelTwo: some View {
-		VStack(spacing: 12) {
-			HStack(spacing: 12) {
-				ForEach(heightVariants.indices, id: \.self) { index in
-					Button(heightVariants[index].id.capitalized) {
-						select(index)
-					}
-					.buttonStyle(.borderedProminent)
-				}
-				Button("Native Large") {
-					activeDetent = .large
-				}
-
-				Button("Content") {
-					rotateAndResize(to: contentHeight)
-				}
 			}
 
 			Button("Resize → 420") {
@@ -205,60 +219,57 @@ struct AuxiliaryPresentationPlane: View {
 				.font(.footnote)
 				.foregroundColor(.gray)
 
-			HStack(spacing: 8) {
-				Button("Previous") {
-
-				}
-				.buttonStyle(.bordered)
-				.buttonSizing(.flexible)
-				.controlSize(.large)
-
-				Button("Next") {
-
-				}
-				.buttonStyle(.borderedProminent)
-				.buttonSizing(.flexible)
-				.controlSize(.large)
+			Button("Back") {
+				rotateAndResize(to: contentHeight)
+				route = .levelOne
 			}
-			.padding(.horizontal, 8)
-			.offset(y: sheetGeometry.safeAreaInsets.bottom/3)
+			.buttonStyle(.borderedProminent)
 		}
-		.opacity(contentOpacity)
-		.padding(.horizontal)
-		.padding(.vertical, 0)
+		.navigationTitle("Level Two")
+		.toolbar {
+			ToolbarItem(placement: .navigationBarLeading) {
+				Button {
+					rotateAndResize(to: contentHeight)
+					route = .levelOne
+				} label: {
+					Label("Back", systemImage: "chevron.left")
+				}
+			}
+		}
+		.toolbarTitleDisplayMode(.inlineLarge)
+		.padding()
 		.background(
 			GeometryReader { proxy in
-				Color.clear
-					.onAppear {
-						print("proxy:", sheetGeometry)
-						let measured =
-						proxy.size.height
-						+ sheetGeometry.safeAreaInsets.top
-						sheetMetrics.height = measured
-						contentHeight = measured + sheetGeometry.safeAreaInsets.bottom
-					}
+				Color.clear.onAppear {
+					let measured =
+					proxy.size.height
+					+ sheetGeometry.safeAreaInsets.top
+					+ sheetGeometry.safeAreaInsets.bottom
+
+					contentHeight = measured
+					sheetMetrics.height = measured
+				}
 			}
 		)
-		.frame(
-			maxWidth: .infinity,
-			maxHeight: .infinity,
-			alignment: .topLeading
-		)
-		.navigationTitle("Look ma we made it")
-		.task {
+		.task(id: contentHeight) {
+			guard contentHeight > 0 else { return }
 			rotateAndResize(to: contentHeight)
-			try? await Task.sleep(nanoseconds: 1000_000_000) // 1.0 seconds
-			withAnimation(.easeIn(duration: 0.35)) {
-				contentOpacity = 1
-			}
 		}
-		.onDisappear {
-			contentOpacity = 0
-		}
-		.background(Color.white)
 	}
 
-	// MARK: - Helpers
+	private var detentRow: some View {
+		HStack(spacing: 12) {
+			ForEach(heightVariants.indices, id: \.self) { index in
+				Button(heightVariants[index].id.capitalized) {
+					select(index)
+				}
+				.buttonStyle(.borderedProminent)
+			}
+			Button("Native Large") {
+				activeDetent = .large
+			}
+		}
+	}
 
 	private func select(_ index: Int) {
 		activeIndex = index
@@ -266,13 +277,19 @@ struct AuxiliaryPresentationPlane: View {
 	}
 
 	private func rotateAndResize(to newHeight: CGFloat) {
-		let nextIndex = (activeIndex + 1) % heightVariants.count
-
+		let next = (activeIndex + 1) % heightVariants.count
 		withAnimation(.easeInOut(duration: 0.35)) {
-			heightVariants[nextIndex].height = newHeight
-			activeIndex = nextIndex
+			heightVariants[next].height = newHeight
+			activeIndex = next
 			activeDetent = .height(newHeight)
 		}
+	}
+}
+
+struct BlurModifier: ViewModifier {
+	let radius: CGFloat
+	func body(content: Content) -> some View {
+		content.blur(radius: radius)
 	}
 }
 
