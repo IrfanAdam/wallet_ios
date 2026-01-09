@@ -20,7 +20,12 @@
 		1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE22EFC27C600876D2D /* AvatarCircle.swift */; };
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
-		15A79E412F0FE423000C6B4E /* Attempt999.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Attempt999.swift */; };
+		15A79E412F0FE423000C6B4E /* DYSGeom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* DYSGeom.swift */; };
+		15A79E472F110636000C6B4E /* DYSToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E462F110626000C6B4E /* DYSToolbar.swift */; };
+		15A79E492F110690000C6B4E /* DYSLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E482F11068B000C6B4E /* DYSLauncher.swift */; };
+		15A79E4B2F1106EB000C6B4E /* DYSL1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E4A2F1106E6000C6B4E /* DYSL1.swift */; };
+		15A79E4D2F110726000C6B4E /* DYSL2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E4C2F110721000C6B4E /* DYSL2.swift */; };
+		15A79E512F11110A000C6B4E /* DYSPlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E502F1110FB000C6B4E /* DYSPlaneView.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -75,7 +80,12 @@
 		1549ECE22EFC27C600876D2D /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
-		15A79E402F0FE423000C6B4E /* Attempt999.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt999.swift; sourceTree = "<group>"; };
+		15A79E402F0FE423000C6B4E /* DYSGeom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSGeom.swift; sourceTree = "<group>"; };
+		15A79E462F110626000C6B4E /* DYSToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSToolbar.swift; sourceTree = "<group>"; };
+		15A79E482F11068B000C6B4E /* DYSLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSLauncher.swift; sourceTree = "<group>"; };
+		15A79E4A2F1106E6000C6B4E /* DYSL1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSL1.swift; sourceTree = "<group>"; };
+		15A79E4C2F110721000C6B4E /* DYSL2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSL2.swift; sourceTree = "<group>"; };
+		15A79E502F1110FB000C6B4E /* DYSPlaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYSPlaneView.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -217,22 +227,27 @@
 			path = "Funky Donut";
 			sourceTree = "<group>";
 		};
-		15DA4B092EEBFD100046EBC6 /* Sheet */ = {
+		15DA4B092EEBFD100046EBC6 /* Dynamic Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				15A79E402F0FE423000C6B4E /* Attempt999.swift */,
-				15DA4B082EEBFD100046EBC6 /* RecursiveStack.swift */,
+				15A79E482F11068B000C6B4E /* DYSLauncher.swift */,
+				15A79E502F1110FB000C6B4E /* DYSPlaneView.swift */,
+				15A79E4A2F1106E6000C6B4E /* DYSL1.swift */,
+				15A79E4C2F110721000C6B4E /* DYSL2.swift */,
+				15A79E402F0FE423000C6B4E /* DYSGeom.swift */,
+				15A79E462F110626000C6B4E /* DYSToolbar.swift */,
 			);
-			path = Sheet;
+			path = "Dynamic Sheet";
 			sourceTree = "<group>";
 		};
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				15DA4B082EEBFD100046EBC6 /* RecursiveStack.swift */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
-				15DA4B092EEBFD100046EBC6 /* Sheet */,
+				15DA4B092EEBFD100046EBC6 /* Dynamic Sheet */,
 			);
 			path = "---Experiments";
 			sourceTree = "<group>";
@@ -474,7 +489,9 @@
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
+				15A79E4B2F1106EB000C6B4E /* DYSL1.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
+				15A79E472F110636000C6B4E /* DYSToolbar.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
@@ -482,7 +499,7 @@
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */,
 				15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */,
-				15A79E412F0FE423000C6B4E /* Attempt999.swift in Sources */,
+				15A79E412F0FE423000C6B4E /* DYSGeom.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
@@ -503,6 +520,7 @@
 				EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
+				15A79E4D2F110726000C6B4E /* DYSL2.swift in Sources */,
 				1549ECDD2EF5472500876D2D /* AvatarStack.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
@@ -514,6 +532,8 @@
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
+				15A79E512F11110A000C6B4E /* DYSPlaneView.swift in Sources */,
+				15A79E492F110690000C6B4E /* DYSLauncher.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
 			);
