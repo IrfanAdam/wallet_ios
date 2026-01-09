@@ -20,8 +20,13 @@
 		1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE22EFC27C600876D2D /* AvatarCircle.swift */; };
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
-		15A79E412F0FE423000C6B4E /* Attempt999.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Attempt999.swift */; };
+		15A79E412F0FE423000C6B4E /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Main.swift */; };
 		15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */; };
+		15A79E552F1125ED000C6B4E /* Dyn Geom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E542F1125E9000C6B4E /* Dyn Geom.swift */; };
+		15A79E572F112624000C6B4E /* Dyn L2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E562F11261F000C6B4E /* Dyn L2.swift */; };
+		15A79E592F1126A0000C6B4E /* Dyn L1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E582F11269A000C6B4E /* Dyn L1.swift */; };
+		15A79E5B2F1126D0000C6B4E /* Dyn Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */; };
+		15A79E5D2F113306000C6B4E /* Dyn Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5C2F113302000C6B4E /* Dyn Plane.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -75,8 +80,13 @@
 		1549ECE22EFC27C600876D2D /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
-		15A79E402F0FE423000C6B4E /* Attempt999.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt999.swift; sourceTree = "<group>"; };
+		15A79E402F0FE423000C6B4E /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFullStack.swift; sourceTree = "<group>"; };
+		15A79E542F1125E9000C6B4E /* Dyn Geom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn Geom.swift"; sourceTree = "<group>"; };
+		15A79E562F11261F000C6B4E /* Dyn L2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn L2.swift"; sourceTree = "<group>"; };
+		15A79E582F11269A000C6B4E /* Dyn L1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn L1.swift"; sourceTree = "<group>"; };
+		15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn Toolbar.swift"; sourceTree = "<group>"; };
+		15A79E5C2F113302000C6B4E /* Dyn Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn Plane.swift"; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -217,12 +227,17 @@
 			path = "Funky Donut";
 			sourceTree = "<group>";
 		};
-		15DA4B092EEBFD100046EBC6 /* Sheet */ = {
+		15DA4B092EEBFD100046EBC6 /* Dyn Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				15A79E402F0FE423000C6B4E /* Attempt999.swift */,
+				15A79E402F0FE423000C6B4E /* Main.swift */,
+				15A79E582F11269A000C6B4E /* Dyn L1.swift */,
+				15A79E562F11261F000C6B4E /* Dyn L2.swift */,
+				15A79E5C2F113302000C6B4E /* Dyn Plane.swift */,
+				15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */,
+				15A79E542F1125E9000C6B4E /* Dyn Geom.swift */,
 			);
-			path = Sheet;
+			path = "Dyn Sheet";
 			sourceTree = "<group>";
 		};
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
@@ -232,7 +247,7 @@
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
-				15DA4B092EEBFD100046EBC6 /* Sheet */,
+				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
 			);
 			path = "---Experiments";
 			sourceTree = "<group>";
@@ -476,22 +491,26 @@
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
+				15A79E5D2F113306000C6B4E /* Dyn Plane.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */,
+				15A79E5B2F1126D0000C6B4E /* Dyn Toolbar.swift in Sources */,
 				15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */,
-				15A79E412F0FE423000C6B4E /* Attempt999.swift in Sources */,
+				15A79E412F0FE423000C6B4E /* Main.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
+				15A79E592F1126A0000C6B4E /* Dyn L1.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* PillUsePreview.swift in Sources */,
 				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
+				15A79E572F112624000C6B4E /* Dyn L2.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,
@@ -511,6 +530,7 @@
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,
 				1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
+				15A79E552F1125ED000C6B4E /* Dyn Geom.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
