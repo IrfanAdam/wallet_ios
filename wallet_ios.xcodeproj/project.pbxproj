@@ -21,7 +21,6 @@
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
 		15A79E412F0FE423000C6B4E /* Attempt999.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Attempt999.swift */; };
-		15A79E452F1019D5000C6B4E /* BlurTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E442F1019D1000C6B4E /* BlurTest.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -59,7 +58,6 @@
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
-		EEA520D12EFD6C9F005BEBCD /* DeepDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +76,6 @@
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
 		15A79E402F0FE423000C6B4E /* Attempt999.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt999.swift; sourceTree = "<group>"; };
-		15A79E442F1019D1000C6B4E /* BlurTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurTest.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -117,7 +114,6 @@
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
-		EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepDismiss.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,8 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				15A79E402F0FE423000C6B4E /* Attempt999.swift */,
-				15A79E442F1019D1000C6B4E /* BlurTest.swift */,
-				EEA520D02EFD6C9B005BEBCD /* DeepDismiss.swift */,
 				15DA4B082EEBFD100046EBC6 /* RecursiveStack.swift */,
 			);
 			path = Sheet;
@@ -479,7 +473,6 @@
 			files = (
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
-				15A79E452F1019D5000C6B4E /* BlurTest.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
@@ -498,7 +491,6 @@
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
-				EEA520D12EFD6C9F005BEBCD /* DeepDismiss.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,

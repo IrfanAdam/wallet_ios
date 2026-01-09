@@ -48,9 +48,7 @@ struct AppView: View {
 			}
 		)
 		.sheet(isPresented: sheetController.isPresentedBinding) {
-			DragResizableSheetRootView(
-				controller: sheetController
-			)
+			PageSheetDemo()
 		}
 	}
 }

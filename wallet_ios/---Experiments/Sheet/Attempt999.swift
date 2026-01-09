@@ -44,6 +44,8 @@ struct PeripheralLaunchSurface: View {
 	@State private var activeIndex: Int = 1
 	@State private var route: AuxiliaryRoute = .levelOne
 
+	@Environment(\.dismiss) private var dismiss
+
 	var body: some View {
 		VStack(spacing: 24) {
 			Text("Primary Interaction Surface")
@@ -88,15 +90,18 @@ struct PeripheralLaunchSurface: View {
 					.animation(.easeInOut(duration: 0.35), value: route)
 					.environment(sheetMetrics)
 				}
-			}
-			.toolbar {
-				ToolbarItemGroup(placement: .topBarLeading) {
-					Button {
-//						rotateAndResize(to: 320)
-//						dismiss()
-					} label: {
-						Label("Dismiss", systemImage: "chevron.down")
-					}
+				.toolbar {
+					AuxiliaryToolbar(
+						route: route,
+						onDismiss: {
+							isAuxiliaryPlanePresented = false
+						},
+						onBack: {
+							withAnimation(.easeInOut(duration: 0.35)) {
+								route = .levelOne
+							}
+						}
+					)
 				}
 			}
 			.presentationDetents(
@@ -130,20 +135,12 @@ struct AuxiliaryPresentationPlane: View {
 			detentRow
 
 			Button("Go L2") {
-				rotateAndResize(to: contentHeight)
-				route = .levelTwo
-			}
-			.buttonStyle(.glassProminent)
-		}
-		.toolbar {
-			ToolbarItem(id: "Morph This", placement: .topBarLeading) {
-				Button {
-					rotateAndResize(to: 320)
-					dismiss()
-				} label: {
-					Label("Dismiss", systemImage: "chevron.down")
+				withAnimation(.easeInOut(duration: 0.35)) {
+					rotateAndResize(to: contentHeight)
+					route = .levelTwo
 				}
 			}
+			.buttonStyle(.glassProminent)
 		}
 		.padding()
 		.background(
@@ -204,6 +201,7 @@ struct LevelTwoView: View {
 	@Binding var route: AuxiliaryRoute
 
 	@Environment(SheetMetrics.self) private var sheetMetrics
+	@Environment(\.dismiss) private var dismiss
 
 	@State private var contentHeight: CGFloat = 0
 	let sheetGeometry: SheetGeometry
@@ -224,18 +222,6 @@ struct LevelTwoView: View {
 			Text("Measured Height: \(Int(contentHeight)) pt")
 				.font(.footnote)
 				.foregroundColor(.gray)
-		}
-		.toolbar {
-			ToolbarItem(id: "Morph This", placement: .topBarLeading) {
-				Button {
-					rotateAndResize(to: contentHeight)
-					route = .levelOne
-				} label: {
-//					Label("Back", systemImage: "chevron.left")
-					AvatarStackView(circleSize: 42, shouldCutout: false)
-				}
-				.padding(.horizontal, -8)
-			}
 		}
 		.padding()
 		.background(
@@ -285,6 +271,42 @@ struct LevelTwoView: View {
 			heightVariants[next].height = newHeight
 			activeIndex = next
 			activeDetent = .height(newHeight)
+		}
+	}
+}
+
+struct AuxiliaryToolbar: ToolbarContent {
+	let route: AuxiliaryRoute
+	let onDismiss: () -> Void
+	let onBack: () -> Void
+
+	var body: some ToolbarContent {
+		// LEADING
+		ToolbarItem(placement: .topBarLeading) {
+			if route == .levelTwo {
+				Button(action: onBack) {
+					AvatarStackView(circleSize: 42, shouldCutout: false)
+				}
+				.padding(.horizontal, -8)
+			}
+		}
+
+		ToolbarItem(placement: .topBarLeading) {
+			if route == .levelOne {
+				Button(action: onDismiss) {
+					Label("Dismiss", systemImage: "chevron.down")
+				}
+			}
+		}
+
+		// TRAILING
+		ToolbarItem(placement: .topBarTrailing) {
+			if route == .levelTwo {
+				Button(action: onDismiss) {
+					Image(systemName: "xmark")
+				}
+				.buttonStyle(.plain)
+			}
 		}
 	}
 }
