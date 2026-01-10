@@ -27,6 +27,7 @@
 		15A79E592F1126A0000C6B4E /* Dyn L1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E582F11269A000C6B4E /* Dyn L1.swift */; };
 		15A79E5B2F1126D0000C6B4E /* Dyn Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */; };
 		15A79E5D2F113306000C6B4E /* Dyn Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5C2F113302000C6B4E /* Dyn Plane.swift */; };
+		15A79E5F2F115296000C6B4E /* DynController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5E2F115292000C6B4E /* DynController.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
 		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
@@ -87,6 +88,7 @@
 		15A79E582F11269A000C6B4E /* Dyn L1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn L1.swift"; sourceTree = "<group>"; };
 		15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn Toolbar.swift"; sourceTree = "<group>"; };
 		15A79E5C2F113302000C6B4E /* Dyn Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dyn Plane.swift"; sourceTree = "<group>"; };
+		15A79E5E2F115292000C6B4E /* DynController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynController.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
 		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				15A79E5C2F113302000C6B4E /* Dyn Plane.swift */,
 				15A79E5A2F1126CC000C6B4E /* Dyn Toolbar.swift */,
 				15A79E542F1125E9000C6B4E /* Dyn Geom.swift */,
+				15A79E5E2F115292000C6B4E /* DynController.swift */,
 			);
 			path = "Dyn Sheet";
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
+				15A79E5F2F115296000C6B4E /* DynController.swift in Sources */,
 				15A79E572F112624000C6B4E /* Dyn L2.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,

@@ -42,15 +42,8 @@ private extension AuxiliaryPlaneContainer {
 
 	var detentRow: some View {
 		HStack(spacing: 12) {
-			ForEach(heightVariants.indices, id: \.self) { index in
-				Button(heightVariants[index].id.capitalized) {
-					select(index)
-				}
-				.buttonStyle(.borderedProminent)
-			}
-
-			Button("Native Large", action: selectLarge)
-			Button("Content Size", action: resizeToContent)
+			Button("Large", action: selectLarge).buttonStyle(.bordered)
+			Button("Content", action: resizeToContent).buttonStyle(.borderedProminent)
 		}
 	}
 

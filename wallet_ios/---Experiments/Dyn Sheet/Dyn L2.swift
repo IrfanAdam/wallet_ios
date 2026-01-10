@@ -19,6 +19,8 @@ struct LevelTwoView: View {
 		) { resize in
 
 			VStack(spacing: 12) {
+				Text("You can test any content style here")
+				
 				Button("Resize → 420") {
 					resize(420)
 				}
