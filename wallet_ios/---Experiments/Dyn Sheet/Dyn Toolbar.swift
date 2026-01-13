@@ -13,11 +13,7 @@ struct AuxiliaryToolbar: ToolbarContent {
 					AvatarStackView(circleSize: 42, shouldCutout: false)
 				}
 				.padding(.horizontal, -8)
-			}
-		}
-
-		ToolbarItem(placement: .topBarLeading) {
-			if route == .levelOne {
+			} else if route == .levelOne {
 				Button(action: onDismiss) {
 					Label("Dismiss", systemImage: "chevron.down")
 				}

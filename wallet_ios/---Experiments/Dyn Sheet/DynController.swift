@@ -1,39 +1,36 @@
 import SwiftUI
 import Observation
 
-@Observable
-final class SheetGeometryController {
+struct HeightVariant: Identifiable, Hashable {
+	let id: String
+	var height: CGFloat
+}
 
-	// mirrors existing state — no behavior change
+struct SheetGeometry {
+	let size: CGSize
+	let safeAreaInsets: EdgeInsets
+}
+
+@Observable
+final class AuxiliarySheetState {
+
 	var heightVariants: [HeightVariant]
 	var activeIndex: Int
 	var activeDetent: PresentationDetent
-	var sheetMetrics: SheetMetrics
+	var route: AuxiliaryRoute
+	var geometry: SheetGeometry?
 
 	init(
 		heightVariants: [HeightVariant],
 		activeIndex: Int,
 		activeDetent: PresentationDetent,
-		sheetMetrics: SheetMetrics
+		route: AuxiliaryRoute,
+		geometry: SheetGeometry? = nil
 	) {
 		self.heightVariants = heightVariants
 		self.activeIndex = activeIndex
 		self.activeDetent = activeDetent
-		self.sheetMetrics = sheetMetrics
-	}
-
-	var detents: Set<PresentationDetent> {
-		Set(heightVariants.map { .height($0.height) } + [.large])
-	}
-
-	// 🔴 IMPORTANT: native detent change only
-	func selectVariant(_ index: Int) {
-		guard heightVariants.indices.contains(index) else { return }
-		activeIndex = index
-		activeDetent = .height(heightVariants[index].height)
-	}
-
-	func selectLarge() {
-		activeDetent = .large
+		self.route = route
+		self.geometry = geometry
 	}
 }

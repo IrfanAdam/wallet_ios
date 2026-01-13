@@ -4,25 +4,13 @@ import SwiftUI
 
 struct AuxiliaryPlaneContainer<Content: View>: View {
 
-	// MARK: - Bindings
-
-	@Binding var heightVariants: [HeightVariant]
-	@Binding var activeIndex: Int
-	@Binding var activeDetent: PresentationDetent
-	@Binding var route: AuxiliaryRoute
-
-	// MARK: - Environment
-
-	@Environment(SheetMetrics.self) private var sheetMetrics
-
-	// MARK: - State
+	@Environment(AuxiliarySheetState.self)
+	private var state
 
 	@State private var contentHeight: CGFloat = 0
 
-	// MARK: - Configuration
-
-	let sheetGeometry: SheetGeometry
-	@ViewBuilder let content: (_ resize: @escaping (CGFloat) -> Void) -> Content
+	@ViewBuilder
+	let content: (_ resize: @escaping (CGFloat) -> Void) -> Content
 
 	// MARK: - Body
 
@@ -33,69 +21,61 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 		}
 		.padding()
 		.background(measurementLayer)
-		.task(id: contentHeight, handleContentHeightChange)
+		.task(id: contentHeight) {
+			AuxiliaryPlaneLogic.handleContentHeightChange(
+				contentHeight: contentHeight,
+				state: state,
+				resize: resize
+			)
+		}
 	}
 }
 
 // MARK: - UI Components
+
 private extension AuxiliaryPlaneContainer {
 
 	var detentRow: some View {
 		HStack(spacing: 12) {
-			Button("Large", action: selectLarge).buttonStyle(.bordered)
-			Button("Content", action: resizeToContent).buttonStyle(.borderedProminent)
+			Button("Large") {
+				AuxiliaryPlaneLogic.selectLarge(state: state)
+			}
+			.buttonStyle(.bordered)
+
+			Button("Content") {
+				AuxiliaryPlaneLogic.resizeToContent(
+					contentHeight: contentHeight,
+					state: state,
+					resize: resize
+				)
+			}
+			.buttonStyle(.borderedProminent)
 		}
 	}
 
 	var measurementLayer: some View {
 		GeometryReader { proxy in
-			Color.clear.onAppear {
-				updateMeasuredHeight(from: proxy)
-			}
+			Color.clear
+				.onAppear {
+					contentHeight =
+					AuxiliaryPlaneLogic.measureContentHeight(
+						proxy: proxy,
+						geometry: state.geometry
+					)
+				}
 		}
 	}
 }
 
-// MARK: - Intent & Logic
+// MARK: - Resize Bridge
+
 private extension AuxiliaryPlaneContainer {
 
-	func handleContentHeightChange() {
-		guard contentHeight > 0 else { return }
-		resize(to: contentHeight)
-	}
-
-	func select(_ index: Int) {
-		activeIndex = index
-		activeDetent = .height(heightVariants[index].height)
-	}
-
-	func selectLarge() {
-		activeDetent = .large
-	}
-
-	func resizeToContent() {
-		resize(to: contentHeight)
-	}
-
-	func resize(to newHeight: CGFloat) {
-		let next = (activeIndex + 1) % heightVariants.count
-		withAnimation(.easeInOut(duration: 0.35)) {
-			heightVariants[next].height = newHeight
-			activeIndex = next
-			activeDetent = .height(newHeight)
-		}
+	func resize(_ newHeight: CGFloat) {
+		AuxiliaryPlaneLogic.resize(
+			to: newHeight,
+			state: state
+		)
 	}
 }
 
-// MARK: - Measurement Helpers
-private extension AuxiliaryPlaneContainer {
-	func updateMeasuredHeight(from proxy: GeometryProxy) {
-		let measured =
-		proxy.size.height
-		+ sheetGeometry.safeAreaInsets.top
-		+ sheetGeometry.safeAreaInsets.bottom
-
-		contentHeight = measured
-		sheetMetrics.height = measured
-	}
-}
