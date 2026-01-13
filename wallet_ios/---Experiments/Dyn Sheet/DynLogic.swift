@@ -11,10 +11,6 @@ enum AuxiliaryPlaneLogic {
 		resize(contentHeight)
 	}
 
-	static func selectLarge(state: AuxiliarySheetState) {
-		state.activeDetent = .large
-	}
-
 	static func resizeToContent(
 		contentHeight: CGFloat,
 		state: AuxiliarySheetState,
@@ -46,5 +42,10 @@ enum AuxiliaryPlaneLogic {
 		return proxy.size.height
 		+ geometry.safeAreaInsets.top
 		+ geometry.safeAreaInsets.bottom
+	}
+
+
+	static func selectLarge(state: AuxiliarySheetState) {
+		state.activeDetent = .large
 	}
 }

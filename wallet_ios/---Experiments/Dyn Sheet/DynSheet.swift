@@ -13,9 +13,9 @@ struct AuxiliarySheetHost: View {
 				ZStack {
 					routedContent
 				}
-				.animation(.easeInOut(duration: 0.35), value: state.route)
 				.onAppear { syncGeometry(proxy) }
 				.onChange(of: proxy.size) { syncGeometry(proxy) }
+				.animation(.easeInOut(duration: 0.35), value: state.route)
 			}
 			.toolbar { toolbar }
 		}
@@ -40,12 +40,17 @@ struct AuxiliarySheetHost: View {
 
 	// MARK: Toolbar
 	private var toolbar: some ToolbarContent {
-		AuxiliaryToolbar( route: state.route, onDismiss: onDismiss, onBack: navigateBack )
+		AuxiliaryToolbar(
+			route: state.route,
+			onDismiss: onDismiss,
+			onBack: navigateBack
+		)
 	}
 
 	private func navigateBack() {
 		withAnimation(.easeInOut(duration: 0.35)) {
-			state.route = .levelOne
+			guard let previous = state.route.previous else { return }
+			state.route = previous
 		}
 	}
 

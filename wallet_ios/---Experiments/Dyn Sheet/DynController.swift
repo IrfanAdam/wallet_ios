@@ -6,14 +6,13 @@ struct HeightVariant: Identifiable, Hashable {
 	var height: CGFloat
 }
 
-struct SheetGeometry {
+struct SheetGeometry: Equatable {
 	let size: CGSize
 	let safeAreaInsets: EdgeInsets
 }
 
 @Observable
 final class AuxiliarySheetState {
-
 	var heightVariants: [HeightVariant]
 	var activeIndex: Int
 	var activeDetent: PresentationDetent

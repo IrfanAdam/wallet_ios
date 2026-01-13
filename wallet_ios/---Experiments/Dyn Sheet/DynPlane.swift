@@ -34,7 +34,6 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 // MARK: - UI Components
 
 private extension AuxiliaryPlaneContainer {
-
 	var detentRow: some View {
 		HStack(spacing: 12) {
 			Button("Large") {
@@ -52,29 +51,34 @@ private extension AuxiliaryPlaneContainer {
 			.buttonStyle(.borderedProminent)
 		}
 	}
-
-	var measurementLayer: some View {
-		GeometryReader { proxy in
-			Color.clear
-				.onAppear {
-					contentHeight =
-					AuxiliaryPlaneLogic.measureContentHeight(
-						proxy: proxy,
-						geometry: state.geometry
-					)
-				}
-		}
-	}
 }
 
 // MARK: - Resize Bridge
 
 private extension AuxiliaryPlaneContainer {
-
 	func resize(_ newHeight: CGFloat) {
 		AuxiliaryPlaneLogic.resize(
 			to: newHeight,
 			state: state
+		)
+	}
+
+	var measurementLayer: some View {
+		GeometryReader { proxy in
+			Color.clear
+				.onAppear {
+					updateContentHeight(proxy: proxy)
+				}
+				.onChange(of: state.geometry) {
+					updateContentHeight(proxy: proxy)
+				}
+		}
+	}
+
+	private func updateContentHeight(proxy: GeometryProxy) {
+		contentHeight = AuxiliaryPlaneLogic.measureContentHeight(
+			proxy: proxy,
+			geometry: state.geometry
 		)
 	}
 }

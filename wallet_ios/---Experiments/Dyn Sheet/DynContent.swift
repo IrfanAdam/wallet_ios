@@ -9,7 +9,6 @@ struct LevelOneView: View {
 		AuxiliaryPlaneContainer { resize in
 			Button("Go L2") {
 				withAnimation(.easeInOut(duration: 0.35)) {
-					resize(320)
 					state.route = .levelTwo
 				}
 			}
