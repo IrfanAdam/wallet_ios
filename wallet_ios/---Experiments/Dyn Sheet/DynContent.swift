@@ -6,7 +6,7 @@ struct LevelOneView: View {
 	private var state
 
 	var body: some View {
-		AuxiliaryPlaneContainer { resize in
+		AuxiliaryPlaneContainer {
 			Button("Go L2") {
 				withAnimation(.easeInOut(duration: 0.35)) {
 					state.route = .levelTwo
@@ -22,17 +22,15 @@ struct LevelTwoView: View {
 	private var state
 
 	var body: some View {
-		AuxiliaryPlaneContainer { resize in
+		AuxiliaryPlaneContainer {
 			VStack(spacing: 12) {
 				Text("You can test any content style here")
-
-				Button("Resize → 420") {
-					resize(420)
-				}
-
-				Button("Resize → 480") {
-					resize(480)
-				}
+				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
 			}
 		}
 	}

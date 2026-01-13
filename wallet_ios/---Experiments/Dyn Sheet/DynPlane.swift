@@ -10,30 +10,26 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 	@State private var contentHeight: CGFloat = 0
 
 	@ViewBuilder
-	let content: (_ resize: @escaping (CGFloat) -> Void) -> Content
-
-	// MARK: - Body
+	let content: () -> Content
 
 	var body: some View {
 		VStack(spacing: 16) {
 			detentRow
-			content(resize)
+			content()
 		}
 		.padding()
 		.background(measurementLayer)
 		.task(id: contentHeight) {
-			AuxiliaryPlaneLogic.handleContentHeightChange(
-				contentHeight: contentHeight,
-				state: state,
-				resize: resize
+			AuxiliaryPlaneLogic.resizeToContent(
+				contentHeight,
+				state: state
 			)
 		}
 	}
 }
 
-// MARK: - UI Components
-
 private extension AuxiliaryPlaneContainer {
+
 	var detentRow: some View {
 		HStack(spacing: 12) {
 			Button("Large") {
@@ -43,9 +39,8 @@ private extension AuxiliaryPlaneContainer {
 
 			Button("Content") {
 				AuxiliaryPlaneLogic.resizeToContent(
-					contentHeight: contentHeight,
-					state: state,
-					resize: resize
+					contentHeight,
+					state: state
 				)
 			}
 			.buttonStyle(.borderedProminent)
@@ -53,33 +48,22 @@ private extension AuxiliaryPlaneContainer {
 	}
 }
 
-// MARK: - Resize Bridge
+// MARK: - Measurement
 
 private extension AuxiliaryPlaneContainer {
-	func resize(_ newHeight: CGFloat) {
-		AuxiliaryPlaneLogic.resize(
-			to: newHeight,
-			state: state
-		)
-	}
 
 	var measurementLayer: some View {
 		GeometryReader { proxy in
 			Color.clear
-				.onAppear {
-					updateContentHeight(proxy: proxy)
-				}
-				.onChange(of: state.geometry) {
-					updateContentHeight(proxy: proxy)
-				}
+				.onAppear { measure(proxy) }
+				.onChange(of: state.geometry) { measure(proxy) }
 		}
 	}
 
-	private func updateContentHeight(proxy: GeometryProxy) {
-		contentHeight = AuxiliaryPlaneLogic.measureContentHeight(
+	func measure(_ proxy: GeometryProxy) {
+		contentHeight = AuxiliaryPlaneLogic.contentHeight(
 			proxy: proxy,
 			geometry: state.geometry
 		)
 	}
 }
-

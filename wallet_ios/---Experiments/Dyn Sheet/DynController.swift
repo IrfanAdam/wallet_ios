@@ -33,3 +33,14 @@ final class AuxiliarySheetState {
 		self.geometry = geometry
 	}
 }
+
+@Observable
+final class AuxiliaryContentState {
+	var route: AuxiliaryRoute
+
+	init(
+		route: AuxiliaryRoute
+	) {
+		self.route = route
+	}
+}

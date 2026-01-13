@@ -13,6 +13,9 @@ struct PeripheralLaunchSurface: View {
 		activeDetent: .height(240),
 		route: .levelOne
 	)
+	@State private var routeState = AuxiliaryContentState(
+		route: .levelOne
+	)
 
 	var body: some View {
 		VStack(spacing: 24) {
@@ -29,6 +32,7 @@ struct PeripheralLaunchSurface: View {
 				onDismiss: { isAuxiliaryPlanePresented = false }
 			)
 			.environment(sheetState)
+			.environment(routeState)
 		}
 	}
 }

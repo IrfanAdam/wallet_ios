@@ -2,38 +2,9 @@ import SwiftUI
 
 enum AuxiliaryPlaneLogic {
 
-	static func handleContentHeightChange(
-		contentHeight: CGFloat,
-		state: AuxiliarySheetState,
-		resize: (CGFloat) -> Void
-	) {
-		guard contentHeight > 0 else { return }
-		resize(contentHeight)
-	}
+	// MARK: - Measurement
 
-	static func resizeToContent(
-		contentHeight: CGFloat,
-		state: AuxiliarySheetState,
-		resize: (CGFloat) -> Void
-	) {
-		guard contentHeight > 0 else { return }
-		resize(contentHeight)
-	}
-
-	static func resize(
-		to newHeight: CGFloat,
-		state: AuxiliarySheetState
-	) {
-		let next = (state.activeIndex + 1) % state.heightVariants.count
-
-		withAnimation(.easeInOut(duration: 0.35)) {
-			state.heightVariants[next].height = newHeight
-			state.activeIndex = next
-			state.activeDetent = .height(newHeight)
-		}
-	}
-
-	static func measureContentHeight(
+	static func contentHeight(
 		proxy: GeometryProxy,
 		geometry: SheetGeometry?
 	) -> CGFloat {
@@ -44,8 +15,35 @@ enum AuxiliaryPlaneLogic {
 		+ geometry.safeAreaInsets.bottom
 	}
 
+	// MARK: - Public Actions
 
-	static func selectLarge(state: AuxiliarySheetState) {
+	static func resizeToContent(
+		_ height: CGFloat,
+		state: AuxiliarySheetState
+	) {
+		guard height > 0 else { return }
+		resize(to: height, state: state)
+	}
+
+	// MARK: - Core Resize
+
+	static func resize(
+		to newHeight: CGFloat,
+		state: AuxiliarySheetState
+	) {
+		let nextIndex =
+		(state.activeIndex + 1) % state.heightVariants.count
+
+		withAnimation(.easeInOut(duration: 0.35)) {
+			state.heightVariants[nextIndex].height = newHeight
+			state.activeIndex = nextIndex
+			state.activeDetent = .height(newHeight)
+		}
+	}
+
+	static func selectLarge(
+		state: AuxiliarySheetState
+	) {
 		state.activeDetent = .large
 	}
 }
