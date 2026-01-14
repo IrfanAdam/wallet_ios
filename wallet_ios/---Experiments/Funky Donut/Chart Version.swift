@@ -13,6 +13,17 @@ struct SalesData: Identifiable {
 struct ChartDonutView: View {
 	let data: [SalesData]
 	@Binding var selectedName: String? // Persistent selection for the parent
+	let isPseudo: Bool
+
+	init(
+		data: [SalesData],
+		selectedName: Binding<String?>,
+		isPseudo: Bool = false
+	) {
+		self.data = data
+		self._selectedName = selectedName
+		self.isPseudo = isPseudo
+	}
 
 	// 1. Native temporary selection tracked by the chart
 	@State private var rawSelectedValue: Double?
@@ -21,37 +32,30 @@ struct ChartDonutView: View {
 		Chart(data) { element in
 			// 2. Highlight based on the persistent binding
 			let isSelected = selectedName == element.name
-
-			SectorMark(
-				angle: .value("Sales", element.sales),
-				innerRadius: .ratio(0.7),
-				outerRadius: .ratio(isSelected ? 1.0 : 0.95),
-				angularInset: 1
-			)
-			.foregroundStyle(by: .value("Name", element.name))
-			.opacity(isSelected || selectedName == nil ? 1 : 0.4)
-			.cornerRadius(6)
-			.shadow(
-				color: .black.opacity(isSelected ? 0.9 : 0),
-				radius:0,
-				x: 1, y: 1)
-			.shadow(
-				color: .black.opacity(isSelected ? 0.9 : 0),
-				radius:0,
-				x: -1, y: -1)
-			.shadow(
-				color: .black.opacity(isSelected ? 0.9 : 0),
-				radius:0,
-				x: -1, y: 1)
-			.shadow(
-				color: .black.opacity(isSelected ? 0.9 : 0),
-				radius:0,
-				x: 1, y: -1)
+			let renderBorder = isPseudo && isSelected
+			if renderBorder {
+				SectorMark(
+					angle: .value("Sales", element.sales),
+					innerRadius: .ratio(0.94),
+					outerRadius: .ratio(1),
+					angularInset: 12
+				)
+				.foregroundStyle(Color.black.opacity(0.8))
+				.cornerRadius(12)
+			} else {
+				SectorMark(
+					angle: .value("Sales", element.sales),
+					innerRadius: .ratio(0.7),
+					outerRadius: .ratio(isSelected ? 0.9 : 0.8),
+					angularInset: isSelected ? 4.0 : 1.0
+				)
+				.foregroundStyle(by : .value("Name", element.name))
+				.cornerRadius(8)
+			}
 		}
 		.animation(.spring(response: 0.25, dampingFraction: 0.8), value: rawSelectedValue)
-		// 3. Bind to the temporary raw value
+		.animation(.spring(response: 0.42, dampingFraction: 0.6), value: selectedName)
 		.chartAngleSelection(value: $rawSelectedValue)
-		// 4. Native way to capture and "persist" the value
 		.onChange(of: rawSelectedValue) { _, newValue in
 			if let newValue {
 				withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
@@ -60,6 +64,7 @@ struct ChartDonutView: View {
 			}
 		}
 		.frame(width: 300, height: 300)
+		.chartLegend(.hidden)
 	}
 
 	private func findSelectedName(for value: Double) -> String? {
@@ -95,22 +100,27 @@ private struct ChartDonutViewPreviewWrapper: View {
 
 	var body: some View {
 		VStack(spacing: 20) {
-			ChartDonutView(data: chartData, selectedName: $selectedName)
+			ZStack {
+				ChartDonutView(data: chartData, selectedName: $selectedName, isPseudo: true)
+				ChartDonutView(data: chartData, selectedName: $selectedName)
 
-			if let selectedName {
-				Text("Selected: \(selectedName)")
-					.font(.headline)
+				VStack(spacing: 12) {
+					if let selectedName {
+						Text("Selected: \(selectedName)")
+							.font(.headline)
 
-				Button("Clear") {
-					withAnimation(.easeInOut(duration: 0.2)) {
-						self.selectedName = nil
+						Button("Clear") {
+							withAnimation(.easeInOut(duration: 0.2)) {
+								self.selectedName = nil
+							}
+						}
+						.font(.subheadline)
+						.foregroundStyle(.secondary)
+					} else {
+						Text("Tap a segment")
+							.foregroundStyle(.secondary)
 					}
 				}
-				.font(.subheadline)
-				.foregroundStyle(.secondary)
-			} else {
-				Text("Tap a segment to select")
-					.foregroundStyle(.secondary)
 			}
 		}
 	}
