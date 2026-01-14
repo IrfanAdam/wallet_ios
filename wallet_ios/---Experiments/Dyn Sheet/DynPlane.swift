@@ -14,7 +14,6 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 
 	var body: some View {
 		VStack(spacing: 16) {
-			detentRow
 			content()
 		}
 		.padding()
@@ -24,26 +23,6 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 				contentHeight,
 				state: state
 			)
-		}
-	}
-}
-
-private extension AuxiliaryPlaneContainer {
-
-	var detentRow: some View {
-		HStack(spacing: 12) {
-			Button("Large") {
-				AuxiliaryPlaneLogic.selectLarge(state: state)
-			}
-			.buttonStyle(.bordered)
-
-			Button("Content") {
-				AuxiliaryPlaneLogic.resizeToContent(
-					contentHeight,
-					state: state
-				)
-			}
-			.buttonStyle(.borderedProminent)
 		}
 	}
 }
