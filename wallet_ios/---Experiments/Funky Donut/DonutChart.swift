@@ -41,14 +41,8 @@ struct ChartDonutView: View {
 		.chartLegend(.hidden)
 		.frame(width: 300, height: 300)
 		.flippedHorizontally()
-		.chartSpringAnimation(
-			rawSelectedValue: rawSelectedValue,
-			selectedName: selectedName
-		)
 		.onAppear {
-			animatedData = ChartAnimation.prepareAnimatedData(from: data)
-			
-			ChartAnimation.animateSegments(
+			ChartDonutSnapperAnimation.start(
 				data: data,
 				animatedData: $animatedData
 			)
@@ -60,5 +54,9 @@ struct ChartDonutView: View {
 				selectedName: $selectedName
 			)
 		}
+		.chartSpringAnimation(
+			rawSelectedValue: rawSelectedValue,
+			selectedName: selectedName
+		)
 	}
 }
