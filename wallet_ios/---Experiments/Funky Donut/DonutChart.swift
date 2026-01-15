@@ -18,6 +18,7 @@ struct ChartDonutView: View {
 	
 	@State private var animatedData: [SalesData] = []
 	@State private var rawSelectedValue: Double?
+	@State private var processedData: [SalesData] = [] // ✅ store sorted + remainder
 	
 	var body: some View {
 		Chart(animatedData) { element in
@@ -25,7 +26,7 @@ struct ChartDonutView: View {
 				for: element,
 				selectedName: selectedName,
 				isPseudo: isPseudo,
-				allData: data
+				allData: processedData // ✅ use processedData for styles
 			)
 			
 			SectorMark(
@@ -34,23 +35,29 @@ struct ChartDonutView: View {
 				outerRadius: .ratio(style.outerRadius),
 				angularInset: style.inset
 			)
-			.foregroundStyle(style.color)
+			.foregroundStyle(
+				element.name == "Remaining" ? Color.gray.opacity(0.2) : style.color
+			)
 			.cornerRadius(style.cornerRadius)
 		}
 		.chartAngleSelection(value: $rawSelectedValue)
 		.chartLegend(.hidden)
 		.frame(width: 300, height: 300)
-		.flippedHorizontally()
+		.scaleEffect(x: -1, y: 1)
 		.onAppear {
+			// 1️⃣ Preprocess data: sort descending + append remainder
+			processedData = preprocessData(data: data, total: 240)
+			
+			// 2️⃣ Start animation using processedData
 			ChartDonutSnapperAnimation.start(
-				data: data,
+				data: processedData,
 				animatedData: $animatedData
 			)
 		}
 		.onChange(of: rawSelectedValue) { _, newValue in
 			ChartSelection.updateSelection(
 				rawValue: newValue,
-				data: data,
+				data: processedData, // ✅ use processedData for selection
 				selectedName: $selectedName
 			)
 		}
@@ -59,4 +66,21 @@ struct ChartDonutView: View {
 			selectedName: selectedName
 		)
 	}
+	
+	// MARK: - Helper: sort and add remainder
+	private func preprocessData(data: [SalesData], total: Double) -> [SalesData] {
+		let sum = data.reduce(0) { $0 + $1.sales }
+		let remainder = max(total - sum, 0)
+		
+		// 1️⃣ Sort original data descending
+		var sortedData = data.sorted { $0.sales > $1.sales }
+		
+		// 2️⃣ Append remainder at start or end (here at end)
+		if remainder > 0 {
+			sortedData.insert(SalesData(name: "Remaining", sales: remainder), at: 0)
+		}
+		
+		return sortedData
+	}
 }
+

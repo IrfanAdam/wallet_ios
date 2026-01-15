@@ -57,7 +57,6 @@
 		EE72EC162F18F2EF00F13FAE /* DonutDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC152F18F2EB00F13FAE /* DonutDemo.swift */; };
 		EE72EC182F18F38700F13FAE /* DonutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC172F18F38300F13FAE /* DonutData.swift */; };
 		EE72EC1A2F18F42700F13FAE /* DonutInteract.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC192F18F42200F13FAE /* DonutInteract.swift */; };
-		EE72EC1C2F1928FE00F13FAE /* DonutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1B2F1928FA00F13FAE /* DonutModifier.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE72EC202F192F4800F13FAE /* DonutAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */; };
 		EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */; };
@@ -125,7 +124,6 @@
 		EE72EC152F18F2EB00F13FAE /* DonutDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutDemo.swift; sourceTree = "<group>"; };
 		EE72EC172F18F38300F13FAE /* DonutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutData.swift; sourceTree = "<group>"; };
 		EE72EC192F18F42200F13FAE /* DonutInteract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInteract.swift; sourceTree = "<group>"; };
-		EE72EC1B2F1928FA00F13FAE /* DonutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutModifier.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutAnimate.swift; sourceTree = "<group>"; };
 		EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStackView.swift; sourceTree = "<group>"; };
@@ -235,10 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				EE72EC152F18F2EB00F13FAE /* DonutDemo.swift */,
+				15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */,
 				EE72EC172F18F38300F13FAE /* DonutData.swift */,
 				EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */,
-				15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */,
-				EE72EC1B2F1928FA00F13FAE /* DonutModifier.swift */,
 				EE72EC192F18F42200F13FAE /* DonutInteract.swift */,
 				EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */,
 			);
@@ -536,7 +533,6 @@
 				EE72EC1A2F18F42700F13FAE /* DonutInteract.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynController.swift in Sources */,
-				EE72EC1C2F1928FE00F13FAE /* DonutModifier.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,

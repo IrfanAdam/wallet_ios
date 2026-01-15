@@ -7,7 +7,6 @@ struct RoundedDonut_Chart: View {
 				LazyVStack {
 					ChartDonutDemoView(
 						data: [
-							.init(name: "0", sales: 100),
 							.init(name: "A", sales: 20),
 							.init(name: "B", sales: 15),
 							.init(name: "C", sales: 40),

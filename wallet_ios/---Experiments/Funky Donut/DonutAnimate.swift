@@ -15,6 +15,7 @@ struct ChartAnimation {
 struct ChartDonutSnapperAnimation {
 	static func start(
 		data: [SalesData],
+		total: Double? = nil,
 		animatedData: Binding<[SalesData]>
 	) {
 		// Initialize with near-zero values
@@ -51,5 +52,28 @@ struct ChartDonutSnapperAnimation {
 				animatedData: animatedData
 			)
 		}
+	}
+}
+
+
+extension View {
+	
+	func chartSpringAnimation(
+		rawSelectedValue: Double?,
+		selectedName: String?
+	) -> some View {
+		self
+			.animation(
+				.spring(response: 0.25, dampingFraction: 0.8),
+				value: rawSelectedValue
+			)
+			.animation(
+				.spring(response: 0.42, dampingFraction: 0.6),
+				value: selectedName
+			)
+	}
+	
+	func flippedHorizontally() -> some View {
+		self.scaleEffect(x: -1, y: 1)
 	}
 }
