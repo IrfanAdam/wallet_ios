@@ -31,7 +31,6 @@
 		15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* DynSheet.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */; };
-		15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */; };
 		15DA4B2C2EEBFD100046EBC6 /* PillUsePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFC2EEBFD100046EBC6 /* PillUsePreview.swift */; };
 		15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */; };
@@ -93,7 +92,6 @@
 		15A79E622F164E68000C6B4E /* DynSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynSheet.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart Version.swift"; sourceTree = "<group>"; };
-		15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Copying Chart.swift"; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Version.swift"; sourceTree = "<group>"; };
 		15DA4AFC2EEBFD100046EBC6 /* PillUsePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillUsePreview.swift; sourceTree = "<group>"; };
 		15DA4AFE2EEBFD100046EBC6 /* AutoFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFlow.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				15DA4AF82EEBFD100046EBC6 /* Chart Version.swift */,
-				15DA4AF92EEBFD100046EBC6 /* Copying Chart.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Version.swift */,
 			);
 			path = "Funky Donut";
@@ -505,7 +502,6 @@
 				15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */,
 				15DA4B292EEBFD100046EBC6 /* Chart Version.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
-				15DA4B2A2EEBFD100046EBC6 /* Copying Chart.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Main.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Version.swift in Sources */,
