@@ -19,6 +19,7 @@ struct ChartDonutView: View {
 	@State private var animatedData: [SalesData] = []
 	@State private var rawSelectedValue: Double?
 	@State private var processedData: [SalesData] = [] // ✅ store sorted + remainder
+	@State private var chartRotation: Angle = .degrees(-90)
 	
 	var body: some View {
 		Chart(animatedData) { element in
@@ -44,6 +45,7 @@ struct ChartDonutView: View {
 		.chartLegend(.hidden)
 		.frame(width: 300, height: 300)
 		.scaleEffect(x: -1, y: 1)
+		.rotationEffect(chartRotation)
 		.onAppear {
 			// 1️⃣ Preprocess data: sort descending + append remainder
 			processedData = preprocessData(data: data, total: 240)
@@ -51,7 +53,8 @@ struct ChartDonutView: View {
 			// 2️⃣ Start animation using processedData
 			ChartDonutSnapperAnimation.start(
 				data: processedData,
-				animatedData: $animatedData
+				animatedData: $animatedData,
+				chartRotation: $chartRotation
 			)
 		}
 		.onChange(of: rawSelectedValue) { _, newValue in
@@ -73,11 +76,11 @@ struct ChartDonutView: View {
 		let remainder = max(total - sum, 0)
 		
 		// 1️⃣ Sort original data descending
-		var sortedData = data.sorted { $0.sales > $1.sales }
+		var sortedData = data.sorted { $0.sales < $1.sales }
 		
 		// 2️⃣ Append remainder at start or end (here at end)
 		if remainder > 0 {
-			sortedData.insert(SalesData(name: "Remaining", sales: remainder), at: 0)
+			sortedData.append(SalesData(name: "Remaining", sales: remainder))
 		}
 		
 		return sortedData

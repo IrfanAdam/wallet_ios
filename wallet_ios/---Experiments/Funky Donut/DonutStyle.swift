@@ -33,7 +33,7 @@ struct ChartDonutStyle {
 		return .init(
 			innerRadius: 0.7,
 			outerRadius: isSelected ? 0.9 : 0.8,
-			inset: isSelected ? 4 : 1,
+			inset: isSelected ? 3 : 1,
 			cornerRadius: 8,
 			color: ChartColors.color(for: element, in: allData)
 		)

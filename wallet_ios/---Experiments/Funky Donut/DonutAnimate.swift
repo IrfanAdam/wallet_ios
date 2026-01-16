@@ -15,8 +15,8 @@ struct ChartAnimation {
 struct ChartDonutSnapperAnimation {
 	static func start(
 		data: [SalesData],
-		total: Double? = nil,
-		animatedData: Binding<[SalesData]>
+		animatedData: Binding<[SalesData]>,
+		chartRotation: Binding<Angle>
 	) {
 		// Initialize with near-zero values
 		animatedData.wrappedValue = data.map {
@@ -26,30 +26,34 @@ struct ChartDonutSnapperAnimation {
 				sales: 0.00000000000000001
 			)
 		}
-		
+
 		animateSegment(
-			at: 0,
+			at: data.count - 1,
 			data: data,
-			animatedData: animatedData
+			animatedData: animatedData,
+			chartRotation: chartRotation
 		)
 	}
 	
 	private static func animateSegment(
 		at index: Int,
 		data: [SalesData],
-		animatedData: Binding<[SalesData]>
+		animatedData: Binding<[SalesData]>,
+		chartRotation: Binding<Angle>
 	) {
-		guard index < data.count else { return }
+		guard index >= 0 else { return }
 		
 		withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
 			animatedData.wrappedValue[index] = data[index]
+			chartRotation.wrappedValue += .degrees(data[index].sales)
 		}
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
 			animateSegment(
-				at: index + 1,
+				at: index - 1,
 				data: data,
-				animatedData: animatedData
+				animatedData: animatedData,
+				chartRotation: chartRotation
 			)
 		}
 	}
@@ -57,7 +61,6 @@ struct ChartDonutSnapperAnimation {
 
 
 extension View {
-	
 	func chartSpringAnimation(
 		rawSelectedValue: Double?,
 		selectedName: String?
@@ -71,9 +74,5 @@ extension View {
 				.spring(response: 0.42, dampingFraction: 0.6),
 				value: selectedName
 			)
-	}
-	
-	func flippedHorizontally() -> some View {
-		self.scaleEffect(x: -1, y: 1)
 	}
 }
