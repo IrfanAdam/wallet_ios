@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ChartSelection {
-	
 	static func updateSelection(
 		rawValue: Double?,
 		data: [SalesData],

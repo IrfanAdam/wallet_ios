@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ChartDonutStyle {
-	
 	struct SegmentStyle {
 		let innerRadius: CGFloat
 		let outerRadius: CGFloat
@@ -16,26 +15,18 @@ struct ChartDonutStyle {
 		isPseudo: Bool,
 		allData: [SalesData]
 	) -> SegmentStyle {
-		
+
 		let isSelected = selectedName == element.name
-		let renderBorder = isPseudo && isSelected
-		
-		if renderBorder {
-			return .init(
-				innerRadius: 0.94,
-				outerRadius: 1.0,
-				inset: 12,
-				cornerRadius: 12,
-				color: .black.opacity(0.8)
-			)
-		}
-		
+		let isPseudoBorder = isPseudo && isSelected
+
 		return .init(
-			innerRadius: 0.7,
-			outerRadius: isSelected ? 0.9 : 0.8,
-			inset: isSelected ? 3 : 1,
-			cornerRadius: 8,
-			color: ChartColors.color(for: element, in: allData)
+			innerRadius: isPseudoBorder ? 0.94 : 0.7,
+			outerRadius: isPseudoBorder ? 1.0 : (isSelected ? 0.9 : 0.8),
+			inset: isPseudoBorder ? 12 : (isSelected ? 3 : 1),
+			cornerRadius: isPseudoBorder ? 12 : 8,
+			color: isPseudoBorder
+			? .black.opacity(0.8)
+			: ChartColors.color(for: element, in: allData)
 		)
 	}
 }

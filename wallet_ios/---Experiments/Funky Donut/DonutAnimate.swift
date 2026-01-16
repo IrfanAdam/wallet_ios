@@ -1,17 +1,5 @@
 import SwiftUI
 
-struct ChartAnimation {
-	static func prepareAnimatedData(from data: [SalesData]) -> [SalesData] {
-		data.map {
-			SalesData(
-				id: $0.id,
-				name: $0.name,
-				sales: .leastNonzeroMagnitude
-			)
-		}
-	}
-}
-
 struct ChartDonutSnapperAnimation {
 	static func start(
 		data: [SalesData],
@@ -58,7 +46,6 @@ struct ChartDonutSnapperAnimation {
 		}
 	}
 }
-
 
 extension View {
 	func chartSpringAnimation(

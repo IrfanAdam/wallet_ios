@@ -28,3 +28,35 @@ struct ChartColors {
 		return Color(hue: 0.58, saturation: 0.75, brightness: brightness)
 	}
 }
+
+struct ChartAnimation {
+	static func prepareAnimatedData(from data: [SalesData]) -> [SalesData] {
+		data.map {
+			SalesData(
+				id: $0.id,
+				name: $0.name,
+				sales: .leastNonzeroMagnitude
+			)
+		}
+	}
+}
+
+enum ChartDonutDataProcessor {
+	static func preprocess(
+		data: [SalesData],
+		total: Double
+	) -> [SalesData] {
+
+		let sum = data.reduce(0) { $0 + $1.sales }
+		let remainder = max(total - sum, 0)
+
+		var sortedData = data.sorted { $0.sales < $1.sales }
+
+		if remainder > 0 {
+			sortedData.append(
+				SalesData(name: "Remaining", sales: remainder)
+			)
+		}
+		return sortedData
+	}
+}

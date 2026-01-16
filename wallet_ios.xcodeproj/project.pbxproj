@@ -29,6 +29,7 @@
 		15A79E5F2F115296000C6B4E /* DynController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5E2F115292000C6B4E /* DynController.swift */; };
 		15A79E612F1649CD000C6B4E /* DynLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E602F1649C9000C6B4E /* DynLogic.swift */; };
 		15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* DynSheet.swift */; };
+		15C963B62F1A2C1500960C5C /* DonutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963B52F1A2C1100960C5C /* DonutModifier.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
@@ -95,6 +96,7 @@
 		15A79E5E2F115292000C6B4E /* DynController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynController.swift; sourceTree = "<group>"; };
 		15A79E602F1649C9000C6B4E /* DynLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLogic.swift; sourceTree = "<group>"; };
 		15A79E622F164E68000C6B4E /* DynSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynSheet.swift; sourceTree = "<group>"; };
+		15C963B52F1A2C1100960C5C /* DonutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutModifier.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */,
 				EE72EC172F18F38300F13FAE /* DonutData.swift */,
 				EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */,
+				15C963B52F1A2C1100960C5C /* DonutModifier.swift */,
 				EE72EC192F18F42200F13FAE /* DonutInteract.swift */,
 				EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */,
 			);
@@ -514,6 +517,7 @@
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
+				15C963B62F1A2C1500960C5C /* DonutModifier.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */,
 				15DA4B292EEBFD100046EBC6 /* DonutChart.swift in Sources */,
