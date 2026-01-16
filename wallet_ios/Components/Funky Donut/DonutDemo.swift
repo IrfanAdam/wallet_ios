@@ -9,7 +9,7 @@ struct ChartDonutDemoView: View {
 			ZStack {
 				ChartDonutView(data: data, selectedName: $selectedName, isPseudo: true)
 				ChartDonutView(data: data, selectedName: $selectedName)
-				
+
 				VStack(spacing: 12) {
 					if let selectedName {
 						Text("Selected: \(selectedName)").font(.headline)

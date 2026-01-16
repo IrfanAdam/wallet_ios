@@ -2,40 +2,61 @@ import SwiftUI
 import Charts
 
 extension View {
-	func donutChartModifiers(
-		rawSelectedValue: Binding<Double?>,
-		selectedName: Binding<String?>,
-		chartRotation: Binding<Angle>,
-		data: [SalesData],
-		processedData: Binding<[SalesData]>,
-		animatedData: Binding<[SalesData]>
+	func donutChartModifiers(context: DonutChartContext) -> some View {
+		self
+			.chartLayout(rawSelectedValue: context.rawSelectedValue)
+			.chartDynamicChange(context: context)
+			.chartSpringAnimation(context: context)
+	}
+
+	func chartLayout(
+		rawSelectedValue: Binding<Double?>
 	) -> some View {
 		self
 			.chartAngleSelection(value: rawSelectedValue)
 			.chartLegend(.hidden)
 			.frame(width: 360, height: 360)
 			.scaleEffect(x: -1, y: 1)
-			.rotationEffect(chartRotation.wrappedValue)
-			.onAppear {
-				processedData.wrappedValue =
-				ChartDonutDataProcessor.preprocess(data: data, total: 240)
+	}
+
+	func chartDynamicChange(
+		context: DonutChartContext
+	) -> some View {
+		self
+			.task(id: context.data.count) {
+				context.processedData.wrappedValue =
+				ChartDonutDataProcessor.preprocess(
+					data: context.data,
+					total: 240
+				)
 
 				ChartDonutSnapperAnimation.start(
-					data: processedData.wrappedValue,
-					animatedData: animatedData,
-					chartRotation: chartRotation
+					data: context.processedData.wrappedValue,
+					animatedData: context.animatedData,
+					chartRotation: context.chartRotation
 				)
 			}
-			.onChange(of: rawSelectedValue.wrappedValue) { _, newValue in
+			.onChange(of: context.rawSelectedValue.wrappedValue) { _, newValue in
 				ChartSelection.updateSelection(
 					rawValue: newValue,
-					data: processedData.wrappedValue,
-					selectedName: selectedName
+					data: context.processedData.wrappedValue,
+					selectedName: context.selectedName
 				)
 			}
-			.chartSpringAnimation(
-				rawSelectedValue: rawSelectedValue.wrappedValue,
-				selectedName: selectedName.wrappedValue
+	}
+
+	func chartSpringAnimation(
+		context: DonutChartContext
+	) -> some View {
+		self
+			.animation(
+				.spring(response: 0.25, dampingFraction: 0.8),
+				value: context.rawSelectedValue.wrappedValue
 			)
+			.animation(
+				.spring(response: 0.42, dampingFraction: 0.6),
+				value: context.selectedName.wrappedValue
+			)
+			.rotationEffect(context.chartRotation.wrappedValue)
 	}
 }
