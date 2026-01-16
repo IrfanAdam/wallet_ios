@@ -222,6 +222,15 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
+		15C963B72F1A36FD00960C5C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
+				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,8 +276,6 @@
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
-				15DA4AFB2EEBFD100046EBC6 /* Funky Donut */,
-				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
 			);
 			path = "---Experiments";
 			sourceTree = "<group>";
@@ -343,6 +350,7 @@
 				EE8802FA2EF8292A00A4D79D /* Main */,
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
+				15C963B72F1A36FD00960C5C /* Components */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;

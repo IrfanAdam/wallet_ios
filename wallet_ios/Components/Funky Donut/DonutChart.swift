@@ -19,8 +19,8 @@ struct ChartDonutView: View {
 	@State private var animatedData: [SalesData] = []
 	@State private var rawSelectedValue: Double?
 	@State private var processedData: [SalesData] = []
-	@State private var chartRotation: Angle = .degrees(-90)
-	
+	@State private var chartRotation: Angle = .degrees(0)
+
 	var body: some View {
 		Chart(animatedData) { element in
 			let style = ChartDonutStyle.segmentStyle(
@@ -29,18 +29,13 @@ struct ChartDonutView: View {
 				isPseudo: isPseudo,
 				allData: processedData
 			)
-
 			SectorMark(
 				angle: .value("Sales", element.sales),
 				innerRadius: .ratio(style.innerRadius),
 				outerRadius: .ratio(style.outerRadius),
 				angularInset: style.inset
 			)
-			.foregroundStyle(
-				element.name == "Remaining"
-				? .gray.opacity(0.2)
-				: style.color
-			)
+			.foregroundStyle(style.color)
 			.cornerRadius(style.cornerRadius)
 		}
 		.donutChartModifiers(

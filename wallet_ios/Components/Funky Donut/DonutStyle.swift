@@ -18,15 +18,18 @@ struct ChartDonutStyle {
 
 		let isSelected = selectedName == element.name
 		let isPseudoBorder = isPseudo && isSelected
+		let isRemaining = element.name == "Remaining"
 
 		return .init(
 			innerRadius: isPseudoBorder ? 0.94 : 0.7,
 			outerRadius: isPseudoBorder ? 1.0 : (isSelected ? 0.9 : 0.8),
 			inset: isPseudoBorder ? 12 : (isSelected ? 3 : 1),
 			cornerRadius: isPseudoBorder ? 12 : 8,
-			color: isPseudoBorder
-			? .black.opacity(0.8)
-			: ChartColors.color(for: element, in: allData)
+			color: isRemaining
+				? .gray.opacity(0.06)
+				: isPseudoBorder
+				? .black.opacity(0.8)
+				: ChartColors.color(for: element, in: allData)
 		)
 	}
 }

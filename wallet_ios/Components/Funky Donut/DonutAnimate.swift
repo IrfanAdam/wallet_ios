@@ -6,7 +6,8 @@ struct ChartDonutSnapperAnimation {
 		animatedData: Binding<[SalesData]>,
 		chartRotation: Binding<Angle>
 	) {
-		// Initialize with near-zero values
+		chartRotation.wrappedValue = .degrees(0)
+		
 		animatedData.wrappedValue = data.map {
 			SalesData(
 				id: $0.id,
@@ -23,19 +24,40 @@ struct ChartDonutSnapperAnimation {
 		)
 	}
 	
+
 	private static func animateSegment(
 		at index: Int,
 		data: [SalesData],
 		animatedData: Binding<[SalesData]>,
 		chartRotation: Binding<Angle>
 	) {
+		let total = data.reduce(0) { $0 + $1.sales }
 		guard index >= 0 else { return }
-		
+
+		let isFirst = index == data.count - 1
+
 		withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
 			animatedData.wrappedValue[index] = data[index]
-			chartRotation.wrappedValue += .degrees(data[index].sales)
 		}
-		
+
+		withAnimation(.spring(response: 0.32, dampingFraction: 0.8)) {
+			let segmentAngle = (data[index].sales / total) * 360
+			chartRotation.wrappedValue += .degrees(segmentAngle)
+		}
+
+		if isFirst {
+			let cumulativeAmount = data.prefix(index + 1)
+				.filter { $0.name != "Remaining" }
+				.reduce(0) { $0 + $1.sales }
+			let cumulativeAngle = (cumulativeAmount / total) * 360
+			
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
+				withAnimation(.spring(response: 0.42, dampingFraction: 0.6)) {
+					chartRotation.wrappedValue += .degrees(cumulativeAngle)
+				}
+			}
+		}
+
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
 			animateSegment(
 				at: index - 1,

@@ -31,8 +31,8 @@ struct ChartDonutDemoView_Previews: PreviewProvider {
 			data: [
 				.init(name: "A", sales: 20),
 				.init(name: "B", sales: 15),
-				.init(name: "C", sales: 40),
-				.init(name: "D", sales: 25)
+				.init(name: "C", sales: 10),
+				.init(name: "D", sales: 60)
 			]
 		)
 		.padding()

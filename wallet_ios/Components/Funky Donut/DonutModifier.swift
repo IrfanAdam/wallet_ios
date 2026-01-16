@@ -13,7 +13,7 @@ extension View {
 		self
 			.chartAngleSelection(value: rawSelectedValue)
 			.chartLegend(.hidden)
-			.frame(width: 300, height: 300)
+			.frame(width: 360, height: 360)
 			.scaleEffect(x: -1, y: 1)
 			.rotationEffect(chartRotation.wrappedValue)
 			.onAppear {
