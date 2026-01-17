@@ -61,7 +61,6 @@
 		EE72EC1A2F18F42700F13FAE /* DonutInteract.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC192F18F42200F13FAE /* DonutInteract.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE72EC202F192F4800F13FAE /* DonutAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */; };
-		EE72EC222F1B832700F13FAE /* DonutSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC212F1B832100F13FAE /* DonutSelection.swift */; };
 		EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
@@ -131,7 +130,6 @@
 		EE72EC192F18F42200F13FAE /* DonutInteract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInteract.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE72EC1F2F192F4500F13FAE /* DonutAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutAnimate.swift; sourceTree = "<group>"; };
-		EE72EC212F1B832100F13FAE /* DonutSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutSelection.swift; sourceTree = "<group>"; };
 		EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStackView.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
-				EE72EC212F1B832100F13FAE /* DonutSelection.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
@@ -526,7 +523,6 @@
 				EE72EC202F192F4800F13FAE /* DonutAnimate.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
-				EE72EC222F1B832700F13FAE /* DonutSelection.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* DynPlane.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
