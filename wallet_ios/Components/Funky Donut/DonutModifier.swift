@@ -1,6 +1,7 @@
 import SwiftUI
 import Charts
 
+
 extension View {
 	func donutChartModifiers(context: DonutChartContext) -> some View {
 		self
@@ -25,23 +26,11 @@ extension View {
 		self
 			.task(id: context.data.count) {
 				context.processedData.wrappedValue =
-				ChartDonutDataProcessor.preprocess(
-					data: context.data,
-					total: 240
-				)
-
-				ChartDonutSnapperAnimation.start(
-					data: context.processedData.wrappedValue,
-					animatedData: context.animatedData,
-					chartRotation: context.chartRotation
-				)
+				ChartDonutDataProcessor.preprocess(context: context)
+				ChartDonutSnapperAnimation.start(context: context)
 			}
-			.onChange(of: context.rawSelectedValue.wrappedValue) { _, newValue in
-				ChartSelection.updateSelection(
-					rawValue: newValue,
-					data: context.processedData.wrappedValue,
-					selectedName: context.selectedName
-				)
+			.onChange(of: context.rawSelectedValue.wrappedValue) {
+				ChartSelection.updateSelection(context: context)
 			}
 	}
 
@@ -49,14 +38,13 @@ extension View {
 		context: DonutChartContext
 	) -> some View {
 		self
-			.animation(
-				.spring(response: 0.25, dampingFraction: 0.8),
+			.animation(.spring(response: 0.25, dampingFraction: 0.8),
 				value: context.rawSelectedValue.wrappedValue
 			)
-			.animation(
-				.spring(response: 0.42, dampingFraction: 0.6),
-				value: context.selectedName.wrappedValue
+			.animation(.spring(response: 0.42, dampingFraction: 0.6),
+				value: context.selectedData.wrappedValue
 			)
-			.rotationEffect(context.chartRotation.wrappedValue)
+			.rotationEffect(context.rotationContext.angle)
 	}
 }
+

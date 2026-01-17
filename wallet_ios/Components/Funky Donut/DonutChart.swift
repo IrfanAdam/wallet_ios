@@ -1,47 +1,56 @@
 import SwiftUI
 import Charts
 
+@Observable
+final class ChartRotationContext: Equatable {
+	var angle: Angle = .degrees(0)
+	
+	static func == (lhs: ChartRotationContext, rhs: ChartRotationContext) -> Bool {
+		lhs.angle == rhs.angle
+	}
+}
+
 struct ChartDonutView: View {
 	let data: [SalesData]
-	@Binding var selectedName: String?
+	let total: Double
+	@Binding var selectedData: SalesData? // <--- change to SalesData
 	let isPseudo: Bool
-
+	
 	init(
 		data: [SalesData],
-		selectedName: Binding<String?>,
+		total: Double,
+		selectedData: Binding<SalesData?>, // <--- change here
 		isPseudo: Bool = false
 	) {
 		self.data = data
-		self._selectedName = selectedName
+		self.total = total
+		self._selectedData = selectedData
 		self.isPseudo = isPseudo
 	}
 	
 	@State private var animatedData: [SalesData] = []
 	@State private var rawSelectedValue: Double?
 	@State private var processedData: [SalesData] = []
-	@State private var chartRotation: Angle = .degrees(0)
+	@State private var rotationContext = ChartRotationContext()
 
+	
 	private var context: DonutChartContext {
 		DonutChartContext(
 			data: data,
+			total: total,
 			rawSelectedValue: $rawSelectedValue,
-			selectedName: $selectedName,
-			chartRotation: $chartRotation,
+			selectedData: $selectedData,
 			processedData: $processedData,
-			animatedData: $animatedData
+			animatedData: $animatedData,
+			rotationContext: rotationContext,
+			isPseudo: isPseudo
 		)
 	}
-
+	
 	var body: some View {
 		Chart(animatedData) { element in
-			ChartDonutSector(
-				element: element,
-				selectedName: selectedName,
-				isPseudo: isPseudo,
-				allData: processedData
-			)
+			ChartDonutSector(element: element, context: context)
 		}
 		.donutChartModifiers(context: context)
 	}
 }
-

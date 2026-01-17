@@ -1,29 +1,20 @@
 import SwiftUI
 
 struct ChartSelection {
-	static func updateSelection(
-		rawValue: Double?,
-		data: [SalesData],
-		selectedName: Binding<String?>
-	) {
-		guard let rawValue else { return }
+	static func updateSelection(context: DonutChartContext) {
+		guard let rawValue = context.rawSelectedValue.wrappedValue else { return }
 		
-		selectedName.wrappedValue = findSelectedName(
-			for: rawValue,
-			in: data
-		)
+		let selected = findSelectedData(for: rawValue, in: context.processedData.wrappedValue)
+		context.selectedData.wrappedValue = selected
 	}
 	
-	static func findSelectedName(
-		for value: Double,
-		in data: [SalesData]
-	) -> String? {
+	private static func findSelectedData(for value: Double, in data: [SalesData]) -> SalesData? {
 		var cumulativeTotal: Double = 0
 		
 		for element in data {
 			cumulativeTotal += element.sales
 			if value <= cumulativeTotal {
-				return element.name
+				return element
 			}
 		}
 		return nil

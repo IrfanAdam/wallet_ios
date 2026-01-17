@@ -2,20 +2,32 @@ import SwiftUI
 
 struct ChartDonutDemoView: View {
 	let data: [SalesData]
-	@State private var selectedName: String?
+	let total: Double
+	@State private var selectedData: SalesData?
 	
 	var body: some View {
 		VStack(spacing: 20) {
 			ZStack {
-				ChartDonutView(data: data, selectedName: $selectedName, isPseudo: true)
-				ChartDonutView(data: data, selectedName: $selectedName)
+				ChartDonutView(
+					data: data,
+					total: total,
+					selectedData: $selectedData,
+					isPseudo: true
+				)
+				ChartDonutView(
+					data: data,
+					total: total,
+					selectedData: $selectedData
+				)
 
-				VStack(spacing: 12) {
-					if let selectedName {
-						Text("Selected: \(selectedName)").font(.headline)
-						Button("Clear") { withAnimation { self.selectedName = nil } }
-							.font(.subheadline)
-							.foregroundStyle(.secondary)
+				VStack(spacing: 8) {
+					if let selectedData {
+						Text("Sales of : \(selectedData.name)").font(.headline)
+						Button("Clear") { withAnimation {
+							self.selectedData = nil
+						}}
+						.font(.subheadline)
+						.foregroundStyle(.secondary)
 					} else {
 						Text("Tap a segment").foregroundStyle(.secondary)
 					}
@@ -33,8 +45,8 @@ struct ChartDonutDemoView_Previews: PreviewProvider {
 				.init(name: "B", sales: 15),
 				.init(name: "C", sales: 10),
 				.init(name: "D", sales: 60)
-			]
+			],
+			total: 240
 		)
-		.padding()
 	}
 }

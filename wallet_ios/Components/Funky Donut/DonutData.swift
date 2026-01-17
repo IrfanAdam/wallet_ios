@@ -5,7 +5,6 @@ struct SalesData: Identifiable, Equatable {
 	let id: UUID
 	let name: String
 	let sales: Double
-	
 	init(id: UUID = UUID(), name: String, sales: Double) {
 		self.id = id
 		self.name = name
@@ -14,16 +13,12 @@ struct SalesData: Identifiable, Equatable {
 }
 
 enum ChartDonutDataProcessor {
-	static func preprocess(
-		data: [SalesData],
-		total: Double
-	) -> [SalesData] {
-
+	static func preprocess(context: DonutChartContext) -> [SalesData] {
+		let data = context.data
+		let total = context.total
 		let sum = data.reduce(0) { $0 + $1.sales }
 		let remainder = max(total - sum, 0)
-
 		var sortedData = data.sorted { $0.sales < $1.sales }
-
 		if remainder > 0 {
 			sortedData.append(
 				SalesData(name: "Remaining", sales: remainder)
@@ -35,9 +30,11 @@ enum ChartDonutDataProcessor {
 
 struct DonutChartContext {
 	let data: [SalesData]
+	let total: Double
 	let rawSelectedValue: Binding<Double?>
-	let selectedName: Binding<String?>
-	let chartRotation: Binding<Angle>
+	let selectedData: Binding<SalesData?>
 	let processedData: Binding<[SalesData]>
 	let animatedData: Binding<[SalesData]>
+	let rotationContext: ChartRotationContext
+	let isPseudo: Bool
 }

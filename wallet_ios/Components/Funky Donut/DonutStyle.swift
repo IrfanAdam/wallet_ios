@@ -11,13 +11,17 @@ struct ChartDonutStyle {
 	
 	static func segmentStyle(
 		for element: SalesData,
-		selectedName: String?,
+		selectedData: SalesData?,
 		isPseudo: Bool,
 		allData: [SalesData]
 	) -> SegmentStyle {
-
-		let isSelected = selectedName == element.name
-		let isPseudoBorder = isPseudo && isSelected
+		
+		var isSelected = false
+		var isPseudoBorder = false
+		if let selectedData {
+			isSelected = selectedData.name == element.name
+			isPseudoBorder = isPseudo && isSelected
+		}
 		let isRemaining = element.name == "Remaining"
 
 		return .init(
@@ -39,13 +43,11 @@ struct ChartColors {
 		guard let index = data.firstIndex(where: { $0.id == element.id }) else {
 			return .clear
 		}
-
 		let segmentCount = max(data.count - 1, 1)
 		let progress = segmentCount > 1 ? Double(index - 1) / Double(segmentCount - 1) : 0
 		let minBrightness = 0.35
 		let maxBrightness = 0.85
 		let brightness = maxBrightness - progress * (maxBrightness - minBrightness)
-
 		return Color(hue: 0.58, saturation: 0.75, brightness: brightness)
 	}
 }
