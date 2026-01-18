@@ -1,15 +1,6 @@
 import SwiftUI
 import Charts
 
-@Observable
-final class ChartRotationContext: Equatable {
-	var angle: Angle = .degrees(0)
-	
-	static func == (lhs: ChartRotationContext, rhs: ChartRotationContext) -> Bool {
-		lhs.angle == rhs.angle
-	}
-}
-
 struct ChartDonutView: View {
 	let data: [SalesData]
 	let total: Double
@@ -33,6 +24,7 @@ struct ChartDonutView: View {
 	@State private var processedData: [SalesData] = []
 	@State private var rotationContext = ChartRotationContext()
 
+	
 	
 	private var context: DonutChartContext {
 		DonutChartContext(

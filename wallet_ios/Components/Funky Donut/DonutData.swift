@@ -27,14 +27,3 @@ enum ChartDonutDataProcessor {
 		return sortedData
 	}
 }
-
-struct DonutChartContext {
-	let data: [SalesData]
-	let total: Double
-	let rawSelectedValue: Binding<Double?>
-	let selectedData: Binding<SalesData?>
-	let processedData: Binding<[SalesData]>
-	let animatedData: Binding<[SalesData]>
-	let rotationContext: ChartRotationContext
-	let isPseudo: Bool
-}
