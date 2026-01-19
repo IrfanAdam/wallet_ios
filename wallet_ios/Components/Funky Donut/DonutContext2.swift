@@ -1,67 +1,41 @@
 import SwiftUI
 
+@Observable
+final class DonutChartContext2 {
+	var model: Model
+	var interaction: Interaction
+	var animation: Animation
+	var layout: Layout
 
-// MARK: - Donut Chart Context
-struct DonutChartContext2 {
-	let model: Model
-	let interaction: Interaction
-	let animation: Animation
-	let layout: Layout
+	// MARK: - Initializers
+	init(data: [SalesData], total: Double, isPseudo: Bool) {
+		self.model = Model(data: data, total: total)
+		self.interaction = Interaction()
+		self.animation = Animation()
+		self.layout = Layout(isPseudo: isPseudo)
+	}
 }
 
 // MARK: - Sub-contexts
-
 extension DonutChartContext2 {
-	
 	struct Model {
-		let observable: DataObs
-		let values: ModelVal
+		let data: [SalesData]
+		let total: Double
+		var processedData: [SalesData] = []
 	}
-	
+
 	struct Interaction {
-		let observable: InteractionObs
-		let values: InteractionVal
+		var rawSelectedValue: Double? = nil
+		var selectedData: SalesData? = nil
 	}
-	
+
 	struct Animation {
-		let observable: AnimationObs
-		let values: AnimationVal
+		var animatedData: [SalesData] = []
+		var rotationAngle: Angle = .degrees(0) // combined rotation
 	}
-	
+
 	struct Layout {
-		let values: LayoutVal
+		let isPseudo: Bool
+		var geometry: [SalesData] = []
 	}
-}
-
-
-// MARK: - Observable Classes
-@Observable
-final class DataObs {
-	var processedData: [SalesData] = []
-}
-@Observable
-final class AnimationObs {
-	var animatedData: [SalesData] = []
-	var rotationAngle: Angle = .degrees(0) // combined rotation
-}
-@Observable
-final class InteractionObs {
-	var rawSelectedValue: Double? = nil
-	var selectedData: SalesData? = nil
-}
-
-// MARK: - Static Structures
-struct ModelVal {
-	let data: [SalesData]
-	let total: Double
-}
-struct InteractionVal {
-	// Add immutable config for interaction if needed
-}
-struct AnimationVal {
-	// Add immutable animation config if needed
-}
-struct LayoutVal {
-	let isPseudo: Bool
-	let geometry: [SalesData]
 }

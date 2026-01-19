@@ -4,7 +4,7 @@ import Charts
 struct ChartDonutSector: ChartContent {
 	let element: SalesData
 	let context: DonutChartContext
-	
+
 	@ChartContentBuilder
 	var body: some ChartContent {
 		let style = ChartDonutStyle.segmentStyle(

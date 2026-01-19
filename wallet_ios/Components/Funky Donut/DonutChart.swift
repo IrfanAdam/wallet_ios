@@ -24,9 +24,7 @@ struct ChartDonutView: View {
 	@State private var processedData: [SalesData] = []
 	@State private var rotationContext = ChartRotationContext()
 
-	
-	
-	private var context: DonutChartContext {
+	private var contextOld: DonutChartContext {
 		DonutChartContext(
 			data: data,
 			total: total,
@@ -38,11 +36,51 @@ struct ChartDonutView: View {
 			isPseudo: isPseudo
 		)
 	}
-	
+
+
 	var body: some View {
 		Chart(animatedData) { element in
-			ChartDonutSector(element: element, context: context)
+			ChartDonutSector(element: element, context: contextOld)
 		}
-		.donutChartModifiers(context: context)
+		.donutChartModifiers(context: contextOld)
 	}
 }
+
+
+struct ChartDonutView2: View {
+	let data: [SalesData]
+	let total: Double
+	let isPseudo: Bool
+
+	@State private var context: DonutChartContext2
+
+	@Binding var selectedData: SalesData? // <--- change to SalesData
+
+	var body: some View {
+		Chart(context.animation.animatedData) { element in
+		}
+	}
+}
+
+extension ChartDonutView2 {
+	init(
+		data: [SalesData],
+		total: Double,
+		isPseudo: Bool = false,
+		selectedData: Binding<SalesData?>
+	) {
+		self.data = data
+		self.total = total
+		self.isPseudo = isPseudo
+		self._selectedData = selectedData
+
+		self._context = State(
+			initialValue: DonutChartContext2(
+				data: data,
+				total: total,
+				isPseudo: isPseudo
+			)
+		)
+	}
+}
+

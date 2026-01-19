@@ -31,6 +31,8 @@
 		15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* DynSheet.swift */; };
 		15C963B62F1A2C1500960C5C /* DonutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963B52F1A2C1100960C5C /* DonutModifier.swift */; };
 		15C963B92F1A63FC00960C5C /* DonutSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963B82F1A63F200960C5C /* DonutSector.swift */; };
+		15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BA2F1E123500960C5C /* ChartTest.swift */; };
+		15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BC2F1E3AA000960C5C /* ContextTest.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B292EEBFD100046EBC6 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
@@ -101,6 +103,8 @@
 		15A79E622F164E68000C6B4E /* DynSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynSheet.swift; sourceTree = "<group>"; };
 		15C963B52F1A2C1100960C5C /* DonutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutModifier.swift; sourceTree = "<group>"; };
 		15C963B82F1A63F200960C5C /* DonutSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutSector.swift; sourceTree = "<group>"; };
+		15C963BA2F1E123500960C5C /* ChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTest.swift; sourceTree = "<group>"; };
+		15C963BC2F1E3AA000960C5C /* ContextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextTest.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AF82EEBFD100046EBC6 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
+				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
@@ -563,6 +569,7 @@
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */,
 				15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */,
+				15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */,
 				EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
@@ -580,6 +587,7 @@
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
+				15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
