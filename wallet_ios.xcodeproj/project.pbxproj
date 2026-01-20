@@ -260,15 +260,23 @@
 			isa = PBXGroup;
 			children = (
 				15C963BE2F1E76E700960C5C /* DonutDemo2.swift */,
-				15C963C12F1E77F100960C5C /* DonutData2.swift */,
-				EE10F2092F1D374500944690 /* DonutContext2.swift */,
 				15C963C32F1E781200960C5C /* DonutChart2.swift */,
 				15C963C52F1E78F300960C5C /* DonutSector2.swift */,
 				15C963C72F1E79C700960C5C /* DonutModifier2.swift */,
-				15C963CB2F1E877000960C5C /* DonutInteract2.swift */,
-				15C963C92F1E855800960C5C /* DonutAnimate2.swift */,
+				15C963CD2F1F9BB800960C5C /* Helpers */,
 			);
 			path = "Funky Donut 2";
+			sourceTree = "<group>";
+		};
+		15C963CD2F1F9BB800960C5C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EE10F2092F1D374500944690 /* DonutContext2.swift */,
+				15C963CB2F1E877000960C5C /* DonutInteract2.swift */,
+				15C963C92F1E855800960C5C /* DonutAnimate2.swift */,
+				15C963C12F1E77F100960C5C /* DonutData2.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {

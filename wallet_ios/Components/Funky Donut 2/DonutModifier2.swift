@@ -3,6 +3,7 @@ import Charts
 
 struct DonutChartModifier: ViewModifier {
 	@Bindable var context: DonutChartContext2
+	let isPseudo: Bool 
 
 	func body(content: Content) -> some View {
 		content

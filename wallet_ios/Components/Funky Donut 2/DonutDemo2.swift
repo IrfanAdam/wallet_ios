@@ -3,37 +3,39 @@ import SwiftUI
 struct ChartDonutDemoView2: View {
 	let data: [SalesData]
 	let total: Double
+
 	@State private var selectedData: SalesData?
+	@State private var context: DonutChartContext2
 
 	var body: some View {
-		VStack(spacing: 20) {
+		ZStack {
 			ZStack {
-				ChartDonutView2(
-					data: data,
-					total: total,
-					isPseudo: true,
-					selectedData: $selectedData,
-				)
-				ChartDonutView2(
-					data: data,
-					total: total,
-					selectedData: $selectedData
-				)
+				ChartDonutView2(context: context, selectedData: $selectedData, isPseudo: true)
+				ChartDonutView2(context: context, selectedData: $selectedData, isPseudo: false)
 
-				VStack(spacing: 8) {
-					if let selectedData {
-						Text("Sales of : \(selectedData.name)").font(.headline)
-						Button("Clear") { withAnimation {
-							self.selectedData = nil
-						}}
+			}
+
+			VStack(spacing: 8) {
+				if let selected = selectedData {
+					Text("Sales of: \(selected.name)")
+						.font(.headline)
+					Button("Clear") { withAnimation { selectedData = nil } }
 						.font(.subheadline)
 						.foregroundStyle(.secondary)
-					} else {
-						Text("Tap a segment").foregroundStyle(.secondary)
-					}
+				} else {
+					Text("Tap a segment")
+						.foregroundStyle(.secondary)
 				}
 			}
 		}
+	}
+}
+
+private extension ChartDonutDemoView2 {
+	init(data: [SalesData], total: Double) {
+		self.data = data
+		self.total = total
+		_context = State(initialValue: .init(data: data, total: total, isPseudo: true))
 	}
 }
 
