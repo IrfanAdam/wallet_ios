@@ -10,6 +10,6 @@ struct ChartDonutView2: View {
 		Chart(context.animation.animatedData) { element in
 			ChartDonutSector2(element: element, context: context, isPseudo: isPseudo)
 		}
-		.modifier(DonutChartModifier(context: context, isPseudo: isPseudo))
+		.modifier(DonutChartModifier(context: context))
 	}
 }
