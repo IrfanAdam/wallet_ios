@@ -31,7 +31,7 @@ struct ChartDonutDemoView2: View {
 	}
 }
 
-private extension ChartDonutDemoView2 {
+extension ChartDonutDemoView2 {
 	init(data: [SalesData], total: Double) {
 		self.data = data
 		self.total = total
@@ -44,9 +44,9 @@ struct ChartDonutDemoView2_Previews: PreviewProvider {
 		ChartDonutDemoView2(
 			data: [
 				.init(name: "A", sales: 20),
-				.init(name: "B", sales: 15),
-				.init(name: "C", sales: 10),
-				.init(name: "D", sales: 60)
+				.init(name: "B", sales: 24),
+				.init(name: "C", sales: 16),
+				.init(name: "D", sales: 32)
 			],
 			total: 240
 		)

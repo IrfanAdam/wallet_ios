@@ -5,48 +5,53 @@ struct ChartDonutSnapperAnimation2 {
 	// MARK: - Public start
 	static func start(context: DonutChartContext2) {
 		let procsData = context.model.processedData
+		let totalSales = context.model.data.reduce(0.0) { $0 + $1.sales }
+		let totalAngle = (totalSales / context.model.total) * 360
+
 		context.animation.animatedData = procsData.map {
 			SalesData(id: $0.id, name: $0.name, sales: .ulpOfOne)
 		}
+
 		context.animation.rotationAngle = .degrees(0)
-		animateSegment(at: procsData.count - 1, context: context)
+		animateSegment(at: procsData.count - 1, context: context, totalAngle: totalAngle)
 	}
 }
 
 // MARK: - Private helper methods
 private extension ChartDonutSnapperAnimation2 {
-	static func animateSegment(at index: Int, context: DonutChartContext2) {
+
+	static func animateSegment(at index: Int, context: DonutChartContext2, totalAngle: Double) {
 		guard index >= 0 else { return }
+
 		let data = context.model.processedData
+
 		withAnimation(segmentAnimation) {
 			context.animation.animatedData[index] = data[index]
 		}
-//		animateRotation(at: index, context: context)
+
+		animateRotation(at: index, context: context, totalAngle: totalAngle)
+
 		DispatchQueue.main.asyncAfter(deadline: .now() + stepDelay) {
-			animateSegment(at: index - 1, context: context)
+			animateSegment(at: index - 1, context: context, totalAngle: totalAngle)
 		}
 	}
 
-	static func animateRotation(at index: Int, context: DonutChartContext2) {
+	static func animateRotation(at index: Int, context: DonutChartContext2, totalAngle: Double) {
 		let data = context.model.processedData
-		let total = data.reduce(0) { $0 + $1.sales }
-		let segmentAngle = (data[index].sales / total) * 360
+		let max = context.model.total
+		let reduceAngle = data.prefix(index).reduce(0) { $0 + ($1.sales / max) * 360 }
+
+		let targetRotation = totalAngle - reduceAngle
+
+		print("▶︎ Segment \(index)")
+		print("   value:", data[index].sales)
+		print("   totalAngle:", totalAngle)
+		print("   reduceAngle:", reduceAngle)
+		print("   targetRotation:", targetRotation)
+
 
 		withAnimation(rotationAnimation) {
-			context.animation.rotationAngle += .degrees(segmentAngle)
-		}
-
-		if index == data.count - 1 {
-			let cumulative = data.prefix(index + 1)
-				.filter { $0.name != "Remaining" }
-				.reduce(0) { $0 + $1.sales }
-			let cumulativeAngle = (cumulative / total) * 360
-
-			DispatchQueue.main.asyncAfter(deadline: .now() + stepDelay) {
-				withAnimation(snapAnimation) {
-					context.animation.rotationAngle += .degrees(cumulativeAngle)
-				}
-			}
+			context.animation.rotationAngle = .degrees(targetRotation)
 		}
 	}
 }
