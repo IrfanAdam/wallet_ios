@@ -31,8 +31,6 @@ struct ChartDonutStyle {
 			cornerRadius: isPseudoBorder ? 12 : 8,
 			color: isRemaining
 				? .gray.opacity(0.1)
-				: isPseudoBorder
-				? .black.opacity(0.8)
 				: ChartColors.color(for: element, in: allData)
 		)
 	}

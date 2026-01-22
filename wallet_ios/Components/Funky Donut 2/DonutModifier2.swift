@@ -5,7 +5,6 @@ struct DonutChartModifier: ViewModifier {
 	@Bindable var context: DonutChartContext2
 	@State private var selectionToken = UUID()
 
-
 	func body(content: Content) -> some View {
 		content
 			.chartAngleSelection(value: $context.interaction.rawSelectedValue)
@@ -16,28 +15,30 @@ struct DonutChartModifier: ViewModifier {
 				context.model.processedData = ChartDonutDataProcessor2.preprocess(context: context)
 				ChartDonutSnapperAnimation2.start(context: context)
 			}
-//			.onChange(of: context.interaction.rawSelectedValue) {
-//				ChartSelection2.updateSelection(context: context)
-//			}
-			.onChange(of: context.interaction.rawSelectedValue) { _, _ in
-				let token = UUID()
-				selectionToken = token
-
-				Task {
-					try? await Task.sleep(for: .milliseconds(140))
-
-					// debounce nullification
-					guard selectionToken == token else { return }
-
-					await MainActor.run {
-						withAnimation(.spring(response: 0.42, dampingFraction: 0.6)) {
-							ChartSelection2.updateSelection(context: context)
-						}
-					}
-				}
+			.onChange(of: context.interaction.rawSelectedValue) {
+				ChartSelection2.updateSelection(context: context)
+				print("pseudo stuff:", context.layout.isPseudo, context.layout.isPseudo != true)
 			}
+//			.onChange(of: context.interaction.rawSelectedValue) { _, _ in
+//				let token = UUID()
+//				selectionToken = token
+//
+//				Task {
+//					try? await Task.sleep(for: .milliseconds(40))
+//
+//					// debounce nullification
+//					guard selectionToken == token else { return }
+//
+//					await MainActor.run {
+//						withAnimation(.spring(response: 0.42, dampingFraction: 0.6)) {
+//							ChartSelection2.updateSelection(context: context)
+//						}
+//					}
+//				}
+//			}
 //			.animation(.spring(response: 0.25, dampingFraction: 0.8),value: context.interaction.rawSelectedValue)
 			.animation(.spring(response: 0.42, dampingFraction: 0.6),value: context.interaction.selectedData)
 			.rotationEffect(context.animation.rotationAngle)
+//			.allowsHitTesting(context.layout.isPseudo != true)
 	}
 }

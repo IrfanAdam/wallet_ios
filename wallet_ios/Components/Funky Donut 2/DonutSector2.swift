@@ -4,7 +4,7 @@ import Charts
 struct ChartDonutSector2: ChartContent {
 	let element: SalesData
 	let context: DonutChartContext2
-	let isPseudo: Bool  // ← new
+	let isPseudo: Bool
 
 	@ChartContentBuilder
 	var body: some ChartContent {

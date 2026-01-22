@@ -4,27 +4,20 @@ struct ChartDonutDemoView2: View {
 	let data: [SalesData]
 	let total: Double
 
-	@State private var selectedData: SalesData?
 	@State private var context: DonutChartContext2
 
 	var body: some View {
 		ZStack {
 			ZStack {
-				ChartDonutView2(context: context, selectedData: $selectedData, isPseudo: true)
-				ChartDonutView2(context: context, selectedData: $selectedData, isPseudo: false)
-
+				ChartDonutView2(context: context, isPseudo: true)
+				ChartDonutView2(context: context, isPseudo: false)
 			}
-
 			VStack(spacing: 8) {
-				if let selected = selectedData {
-					Text("Sales of: \(selected.name)")
-						.font(.headline)
-					Button("Clear") { withAnimation { selectedData = nil } }
-						.font(.subheadline)
-						.foregroundStyle(.secondary)
+				if let selected = context.interaction.selectedData {
+					Text("Sales of: \(selected.name)").font(.headline)
+					Button("Clear") { withAnimation { context.interaction.selectedData = nil } }.font(.subheadline).foregroundStyle(.secondary)
 				} else {
-					Text("Tap a segment")
-						.foregroundStyle(.secondary)
+					Text("Tap a segment").foregroundStyle(.secondary)
 				}
 			}
 		}

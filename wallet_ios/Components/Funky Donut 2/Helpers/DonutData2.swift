@@ -1,7 +1,5 @@
 import SwiftUI
 
-// MARK: - Data Model
-
 enum ChartDonutDataProcessor2 {
 	static func preprocess(context: DonutChartContext2) -> [SalesData] {
 		let data = context.model.data
