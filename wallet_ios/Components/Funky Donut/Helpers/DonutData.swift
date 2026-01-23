@@ -1,7 +1,18 @@
 import SwiftUI
 
-enum ChartDonutDataProcessor2 {
-	static func preprocess(context: DonutChartContext2) -> [SalesData] {
+struct SalesData: Identifiable, Equatable {
+	let id: UUID
+	let name: String
+	let sales: Double
+	init(id: UUID = UUID(), name: String, sales: Double) {
+		self.id = id
+		self.name = name
+		self.sales = sales
+	}
+}
+
+enum ChartDonutDataProcessor {
+	static func preprocess(context: DonutChartContext) -> [SalesData] {
 		let data = context.model.data
 		let total = context.model.total
 		let sum = data.reduce(0) { $0 + $1.sales }

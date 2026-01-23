@@ -7,13 +7,7 @@ struct ChartDonutSector: ChartContent {
 
 	@ChartContentBuilder
 	var body: some ChartContent {
-		let style = ChartDonutStyle.segmentStyle(
-			for: element,
-			selectedData: context.selectedData.wrappedValue,
-			isPseudo: context.isPseudo,
-			allData: context.processedData.wrappedValue
-		)
-		
+		let style = context.segmentStyle(for: element, isPseudo: context.layout.isPseudo)
 		SectorMark(
 			angle: .value("Sales", element.sales),
 			innerRadius: .ratio(style.innerRadius),
@@ -22,5 +16,16 @@ struct ChartDonutSector: ChartContent {
 		)
 		.foregroundStyle(style.color)
 		.cornerRadius(style.cornerRadius)
+	}
+}
+
+extension DonutChartContext {
+	func segmentStyle(for element: SalesData, isPseudo: Bool) -> ChartDonutStyle.SegmentStyle {
+		ChartDonutStyle.segmentStyle(
+			for: element,
+			selectedData: interaction.selectedData,
+			isPseudo: layout.isPseudo,
+			allData: model.processedData
+		)
 	}
 }

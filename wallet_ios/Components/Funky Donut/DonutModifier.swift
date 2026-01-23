@@ -1,50 +1,46 @@
 import SwiftUI
 import Charts
 
+struct DonutChartModifier: ViewModifier {
+	@Bindable var context: DonutChartContext
 
-extension View {
-	func donutChartModifiers(context: DonutChartContext) -> some View {
-		self
-			.chartLayout(rawSelectedValue: context.rawSelectedValue)
-			.chartDynamicChange(context: context)
-			.chartSpringAnimation(context: context)
-	}
-
-	func chartLayout(
-		rawSelectedValue: Binding<Double?>
-	) -> some View {
-		self
-			.chartAngleSelection(value: rawSelectedValue)
+	func body(content: Content) -> some View {
+		content
+			.chartAngleSelection(value: $context.interaction.rawSelectedValue)
 			.chartLegend(.hidden)
 			.frame(width: 360, height: 360)
 			.scaleEffect(x: -1, y: 1)
+			.animation(.spring(response: 0.42, dampingFraction: 0.6),value: context.interaction.selectedData)
+			.rotationEffect(context.animation.rotationAngle)
+			.allowsHitTesting(context.layout.isPseudo != true)
+	}
+}
+
+struct DonutChartCoordinator: ViewModifier {
+	@Bindable var main: DonutChartContext
+	@Bindable var pseudo: DonutChartContext
+
+	func body(content: Content) -> some View {
+		content
+			.task {
+				prepare(main)
+				prepare(pseudo)
+			}
+			.onChange(of: main.interaction.rawSelectedValue) { _, newValue in
+				syncSelection(rawValue: newValue)
+			}
 	}
 
-	func chartDynamicChange(
-		context: DonutChartContext
-	) -> some View {
-		self
-			.task(id: context.data.count) {
-				context.processedData.wrappedValue =
-				ChartDonutDataProcessor.preprocess(context: context)
-				ChartDonutSnapperAnimation.start(context: context)
-			}
-			.onChange(of: context.rawSelectedValue.wrappedValue) {
-				ChartSelection.updateSelection(context: context)
-			}
+	private func prepare(_ context: DonutChartContext) {
+		context.model.processedData =
+		ChartDonutDataProcessor.preprocess(context: context)
+		ChartDonutSnapperAnimation.start(context: context)
 	}
 
-	func chartSpringAnimation(
-		context: DonutChartContext
-	) -> some View {
-		self
-			.animation(.spring(response: 0.25, dampingFraction: 0.8),
-				value: context.rawSelectedValue.wrappedValue
-			)
-			.animation(.spring(response: 0.42, dampingFraction: 0.6),
-				value: context.selectedData.wrappedValue
-			)
-			.rotationEffect(context.rotationContext.angle)
+	private func syncSelection(rawValue: Double?) {
+		pseudo.interaction.rawSelectedValue = rawValue
+		ChartSelection.updateSelection(context: main)
+		ChartSelection.updateSelection(context: pseudo)
 	}
 }
 

@@ -5,15 +5,6 @@ struct RoundedDonut_Chart: View {
 		NavigationStack {
 			ScrollView {
 				LazyVStack {
-					ChartDonutDemoView2(
-						data: [
-							.init(name: "A", sales: 20),
-							.init(name: "B", sales: 15),
-							.init(name: "C", sales: 40),
-							.init(name: "D", sales: 25)
-						],
-						total: 320
-					)
 					ChartDonutDemoView(
 						data: [
 							.init(name: "A", sales: 20),

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChartDonutStyle {
-	struct SegmentStyle {
+	struct SegmentStyle: Equatable {
 		let innerRadius: CGFloat
 		let outerRadius: CGFloat
 		let inset: CGFloat

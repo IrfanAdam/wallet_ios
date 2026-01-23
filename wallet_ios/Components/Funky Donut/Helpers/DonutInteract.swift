@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ChartSelection2 {
-	static func updateSelection(context: DonutChartContext2) {
+struct ChartSelection {
+	static func updateSelection(context: DonutChartContext) {
 		guard let rawValue = context.interaction.rawSelectedValue else { return }
 
 		let selected = findSelectedData(for: rawValue, in: context.model.processedData)

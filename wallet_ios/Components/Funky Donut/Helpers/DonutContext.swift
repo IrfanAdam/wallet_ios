@@ -1,7 +1,7 @@
 import SwiftUI
 
 @Observable
-final class DonutChartContext2 {
+final class DonutChartContext {
 	var model: Model
 	var interaction: Interaction
 	var animation: Animation
@@ -17,7 +17,7 @@ final class DonutChartContext2 {
 }
 
 // MARK: - Sub-contexts
-extension DonutChartContext2 {
+extension DonutChartContext {
 	struct Model {
 		let data: [SalesData]
 		let total: Double
