@@ -33,8 +33,8 @@
 		15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BC2F1E3AA000960C5C /* ContextTest.swift */; };
 		15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BE2F1E76E700960C5C /* DonutDemo.swift */; };
 		15C963C22F1E77F700960C5C /* DonutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C12F1E77F100960C5C /* DonutData.swift */; };
-		15C963C42F1E781400960C5C /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C32F1E781200960C5C /* DonutChart.swift */; };
-		15C963C62F1E78F500960C5C /* DonutSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C52F1E78F300960C5C /* DonutSector.swift */; };
+		15C963C42F1E781400960C5C /* DonutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C32F1E781200960C5C /* DonutView.swift */; };
+		15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C52F1E78F300960C5C /* DonutChart.swift */; };
 		15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C72F1E79C700960C5C /* DonutModifier.swift */; };
 		15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C92F1E855800960C5C /* DonutAnimate.swift */; };
 		15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963CB2F1E877000960C5C /* DonutInteract.swift */; };
@@ -105,8 +105,8 @@
 		15C963BC2F1E3AA000960C5C /* ContextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextTest.swift; sourceTree = "<group>"; };
 		15C963BE2F1E76E700960C5C /* DonutDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutDemo.swift; sourceTree = "<group>"; };
 		15C963C12F1E77F100960C5C /* DonutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutData.swift; sourceTree = "<group>"; };
-		15C963C32F1E781200960C5C /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
-		15C963C52F1E78F300960C5C /* DonutSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutSector.swift; sourceTree = "<group>"; };
+		15C963C32F1E781200960C5C /* DonutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutView.swift; sourceTree = "<group>"; };
+		15C963C52F1E78F300960C5C /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		15C963C72F1E79C700960C5C /* DonutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutModifier.swift; sourceTree = "<group>"; };
 		15C963C92F1E855800960C5C /* DonutAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutAnimate.swift; sourceTree = "<group>"; };
 		15C963CB2F1E877000960C5C /* DonutInteract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInteract.swift; sourceTree = "<group>"; };
@@ -245,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				15C963BE2F1E76E700960C5C /* DonutDemo.swift */,
-				15C963C32F1E781200960C5C /* DonutChart.swift */,
-				15C963C52F1E78F300960C5C /* DonutSector.swift */,
+				15C963C32F1E781200960C5C /* DonutView.swift */,
+				15C963C52F1E78F300960C5C /* DonutChart.swift */,
 				15C963C72F1E79C700960C5C /* DonutModifier.swift */,
 				15C963CD2F1F9BB800960C5C /* Helpers */,
 			);
@@ -256,11 +256,11 @@
 		15C963CD2F1F9BB800960C5C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				15C963C12F1E77F100960C5C /* DonutData.swift */,
 				EE10F2092F1D374500944690 /* DonutContext.swift */,
 				15C963CB2F1E877000960C5C /* DonutInteract.swift */,
-				15C963C92F1E855800960C5C /* DonutAnimate.swift */,
 				EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */,
-				15C963C12F1E77F100960C5C /* DonutData.swift */,
+				15C963C92F1E855800960C5C /* DonutAnimate.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -564,7 +564,7 @@
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
-				15C963C62F1E78F500960C5C /* DonutSector.swift in Sources */,
+				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynController.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
@@ -572,7 +572,7 @@
 				15C963C22F1E77F700960C5C /* DonutData.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,
 				EE8802FC2EF8398100A4D79D /* Tags.swift in Sources */,
-				15C963C42F1E781400960C5C /* DonutChart.swift in Sources */,
+				15C963C42F1E781400960C5C /* DonutView.swift in Sources */,
 				1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
 				1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */,

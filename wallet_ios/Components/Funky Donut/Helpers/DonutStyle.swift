@@ -1,37 +1,24 @@
 import SwiftUI
 
 struct ChartDonutStyle {
-	struct SegmentStyle: Equatable {
-		let innerRadius: CGFloat
-		let outerRadius: CGFloat
-		let inset: CGFloat
-		let cornerRadius: CGFloat
-		let color: Color
-	}
-	
 	static func segmentStyle(
 		for element: SalesData,
 		selectedData: SalesData?,
 		isPseudo: Bool,
 		allData: [SalesData]
-	) -> SegmentStyle {
-		
-		var isSelected = false
-		var isPseudoBorder = false
-		if let selectedData {
-			isSelected = selectedData.name == element.name
-			isPseudoBorder = isPseudo && isSelected
-		}
-		let isRemaining = element.name == "Remaining"
+	) -> DonutChartContext.SegmentStyle {
+
+		let selected = selectedData?.id == element.id
+		let pseudo = isPseudo && selected
 
 		return .init(
-			innerRadius: isPseudoBorder ? 0.94 : 0.7,
-			outerRadius: isPseudoBorder ? 1.0 : (isSelected ? 0.9 : 0.8),
-			inset: isPseudoBorder ? 12 : (isSelected ? 3 : 1),
-			cornerRadius: isPseudoBorder ? 12 : 8,
-			color: isRemaining
-				? .gray.opacity(0.1)
-				: ChartColors.color(for: element, in: allData)
+			innerRadius: pseudo ? 0.94 : 0.7,
+			outerRadius: pseudo ? 1.0 : (selected ? 0.9 : 0.8),
+			inset: pseudo ? 12 : (selected ? 3 : 1),
+			cornerRadius: pseudo ? 12 : 8,
+			color: element.name == "Remaining"
+			? .gray.opacity(0.1)
+			: ChartColors.color(for: element, in: allData)
 		)
 	}
 }

@@ -3,44 +3,32 @@ import Charts
 
 struct DonutChartModifier: ViewModifier {
 	@Bindable var context: DonutChartContext
-
 	func body(content: Content) -> some View {
 		content
 			.chartAngleSelection(value: $context.interaction.rawSelectedValue)
 			.chartLegend(.hidden)
 			.frame(width: 360, height: 360)
 			.scaleEffect(x: -1, y: 1)
-			.animation(.spring(response: 0.42, dampingFraction: 0.6),value: context.interaction.selectedData)
 			.rotationEffect(context.animation.rotationAngle)
 			.allowsHitTesting(context.layout.isPseudo != true)
 	}
 }
 
-struct DonutChartCoordinator: ViewModifier {
-	@Bindable var main: DonutChartContext
-	@Bindable var pseudo: DonutChartContext
+struct DonutSelectionInfoView: View {
+	@Bindable var mainContext: DonutChartContext
+	@Bindable var pseudoContext: DonutChartContext
 
-	func body(content: Content) -> some View {
-		content
-			.task {
-				prepare(main)
-				prepare(pseudo)
+	var body: some View {
+		VStack(spacing: 8) {
+			if let selected = mainContext.interaction.selectedData {
+				Text("Sales of: \(selected.name)").font(.headline)
+				Button("Clear") { withAnimation {
+					mainContext.interaction.selectedData = nil
+					pseudoContext.interaction.selectedData = nil
+				} }.font(.subheadline).foregroundStyle(.secondary)
+			} else {
+				Text("Tap a segment").foregroundStyle(.secondary)
 			}
-			.onChange(of: main.interaction.rawSelectedValue) { _, newValue in
-				syncSelection(rawValue: newValue)
-			}
-	}
-
-	private func prepare(_ context: DonutChartContext) {
-		context.model.processedData =
-		ChartDonutDataProcessor.preprocess(context: context)
-		ChartDonutSnapperAnimation.start(context: context)
-	}
-
-	private func syncSelection(rawValue: Double?) {
-		pseudo.interaction.rawSelectedValue = rawValue
-		ChartSelection.updateSelection(context: main)
-		ChartSelection.updateSelection(context: pseudo)
+		}
 	}
 }
-

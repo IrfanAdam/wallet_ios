@@ -12,7 +12,7 @@ struct RoundedDonut_Chart: View {
 							.init(name: "C", sales: 40),
 							.init(name: "D", sales: 25)
 						],
-						total: 320
+						dataMax: 320
 					)
 				}
 				.padding(.vertical, 24)

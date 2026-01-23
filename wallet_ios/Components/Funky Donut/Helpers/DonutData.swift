@@ -14,9 +14,9 @@ struct SalesData: Identifiable, Equatable {
 enum ChartDonutDataProcessor {
 	static func preprocess(context: DonutChartContext) -> [SalesData] {
 		let data = context.model.data
-		let total = context.model.total
+		let dataMax = context.model.dataMax
 		let sum = data.reduce(0) { $0 + $1.sales }
-		let remainder = max(total - sum, 0)
+		let remainder = max(dataMax - sum, 0)
 		var sortedData = data.sorted { $0.sales < $1.sales }
 		if remainder > 0 {
 			sortedData.append(

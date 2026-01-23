@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct ChartDonutSnapperAnimation {
-
 	static func start(context: DonutChartContext) {
 		let procsData = context.model.processedData
 		let totalSales = context.model.data.reduce(0.0) { $0 + $1.sales }
-		let totalAngle = (totalSales / context.model.total) * 360
+		let totalAngle = (totalSales / context.model.dataMax) * 360
 		context.animation.animatedData = procsData.map {
 			SalesData(id: $0.id, name: $0.name, sales: .ulpOfOne)
 		}
@@ -29,8 +28,8 @@ private extension ChartDonutSnapperAnimation {
 
 	static func animateRotation(at index: Int, context: DonutChartContext, totalAngle: Double) {
 		let data = context.model.processedData
-		let max = context.model.total
-		let reduceAngle = data.prefix(index).reduce(0) { $0 + ($1.sales / max) * 360 }
+		let dataMax = context.model.dataMax
+		let reduceAngle = data.prefix(index).reduce(0) { $0 + ($1.sales / dataMax) * 360 }
 		let targetRotation = totalAngle - reduceAngle
 		withAnimation(rotationAnimation) {
 			context.animation.rotationAngle = .degrees(targetRotation)
