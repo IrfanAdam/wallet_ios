@@ -27,12 +27,11 @@ private extension ChartDonutSnapperAnimation {
 	}
 
 	static func animateRotation(at index: Int, context: DonutChartContext, totalAngle: Double) {
-		let data = context.model.processedData
-		let dataMax = context.model.dataMax
-		let reduceAngle = data.prefix(index).reduce(0) { $0 + ($1.sales / dataMax) * 360 }
-		let targetRotation = totalAngle - reduceAngle
+		let reduceAngle = context.model.processedData.prefix(index).reduce(0) {
+			$0 + ($1.sales / context.model.dataMax) * 360
+		}
 		withAnimation(rotationAnimation) {
-			context.animation.rotationAngle = .degrees(targetRotation)
+			context.animation.rotationAngle = .degrees(totalAngle - reduceAngle)
 		}
 	}
 }

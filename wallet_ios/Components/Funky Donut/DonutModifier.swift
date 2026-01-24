@@ -22,10 +22,12 @@ struct DonutSelectionInfoView: View {
 		VStack(spacing: 8) {
 			if let selected = mainContext.interaction.selectedData {
 				Text("Sales of: \(selected.name)").font(.headline)
-				Button("Clear") { withAnimation {
-					mainContext.interaction.selectedData = nil
-					pseudoContext.interaction.selectedData = nil
-				} }.font(.subheadline).foregroundStyle(.secondary)
+				Button("Clear") {
+					withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
+						mainContext.interaction.selectedData = nil
+						pseudoContext.interaction.selectedData = nil
+					}
+				}.font(.subheadline).foregroundStyle(.secondary)
 			} else {
 				Text("Tap a segment").foregroundStyle(.secondary)
 			}

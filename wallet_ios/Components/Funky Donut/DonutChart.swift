@@ -5,7 +5,7 @@ struct ChartDonutView: View {
 	@Bindable var context: DonutChartContext
 	var body: some View {
 		Chart(context.animation.animatedData) { element in
-			let style = context.segmentStyle(for: element)
+			let style = context.sectorStyle(for: element)
 			SectorMark(
 				angle: .value("Sales", element.sales),
 				innerRadius: .ratio(style.innerRadius),

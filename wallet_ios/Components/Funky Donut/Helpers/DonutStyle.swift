@@ -1,28 +1,5 @@
 import SwiftUI
 
-struct ChartDonutStyle {
-	static func segmentStyle(
-		for element: SalesData,
-		selectedData: SalesData?,
-		isPseudo: Bool,
-		allData: [SalesData]
-	) -> DonutChartContext.SegmentStyle {
-
-		let selected = selectedData?.id == element.id
-		let pseudo = isPseudo && selected
-
-		return .init(
-			innerRadius: pseudo ? 0.94 : 0.7,
-			outerRadius: pseudo ? 1.0 : (selected ? 0.9 : 0.8),
-			inset: pseudo ? 12 : (selected ? 3 : 1),
-			cornerRadius: pseudo ? 12 : 8,
-			color: element.name == "Remaining"
-			? .gray.opacity(0.1)
-			: ChartColors.color(for: element, in: allData)
-		)
-	}
-}
-
 struct ChartColors {
 	static func color(for element: SalesData, in data: [SalesData]) -> Color {
 		guard let index = data.firstIndex(where: { $0.id == element.id }) else {
@@ -34,5 +11,35 @@ struct ChartColors {
 		let maxBrightness = 0.85
 		let brightness = maxBrightness - progress * (maxBrightness - minBrightness)
 		return Color(hue: 0.58, saturation: 0.75, brightness: brightness)
+	}
+}
+
+extension DonutChartContext {
+	struct SegmentStyle {
+		let element: SalesData
+		let isSelected: Bool
+		let isHighlightRing: Bool
+		let allData: [SalesData]
+		
+		var innerRadius: CGFloat { isHighlightRing ? 0.94 : 0.7 }
+		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.9 : 0.8) }
+		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 3 : 1) }
+		var cornerRadius: CGFloat { isHighlightRing ? 12 : 8 }
+		
+		var color: Color {
+			element.name == "Remaining"
+			? .gray.opacity(0.1)
+			: ChartColors.color(for: element, in: allData)
+		}
+	}
+	
+	func sectorStyle(for element: SalesData) -> SegmentStyle {
+		let isSelected = interaction.selectedData?.id == element.id
+		return SegmentStyle(
+			element: element,
+			isSelected: isSelected,
+			isHighlightRing: layout.isPseudo && isSelected,
+			allData: model.processedData
+		)
 	}
 }
