@@ -1,15 +1,11 @@
 import SwiftUI
 
-// MARK: - Routing
 enum AuxiliaryRoute {
 	case levelOne
 	case levelTwo
 }
 
-// MARK: - Flow Semantics
 extension AuxiliaryRoute {
-
-	/// Previous route in the flow
 	var previous: AuxiliaryRoute? {
 		switch self {
 		case .levelOne:
@@ -18,8 +14,6 @@ extension AuxiliaryRoute {
 			return .levelOne
 		}
 	}
-
-	/// Next route in the flow
 	var next: AuxiliaryRoute? {
 		switch self {
 		case .levelOne:

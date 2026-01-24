@@ -2,8 +2,6 @@ import SwiftUI
 
 enum AuxiliaryPlaneLogic {
 
-	// MARK: - Measurement
-
 	static func contentHeight(
 		proxy: GeometryProxy,
 		geometry: SheetGeometry?
@@ -15,8 +13,6 @@ enum AuxiliaryPlaneLogic {
 		+ geometry.safeAreaInsets.bottom
 	}
 
-	// MARK: - Public Actions
-
 	static func resizeToContent(
 		_ height: CGFloat,
 		state: AuxiliarySheetState
@@ -24,9 +20,7 @@ enum AuxiliaryPlaneLogic {
 		guard height > 0 else { return }
 		resize(to: height, state: state)
 	}
-
-	// MARK: - Core Resize
-
+	
 	static func resize(
 		to newHeight: CGFloat,
 		state: AuxiliarySheetState

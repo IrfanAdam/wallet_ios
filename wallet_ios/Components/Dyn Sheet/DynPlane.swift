@@ -1,9 +1,6 @@
 import SwiftUI
 
-// MARK: - Auxiliary Plane Container
-
 struct AuxiliaryPlaneContainer<Content: View>: View {
-
 	@Environment(AuxiliarySheetState.self)
 	private var state
 
@@ -27,10 +24,7 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 	}
 }
 
-// MARK: - Measurement
-
 private extension AuxiliaryPlaneContainer {
-
 	var measurementLayer: some View {
 		GeometryReader { proxy in
 			Color.clear

@@ -4,6 +4,9 @@ struct AuxiliarySheetHost: View {
 
 	@Environment(AuxiliarySheetState.self)
 	private var state
+	private var coordinator: AuxiliarySheetCoordinator {
+		AuxiliarySheetCoordinator(state: state)
+	}
 
 	let onDismiss: () -> Void
 
@@ -11,59 +14,20 @@ struct AuxiliarySheetHost: View {
 		NavigationStack {
 			GeometryReader { proxy in
 				ZStack {
-					routedContent
+					AuxiliarySheetBuilders.routedContent(route: state.route)
 				}
-				.onAppear { syncGeometry(proxy) }
-				.onChange(of: proxy.size) { syncGeometry(proxy) }
+				.onAppear { coordinator.syncGeometry(proxy) }
+				.onChange(of: proxy.size) { coordinator.syncGeometry(proxy) }
 				.animation(.easeInOut(duration: 0.35), value: state.route)
+				.animation(.easeInOut(duration: 0.35), value: state.heightVariants)
 			}
-			.toolbar { toolbar }
+			.toolbar { AuxiliarySheetBuilders.toolbar(route: state.route, onDismiss: onDismiss, onBack: coordinator.navigateBack) }
 		}
-		.presentationDetents(detents, selection: Bindable(state).activeDetent)
-		.presentationBackground(.white)
+		.presentationDetents(coordinator.detents, selection: Bindable(state).activeDetent)
 		.presentationDragIndicator(.hidden)
-	}
-
-	// MARK: Routed Content
-	@ViewBuilder
-	private var routedContent: some View {
-		switch state.route {
-		case .levelOne:
-			LevelOneView()
-				.transition(.blurReplace)
-
-		case .levelTwo:
-			LevelTwoView()
-				.transition(.blurReplace)
-		}
-	}
-
-	// MARK: Toolbar
-	private var toolbar: some ToolbarContent {
-		AuxiliaryToolbar(
-			route: state.route,
-			onDismiss: onDismiss,
-			onBack: navigateBack
-		)
-	}
-
-	private func navigateBack() {
-		withAnimation(.easeInOut(duration: 0.35)) {
-			guard let previous = state.route.previous else { return }
-			state.route = previous
-		}
-	}
-
-	// MARK: Detents
-	private var detents: Set<PresentationDetent> {
-		Set(state.heightVariants.map { .height($0.height) } + [.large])
-	}
-
-	// MARK: Geometry
-	private func syncGeometry(_ proxy: GeometryProxy) {
-		state.geometry = SheetGeometry(
-			size: proxy.size,
-			safeAreaInsets: proxy.safeAreaInsets
+		.background(
+			Rectangle().fill(.white).frame(width: .infinity, height: 1000)
 		)
 	}
 }
+

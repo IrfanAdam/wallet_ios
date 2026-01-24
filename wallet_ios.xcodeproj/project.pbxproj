@@ -20,13 +20,13 @@
 		1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE22EFC27C600876D2D /* AvatarCircle.swift */; };
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
-		15A79E412F0FE423000C6B4E /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Main.swift */; };
+		15A79E412F0FE423000C6B4E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Demo.swift */; };
 		15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */; };
 		15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E542F1125E9000C6B4E /* DynRouting.swift */; };
 		15A79E592F1126A0000C6B4E /* DynContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E582F11269A000C6B4E /* DynContent.swift */; };
 		15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */; };
 		15A79E5D2F113306000C6B4E /* DynPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5C2F113302000C6B4E /* DynPlane.swift */; };
-		15A79E5F2F115296000C6B4E /* DynController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5E2F115292000C6B4E /* DynController.swift */; };
+		15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5E2F115292000C6B4E /* DynContext.swift */; };
 		15A79E612F1649CD000C6B4E /* DynLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E602F1649C9000C6B4E /* DynLogic.swift */; };
 		15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* DynSheet.swift */; };
 		15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BA2F1E123500960C5C /* ChartTest.swift */; };
@@ -64,6 +64,8 @@
 		15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B502EF03A410046EBC6 /* Initiate.swift */; };
 		EE10F20A2F1D374B00944690 /* DonutContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2092F1D374500944690 /* DonutContext.swift */; };
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
+		EE10F20F2F24E76800944690 /* DynController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20E2F24E76400944690 /* DynController.swift */; };
+		EE10F2112F24E7FD00944690 /* DynBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2102F24E7F800944690 /* DynBuilder.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
@@ -92,13 +94,13 @@
 		1549ECE22EFC27C600876D2D /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
-		15A79E402F0FE423000C6B4E /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		15A79E402F0FE423000C6B4E /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFullStack.swift; sourceTree = "<group>"; };
 		15A79E542F1125E9000C6B4E /* DynRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynRouting.swift; sourceTree = "<group>"; };
 		15A79E582F11269A000C6B4E /* DynContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynContent.swift; sourceTree = "<group>"; };
 		15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynToolbar.swift; sourceTree = "<group>"; };
 		15A79E5C2F113302000C6B4E /* DynPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynPlane.swift; sourceTree = "<group>"; };
-		15A79E5E2F115292000C6B4E /* DynController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynController.swift; sourceTree = "<group>"; };
+		15A79E5E2F115292000C6B4E /* DynContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynContext.swift; sourceTree = "<group>"; };
 		15A79E602F1649C9000C6B4E /* DynLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLogic.swift; sourceTree = "<group>"; };
 		15A79E622F164E68000C6B4E /* DynSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynSheet.swift; sourceTree = "<group>"; };
 		15C963BA2F1E123500960C5C /* ChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTest.swift; sourceTree = "<group>"; };
@@ -137,6 +139,8 @@
 		EE0E14022EDAD5FA00092DAA /* wallet_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE10F2092F1D374500944690 /* DonutContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutContext.swift; sourceTree = "<group>"; };
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
+		EE10F20E2F24E76400944690 /* DynController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynController.swift; sourceTree = "<group>"; };
+		EE10F2102F24E7F800944690 /* DynBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynBuilder.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStackView.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
@@ -277,14 +281,13 @@
 		15DA4B092EEBFD100046EBC6 /* Dyn Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				15A79E402F0FE423000C6B4E /* Main.swift */,
+				15A79E402F0FE423000C6B4E /* Demo.swift */,
 				15A79E622F164E68000C6B4E /* DynSheet.swift */,
 				15A79E582F11269A000C6B4E /* DynContent.swift */,
+				EE10F2102F24E7F800944690 /* DynBuilder.swift */,
 				15A79E5C2F113302000C6B4E /* DynPlane.swift */,
-				15A79E602F1649C9000C6B4E /* DynLogic.swift */,
 				15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */,
-				15A79E542F1125E9000C6B4E /* DynRouting.swift */,
-				15A79E5E2F115292000C6B4E /* DynController.swift */,
+				EE10F20D2F24E41B00944690 /* Helpers */,
 			);
 			path = "Dyn Sheet";
 			sourceTree = "<group>";
@@ -394,6 +397,17 @@
 				EE0E14022EDAD5FA00092DAA /* wallet_ios.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EE10F20D2F24E41B00944690 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				15A79E602F1649C9000C6B4E /* DynLogic.swift */,
+				15A79E542F1125E9000C6B4E /* DynRouting.swift */,
+				15A79E5E2F115292000C6B4E /* DynContext.swift */,
+				EE10F20E2F24E76400944690 /* DynController.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		EE1A4E022F06B5F600352395 /* PageTransition */ = {
@@ -551,7 +565,7 @@
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
-				15A79E412F0FE423000C6B4E /* Main.swift in Sources */,
+				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
@@ -566,7 +580,8 @@
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
-				15A79E5F2F115296000C6B4E /* DynController.swift in Sources */,
+				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
+				EE10F2112F24E7FD00944690 /* DynBuilder.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,
@@ -595,6 +610,7 @@
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */,
+				EE10F20F2F24E76800944690 /* DynController.swift in Sources */,
 				15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
