@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct PeripheralLaunchSurface: View {
-
 	@State private var isAuxiliaryPlanePresented = false
 	@State private var sheetState = AuxiliarySheetState(
 		heightVariants: [
@@ -16,6 +15,9 @@ struct PeripheralLaunchSurface: View {
 	@State private var routeState = AuxiliaryContentState(
 		route: .levelOne
 	)
+	private var coordinator: AuxiliarySheetCoordinator {
+		AuxiliarySheetCoordinator(state: sheetState)
+	}
 
 	var body: some View {
 		VStack(spacing: 24) {
@@ -30,7 +32,11 @@ struct PeripheralLaunchSurface: View {
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
 			AuxiliarySheetHost(
 				onDismiss: { isAuxiliaryPlanePresented = false }
-			)
+			) {
+				AuxiliarySheetRouter.routedContent(
+					route: sheetState.route
+				)
+			}
 			.environment(sheetState)
 			.environment(routeState)
 		}

@@ -12,6 +12,7 @@ struct AuxiliarySheetCoordinator {
 	func syncGeometry(_ proxy: GeometryProxy) {
 		let height = proxy.size.height
 		print("📏 Sheet height:", height)
+		print("📏 Sheet width:", proxy.size.width)
 
 		state.geometry = SheetGeometry(
 			size: proxy.size,
@@ -20,6 +21,6 @@ struct AuxiliarySheetCoordinator {
 	}
 	
 	var detents: Set<PresentationDetent> {
-		Set(state.heightVariants.map { .height($0.height) } /*+ [.large]*/)
+		Set(state.heightVariants.map { .height($0.height) } + [.large])
 	}
 }

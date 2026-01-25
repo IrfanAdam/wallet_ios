@@ -65,7 +65,6 @@
 		EE10F20A2F1D374B00944690 /* DonutContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2092F1D374500944690 /* DonutContext.swift */; };
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
 		EE10F20F2F24E76800944690 /* DynController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20E2F24E76400944690 /* DynController.swift */; };
-		EE10F2112F24E7FD00944690 /* DynBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2102F24E7F800944690 /* DynBuilder.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F02EF8026200A4D79D /* AvatarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
@@ -140,7 +139,6 @@
 		EE10F2092F1D374500944690 /* DonutContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutContext.swift; sourceTree = "<group>"; };
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
 		EE10F20E2F24E76400944690 /* DynController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynController.swift; sourceTree = "<group>"; };
-		EE10F2102F24E7F800944690 /* DynBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynBuilder.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802EF2EF8025A00A4D79D /* AvatarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStackView.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				15A79E402F0FE423000C6B4E /* Demo.swift */,
 				15A79E622F164E68000C6B4E /* DynSheet.swift */,
 				15A79E582F11269A000C6B4E /* DynContent.swift */,
-				EE10F2102F24E7F800944690 /* DynBuilder.swift */,
 				15A79E5C2F113302000C6B4E /* DynPlane.swift */,
 				15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */,
 				EE10F20D2F24E41B00944690 /* Helpers */,
@@ -581,7 +578,6 @@
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
-				EE10F2112F24E7FD00944690 /* DynBuilder.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				1549ECD32EF2ECC900876D2D /* AutoFlowComposer.swift in Sources */,

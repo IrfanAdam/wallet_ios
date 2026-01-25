@@ -23,3 +23,17 @@ extension AuxiliaryRoute {
 		}
 	}
 }
+
+enum AuxiliarySheetRouter {
+	@ViewBuilder
+	static func routedContent(
+		route: AuxiliaryRoute
+	) -> some View {
+		switch route {
+		case .levelOne:
+			LevelOneView().transition(.blurReplace)
+		case .levelTwo:
+			LevelTwoView().transition(.blurReplace)
+		}
+	}
+}

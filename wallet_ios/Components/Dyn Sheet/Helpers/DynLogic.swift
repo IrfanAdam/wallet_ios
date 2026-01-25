@@ -41,3 +41,16 @@ enum AuxiliaryPlaneLogic {
 		state.activeDetent = .large
 	}
 }
+
+enum ScreenMetrics {
+	static var screenSize: CGSize {
+		guard
+			let scene = UIApplication.shared.connectedScenes
+				.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+		else {
+			return .zero
+		}
+		
+		return scene.screen.bounds.size
+	}
+}

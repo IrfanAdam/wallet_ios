@@ -20,10 +20,12 @@ struct ChartDonutDemoView: View {
 					pseudo: pseudoContext
 				)
 			)
-			DonutSelectionInfoView(
-				mainContext: mainContext,
-				pseudoContext: pseudoContext
-			)
+			VStack(spacing: 8) {
+				DonutSelectionInfoView(
+					mainContext: mainContext,
+					pseudoContext: pseudoContext
+				)
+			}
 		}
 	}
 }

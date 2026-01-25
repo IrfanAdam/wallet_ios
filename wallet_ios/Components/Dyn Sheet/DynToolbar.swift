@@ -4,30 +4,35 @@ struct AuxiliaryToolbar: ToolbarContent {
 	let route: AuxiliaryRoute
 	let onDismiss: () -> Void
 	let onBack: () -> Void
-
 	var body: some ToolbarContent {
-		// LEADING
-		ToolbarItem(placement: .topBarLeading) {
-			if route == .levelTwo {
-				Button(action: onBack) {
-					AvatarStackView(circleSize: 42, shouldCutout: false)
-				}
-				.padding(.horizontal, -8)
-			} else if route == .levelOne {
-				Button(action: onDismiss) {
-					Label("Dismiss", systemImage: "chevron.down")
-				}
+		ToolbarItem(placement: .topBarLeading) {leading}
+		ToolbarItem(placement: .topBarTrailing) {trailing}
+	}
+}
+
+private extension AuxiliaryToolbar {
+	@ViewBuilder
+	var leading: some View {
+		if route == .levelTwo {
+			Button(action: onBack) {
+				AvatarStackView(circleSize: 42, shouldCutout: false)
+			}
+			.padding(.horizontal, -8)
+			
+		} else if route == .levelOne {
+			Button(action: onDismiss) {
+				Label("Dismiss", systemImage: "chevron.down")
 			}
 		}
-
-		// TRAILING
-		ToolbarItem(placement: .topBarTrailing) {
-			if route == .levelTwo {
-				Button(action: onDismiss) {
-					Image(systemName: "xmark")
-				}
-				.buttonStyle(.plain)
+	}
+	
+	@ViewBuilder
+	var trailing: some View {
+		if route == .levelOne {
+			Button(action: onDismiss) {
+				Image(systemName: "xmark")
 			}
+			.buttonStyle(.plain)
 		}
 	}
 }
