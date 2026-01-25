@@ -13,16 +13,21 @@ struct SheetGeometry: Equatable {
 
 @Observable
 final class AuxiliarySheetState {
+	
 	var heightVariants: [HeightVariant]
 	var activeIndex: Int
 	var activeDetent: PresentationDetent
 	var route: AuxiliaryRoute
 	var geometry: SheetGeometry?
-
+	
 	init(
-		heightVariants: [HeightVariant],
-		activeIndex: Int,
-		activeDetent: PresentationDetent,
+		heightVariants: [HeightVariant] = [
+			.init(id: "A", height: 140),
+			.init(id: "B", height: 320),
+			.init(id: "C", height: 720)
+		],
+		activeIndex: Int = 1,
+		activeDetent: PresentationDetent = .height(320),
 		route: AuxiliaryRoute,
 		geometry: SheetGeometry? = nil
 	) {
@@ -33,6 +38,7 @@ final class AuxiliarySheetState {
 		self.geometry = geometry
 	}
 }
+
 
 @Observable
 final class AuxiliaryContentState {

@@ -1,7 +1,6 @@
 import SwiftUI
 
 enum AuxiliaryPlaneLogic {
-
 	static func contentHeight(
 		proxy: GeometryProxy,
 		geometry: SheetGeometry?

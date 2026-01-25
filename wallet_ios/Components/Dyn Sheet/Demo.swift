@@ -3,13 +3,6 @@ import SwiftUI
 struct PeripheralLaunchSurface: View {
 	@State private var isAuxiliaryPlanePresented = false
 	@State private var sheetState = AuxiliarySheetState(
-		heightVariants: [
-			.init(id: "A", height: 140),
-			.init(id: "B", height: 320),
-			.init(id: "C", height: 720)
-		],
-		activeIndex: 1,
-		activeDetent: .height(240),
 		route: .levelOne
 	)
 	@State private var routeState = AuxiliaryContentState(
@@ -30,9 +23,7 @@ struct PeripheralLaunchSurface: View {
 		}
 		.padding()
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
-			AuxiliarySheetHost(
-				onDismiss: { isAuxiliaryPlanePresented = false }
-			) {
+			AuxiliarySheetHost() {
 				AuxiliarySheetRouter.routedContent(
 					route: sheetState.route
 				)

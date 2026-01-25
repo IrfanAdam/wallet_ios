@@ -9,7 +9,6 @@ struct AuxiliarySheetHost<
 	private var coordinator: AuxiliarySheetCoordinator {
 		AuxiliarySheetCoordinator(state: state)
 	}
-	let onDismiss: () -> Void
 	
 	@ViewBuilder let content: () -> Content
 	@ToolbarContentBuilder let toolbar: () -> Toolbar
@@ -31,7 +30,9 @@ struct AuxiliarySheetHost<
 		}
 		.presentationDetents(coordinator.detents, selection: Bindable(state).activeDetent)
 		.presentationDragIndicator(.hidden)
+		.presentationDragIndicator(.hidden)
 		.presentationBackground(Color.white)
+		.highPriorityGesture(DragGesture())
 		.background(
 			Rectangle()
 				.fill(Color(red: 250/255, green: 248/255, blue: 245/255))

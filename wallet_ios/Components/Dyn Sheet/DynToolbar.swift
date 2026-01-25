@@ -28,7 +28,7 @@ private extension AuxiliaryToolbar {
 	
 	@ViewBuilder
 	var trailing: some View {
-		if route == .levelOne {
+		if route == .levelTwo {
 			Button(action: onDismiss) {
 				Image(systemName: "xmark")
 			}

@@ -280,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				15A79E402F0FE423000C6B4E /* Demo.swift */,
-				15A79E622F164E68000C6B4E /* DynSheet.swift */,
 				15A79E542F1125E9000C6B4E /* DynRouting.swift */,
 				15A79E582F11269A000C6B4E /* DynContent.swift */,
 				15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */,
@@ -399,6 +398,7 @@
 		EE10F20D2F24E41B00944690 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				15A79E622F164E68000C6B4E /* DynSheet.swift */,
 				15A79E5C2F113302000C6B4E /* DynPlane.swift */,
 				15A79E602F1649C9000C6B4E /* DynLogic.swift */,
 				15A79E5E2F115292000C6B4E /* DynContext.swift */,
