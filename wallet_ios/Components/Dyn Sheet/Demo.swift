@@ -36,6 +36,12 @@ struct PeripheralLaunchSurface: View {
 				AuxiliarySheetRouter.routedContent(
 					route: sheetState.route
 				)
+			} toolbar: {
+				AuxiliaryToolbar(
+					route: sheetState.route,
+					onDismiss: { isAuxiliaryPlanePresented = false },
+					onBack: coordinator.navigateBack
+				)
 			}
 			.environment(sheetState)
 			.environment(routeState)

@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct AuxiliarySheetHost<Content: View>: View {
+struct AuxiliarySheetHost<
+	Content: View,
+	Toolbar: ToolbarContent
+>: View {
 	@Environment(AuxiliarySheetState.self)
 	private var state
 	private var coordinator: AuxiliarySheetCoordinator {
@@ -9,6 +12,8 @@ struct AuxiliarySheetHost<Content: View>: View {
 	let onDismiss: () -> Void
 	
 	@ViewBuilder let content: () -> Content
+	@ToolbarContentBuilder let toolbar: () -> Toolbar
+	
 	var body: some View {
 		NavigationStack {
 			GeometryReader { proxy in
@@ -21,11 +26,7 @@ struct AuxiliarySheetHost<Content: View>: View {
 				.animation(.easeInOut(duration: 0.35), value: state.heightVariants)
 			}
 			.toolbar {
-				AuxiliaryToolbar(
-					route: state.route,
-					onDismiss: onDismiss,
-					onBack: coordinator.navigateBack
-				)
+				toolbar()
 			}
 		}
 		.presentationDetents(coordinator.detents, selection: Bindable(state).activeDetent)
@@ -33,7 +34,7 @@ struct AuxiliarySheetHost<Content: View>: View {
 		.presentationBackground(Color.white)
 		.background(
 			Rectangle()
-				.fill(.white)
+				.fill(Color(red: 250/255, green: 248/255, blue: 245/255))
 				.frame(width: state.geometry?.size.width, height: ScreenMetrics.screenSize.height * 2)
 				.ignoresSafeArea()
 		)
