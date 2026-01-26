@@ -23,7 +23,7 @@ struct PeripheralLaunchSurface: View {
 		}
 		.padding()
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
-			SheetShell() {
+			SheetShell {
 				AuxiliarySheetRouter.routedContent(
 					route: sheetState.route
 				)

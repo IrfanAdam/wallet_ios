@@ -4,6 +4,8 @@ import SwiftUI
 struct AuxiliarySheetLayout {
 	let state: AuxiliarySheetState
 	
+	
+	//	SHEET GEOMETRY
 	var detents: Set<PresentationDetent> {
 		Set(state.heightVariants.map { .height($0.height) } + [.large])
 	}
@@ -15,6 +17,8 @@ struct AuxiliarySheetLayout {
 		)
 	}
 	
+	
+	//	CONTENT GEOMETRY
 	static func contentHeight(
 		proxy: GeometryProxy,
 		geometry: SheetGeometry?
@@ -41,6 +45,7 @@ struct AuxiliarySheetLayout {
 		}
 	}
 	
+	//	AUTO CONTENT RESIZE
 	struct PlaneMeasurementLayer: View {
 		let state: AuxiliarySheetState
 		let updHeight: (CGFloat) -> Void
