@@ -1,5 +1,15 @@
 import SwiftUI
 
+struct AuxiliarySheetCoordinator {
+	let state: AuxiliarySheetState
+	func navigateBack() {
+		withAnimation(.easeInOut(duration: 0.35)) {
+			guard let previous = state.route.previous else { return }
+			state.route = previous
+		}
+	}
+}
+
 enum AuxiliaryRoute {
 	case levelOne
 	case levelTwo
