@@ -27,7 +27,7 @@
 		15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */; };
 		15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5C2F113302000C6B4E /* ContentContainer.swift */; };
 		15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E5E2F115292000C6B4E /* DynContext.swift */; };
-		15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* DynSheet.swift */; };
+		15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E622F164E68000C6B4E /* SheetShell.swift */; };
 		15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BA2F1E123500960C5C /* ChartTest.swift */; };
 		15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BC2F1E3AA000960C5C /* ContextTest.swift */; };
 		15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963BE2F1E76E700960C5C /* DonutDemo.swift */; };
@@ -100,7 +100,7 @@
 		15A79E5A2F1126CC000C6B4E /* DynToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynToolbar.swift; sourceTree = "<group>"; };
 		15A79E5C2F113302000C6B4E /* ContentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainer.swift; sourceTree = "<group>"; };
 		15A79E5E2F115292000C6B4E /* DynContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynContext.swift; sourceTree = "<group>"; };
-		15A79E622F164E68000C6B4E /* DynSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynSheet.swift; sourceTree = "<group>"; };
+		15A79E622F164E68000C6B4E /* SheetShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetShell.swift; sourceTree = "<group>"; };
 		15C963BA2F1E123500960C5C /* ChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTest.swift; sourceTree = "<group>"; };
 		15C963BC2F1E3AA000960C5C /* ContextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextTest.swift; sourceTree = "<group>"; };
 		15C963BE2F1E76E700960C5C /* DonutDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutDemo.swift; sourceTree = "<group>"; };
@@ -397,7 +397,7 @@
 		EE10F20D2F24E41B00944690 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				15A79E622F164E68000C6B4E /* DynSheet.swift */,
+				15A79E622F164E68000C6B4E /* SheetShell.swift */,
 				15A79E5C2F113302000C6B4E /* ContentContainer.swift */,
 				EE10F2162F26659E00944690 /* DynLayout.swift */,
 				15A79E5E2F115292000C6B4E /* DynContext.swift */,
@@ -568,7 +568,7 @@
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
-				15A79E632F164E6C000C6B4E /* DynSheet.swift in Sources */,
+				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
