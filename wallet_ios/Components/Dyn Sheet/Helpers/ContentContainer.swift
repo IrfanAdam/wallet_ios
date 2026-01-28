@@ -24,5 +24,6 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 					state: state
 				)
 			}
+			.frame(height: contentHeight, alignment: .top)
 	}
 }

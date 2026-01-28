@@ -1,10 +1,5 @@
 import SwiftUI
 
-enum AvatarContent {
-	case image(Image)
-	case icon(Image)
-}
-
 struct AvatarCircle: View {
 	let size: CGFloat
 	let image: Image?
@@ -82,7 +77,7 @@ struct AvatarCircle: View {
 }
 
 
-extension View {
+private extension View {
 	@ViewBuilder
 	func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
 		if condition {

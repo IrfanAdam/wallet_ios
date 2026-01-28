@@ -21,8 +21,8 @@ struct SheetShell<
 			GeometryReader { proxy in
 				sheetContent()
 					.onChange(of: proxy.size) { setLayout.syncGeometry(proxy) }
-					.animation(.easeInOut(duration: 0.25), value: state.route)
-					.animation(.easeInOut(duration: 0.35), value: state.heightVariants)
+					.animation(.easeInOut(duration: 0.16), value: state.route)
+					.animation(.easeInOut(duration: 0.32), value: state.heightVariants)
 			}
 			.toolbar {
 				toolbar()
