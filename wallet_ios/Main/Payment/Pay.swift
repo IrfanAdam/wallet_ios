@@ -11,7 +11,6 @@ struct ToolbarHeightKey: PreferenceKey {
 // MARK: - Payment Context
 @Observable
 final class InitiatePaymentContext {
-
 	// Amount
 	var integerPart: String = ""
 	var decimalPart: String = ""
@@ -147,10 +146,18 @@ private struct ToolbarLeadingContent: View {
 	@State private var hasSetHeight = false
 	
 	var body: some View {
-		let _ = Self._printChanges()
 		ToolbarPill {
-			AvatarStackView(circleSize: toolbarHeight, shouldCutout: false)
-				.animation(.none, value: toolbarHeight)
+			AvatarStackView(
+				avatars: [
+					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
+					AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
+				],
+				circleSize: toolbarHeight,
+				shouldCutout: true
+			).animation(.none, value: toolbarHeight)
+			.onChange(of: toolbarHeight) {_, newValue in
+				print("Toolbar circle size:", newValue)
+			}
 		}
 		.padding(.horizontal, 0.75)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -11,13 +11,15 @@ struct AvatarStyle {
 	let iconBackgroundColor: Color
 	let stackBackgroundColor: Color
 	let overlapRatio: CGFloat
+	let circleSize: CGFloat
 
 	static let `default` = AvatarStyle(
 		strokeWidth: 1.5,
 		strokeColor: .blue,
 		iconBackgroundColor: .blue,
 		stackBackgroundColor: .white,
-		overlapRatio: 0.2
+		overlapRatio: 0.2,
+		circleSize: 42
 	)
 }
 

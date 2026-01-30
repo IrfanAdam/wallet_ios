@@ -2,24 +2,23 @@ import SwiftUI
 
 struct AvatarStack: View {
 	let avatars: [AvatarData]
-	let avatarSize: CGFloat
-	let showBackground: Bool
 	let style: AvatarStyle
 	let shouldCutout: Bool
 
+	private var avatarSize: CGFloat {
+		style.circleSize - (4 * style.strokeWidth)
+	}
+
 	init(
 		avatars: [AvatarData],
-		avatarSize: CGFloat = 32,
-		showBackground: Bool = false,
 		style: AvatarStyle = .default,
 		shouldCutout: Bool = false
 	) {
 		self.avatars = avatars
-		self.avatarSize = avatarSize
-		self.showBackground = showBackground
 		self.style = style
 		self.shouldCutout = shouldCutout
 	}
+
 
 	var body: some View {
 		HStack(spacing: -(avatarSize * style.overlapRatio)) {
@@ -31,7 +30,6 @@ struct AvatarStack: View {
 				switch avatar.content {
 				case .image(let image):
 					AvatarCircle(
-						size: avatarSize,
 						image: image,
 						isCutout: cutout,
 						hasBorder: avatar.hasBorder,
@@ -40,7 +38,6 @@ struct AvatarStack: View {
 
 				case .icon(let icon):
 					AvatarCircle(
-						size: avatarSize,
 						icon: icon,
 						isCutout: cutout,
 						hasBorder: avatar.hasBorder,
@@ -51,7 +48,7 @@ struct AvatarStack: View {
 		}
 		.padding(style.strokeWidth) // inner clearance only
 		.background {
-			if showBackground {
+			if !shouldCutout {
 				RoundedRectangle(
 					cornerRadius: avatarSize / 2,
 					style: .continuous

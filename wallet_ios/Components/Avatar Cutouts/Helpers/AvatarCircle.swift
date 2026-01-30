@@ -1,22 +1,23 @@
 import SwiftUI
 
+// MARK: - AvatarCircle
+
 struct AvatarCircle: View {
-	let size: CGFloat
+	// MARK: Public API
 	let image: Image?
 	let icon: Image?
 	let isCutout: Bool
 	let hasBorder: Bool
 	let style: AvatarStyle
 
+	// MARK: Init
 	init(
-		size: CGFloat,
 		image: Image? = nil,
 		icon: Image? = nil,
 		isCutout: Bool = false,
 		hasBorder: Bool = true,
 		style: AvatarStyle = .default
 	) {
-		self.size = size
 		self.image = image
 		self.icon = icon
 		self.isCutout = isCutout
@@ -24,62 +25,112 @@ struct AvatarCircle: View {
 		self.style = style
 	}
 
+	// MARK: View
 	var body: some View {
-		let diameter = size
-		let strokeWidth = style.strokeWidth
-		let overlap = style.overlapRatio
-
-		let cutoutDiameter = diameter + (strokeWidth * 2)
-		let cutoutOffset = (cutoutDiameter * (1 - overlap) - (strokeWidth * 2))
-
 		ZStack {
-			if let image {
-				image
-					.resizable()
-					.scaledToFill()
-					.frame(width: diameter, height: diameter)
-					.clipped()
-			} else if let icon {
-					Circle()
-						.fill(style.iconBackgroundColor)
-						.overlay(
-							icon
-								.renderingMode(.template)
-								.resizable()
-								.scaledToFit()
-								.padding(diameter * 0.2)
-								.foregroundColor(style.strokeColor)
-						)
-			}
+			contentView
+			cutoutEnabler
+		}
+		.avatarCircleModifier(
+			diameter: diameter,
+			isCutout: isCutout
+		) { borderView }
+	}
+}
 
-			if isCutout {
-				Circle()
-					.frame(width: cutoutDiameter, height: cutoutDiameter)
-					.blendMode(.destinationOut)
-					.offset(x: cutoutOffset)
-			}
+private extension View {
+	func avatarCircleModifier<Border: View>(
+		diameter: CGFloat,
+		isCutout: Bool,
+		@ViewBuilder border: () -> Border
+	) -> some View {
+		self
+			.if(isCutout) { $0.drawingGroup() }
+			.frame(width: diameter, height: diameter)
+			.clipShape(Circle())
+			.if(isCutout) { $0.compositingGroup() }
+			.overlay(border())
+	}
+}
+
+// MARK: - Geometry
+private extension AvatarCircle {
+	var diameter: CGFloat { style.circleSize - (4 * style.strokeWidth) }
+	var strokeWidth: CGFloat { style.strokeWidth }
+	var overlapRatio: CGFloat { style.overlapRatio }
+
+	var cutoutDiameter: CGFloat {
+		diameter + (strokeWidth * 2)
+	}
+	var cutoutOffset: CGFloat {
+		(cutoutDiameter * (1 - overlapRatio) - (strokeWidth * 2))
+	}
+}
+
+// MARK: - Content Rendering
+private extension AvatarCircle {
+	@ViewBuilder
+	var contentView: some View {
+		if let image {
+			imageView(image)
+		} else if let icon {
+			iconView(icon)
 		}
-		.if(isCutout) { view in
-			view.drawingGroup()
-		}
-		.frame(width: diameter, height: diameter)
-		.clipShape(Circle())
-		.if(isCutout) { view in
-			view.compositingGroup()
-		}
-		.overlay {
-			if !isCutout && hasBorder {
-				Circle()
-					.stroke(style.strokeColor, lineWidth: strokeWidth)
-			}
+	}
+
+	func imageView(_ image: Image) -> some View {
+		image
+			.resizable()
+			.scaledToFill()
+			.frame(width: diameter, height: diameter)
+			.clipped()
+	}
+
+	func iconView(_ icon: Image) -> some View {
+		Circle()
+			.fill(style.iconBackgroundColor)
+			.overlay(
+				icon
+					.renderingMode(.template)
+					.resizable()
+					.scaledToFit()
+					.padding(diameter * 0.2)
+					.foregroundColor(style.strokeColor)
+			)
+	}
+}
+
+// MARK: - Cutout
+private extension AvatarCircle {
+	@ViewBuilder
+	var cutoutEnabler: some View {
+		if isCutout {
+			Circle()
+				.frame(width: cutoutDiameter, height: cutoutDiameter)
+				.blendMode(.destinationOut)
+				.offset(x: cutoutOffset)
 		}
 	}
 }
 
+// MARK: - Border
+private extension AvatarCircle {
+	@ViewBuilder
+	var borderView: some View {
+		if !isCutout && hasBorder {
+			Circle()
+				.stroke(style.strokeColor, lineWidth: strokeWidth)
+		}
+	}
+}
 
+// MARK: - Conditional Modifier
 private extension View {
 	@ViewBuilder
-	func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+	func `if`<Content: View>(
+		_ condition: Bool,
+		transform: (Self) -> Content
+	) -> some View {
 		if condition {
 			transform(self)
 		} else {

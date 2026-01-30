@@ -1,40 +1,74 @@
 import SwiftUI
 
-struct AvatarStackView: View {
-	let circleSize: CGFloat
-	let shouldCutout: Bool
+private struct ToolbarCutPreview: View {
+	@State private var pillHeight: CGFloat = 0
+	@State private var lastMeasuredHeight: CGFloat = 36
+	@State private var shouldMeasure = true
 
-	private let avatars: [AvatarData] = [
-		AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
-		AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
-	]
-
-	private let style = AvatarStyle(
-		strokeWidth: 1.5,
-		strokeColor: .blue,
-		iconBackgroundColor: .white,
-		stackBackgroundColor: .white,
-		overlapRatio: 0.25
-	)
+	let avatars: [AvatarData]
 
 	var body: some View {
-		HStack {
-			AvatarStack(
-				avatars: avatars,
-				avatarSize: circleSize - (4 * style.strokeWidth),
-				showBackground: false,
-				style: style,
-				shouldCutout: shouldCutout
-			)
+		NavigationStack {
+			Text("Avatar Stack View")
+				.toolbar {
+
+					// 👇 render probe only while height is increasing
+					if shouldMeasure {
+						ToolbarItem(placement: .topBarLeading) {
+							ToolbarHeightProbe { newHeight in
+								guard newHeight > lastMeasuredHeight else {
+									shouldMeasure = false
+									return
+								}
+
+								lastMeasuredHeight = newHeight
+								pillHeight = newHeight
+							}
+						}
+					}
+
+					ToolbarItemGroup(placement: .topBarLeading) {
+						AvatarStackView(
+							avatars: avatars,
+							circleSize: pillHeight
+						)
+						.background(
+							Capsule()
+								.fill(Color.white.opacity(0.94))
+						)
+					}
+				}
 		}
+	}
+}
+
+private struct ToolbarHeightProbe: View {
+	let onMeasure: (CGFloat) -> Void
+
+	var body: some View {
+		Color.clear
+			.frame(width: 1) // minimal footprint
+			.background(
+				GeometryReader { geo in
+					Color.clear
+						.onAppear {
+							onMeasure(geo.size.height)
+						}
+						.onChange(of: geo.size.height) { _, newValue in
+							onMeasure(newValue)
+						}
+				}
+			)
+			.hidden() // 👈 important: keeps layout, hides visually
 	}
 }
 
 
 #Preview {
-	NavigationStack {
-		GeometryReader { ProxyRepresentation in
-			AvatarStackView(circleSize: 42, shouldCutout: true)
-		}.background(Color.black)
-	}
+	ToolbarCutPreview(
+		avatars: [
+			AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
+			AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: true)
+		]
+	)
 }

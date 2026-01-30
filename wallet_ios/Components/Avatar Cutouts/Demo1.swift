@@ -9,20 +9,22 @@ struct AvatarStackViewPreview: View {
 		AvatarData(content: .image(Image("LargeDP"))),
 	]
 
-	private let style = AvatarStyle(
-		strokeWidth: 3.2,
-		strokeColor: .blue,
-		iconBackgroundColor: .green,
-		stackBackgroundColor: .white,
-		overlapRatio: 0.4
-	)
+	private var style: AvatarStyle {
+		AvatarStyle(
+			strokeWidth: 3.2,
+			strokeColor: .blue,
+			iconBackgroundColor: .green,
+			stackBackgroundColor: .white,
+			overlapRatio: 0.4,
+			circleSize: circleSize
+		)
+	}
 
 	var body: some View {
 		HStack {
 			AvatarStack(
 				avatars: avatars,
-				avatarSize: circleSize - (4 * style.strokeWidth),
-				showBackground: false,
+//				avatarSize: circleSize - (4 * style.strokeWidth),
 				style: style,
 				shouldCutout: true
 			)
