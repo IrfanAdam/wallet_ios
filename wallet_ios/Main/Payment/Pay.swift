@@ -1,13 +1,5 @@
 import SwiftUI
 
-// MARK: - Toolbar Preference Key
-struct ToolbarHeightKey: PreferenceKey {
-	static var defaultValue: CGFloat = 0
-	static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-		value = nextValue()
-	}
-}
-
 // MARK: - Payment Context
 @Observable
 final class InitiatePaymentContext {
@@ -42,11 +34,6 @@ struct InitiatePayment: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.sheetControl) private var sheetControl
 
-	private let minimumToolbarHeight: CGFloat = 36
-	private let defaultToolbarHeight: CGFloat = 36
-	@State private var toolbarHeight: CGFloat = 36
-	@State private var hasSetHeight = false  // NEW
-
 	// MARK: - Animations
 	private let instantSpring = Animation.spring(response: 0.2, dampingFraction: 0.95)
 	private let snappySpring = Animation.spring(response: 0.25, dampingFraction: 0.92)
@@ -80,14 +67,6 @@ struct InitiatePayment: View {
 			.background(Color.clear)
 			.navigationBarBackButtonHidden(true)
 			.toolbar { toolbarContent }
-			.onPreferenceChange(ToolbarHeightKey.self) { height in
-				guard !hasSetHeight else { return }  // ← Stops all updates after first
-				let newHeight = max(height, minimumToolbarHeight)
-				if newHeight > minimumToolbarHeight {
-					toolbarHeight = newHeight
-					hasSetHeight = true  // ← Lock it forever
-				}
-			}
 		}
 		.safeAreaInset(edge: .bottom) {
 			BottomActionAreaView(
@@ -123,8 +102,6 @@ struct InitiatePayment: View {
 	private var toolbarContent: some ToolbarContent {
 		ToolbarItemGroup(placement: .topBarLeading) {
 			ToolbarLeadingContent(
-				toolbarHeight: $toolbarHeight,
-				defaultHeight: defaultToolbarHeight,
 				dismiss: dismiss
 			)
 		}
@@ -139,8 +116,6 @@ struct InitiatePayment: View {
 
 // MARK: - Toolbar Leading Content (Separate View)
 private struct ToolbarLeadingContent: View {
-	@Binding var toolbarHeight: CGFloat
-	let defaultHeight: CGFloat
 	let dismiss: DismissAction
 	
 	@State private var hasSetHeight = false
@@ -152,28 +127,12 @@ private struct ToolbarLeadingContent: View {
 					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
 					AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 				],
-//				circleSize: toolbarHeight,
 				shouldCutout: true
-			).animation(.none, value: toolbarHeight)
-			.onChange(of: toolbarHeight) {_, newValue in
-				print("Toolbar circle size:", newValue)
-			}
+			)
 		}
-		.padding(.horizontal, 0.75)
+		.padding(.horizontal, 1.5)
+		.padding(.vertical, 1.5)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.background(
-			GeometryReader { geo in
-				Color.clear.preference(
-					key: ToolbarHeightKey.self,
-					value: geo.size.height
-				)
-			}
-		)
-		.onPreferenceChange(ToolbarHeightKey.self) { height in
-			guard !hasSetHeight, height > defaultHeight else { return }
-			toolbarHeight = height
-			hasSetHeight = true
-		}
 		.onTapGesture { dismiss() }
 	}
 }
