@@ -1,11 +1,8 @@
 import SwiftUI
 
-//Used to update the current sheet size  in shared state
 struct AuxiliarySheetLayout {
 	let state: AuxiliarySheetState
 	
-	
-	//	SHEET GEOMETRY
 	var detents: Set<PresentationDetent> {
 		Set(state.heightVariants.map { .height($0.height) } + [.large])
 	}
@@ -16,9 +13,7 @@ struct AuxiliarySheetLayout {
 			safeAreaInsets: proxy.safeAreaInsets
 		)
 	}
-	
-	
-	//	CONTENT GEOMETRY
+
 	static func contentHeight(
 		proxy: GeometryProxy,
 		geometry: SheetGeometry?
@@ -45,7 +40,6 @@ struct AuxiliarySheetLayout {
 		}
 	}
 	
-	//	AUTO CONTENT RESIZE
 	struct PlaneMeasurementLayer: View {
 		let state: AuxiliarySheetState
 		let updHeight: (CGFloat) -> Void

@@ -24,7 +24,6 @@ struct AvatarStackViewPreview: View {
 		HStack {
 			AvatarStack(
 				avatars: avatars,
-//				avatarSize: circleSize - (4 * style.strokeWidth),
 				style: style,
 				shouldCutout: true
 			)

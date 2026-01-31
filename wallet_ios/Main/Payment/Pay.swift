@@ -152,7 +152,7 @@ private struct ToolbarLeadingContent: View {
 					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
 					AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 				],
-				circleSize: toolbarHeight,
+//				circleSize: toolbarHeight,
 				shouldCutout: true
 			).animation(.none, value: toolbarHeight)
 			.onChange(of: toolbarHeight) {_, newValue in
