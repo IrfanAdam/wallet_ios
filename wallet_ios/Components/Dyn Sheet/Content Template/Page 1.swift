@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct LevelOneView: View {
-	@Environment(AuxiliarySheetState.self)
-	private var state
+	@Environment(AuxiliaryContentState.self)
+	private var routeState
 
 	var body: some View {
 		AuxiliaryPlaneContainer {
 			Button("Go L2") {
 				withAnimation(.easeInOut(duration: 0.35)) {
-					state.route = .levelTwo
+					routeState.route = .levelTwo
 				}
 			}
 			.buttonStyle(.glassProminent)

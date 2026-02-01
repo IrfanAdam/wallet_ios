@@ -55,7 +55,9 @@ private extension View {
 
 // MARK: - Geometry
 private extension AvatarCircle {
-	var diameter: CGFloat { style.circleSize - (4 * style.strokeWidth) }
+	var diameter: CGFloat {
+		max(0, style.circleSize - (4 * style.strokeWidth))
+	}
 	var strokeWidth: CGFloat { style.strokeWidth }
 	var overlapRatio: CGFloat { style.overlapRatio }
 

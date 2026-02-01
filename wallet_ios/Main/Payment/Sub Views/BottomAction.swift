@@ -7,9 +7,9 @@ struct BottomActionAreaView: View {
 	@FocusState private var focusDecimal: Bool
 
 	let namespace: Namespace.ID
-	let instantSpring: Animation
-	let snappySpring: Animation
-	let smoothSpring: Animation
+//	let instantSpring: Animation
+//	let snappySpring: Animation
+//	let smoothSpring: Animation
 
 	var body: some View {
 		Group {
@@ -18,7 +18,7 @@ struct BottomActionAreaView: View {
 					amount: "\(context.selectedCurrency) \(context.fullAmount)",
 					namespace: namespace,
 					onDismiss: {
-						withAnimation(smoothSpring) {
+						withAnimation(Self.smoothSpring) {
 							context.isAuthenticating = false
 						}
 					}
@@ -33,12 +33,12 @@ struct BottomActionAreaView: View {
 
 					onContinue: {
 						Task { @MainActor in
-							withAnimation(smoothSpring) {
+							withAnimation(Self.smoothSpring) {
 								context.showTags = true
 							}
 
 							DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-								withAnimation(snappySpring) {
+								withAnimation(Self.snappySpring) {
 									context.hasContinued = true
 								}
 							}
@@ -48,7 +48,7 @@ struct BottomActionAreaView: View {
 					onPayNow: {
 						focusInteger = false
 						focusDecimal = false
-						withAnimation(snappySpring) {
+						withAnimation(Self.snappySpring) {
 							context.isAuthenticating = true
 						}
 					},
@@ -73,12 +73,27 @@ struct BottomActionAreaPreviewWrapper: View {
 	var body: some View {
 		BottomActionAreaView(
 			context: context,
-			namespace: namespace,
-			instantSpring: .interactiveSpring(response: 0.2, dampingFraction: 0.9),
-			snappySpring: .spring(response: 0.35, dampingFraction: 0.85),
-			smoothSpring: .spring(response: 0.55, dampingFraction: 0.9)
+			namespace: namespace
 		)
 		.background(Color(.systemBackground))
 	}
+}
+
+private extension BottomActionAreaView {
+	
+	static let instantSpring = Animation.spring(
+		response: 0.2,
+		dampingFraction: 0.95
+	)
+	
+	static let snappySpring = Animation.spring(
+		response: 0.25,
+		dampingFraction: 0.92
+	)
+	
+	static let smoothSpring = Animation.spring(
+		response: 0.3,
+		dampingFraction: 0.88
+	)
 }
 

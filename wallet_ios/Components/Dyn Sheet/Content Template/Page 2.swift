@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct LevelTwoView: View {
-	@Environment(AuxiliarySheetState.self)
-	private var state
+	@Environment(AuxiliaryContentState.self)
+	private var routeState
 	
 	var body: some View {
 		AuxiliaryPlaneContainer {

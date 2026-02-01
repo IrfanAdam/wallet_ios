@@ -2,14 +2,12 @@ import SwiftUI
 
 struct PeripheralLaunchSurface: View {
 	@State private var isAuxiliaryPlanePresented = false
-	@State private var sheetState = AuxiliarySheetState(
-		route: .levelOne
-	)
-	@State private var routeState = AuxiliaryContentState(
+	@State private var sheetState = AuxiliarySheetState()
+	@State private var contentState = AuxiliaryContentState(
 		route: .levelOne
 	)
 	private var coordinator: AuxiliarySheetCoordinator {
-		AuxiliarySheetCoordinator(state: sheetState)
+		AuxiliarySheetCoordinator(state: contentState)
 	}
 
 	var body: some View {
@@ -25,17 +23,17 @@ struct PeripheralLaunchSurface: View {
 		.sheet(isPresented: $isAuxiliaryPlanePresented) {
 			SheetShell {
 				AuxiliarySheetRouter.routedContent(
-					route: sheetState.route
+					route: contentState.route
 				)
 			} toolbar: {
 				AuxiliaryToolbar(
-					route: sheetState.route,
+					route: contentState.route,
 					onDismiss: { isAuxiliaryPlanePresented = false },
 					onBack: coordinator.navigateBack
 				)
 			}
 			.environment(sheetState)
-			.environment(routeState)
+			.environment(contentState)
 		}
 	}
 }

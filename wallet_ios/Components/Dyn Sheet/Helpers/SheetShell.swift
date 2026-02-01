@@ -6,8 +6,12 @@ struct SheetShell<
 >: View {
 	@Environment(AuxiliarySheetState.self)
 	private var state
+	
+	@Environment(AuxiliaryContentState.self)
+	private var contentState
+	
 	private var coordinator: AuxiliarySheetCoordinator {
-		AuxiliarySheetCoordinator(state: state)
+		AuxiliarySheetCoordinator(state: contentState)
 	}
 	private var setLayout: AuxiliarySheetLayout {
 		AuxiliarySheetLayout(state: state)
@@ -21,7 +25,7 @@ struct SheetShell<
 			GeometryReader { proxy in
 				sheetContent()
 					.onChange(of: proxy.size) { setLayout.syncGeometry(proxy) }
-					.animation(.easeInOut(duration: 0.16), value: state.route)
+					.animation(.easeInOut(duration: 0.16), value: contentState.route)
 					.animation(.easeInOut(duration: 0.32), value: state.heightVariants)
 			}
 			.toolbar {

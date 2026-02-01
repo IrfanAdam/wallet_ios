@@ -17,7 +17,6 @@ final class AuxiliarySheetState {
 	var heightVariants: [HeightVariant]
 	var activeIndex: Int
 	var activeDetent: PresentationDetent
-	var route: AuxiliaryRoute
 	var geometry: SheetGeometry?
 	
 	init(
@@ -28,13 +27,11 @@ final class AuxiliarySheetState {
 		],
 		activeIndex: Int = 1,
 		activeDetent: PresentationDetent = .height(320),
-		route: AuxiliaryRoute,
 		geometry: SheetGeometry? = nil
 	) {
 		self.heightVariants = heightVariants
 		self.activeIndex = activeIndex
 		self.activeDetent = activeDetent
-		self.route = route
 		self.geometry = geometry
 	}
 }

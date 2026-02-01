@@ -1,37 +1,19 @@
 import SwiftUI
 
 struct AuxiliarySheetCoordinator {
-	let state: AuxiliarySheetState
+	let state: AuxiliaryContentState
+	
 	func navigateBack() {
 		withAnimation(.easeInOut(duration: 0.35)) {
-			guard let previous = state.route.previous else { return }
+			guard let previous = RouteNavigator.previous(state.route) else { return }
 			state.route = previous
 		}
 	}
 }
 
-enum AuxiliaryRoute {
+enum AuxiliaryRoute : CaseIterable {
 	case levelOne
 	case levelTwo
-}
-
-extension AuxiliaryRoute {
-	var previous: AuxiliaryRoute? {
-		switch self {
-		case .levelOne:
-			return nil
-		case .levelTwo:
-			return .levelOne
-		}
-	}
-	var next: AuxiliaryRoute? {
-		switch self {
-		case .levelOne:
-			return .levelTwo
-		case .levelTwo:
-			return nil
-		}
-	}
 }
 
 enum AuxiliarySheetRouter {
@@ -47,3 +29,4 @@ enum AuxiliarySheetRouter {
 		}
 	}
 }
+

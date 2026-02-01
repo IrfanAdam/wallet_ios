@@ -6,7 +6,7 @@ struct ChartDonutDemoView_Previews: PreviewProvider {
 			data: [
 				.init(name: "A", sales: 14),
 				.init(name: "B", sales: 24),
-				.init(name: "C", sales: 120),
+				.init(name: "C", sales: 90),
 				.init(name: "D", sales: 32)
 			],
 			dataMax: 240
