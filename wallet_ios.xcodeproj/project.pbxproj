@@ -41,6 +41,7 @@
 		15C963D62F29F94D00960C5C /* Demo1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963D52F29F94800960C5C /* Demo1.swift */; };
 		15C963D92F2A116400960C5C /* Demo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963D82F2A116000960C5C /* Demo2.swift */; };
 		15C963DD2F2BA08000960C5C /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963DC2F2BA07C00960C5C /* StackView.swift */; };
+		15C963E22F30E98700960C5C /* SwipeToUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963E12F30E98100960C5C /* SwipeToUnlock.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B2C2EEBFD100046EBC6 /* PillUsePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFC2EEBFD100046EBC6 /* PillUsePreview.swift */; };
@@ -78,7 +79,6 @@
 		EE9517722F2F85760007F91E /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517712F2F85720007F91E /* Navigator.swift */; };
 		EE9517752F2FA1700007F91E /* PayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517742F2FA16A0007F91E /* PayContext.swift */; };
 		EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517762F2FA25B0007F91E /* PayToolbar.swift */; };
-		EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14872EED7929003A5926 /* ToolbarMorph.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
@@ -120,6 +120,7 @@
 		15C963D52F29F94800960C5C /* Demo1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1.swift; sourceTree = "<group>"; };
 		15C963D82F2A116000960C5C /* Demo2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo2.swift; sourceTree = "<group>"; };
 		15C963DC2F2BA07C00960C5C /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		15C963E12F30E98100960C5C /* SwipeToUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToUnlock.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4AFC2EEBFD100046EBC6 /* PillUsePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillUsePreview.swift; sourceTree = "<group>"; };
@@ -158,7 +159,6 @@
 		EE9517712F2F85720007F91E /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		EE9517742F2FA16A0007F91E /* PayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayContext.swift; sourceTree = "<group>"; };
 		EE9517762F2FA25B0007F91E /* PayToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayToolbar.swift; sourceTree = "<group>"; };
-		EE9C14872EED7929003A5926 /* ToolbarMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMorph.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
@@ -301,11 +301,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		15C963E02F30E73500960C5C /* Slide To Close */ = {
+			isa = PBXGroup;
+			children = (
+				15C963E12F30E98100960C5C /* SwipeToUnlock.swift */,
+			);
+			path = "Slide To Close";
+			sourceTree = "<group>";
+		};
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
-				EE9C14872EED7929003A5926 /* ToolbarMorph.swift */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -328,6 +335,7 @@
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
+				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 			);
@@ -632,7 +640,6 @@
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,
 				15A79E592F1126A0000C6B4E /* Page 1.swift in Sources */,
 				15DA4B2C2EEBFD100046EBC6 /* PillUsePreview.swift in Sources */,
-				EE9C14882EED792F003A5926 /* ToolbarMorph.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B2E2EEBFD100046EBC6 /* AutoFlow.swift in Sources */,
@@ -642,6 +649,7 @@
 				15C963D62F29F94D00960C5C /* Demo1.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15C963D92F2A116400960C5C /* Demo2.swift in Sources */,
+				15C963E22F30E98700960C5C /* SwipeToUnlock.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
