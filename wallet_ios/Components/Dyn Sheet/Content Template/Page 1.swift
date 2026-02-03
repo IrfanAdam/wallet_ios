@@ -12,6 +12,8 @@ struct LevelOneView: View {
 				}
 			}
 			.buttonStyle(.glassProminent)
+
+			CustomGlass()
 		}
 	}
 }

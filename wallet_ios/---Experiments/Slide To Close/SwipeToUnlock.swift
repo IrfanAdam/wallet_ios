@@ -60,6 +60,47 @@ struct SwipeToUnlock: View {
 	}
 }
 
+struct CustomGlass2: View {
+	@State private var isHovered = false
+
+	var body: some View {
+		ZStack(alignment: .center) {
+			RoundedRectangle(cornerRadius: 24)
+				.glassEffect(
+					.clear.tint(Color.blue.opacity(0.9)),
+					in: .rect(cornerRadius: 24)
+				)
+				.clipShape(RoundedRectangle(cornerRadius: 24))
+				.frame(height: 100)
+
+			RoundedRectangle(cornerRadius: 16)
+				.fill(Color.blue) // optional fill/tint
+				.overlay(
+					RoundedRectangle(cornerRadius: 16)
+						.stroke(
+							Color.white.opacity(0.6),
+							lineWidth: 1
+						)
+				)
+				.clipShape(RoundedRectangle(cornerRadius: 16))
+				.frame(width: 180, height: 60)
+			HStack {
+				Image(systemName: "scribble.variable")
+					.foregroundStyle(Color.white)
+					.frame(width: 42, height: 42)
+					.background(
+						RoundedRectangle(cornerRadius: 12)
+							.glassEffect(
+								.regular.tint(Color.blue).interactive(),
+								in: .rect(cornerRadius: 12)
+							)
+					)
+			}
+		}
+		.padding(60)
+	}
+}
+
 #Preview {
 	ZStack {
 		ScrollView {
@@ -79,53 +120,22 @@ struct SwipeToUnlock: View {
 			.padding(32)
 
 			GlassEffectContainer(spacing: 40.0) {
-				HStack(spacing: 40.0) {
+				HStack(spacing: 48.0) {
 					Image(systemName: "scribble.variable")
 						.frame(width: 80.0, height: 80.0)
 						.font(.system(size: 36))
-						.glassEffect()
+						.glassEffect(.regular.interactive())
 
 
 					Image(systemName: "eraser.fill")
-						.frame(width: 80.0, height: 80.0)
-						.font(.system(size: 36))
-						.glassEffect()
+						.frame(width: 60.0, height: 60.0)
+						.font(.system(size: 32))
+						.glassEffect(.regular.interactive())
 						.offset(x: -40.0, y: 0.0)
 				}
 			}
 
-			ZStack(alignment: .center) {
-				// 1️⃣ Bottom decorative glass
-				RoundedRectangle(cornerRadius: 16)
-					.glassEffect(.clear, in: .rect(cornerRadius: 16))
-					.overlay(Color.blue.opacity(0.6).blendMode(.normal))
-					.clipShape(RoundedRectangle(cornerRadius: 16))
-					.frame(height: 100)
-
-				// 2️⃣ Middle thin material track
-				RoundedRectangle(cornerRadius: 16)
-					.background(.thinMaterial)               // frosted thin material
-					.overlay(Color.white.opacity(0.15))       // subtle embedded tint
-					.clipShape(RoundedRectangle(cornerRadius: 16))
-					.frame(width: 120, height: 80)
-
-				// 3️⃣ Top interactive blob
-				RoundedRectangle(cornerRadius: 200)
-					.frame(width: 42, height: 42)
-					.glassEffect(.regular.interactive())
-					.offset(x: 0)                             // replace 0 with your drag offset
-			}
-			.padding(60)
-
-			Text("Glass Content")
-				.padding()
-				.background {
-					// Apply the effect in a specific shape
-					Color.clear
-						.glassEffect(in: RoundedRectangle(cornerRadius: 20))
-						.tint(.blue.opacity(0.5))
-				}
-
+			CustomGlass()
 		}
 	}
 }
