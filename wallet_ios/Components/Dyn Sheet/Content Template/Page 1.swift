@@ -6,14 +6,16 @@ struct LevelOneView: View {
 
 	var body: some View {
 		AuxiliaryPlaneContainer {
-			Button("Go L2") {
-				withAnimation(.easeInOut(duration: 0.35)) {
-					routeState.route = .levelTwo
+			VStack(spacing: 12) {
+				Button("Go L2") {
+					withAnimation(.easeInOut(duration: 0.35)) {
+						routeState.route = .levelTwo
+					}
 				}
-			}
-			.buttonStyle(.glassProminent)
+				.buttonStyle(.glassProminent)
 
-			CustomGlass()
+				CustomGlass()
+			}
 		}
 	}
 }

@@ -2,10 +2,26 @@ import SwiftUI
 
 struct SwipeToUnlock: View {
 	let onUnlock: () -> Void
+	let capSize: CGSize
+	let trackHeight: CGFloat
+	let resetDelay: TimeInterval = 1.2
+
+
+	init(
+		capSize: CGSize,
+		trackHeight: CGFloat,
+		onUnlock: @escaping () -> Void
+	) {
+		self.capSize = capSize
+		self.trackHeight = trackHeight
+		self.onUnlock = onUnlock
+	}
+
+
+	// MARK: – State
 	@State private var x: CGFloat = 0
 	@State private var completed = false
-	let resetDelay: TimeInterval = 1.2
-	let capsWidth: Int = 44
+
 	private let swipeSpring = Animation.spring(
 		response: 0.35,
 		dampingFraction: 0.85
@@ -13,42 +29,63 @@ struct SwipeToUnlock: View {
 
 	var body: some View {
 		GeometryReader { g in
-			let maxX = g.size.width - 54
+			let maxX = g.size.width - capSize.width
 
 			ZStack(alignment: .leading) {
-				RoundedRectangle(cornerRadius: 16)
-					.background(.ultraThinMaterial)
-					.clipShape(RoundedRectangle(cornerRadius: 16))
-				RoundedRectangle(cornerRadius: 16).fill(
-					completed ? .green.opacity(0.6) : .white.opacity(0.4)
-				).frame(width: x + 54)
-				RoundedRectangle(cornerRadius: 16)
-					.glassEffect(.regular.interactive(), in: .rect(cornerRadius: 16))
-					.frame(width: 54, height: 44)
-					.buttonStyle(GlassButtonStyle())
+
+				// Track
+				RoundedRectangle(cornerRadius: 20)
+					.fill(.blue.opacity(0.4).blendMode(.multiply))
+					.overlay(
+						RoundedRectangle(cornerRadius: 20)
+							.stroke(Color.white.opacity(0.4), lineWidth: 1)
+					)
+
+				// Progress fill
+				RoundedRectangle(cornerRadius: 20)
+					.fill(completed ? .green.opacity(0.6) : .white.opacity(0.4))
+					.frame(width: x + capSize.width)
+
+				// Draggable cap
+				Image(systemName: "scribble.variable")
+					.foregroundColor(.white)
+					.frame(width: capSize.width, height: trackHeight)
+					.background(
+						NativeGlass(
+							tintColor: UIColor(
+								red: 0/255,
+								green: 111/255,
+								blue: 235/255,
+								alpha: 0.9
+							),
+							interactive: true,
+							cornerRadius: 20
+						)
+						.frame(width: capSize.width, height: capSize.height)
+					)
 					.offset(x: x)
 					.gesture(
 						DragGesture()
-							.onChanged {
+							.onChanged { value in
 								guard !completed else { return }
-								x = min(max(0, $0.translation.width), maxX)
+								x = min(max(0, value.translation.width), maxX)
 							}
 							.onEnded { _ in
 								if x >= maxX {
-									withAnimation(.spring()) {
+									withAnimation(swipeSpring) {
 										completed = true
 										x = maxX
 									}
 									onUnlock()
 
 									DispatchQueue.main.asyncAfter(deadline: .now() + resetDelay) {
-										withAnimation(.spring()) {
+										withAnimation(swipeSpring) {
 											x = 0
 											completed = false
 										}
 									}
 								} else {
-									withAnimation(.spring()) {
+									withAnimation(swipeSpring) {
 										x = 0
 									}
 								}
@@ -56,50 +93,10 @@ struct SwipeToUnlock: View {
 					)
 			}
 		}
-		.frame(height: 44)
+		.frame(height: trackHeight)
 	}
 }
 
-struct CustomGlass2: View {
-	@State private var isHovered = false
-
-	var body: some View {
-		ZStack(alignment: .center) {
-			RoundedRectangle(cornerRadius: 24)
-				.glassEffect(
-					.clear.tint(Color.blue.opacity(0.9)),
-					in: .rect(cornerRadius: 24)
-				)
-				.clipShape(RoundedRectangle(cornerRadius: 24))
-				.frame(height: 100)
-
-			RoundedRectangle(cornerRadius: 16)
-				.fill(Color.blue) // optional fill/tint
-				.overlay(
-					RoundedRectangle(cornerRadius: 16)
-						.stroke(
-							Color.white.opacity(0.6),
-							lineWidth: 1
-						)
-				)
-				.clipShape(RoundedRectangle(cornerRadius: 16))
-				.frame(width: 180, height: 60)
-			HStack {
-				Image(systemName: "scribble.variable")
-					.foregroundStyle(Color.white)
-					.frame(width: 42, height: 42)
-					.background(
-						RoundedRectangle(cornerRadius: 12)
-							.glassEffect(
-								.regular.tint(Color.blue).interactive(),
-								in: .rect(cornerRadius: 12)
-							)
-					)
-			}
-		}
-		.padding(60)
-	}
-}
 
 #Preview {
 	ZStack {
@@ -114,7 +111,10 @@ struct CustomGlass2: View {
 		}.background(.white)
 
 		VStack {
-			SwipeToUnlock {
+			SwipeToUnlock(
+				capSize: CGSize(width: 56, height: 52),
+				trackHeight: 44
+			) {
 				print("Unlocked")
 			}
 			.padding(32)

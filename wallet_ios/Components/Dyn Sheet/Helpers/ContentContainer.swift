@@ -5,6 +5,7 @@ struct AuxiliaryPlaneContainer<Content: View>: View {
 	private var state
 
 	@State private var contentHeight: CGFloat = 0
+	@State private var hasAppliedInitialResize = false 
 
 	@ViewBuilder
 	let routeContent: () -> Content

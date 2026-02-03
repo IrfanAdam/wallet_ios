@@ -14,6 +14,9 @@ struct LevelTwoView: View {
 				Text("You can test any content style here")
 				Text("You can test any content style here")
 				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
+				Text("You can test any content style here")
 			}
 			.background(Color.gray.opacity(0.2))
 		}
