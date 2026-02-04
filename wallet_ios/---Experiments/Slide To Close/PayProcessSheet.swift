@@ -49,7 +49,7 @@ struct LiminalGate: View {
 			}
 		}
 		// Ensures visibility if needed, though default usually works
-		.toolbarVisibility(.visible, for: .bottomBar) 
+		.toolbarVisibility(.visible, for: .bottomBar)
 	}
 }
 
@@ -85,6 +85,7 @@ struct ObsidianFold: View {
 		.presentationDragIndicator(.hidden)
 		.presentationBackground(Color.blue.opacity(0.8).blendMode(.plusDarker))
 		.interactiveDismissDisabled()
+		.presentationCompactAdaptation(.popover)
 	}
 }
 
