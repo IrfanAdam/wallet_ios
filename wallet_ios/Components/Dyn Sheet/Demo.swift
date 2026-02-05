@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PeripheralLaunchSurface: View {
 	@State private var isAuxiliaryPlanePresented = false
+	@State private var showDetail = false
 	@State private var sheetState = AuxiliarySheetState()
 	@State private var contentState = AuxiliaryContentState(
 		route: .levelOne
@@ -11,29 +12,38 @@ struct PeripheralLaunchSurface: View {
 	}
 
 	var body: some View {
-		VStack(spacing: 24) {
-			Text("Primary Interaction Surface")
-				.font(.title2)
+		NavigationStack {
+			VStack(spacing: 24) {
+				Text("Primary Interaction Surface")
+					.font(.title2)
+				
+				Button("Invoke Secondary Plane") {
+					isAuxiliaryPlanePresented.toggle()
+				}
 
-			Button("Invoke Secondary Plane") {
-				isAuxiliaryPlanePresented.toggle()
+				Button("Go Deeper") {
+					showDetail.toggle()
+				}
 			}
-		}
-		.padding()
-		.sheet(isPresented: $isAuxiliaryPlanePresented) {
-			SheetShell {
-				AuxiliarySheetRouter.routedContent(
-					route: contentState.route
-				)
-			} toolbar: {
-				AuxiliaryToolbar(
-					route: contentState.route,
-					onDismiss: { isAuxiliaryPlanePresented = false },
-					onBack: coordinator.navigateBack
-				)
+			.padding()
+			.sheet(isPresented: $isAuxiliaryPlanePresented) {
+				SheetShell {
+					AuxiliarySheetRouter.routedContent(
+						route: contentState.route
+					)
+				} toolbar: {
+					AuxiliaryToolbar(
+						route: contentState.route,
+						onDismiss: { isAuxiliaryPlanePresented = false },
+						onBack: coordinator.navigateBack
+					)
+				}
+				.environment(sheetState)
+				.environment(contentState)
 			}
-			.environment(sheetState)
-			.environment(contentState)
+			.fullScreenCover(isPresented: $showDetail) {
+				EdgeAccessoryDemo()
+			}
 		}
 	}
 }
