@@ -25,8 +25,8 @@ private struct ToolbarCutPreview: View {
 #Preview {
 	ToolbarCutPreview(
 		avatars: [
-			AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
-			AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: true)
+			AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
+			AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 		]
 	)
 }

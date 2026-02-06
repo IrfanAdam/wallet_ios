@@ -4,12 +4,12 @@ import SwiftUI
 
 private func makeStyle(for circleSize: CGFloat) -> AvatarStyle {
 	AvatarStyle(
-		strokeWidth: 4,
+		strokeWidth: 1.5,
 		strokeColor: .blue,
 		iconBackgroundColor: .white,
 		stackBackgroundColor: .white,
 		overlapRatio: 0.25,
-		circleSize: circleSize + 4 * 2
+		circleSize: circleSize + 1.5 * 2
 	)
 }
 

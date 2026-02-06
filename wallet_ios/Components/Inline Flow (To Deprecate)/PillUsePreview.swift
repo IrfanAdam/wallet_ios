@@ -2,7 +2,6 @@ import SwiftUI
 
 // MARK: --- Preview ---
 struct SimpleFlowWrap_Preview: PreviewProvider {
-
 	static var previewItems: [AnyView] {
 		let phrase1 = "Jabari M. will send CFA 1500"
 		let phrase2 = "for Groceries"

@@ -33,11 +33,13 @@ struct TagChip: View {
 struct Pill: View {
 	let text: String
 
-
 	var body: some View {
 		Text(text)
 			.padding(.horizontal, 8)
 			.padding(.vertical, 4)
-			.background(Capsule().stroke(Color.gray, lineWidth: 1))
+			.background(Capsule()
+				.fill(Color(red: 250/255, green: 248/255, blue: 245/255))
+				.stroke(Color.gray, lineWidth: 1.5)
+			)
 	}
 }
