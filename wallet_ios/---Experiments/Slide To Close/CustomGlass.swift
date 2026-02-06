@@ -70,7 +70,7 @@ struct CustomGlass2: View {
 				.clipShape(RoundedRectangle(cornerRadius: 16))
 				.frame(width: 180, height: 60)
 			HStack {
-				Image(systemName: "scribble.variable")
+				Image(systemName: "chevron.right.2")
 					.foregroundStyle(Color.white)
 					.frame(width: 42, height: 42)
 					.background(

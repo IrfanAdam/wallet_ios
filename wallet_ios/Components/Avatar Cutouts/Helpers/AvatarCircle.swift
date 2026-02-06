@@ -35,6 +35,8 @@ struct AvatarCircle: View {
 			diameter: diameter,
 			isCutout: isCutout
 		) { borderView }
+			.padding(.horizontal, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
+			.padding(.vertical, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
 	}
 }
 
@@ -90,7 +92,7 @@ private extension AvatarCircle {
 
 	func iconView(_ icon: Image) -> some View {
 		Circle()
-			.fill(style.iconBackgroundColor)
+			.fill(Color(red: 250/255, green: 248/255, blue: 245/255))
 			.overlay(
 				icon
 					.renderingMode(.template)

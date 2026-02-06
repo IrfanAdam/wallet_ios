@@ -28,7 +28,7 @@ struct SwipeCap: View {
 			cornerRadius: 20
 		) {
 			HStack {
-				Image(systemName: "scribble.variable")
+				Image(systemName: "chevron.right.2")
 					.foregroundColor(.white)
 					.frame(width: capSize.width, height: trackHeight)
 //					.background(

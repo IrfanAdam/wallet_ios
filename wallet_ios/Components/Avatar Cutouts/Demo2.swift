@@ -16,8 +16,8 @@ private struct ToolbarCutPreview: View {
 			}
 			
 			VStack{
-				AvatarStackView(avatars: avatars)
-			}.frame(height: 80)
+				AvatarStackView(avatars: avatars, shouldCutout: true, showBorder: true)
+			}.frame(height: 180)
 		}
 	}
 }
@@ -25,7 +25,7 @@ private struct ToolbarCutPreview: View {
 #Preview {
 	ToolbarCutPreview(
 		avatars: [
-			AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
+			AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
 			AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: true)
 		]
 	)

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct EdgeAccessoryDemo: View {
+	@Environment(\.dismiss) private var dismiss
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			ScrollView {
@@ -19,6 +20,17 @@ struct EdgeAccessoryDemo: View {
 		.padding(.horizontal, 4)
 		.padding(.vertical, 4)
 		.ignoresSafeArea()
+		.overlay(alignment: .topTrailing) {
+			Button {
+				dismiss()
+			} label: {
+				Image(systemName: "xmark")
+					.font(.system(size: 20, weight: .semibold))
+					.padding(16)
+					.background(.ultraThinMaterial, in: .circle)
+			}
+			.padding()
+		}
 	}
 }
 

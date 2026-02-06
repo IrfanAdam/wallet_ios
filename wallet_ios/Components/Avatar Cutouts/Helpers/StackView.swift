@@ -1,9 +1,23 @@
 import SwiftUI
 
+// MARK: - Helper functions outside main struct
+
+private func makeStyle(for circleSize: CGFloat) -> AvatarStyle {
+	AvatarStyle(
+		strokeWidth: 4,
+		strokeColor: .blue,
+		iconBackgroundColor: .white,
+		stackBackgroundColor: .white,
+		overlapRatio: 0.25,
+		circleSize: circleSize + 4 * 2
+	)
+}
+
 struct AvatarStackView: View {
 	let avatars: [AvatarData]
 	let shouldCutout: Bool
-	
+	let showBorder: Bool
+
 	// internal state
 	@State private var circleSize: CGFloat = 0
 	@State private var lastIncreaseToken = UUID()
@@ -11,10 +25,12 @@ struct AvatarStackView: View {
 	
 	init(
 		avatars: [AvatarData],
-		shouldCutout: Bool = true
+		shouldCutout: Bool = true,
+		showBorder: Bool = false
 	) {
 		self.avatars = avatars
 		self.shouldCutout = shouldCutout
+		self.showBorder = showBorder
 	}
 	
 	var body: some View {
@@ -33,6 +49,14 @@ struct AvatarStackView: View {
 				}
 			}
 		}
+		.if(showBorder) { view in
+			view
+				.contentShape(Capsule())
+				.background(
+					Capsule()
+						.stroke(Color.blue, lineWidth: makeStyle(for: circleSize).strokeWidth)
+				)
+		}
 	}
 	
 	// MARK: - Content Builder
@@ -46,19 +70,6 @@ struct AvatarStackView: View {
 			)
 		}
 	}
-}
-
-// MARK: - Helper functions outside main struct
-
-private func makeStyle(for circleSize: CGFloat) -> AvatarStyle {
-	AvatarStyle(
-		strokeWidth: 1.5,
-		strokeColor: .blue,
-		iconBackgroundColor: .white,
-		stackBackgroundColor: .white,
-		overlapRatio: 0.25,
-		circleSize: circleSize + 1.5 * 2
-	)
 }
 
 private extension AvatarStackView {
@@ -78,6 +89,20 @@ private extension AvatarStackView {
 					print("🔒 circle size locked at → \(circleSize)")
 				}
 			}
+		}
+	}
+}
+
+private extension View {
+	@ViewBuilder
+	func `if`<Content: View>(
+		_ condition: Bool,
+		transform: (Self) -> Content
+	) -> some View {
+		if condition {
+			transform(self)
+		} else {
+			self
 		}
 	}
 }

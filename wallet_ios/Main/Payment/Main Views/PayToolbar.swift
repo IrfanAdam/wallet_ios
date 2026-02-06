@@ -32,13 +32,13 @@ private struct ToolbarLeadingContent: View {
 			],
 			shouldCutout: true
 		)
-		.background(
-			Capsule()
-				.stroke(Color.blue, lineWidth: 1.5)
-		)
-		.contentShape(Capsule())
-		.padding(.horizontal, 1.5)
-		.padding(.vertical, 1.5)
+//		.background(
+//			Capsule()
+//				.stroke(Color.blue, lineWidth: 1.5)
+//		)
+//		.contentShape(Capsule())
+//		.padding(.horizontal, 1.5)
+//		.padding(.vertical, 1.5)
 		.onTapGesture { dismiss() }
 	}
 }

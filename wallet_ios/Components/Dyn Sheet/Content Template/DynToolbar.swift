@@ -18,7 +18,7 @@ private extension AuxiliaryToolbar {
 			AvatarStackView(
 				avatars: [
 					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
-					AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
+					AvatarData(content: .icon(Image(systemName: "arrow.up")), hasBorder: false)
 				],
 				shouldCutout: false
 			)
