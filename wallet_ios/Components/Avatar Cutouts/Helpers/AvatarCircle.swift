@@ -35,8 +35,8 @@ struct AvatarCircle: View {
 			diameter: diameter,
 			isCutout: isCutout
 		) { borderView }
-			.padding(.horizontal, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
-			.padding(.vertical, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
+//			.padding(.horizontal, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
+//			.padding(.vertical, hasBorder ? -1 * style.strokeWidth : style.strokeWidth)
 	}
 }
 
@@ -123,6 +123,7 @@ private extension AvatarCircle {
 	var borderView: some View {
 		if !isCutout && hasBorder {
 			Circle()
+				.inset(by: strokeWidth / 2)
 				.stroke(style.strokeColor, lineWidth: strokeWidth)
 		}
 	}

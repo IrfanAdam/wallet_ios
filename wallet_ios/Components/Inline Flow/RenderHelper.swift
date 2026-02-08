@@ -17,7 +17,7 @@ struct FlowRenderer: View {
 							}
 						}
 
-					case let .pill(text): Pill(text: text).padding(.horizontal, 6)
+					case let .pill(text): Pill(text: text).padding(.horizontal, 4)
 				}
 			}
 		}

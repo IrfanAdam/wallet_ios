@@ -7,8 +7,8 @@ import SwiftUI
 		.text("CFA 1500", .primary),
 		.pill("Daily"),
 		.text("for Groceries", .secondary),
-		.pill("Category"),
-		.text("for Groceries", .secondary)
+		.pill("Category Name"),
+		.text("Lol lol lol", .secondary)
 	])
 	.padding(0)
 }

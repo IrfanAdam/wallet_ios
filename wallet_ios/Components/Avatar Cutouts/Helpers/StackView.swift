@@ -51,27 +51,31 @@ struct AvatarStackView: View {
 		}
 		.if(showBorder) { view in
 			view
-				.contentShape(Capsule())
 				.background(
 					Capsule()
+						.inset(by:  makeStyle(for: circleSize).strokeWidth / 2)
+						.fill(makeStyle(for: circleSize).stackBackgroundColor)
 						.stroke(Color.blue, lineWidth: makeStyle(for: circleSize).strokeWidth)
 				)
 		}
+		.padding(.horizontal, makeStyle(for: circleSize).strokeWidth)
+		.padding(.vertical, makeStyle(for: circleSize).strokeWidth)
+		.contentShape(Capsule())
+		.clipShape(Capsule())
 	}
 	
 	// MARK: - Content Builder
 	@ViewBuilder
 	private func contentHStack() -> some View {
-		HStack {
-			AvatarStack(
-				avatars: avatars,
-				style: makeStyle(for: circleSize),
-				shouldCutout: shouldCutout
-			)
-		}
+		AvatarStack(
+			avatars: avatars,
+			style: makeStyle(for: circleSize),
+			shouldCutout: shouldCutout
+		)
 	}
 }
 
+// MARK: - Set Height
 private extension AvatarStackView {
 	func updateCircleSizeIfNeeded(newHeight: CGFloat) {
 		guard !isHeightLocked else { return }

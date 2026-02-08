@@ -29,7 +29,7 @@ struct InitiatePayment: View {
 					.text("for Groceries", .secondary),
 					.pill("Category"),
 				])
-				.padding(0)
+				.padding()
 
 				AmountInputView(context: context, flag: flag(for:))
 					.padding(.horizontal)

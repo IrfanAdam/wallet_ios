@@ -30,15 +30,9 @@ private struct ToolbarLeadingContent: View {
 				AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
 				AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
 			],
-			shouldCutout: true
+			shouldCutout: true,
+			showBorder: true
 		)
-//		.background(
-//			Capsule()
-//				.stroke(Color.blue, lineWidth: 1.5)
-//		)
-//		.contentShape(Capsule())
-//		.padding(.horizontal, 1.5)
-//		.padding(.vertical, 1.5)
 		.onTapGesture { dismiss() }
 	}
 }

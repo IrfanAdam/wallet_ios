@@ -20,7 +20,7 @@ private extension AuxiliaryToolbar {
 					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
 					AvatarData(content: .icon(Image(systemName: "arrow.up")), hasBorder: false)
 				],
-				shouldCutout: false
+				shouldCutout: true
 			)
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {

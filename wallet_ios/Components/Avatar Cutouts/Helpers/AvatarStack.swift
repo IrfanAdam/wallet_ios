@@ -46,7 +46,7 @@ struct AvatarStack: View {
 				}
 			}
 		}
-		.padding(style.strokeWidth) // inner clearance only
+		.padding(style.strokeWidth * 2) // inner clearance only
 		.background {
 			if !shouldCutout {
 				RoundedRectangle(

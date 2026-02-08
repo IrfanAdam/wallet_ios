@@ -8,10 +8,14 @@ private struct ToolbarCutPreview: View {
 			Text("Avatar Stack View")
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {
-					AvatarStackView(avatars: avatars)
-						.onTapGesture {
-							print("📌 ToolbarItem tapped!")
-						}
+					AvatarStackView(
+						avatars: avatars,
+						shouldCutout: true,
+						showBorder: true
+					)
+					.onTapGesture {
+						print("📌 ToolbarItem tapped!")
+					}
 				}
 			}
 			
