@@ -31,20 +31,32 @@ struct PaymentTagSection: View {
 					.strokeBorder(.secondary.opacity(0.3))
 			)
 			
-			// Tags stack
-			SimpleFlowWrap(
-				items: PaymentTag.allCases.map { tag in
-					AnyView(
-						TagChip(
-							title: tag.rawValue,
-							isSelected: selectedTags.contains(tag)
-						) {
-							toggle(tag)
-						}
-					)
+			FlowLayout {
+				ForEach(PaymentTag.allCases) { tag in
+					TagChip(
+						title: tag.rawValue,
+						isSelected: selectedTags.contains(tag)
+					) {
+						toggle(tag)
+					}
 				}
-			)
+			}
 			.frame(maxWidth: .infinity, alignment: .leading)
+			
+//			// Tags stack
+//			SimpleFlowWrap(
+//				items: PaymentTag.allCases.map { tag in
+//					AnyView(
+//						TagChip(
+//							title: tag.rawValue,
+//							isSelected: selectedTags.contains(tag)
+//						) {
+//							toggle(tag)
+//						}
+//					)
+//				}
+//			)
+//			.frame(maxWidth: .infinity, alignment: .leading)
 		}
 	}
 	

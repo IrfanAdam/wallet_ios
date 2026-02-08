@@ -21,8 +21,15 @@ struct InitiatePayment: View {
 	var body: some View {
 		NavigationStack {
 			VStack(alignment: .leading, spacing: 12) {
-				SimpleFlowWrap(items: paymentFlowItems)
-					.padding(.horizontal)
+				FlowRenderer(items: [
+					.text("Jabari M. Last Name", .primary),
+					.text("will send", .secondary),
+					.text("CFA 1500", .primary),
+					.pill("Daily"),
+					.text("for Groceries", .secondary),
+					.pill("Category"),
+				])
+				.padding(0)
 
 				AmountInputView(context: context, flag: flag(for:))
 					.padding(.horizontal)
@@ -59,11 +66,6 @@ struct InitiatePayment: View {
 		case "EUR": return "🇪🇺"
 		default: return "🏳️"
 		}
-	}
-
-	// MARK: - Payment Flow Items
-	private var paymentFlowItems: [AnyView] {
-		renderFlowItems([.text("Jabari M. Last Name", tone: .primary)])
 	}
 }
 
