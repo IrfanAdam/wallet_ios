@@ -87,6 +87,7 @@
 		EE9517722F2F85760007F91E /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517712F2F85720007F91E /* Navigator.swift */; };
 		EE9517752F2FA1700007F91E /* PayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517742F2FA16A0007F91E /* PayContext.swift */; };
 		EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517762F2FA25B0007F91E /* PayToolbar.swift */; };
+		EE95177A2F38D82C0007F91E /* NewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517792F38D8290007F91E /* NewTest.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
@@ -175,6 +176,7 @@
 		EE9517712F2F85720007F91E /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		EE9517742F2FA16A0007F91E /* PayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayContext.swift; sourceTree = "<group>"; };
 		EE9517762F2FA25B0007F91E /* PayToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayToolbar.swift; sourceTree = "<group>"; };
+		EE9517792F38D8290007F91E /* NewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTest.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		15C963D22F29F7F900960C5C /* Avatar Cutouts */ = {
 			isa = PBXGroup;
 			children = (
+				EE9517792F38D8290007F91E /* NewTest.swift */,
 				15C963D52F29F94800960C5C /* Demo1.swift */,
 				15C963D82F2A116000960C5C /* Demo2.swift */,
 				15C963D72F2A114100960C5C /* Helpers */,
@@ -713,6 +716,7 @@
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
+				EE95177A2F38D82C0007F91E /* NewTest.swift in Sources */,
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
 				15C964122F36403900960C5C /* RenderHelper.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
