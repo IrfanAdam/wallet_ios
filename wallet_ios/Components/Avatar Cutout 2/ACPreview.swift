@@ -44,12 +44,12 @@ private struct CutoutV2PreviewPlayground: View {
 
 			HStack {
 				Text("Overlap")
-				Slider(value: $overlap, in: 0...1)
+				Slider(value: $overlap, in: -0.5...1)
 			}
 
 			HStack {
 				Text("Height")
-				Slider(value: $height, in: 32...100)
+				Slider(value: $height, in: 32...90)
 			}
 
 			HStack {

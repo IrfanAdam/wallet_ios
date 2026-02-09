@@ -11,7 +11,6 @@ struct CutoutV2AvatarCircle: View {
 	}
 
 	private var cutoutOffset: CGFloat {
-//		(diameter * (1 - style.overlapRatio))
 		(diameter - style.strokeWidth * 2) * (1 - style.overlapRatio)
 	}
 
