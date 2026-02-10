@@ -55,6 +55,7 @@
 		15C964152F39D08900960C5C /* ACPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964142F39D08400960C5C /* ACPreview.swift */; };
 		15C964172F39D0C300960C5C /* ACCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964162F39D0BF00960C5C /* ACCircle.swift */; };
 		15C964192F39D0E900960C5C /* ACStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964182F39D0E600960C5C /* ACStack.swift */; };
+		15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9641A2F3A1C8700960C5C /* ACPreview2.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -146,6 +147,7 @@
 		15C964142F39D08400960C5C /* ACPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview.swift; sourceTree = "<group>"; };
 		15C964162F39D0BF00960C5C /* ACCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCircle.swift; sourceTree = "<group>"; };
 		15C964182F39D0E600960C5C /* ACStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStack.swift; sourceTree = "<group>"; };
+		15C9641A2F3A1C8700960C5C /* ACPreview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview2.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -356,12 +358,21 @@
 		15C964132F39CFA800960C5C /* Avatar Cutout 2 */ = {
 			isa = PBXGroup;
 			children = (
+				15C9641A2F3A1C8700960C5C /* ACPreview2.swift */,
 				15C964142F39D08400960C5C /* ACPreview.swift */,
+				15C9641C2F3B1FFA00960C5C /* Helper */,
+			);
+			path = "Avatar Cutout 2";
+			sourceTree = "<group>";
+		};
+		15C9641C2F3B1FFA00960C5C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
 				15C964182F39D0E600960C5C /* ACStack.swift */,
 				15C964162F39D0BF00960C5C /* ACCircle.swift */,
 				EE9517792F38D8290007F91E /* ACSetup.swift */,
 			);
-			path = "Avatar Cutout 2";
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
@@ -676,6 +687,7 @@
 				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
+				15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */,
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
 				EE10F2192F2787B600944690 /* Page 2.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,

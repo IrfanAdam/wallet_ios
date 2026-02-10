@@ -8,7 +8,7 @@ private struct CutoutV2PreviewPlayground: View {
 	@State private var cutout = true
 	@State private var showBorder = true
 	@State private var overlap: CGFloat = 0.25
-	@State private var height: CGFloat = 48
+	@State private var height: CGFloat = 80
 	@State private var borderWidth: CGFloat = 1.5
 
 	var body: some View {
@@ -27,10 +27,10 @@ private struct CutoutV2PreviewPlayground: View {
 						overlapRatio: overlap
 					),
 					shouldCutout: cutout,
-					showBorder: showBorder,
-					avatarDiameter: height   // 👈 same source
+					showBorder: showBorder
 				)
-
+				.id(height)       
+				.frame(height: height)
 				controls
 			}
 			.padding()
@@ -49,7 +49,7 @@ private struct CutoutV2PreviewPlayground: View {
 
 			HStack {
 				Text("Height")
-				Slider(value: $height, in: 32...90)
+				Slider(value: $height, in: 32...100)
 			}
 
 			HStack {

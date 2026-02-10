@@ -21,6 +21,7 @@ struct CutoutV2AvatarCircle: View {
 				cutoutShape
 			}
 		}
+		.drawingGroup()
 		.frame(width: diameter, height: diameter)
 		.compositingGroup()
 		.clipShape(Circle())
