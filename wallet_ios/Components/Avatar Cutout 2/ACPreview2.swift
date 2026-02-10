@@ -11,39 +11,40 @@ private struct ToolbarCutPreview2: View {
 
 	var body: some View {
 		NavigationStack {
-			Text("Avatar Stack View")
-				.toolbar {
-					ToolbarItem(placement: .topBarLeading) {
-						CutoutV2AvatarStack(
-							avatars: demoAvatars,
-							style: .init(
-								strokeWidth: borderWidth,
-								strokeColor: .blue,
-								iconBackgroundColor: .white,
-								stackBackgroundColor: .black,
-								overlapRatio: overlap
-							),
-							shouldCutout: true,
-							showBorder: showBorder
-						)
-						.onTapGesture {
-							print("📌 ToolbarItem tapped!")
-						}
+			VStack {
+				Text("Avatar Stack View")
+				CutoutV2AvatarStack(
+					avatars: demoAvatars,
+					style: .init(
+						strokeWidth: 8,
+						strokeColor: .blue,
+						iconBackgroundColor: .white,
+						stackBackgroundColor: .gray,
+						overlapRatio: overlap
+					),
+					shouldCutout: cutout,
+					showBorder: showBorder
+				).frame(height: 160)
+			}
+			.toolbar {
+				ToolbarItem(placement: .topBarLeading) {
+					CutoutV2AvatarStack(
+						avatars: demoAvatars,
+						style: .init(
+							strokeWidth: 1.5,
+							strokeColor: .blue,
+							iconBackgroundColor: .white,
+							stackBackgroundColor: .white,
+							overlapRatio: 0.1
+						),
+						shouldCutout: true,
+						showBorder: showBorder
+					)
+					.onTapGesture {
+						print("📌 ToolbarItem tapped!")
 					}
 				}
-
-			CutoutV2AvatarStack(
-				avatars: demoAvatars,
-				style: .init(
-					strokeWidth: 8,
-					strokeColor: .blue,
-					iconBackgroundColor: .white,
-					stackBackgroundColor: .gray,
-					overlapRatio: overlap
-				),
-				shouldCutout: cutout,
-				showBorder: showBorder
-			).frame(height: 160)
+			}
 		}
 	}
 

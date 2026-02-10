@@ -10,11 +10,22 @@ struct CutoutV2AvatarStack: View {
 	@State private var isHeightLocked = false
 	@State private var lastToken = UUID()
 
-	private func overlapSpacing(for diameter: CGFloat) -> CGFloat {
+	/// Starts at 1.0, switches to style.overlapRatio after height lock
+	@State private var effectiveOverlapRatio: CGFloat = 1.0
+
+	// MARK: - Overlap math
+
+	private func overlapSpacing(
+		for diameter: CGFloat,
+		ratio: CGFloat
+	) -> CGFloat {
 		let overlapDistance =
-		(diameter - style.strokeWidth * 2) * style.overlapRatio
+		(diameter - style.strokeWidth * 2) * ratio
+
 		return -overlapDistance - (style.strokeWidth * 2)
 	}
+
+	// MARK: - Body
 
 	var body: some View {
 		Group {
@@ -24,6 +35,8 @@ struct CutoutV2AvatarStack: View {
 				GeometryReader { geo in
 					stackContent(diameter: avatarDiameter)
 						.onAppear {
+							// reset for reuse / toolbar re-layouts
+							effectiveOverlapRatio = 1.0
 							updateDiameterIfNeeded(from: geo.size.height)
 						}
 						.onChange(of: geo.size.height) { _, newValue in
@@ -34,9 +47,14 @@ struct CutoutV2AvatarStack: View {
 		}
 	}
 
+	// MARK: - Stack content
+
 	@ViewBuilder
 	private func stackContent(diameter: CGFloat) -> some View {
-		let overlap = overlapSpacing(for: diameter)
+		let overlap = overlapSpacing(
+			for: diameter,
+			ratio: effectiveOverlapRatio
+		)
 
 		HStack(spacing: overlap) {
 			ForEach(avatars.indices, id: \.self) { index in
@@ -57,12 +75,12 @@ struct CutoutV2AvatarStack: View {
 		.clipShape(Capsule())
 	}
 
+	// MARK: - Geometry → diameter locking
+
 	private func updateDiameterIfNeeded(from height: CGFloat) {
 		guard !isHeightLocked else { return }
 
-		let proposed =
-		height - (style.strokeWidth * 4)
-
+		let proposed = height - (style.strokeWidth * 4)
 		guard proposed > avatarDiameter else { return }
 
 		avatarDiameter = proposed
@@ -72,9 +90,20 @@ struct CutoutV2AvatarStack: View {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
 			if lastToken == token {
 				isHeightLocked = true
+
+				// 🔑 Only animate overlap AFTER height is stable
+				withAnimation(.spring(
+					response: 0.35,
+					dampingFraction: 0.85,
+					blendDuration: 0.1
+				)) {
+					effectiveOverlapRatio = style.overlapRatio
+				}
 			}
 		}
 	}
+
+	// MARK: - Background
 
 	@ViewBuilder
 	private var backgroundCapsule: some View {
@@ -83,8 +112,11 @@ struct CutoutV2AvatarStack: View {
 				.fill(style.stackBackgroundColor)
 				.overlay(
 					Capsule()
-						.inset(by: style.strokeWidth/2)
-						.stroke(style.strokeColor, lineWidth: style.strokeWidth)
+						.inset(by: style.strokeWidth / 2)
+						.stroke(
+							style.strokeColor,
+							lineWidth: style.strokeWidth
+						)
 				)
 		}
 	}

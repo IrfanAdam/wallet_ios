@@ -16,7 +16,7 @@ private struct CutoutV2PreviewPlayground: View {
 			Color.green.opacity(0.25) // ← visible through cutout
 				.ignoresSafeArea()
 
-			VStack(spacing: 24) {
+			VStack(alignment: .center ,spacing: 24) {
 				CutoutV2AvatarStack(
 					avatars: demoAvatars,
 					style: .init(
