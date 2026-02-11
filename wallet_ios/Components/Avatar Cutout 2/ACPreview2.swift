@@ -20,7 +20,7 @@ private struct ToolbarCutPreview2: View {
 						strokeColor: .blue,
 						iconBackgroundColor: .white,
 						stackBackgroundColor: .gray,
-						overlapRatio: 0.32
+						overlapRatio: 0.2
 					),
 					shouldCutout: cutout,
 					showBorder: showBorder

@@ -24,6 +24,7 @@ struct EdgeAccessory: View {
 			}
 			.padding()
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.padding(12)
 		.background(
 			Color.clear
