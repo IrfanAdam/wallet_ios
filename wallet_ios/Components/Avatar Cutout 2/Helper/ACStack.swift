@@ -10,7 +10,6 @@ struct CutoutV2AvatarStack: View {
 	@State private var isHeightLocked = false
 	@State private var lastToken = UUID()
 
-	/// Starts at 1.0, switches to style.overlapRatio after height lock
 	@State private var effectiveOverlapRatio: CGFloat = 1.0
 	@State private var isRasterized = false
 
@@ -37,6 +36,18 @@ struct CutoutV2AvatarStack: View {
 						DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
 							withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
 								effectiveOverlapRatio = style.overlapRatio
+							}
+						}
+					}
+					.onChange(of: effectiveOverlapRatio) { _, newValue in
+						if newValue == style.overlapRatio {
+							DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+									Task { @MainActor in
+										try? await Task.sleep(
+											nanoseconds: UInt64(0.35 * 1_000_000_000)
+										)
+										isRasterized = true
+									}
 							}
 						}
 					}
@@ -87,6 +98,7 @@ struct CutoutV2AvatarStack: View {
 		.if(isRasterized) { view in
 			view.drawingGroup()
 		}
+		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 
 	// MARK: - Geometry → diameter locking
@@ -101,30 +113,10 @@ struct CutoutV2AvatarStack: View {
 		let token = UUID()
 		lastToken = token
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.54) {
 			if lastToken == token {
 				isHeightLocked = true
-
-				// Turn rasterization OFF before animation
 				isRasterized = false
-
-				let animationDuration: Double = 0.35
-
-//				withAnimation(.spring(
-//					response: animationDuration,
-//					dampingFraction: 0.85,
-//					blendDuration: 0.1
-//				)) {
-//					effectiveOverlapRatio = style.overlapRatio
-//				}
-
-				// Turn rasterization ON after animation completes
-				Task { @MainActor in
-					try? await Task.sleep(
-						nanoseconds: UInt64(animationDuration * 1_000_000_000)
-					)
-					isRasterized = true
-				}
 			}
 		}
 	}

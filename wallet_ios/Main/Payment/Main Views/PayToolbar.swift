@@ -25,16 +25,6 @@ private struct ToolbarLeadingContent: View {
 	let dismiss: DismissAction
 	
 	var body: some View {
-//		AvatarStackView(
-//			avatars: [
-//				AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
-//				AvatarData(content: .icon(Image("ph_credit-card-bold")), hasBorder: false)
-//			],
-//			shouldCutout: true,
-//			showBorder: true
-//		)
-//		.onTapGesture { dismiss() }
-
 		CutoutV2AvatarStack(
 			avatars: demoAvatars,
 			style: .init(
@@ -44,8 +34,8 @@ private struct ToolbarLeadingContent: View {
 				stackBackgroundColor: .black,
 				overlapRatio: 0.24
 			),
-			shouldCutout: true,
-			showBorder: false
+			shouldCutout: false,
+			showBorder: true
 		)
 		.onTapGesture { dismiss() }
 	}
