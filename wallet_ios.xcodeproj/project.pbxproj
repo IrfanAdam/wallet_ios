@@ -56,6 +56,7 @@
 		15C964172F39D0C300960C5C /* ACCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964162F39D0BF00960C5C /* ACCircle.swift */; };
 		15C964192F39D0E900960C5C /* ACStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964182F39D0E600960C5C /* ACStack.swift */; };
 		15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9641A2F3A1C8700960C5C /* ACPreview2.swift */; };
+		15C9641E2F3C689600960C5C /* AnimateWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9641D2F3C689000960C5C /* AnimateWidth.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -148,6 +149,7 @@
 		15C964162F39D0BF00960C5C /* ACCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCircle.swift; sourceTree = "<group>"; };
 		15C964182F39D0E600960C5C /* ACStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStack.swift; sourceTree = "<group>"; };
 		15C9641A2F3A1C8700960C5C /* ACPreview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview2.swift; sourceTree = "<group>"; };
+		15C9641D2F3C689000960C5C /* AnimateWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateWidth.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				15C9641D2F3C689000960C5C /* AnimateWidth.swift */,
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
 			path = Toolbar;
@@ -726,6 +729,7 @@
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
 				1549ECDD2EF5472500876D2D /* AvatarStack.swift in Sources */,
+				15C9641E2F3C689600960C5C /* AnimateWidth.swift in Sources */,
 				15C963FE2F361D6100960C5C /* LogicHelper.swift in Sources */,
 				15C963CF2F213CD500960C5C /* OneSegmentChart.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,

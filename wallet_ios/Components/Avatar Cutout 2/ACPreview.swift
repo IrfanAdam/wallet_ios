@@ -29,12 +29,30 @@ private struct CutoutV2PreviewPlayground: View {
 					shouldCutout: cutout,
 					showBorder: showBorder
 				)
-				.id(height)       
+				.id(identityKey)
 				.frame(height: height)
 				controls
 			}
 			.padding()
 		}
+	}
+
+	private struct IdentityKey: Hashable {
+		let height: CGFloat
+		let overlap: CGFloat
+		let borderWidth: CGFloat
+		let cutout: Bool
+		let showBorder: Bool
+	}
+
+	private var identityKey: IdentityKey {
+		.init(
+			height: height,
+			overlap: overlap,
+			borderWidth: borderWidth,
+			cutout: cutout,
+			showBorder: showBorder
+		)
 	}
 
 	private var controls: some View {

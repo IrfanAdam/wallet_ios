@@ -12,6 +12,7 @@ struct CutoutV2AvatarStack: View {
 
 	/// Starts at 1.0, switches to style.overlapRatio after height lock
 	@State private var effectiveOverlapRatio: CGFloat = 1.0
+	@State private var isRasterized = false
 
 	// MARK: - Overlap math
 
@@ -31,12 +32,20 @@ struct CutoutV2AvatarStack: View {
 		Group {
 			if isHeightLocked {
 				stackContent(diameter: avatarDiameter)
+					.onAppear {
+						// Animate after appear
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+							withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+								effectiveOverlapRatio = style.overlapRatio
+							}
+						}
+					}
 			} else {
 				GeometryReader { geo in
 					stackContent(diameter: avatarDiameter)
 						.onAppear {
-							// reset for reuse / toolbar re-layouts
 							effectiveOverlapRatio = 1.0
+							isRasterized = false
 							updateDiameterIfNeeded(from: geo.size.height)
 						}
 						.onChange(of: geo.size.height) { _, newValue in
@@ -73,6 +82,11 @@ struct CutoutV2AvatarStack: View {
 		.padding(style.strokeWidth * 2)
 		.background(backgroundCapsule)
 		.clipShape(Capsule())
+		.opacity(isHeightLocked ? 1 : 0)
+		.animation(.easeOut(duration: 0.2), value: isHeightLocked)
+		.if(isRasterized) { view in
+			view.drawingGroup()
+		}
 	}
 
 	// MARK: - Geometry → diameter locking
@@ -91,13 +105,25 @@ struct CutoutV2AvatarStack: View {
 			if lastToken == token {
 				isHeightLocked = true
 
-				// 🔑 Only animate overlap AFTER height is stable
-				withAnimation(.spring(
-					response: 0.35,
-					dampingFraction: 0.85,
-					blendDuration: 0.1
-				)) {
-					effectiveOverlapRatio = style.overlapRatio
+				// Turn rasterization OFF before animation
+				isRasterized = false
+
+				let animationDuration: Double = 0.35
+
+//				withAnimation(.spring(
+//					response: animationDuration,
+//					dampingFraction: 0.85,
+//					blendDuration: 0.1
+//				)) {
+//					effectiveOverlapRatio = style.overlapRatio
+//				}
+
+				// Turn rasterization ON after animation completes
+				Task { @MainActor in
+					try? await Task.sleep(
+						nanoseconds: UInt64(animationDuration * 1_000_000_000)
+					)
+					isRasterized = true
 				}
 			}
 		}
@@ -118,6 +144,20 @@ struct CutoutV2AvatarStack: View {
 							lineWidth: style.strokeWidth
 						)
 				)
+		}
+	}
+}
+
+private extension View {
+	@ViewBuilder
+	func `if`<Content: View>(
+		_ condition: Bool,
+		transform: (Self) -> Content
+	) -> some View {
+		if condition {
+			transform(self)
+		} else {
+			self
 		}
 	}
 }

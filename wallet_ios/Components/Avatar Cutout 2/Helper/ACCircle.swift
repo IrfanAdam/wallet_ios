@@ -21,7 +21,6 @@ struct CutoutV2AvatarCircle: View {
 				cutoutShape
 			}
 		}
-		.drawingGroup()
 		.frame(width: diameter, height: diameter)
 		.compositingGroup()
 		.clipShape(Circle())
@@ -41,6 +40,7 @@ struct CutoutV2AvatarCircle: View {
 				.fill(style.iconBackgroundColor)
 				.overlay(
 					icon
+						.renderingMode(.template)
 						.resizable()
 						.scaledToFit()
 						.padding(diameter * 0.2)

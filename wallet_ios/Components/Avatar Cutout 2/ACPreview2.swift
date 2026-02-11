@@ -20,7 +20,7 @@ private struct ToolbarCutPreview2: View {
 						strokeColor: .blue,
 						iconBackgroundColor: .white,
 						stackBackgroundColor: .gray,
-						overlapRatio: overlap
+						overlapRatio: 0.32
 					),
 					shouldCutout: cutout,
 					showBorder: showBorder
@@ -34,8 +34,8 @@ private struct ToolbarCutPreview2: View {
 							strokeWidth: 1.5,
 							strokeColor: .blue,
 							iconBackgroundColor: .white,
-							stackBackgroundColor: .white,
-							overlapRatio: 0.1
+							stackBackgroundColor: .black,
+							overlapRatio: 0.16
 						),
 						shouldCutout: true,
 						showBorder: showBorder
@@ -52,7 +52,7 @@ private struct ToolbarCutPreview2: View {
 		[
 			.init(content: .icon(Image(systemName: "person.fill"))),
 			.init(content: .image(Image("LargeDP"))),
-			.init(content: .icon(Image(systemName: "star.fill")))
+			.init(content: .icon(Image("ph_credit-card-bold")))
 		]
 	}
 }
