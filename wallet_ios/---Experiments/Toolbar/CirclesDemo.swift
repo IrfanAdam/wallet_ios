@@ -29,7 +29,7 @@ struct FullHeightCircles: View {
 	private let count = 3
 
 	@State private var height: CGFloat = 0
-	@State private var overlap: CGFloat = 0.2   // 0 → 1
+	@State private var overlap: CGFloat = 0.24   // 0 → 1
 	@State private var animateSpace: Bool = false   // 0 → 1
 
 	private var spacing: CGFloat {
@@ -63,6 +63,7 @@ struct FullHeightCircles: View {
 					.onAppear {
 						print("Appeared index:", index)
 					}
+					.opacity(animateSpace ? 1 : 0)
 					.offset(x: animateSpace ? 0 : -(newHeight + spacing) * CGFloat(index) * 0.5)
 				}
 			}

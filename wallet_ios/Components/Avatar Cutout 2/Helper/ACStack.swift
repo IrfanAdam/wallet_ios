@@ -13,6 +13,8 @@ struct CutoutV2AvatarStack: View {
 	@State private var effectiveOverlapRatio: CGFloat = 1.0
 	@State private var isRasterized = false
 
+	@State private var animateIn = false
+
 	// MARK: - Overlap math
 
 	private func overlapSpacing(
@@ -25,56 +27,52 @@ struct CutoutV2AvatarStack: View {
 		return -overlapDistance - (style.strokeWidth * 2)
 	}
 
+	private func totalWidth(
+		diameter: CGFloat,
+		overlap: CGFloat
+	) -> CGFloat {
+		let count = CGFloat(avatars.count)
+		let effectiveDia = diameter - (style.strokeWidth * 2)
+		let negSpace = overlap * effectiveDia
+
+		return (diameter * count) - (negSpace * (count - 1))
+	}
+
 	// MARK: - Body
 
 	var body: some View {
-		Group {
-			if isHeightLocked {
-				stackContent(diameter: avatarDiameter)
-					.onAppear {
-						// Animate after appear
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-							withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-								effectiveOverlapRatio = style.overlapRatio
-							}
-						}
-					}
-					.onChange(of: effectiveOverlapRatio) { _, newValue in
-						if newValue == style.overlapRatio {
-							DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-									Task { @MainActor in
-										try? await Task.sleep(
-											nanoseconds: UInt64(0.35 * 1_000_000_000)
-										)
-										isRasterized = true
-									}
-							}
-						}
-					}
-			} else {
-				GeometryReader { geo in
-					stackContent(diameter: avatarDiameter)
-						.onAppear {
-							effectiveOverlapRatio = 1.0
-							isRasterized = false
-							updateDiameterIfNeeded(from: geo.size.height)
-						}
-						.onChange(of: geo.size.height) { _, newValue in
-							updateDiameterIfNeeded(from: newValue)
-						}
+		let stackWidth = totalWidth(diameter: avatarDiameter, overlap: style.overlapRatio)
+		GeometryReader { geo in
+			stackContent(diameter: avatarDiameter)
+				.onAppear {
+					isRasterized = false
+					updateDiameterIfNeeded(from: geo.size.height)
+				}
+				.onChange(of: geo.size.height) { _, newValue in
+					updateDiameterIfNeeded(from: newValue)
+				}
+		}
+		.onChange(of: stackWidth) { _, newValue in
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+				Task { @MainActor in
+					try? await Task.sleep(
+						nanoseconds: UInt64(0.35 * 1_000_000_000)
+					)
+					isRasterized = true
 				}
 			}
 		}
+		.frame(width: stackWidth, alignment: .leading)
 	}
-
-	// MARK: - Stack content
 
 	@ViewBuilder
 	private func stackContent(diameter: CGFloat) -> some View {
 		let overlap = overlapSpacing(
 			for: diameter,
-			ratio: effectiveOverlapRatio
+			ratio: style.overlapRatio
 		)
+
+		let step = diameter + overlap
 
 		HStack(spacing: overlap) {
 			ForEach(avatars.indices, id: \.self) { index in
@@ -88,18 +86,34 @@ struct CutoutV2AvatarStack: View {
 					isCutout: cutout,
 					diameter: diameter
 				)
+				.offset(
+					x: animateIn
+					? 0
+					: -step * CGFloat(index + 1)
+				)
 			}
 		}
 		.padding(style.strokeWidth * 2)
 		.background(backgroundCapsule)
 		.clipShape(Capsule())
-		.opacity(isHeightLocked ? 1 : 0)
+		.opacity(animateIn ? 1 : 0)
 		.animation(.easeOut(duration: 0.2), value: isHeightLocked)
 		.if(isRasterized) { view in
 			view.drawingGroup()
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
+		.onAppear {
+			animateIn = false
+
+			DispatchQueue.main.async {
+				withAnimation(.spring(response: 0.36, dampingFraction: 0.8)) {
+					animateIn = true
+				}
+			}
+		}
 	}
+
+
 
 	// MARK: - Geometry → diameter locking
 
