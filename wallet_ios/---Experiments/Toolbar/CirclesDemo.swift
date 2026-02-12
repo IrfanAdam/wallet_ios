@@ -29,7 +29,8 @@ struct FullHeightCircles: View {
 	private let count = 3
 
 	@State private var height: CGFloat = 0
-	@State private var overlap: CGFloat = 0   // 0 → 1
+	@State private var overlap: CGFloat = 0.2   // 0 → 1
+	@State private var animateSpace: Bool = false   // 0 → 1
 
 	private var spacing: CGFloat {
 		-height * overlap
@@ -47,13 +48,24 @@ struct FullHeightCircles: View {
 			let newHeight = proxy.size.height
 
 			HStack(spacing: spacing) {
-				ForEach(0..<count, id: \.self) { _ in
-					Circle()
-						.fill(Color.blue)
-						.frame(width: newHeight, height: newHeight)
+				ForEach(0..<count, id: \.self) { index in
+					HStack {
+						Text("\(index)")
+							.foregroundStyle(.white)
+							.frame(width: newHeight, height: newHeight)
+					}
+					.background(
+						Circle()
+							.fill(Color.blue)
+							.frame(width: newHeight, height: newHeight)
+					)
+					.frame(width: newHeight, height: newHeight, alignment: .center)
+					.onAppear {
+						print("Appeared index:", index)
+					}
+					.offset(x: animateSpace ? 0 : -(newHeight + spacing) * CGFloat(index) * 0.5)
 				}
 			}
-
 			.onAppear {
 				if height == 0 {
 					height = newHeight
@@ -64,11 +76,10 @@ struct FullHeightCircles: View {
 			}
 		}
 		.onChange(of: height) { _, value in
-			overlap = 1
-			stackWidth = height
-			withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-				overlap = 0.24
-				stackWidth = totalWidth
+			stackWidth = totalWidth
+			animateSpace = false
+			withAnimation(.spring(response: 0.36, dampingFraction: 0.8)) {
+				animateSpace = true
 			}
 		}
 		.frame(width: stackWidth)
