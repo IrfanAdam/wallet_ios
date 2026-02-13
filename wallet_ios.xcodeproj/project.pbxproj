@@ -57,6 +57,9 @@
 		15C964192F39D0E900960C5C /* ACStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964182F39D0E600960C5C /* ACStack.swift */; };
 		15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9641A2F3A1C8700960C5C /* ACPreview2.swift */; };
 		15C964222F3CA14E00960C5C /* CirclesDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964212F3CA14A00960C5C /* CirclesDemo.swift */; };
+		15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964252F3F484A00960C5C /* CircleCutouts.swift */; };
+		15C964292F3F7CC000960C5C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964282F3F7CBC00960C5C /* Modifier.swift */; };
+		15C9642B2F3F7CE800960C5C /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642A2F3F7CE500960C5C /* Circle.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -150,6 +153,9 @@
 		15C964182F39D0E600960C5C /* ACStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStack.swift; sourceTree = "<group>"; };
 		15C9641A2F3A1C8700960C5C /* ACPreview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview2.swift; sourceTree = "<group>"; };
 		15C964212F3CA14A00960C5C /* CirclesDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesDemo.swift; sourceTree = "<group>"; };
+		15C964252F3F484A00960C5C /* CircleCutouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCutouts.swift; sourceTree = "<group>"; };
+		15C964282F3F7CBC00960C5C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+		15C9642A2F3F7CE500960C5C /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -377,10 +383,20 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
+		15C964272F3F7C9E00960C5C /* New Stack */ = {
 			isa = PBXGroup;
 			children = (
 				15C964212F3CA14A00960C5C /* CirclesDemo.swift */,
+				15C964252F3F484A00960C5C /* CircleCutouts.swift */,
+				15C9642A2F3F7CE500960C5C /* Circle.swift */,
+				15C964282F3F7CBC00960C5C /* Modifier.swift */,
+			);
+			path = "New Stack";
+			sourceTree = "<group>";
+		};
+		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
 				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
 			);
 			path = Toolbar;
@@ -399,6 +415,7 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				15C964272F3F7C9E00960C5C /* New Stack */,
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
@@ -688,9 +705,11 @@
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
+				15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
 				15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */,
+				15C964292F3F7CC000960C5C /* Modifier.swift in Sources */,
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
 				EE10F2192F2787B600944690 /* Page 2.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
@@ -722,6 +741,7 @@
 				15C963C42F1E781400960C5C /* DonutView.swift in Sources */,
 				1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */,
 				15DA4B512EF03A460046EBC6 /* Initiate.swift in Sources */,
+				15C9642B2F3F7CE800960C5C /* Circle.swift in Sources */,
 				1549ECE32EFC27CC00876D2D /* AvatarCircle.swift in Sources */,
 				15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */,
 				EE9517752F2FA1700007F91E /* PayContext.swift in Sources */,

@@ -31,3 +31,4 @@ struct CutoutV2AvatarStyle {
 	var stackBackgroundColor: Color = .clear
 	var overlapRatio: CGFloat = 0.25
 }
+

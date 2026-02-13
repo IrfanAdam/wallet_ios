@@ -27,7 +27,7 @@ private extension AuxiliaryToolbar {
 //				shouldCutout: true,
 //				showBorder: false
 //			)
-			FullHeightCirclesCutout().drawingGroup()
+			FullHeightCirclesCutout()
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {
 			Button(action: onDismiss) {
