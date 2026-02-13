@@ -60,6 +60,7 @@
 		15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964252F3F484A00960C5C /* CircleCutouts.swift */; };
 		15C964292F3F7CC000960C5C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964282F3F7CBC00960C5C /* Modifier.swift */; };
 		15C9642B2F3F7CE800960C5C /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642A2F3F7CE500960C5C /* Circle.swift */; };
+		15C9642D2F3F811500960C5C /* CirclesContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642C2F3F811000960C5C /* CirclesContext.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -156,6 +157,7 @@
 		15C964252F3F484A00960C5C /* CircleCutouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCutouts.swift; sourceTree = "<group>"; };
 		15C964282F3F7CBC00960C5C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		15C9642A2F3F7CE500960C5C /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		15C9642C2F3F811000960C5C /* CirclesContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesContext.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				15C964252F3F484A00960C5C /* CircleCutouts.swift */,
 				15C9642A2F3F7CE500960C5C /* Circle.swift */,
 				15C964282F3F7CBC00960C5C /* Modifier.swift */,
+				15C9642C2F3F811000960C5C /* CirclesContext.swift */,
 			);
 			path = "New Stack";
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
+				15C9642D2F3F811500960C5C /* CirclesContext.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				EE95177A2F38D82C0007F91E /* ACSetup.swift in Sources */,
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
