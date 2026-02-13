@@ -11,12 +11,13 @@ private struct ToolbarCutPreview2: View {
 
 	var body: some View {
 		NavigationStack {
+			Color.blue.ignoresSafeArea()
 			VStack {
 				Text("Avatar Stack View")
 				CutoutV2AvatarStack(
 					avatars: demoAvatars,
 					style: .init(
-						strokeWidth: 8,
+						strokeWidth: 6,
 						strokeColor: .blue,
 						iconBackgroundColor: .white,
 						stackBackgroundColor: .gray,
@@ -35,10 +36,10 @@ private struct ToolbarCutPreview2: View {
 							strokeColor: .blue,
 							iconBackgroundColor: .white,
 							stackBackgroundColor: .black,
-							overlapRatio: 0.24
+							overlapRatio: 0.2
 						),
 						shouldCutout: true,
-						showBorder: showBorder
+						showBorder: false
 					)
 					.onTapGesture {
 						print("📌 ToolbarItem tapped!")

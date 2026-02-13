@@ -25,6 +25,13 @@ struct CutoutV2AvatarCircle: View {
 		.compositingGroup()
 		.clipShape(Circle())
 //		.overlay(border)
+		.onAppear {
+			print("Final diameter:", diameter)
+		}
+	}
+
+	private var iconPad: CGFloat {
+		diameter * 0.2
 	}
 
 	@ViewBuilder
@@ -43,7 +50,7 @@ struct CutoutV2AvatarCircle: View {
 						.renderingMode(.template)
 						.resizable()
 						.scaledToFit()
-						.padding(diameter * 0.2)
+						.padding(iconPad)
 						.foregroundColor(style.strokeColor)
 				)
 		}

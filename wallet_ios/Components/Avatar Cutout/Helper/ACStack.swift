@@ -32,10 +32,12 @@ struct CutoutV2AvatarStack: View {
 		overlap: CGFloat
 	) -> CGFloat {
 		let count = CGFloat(avatars.count)
-		let effectiveDia = diameter - (style.strokeWidth * 2)
-		let negSpace = overlap * effectiveDia
+		let negSpace = overlap * diameter
 
-		return (diameter * count) - (negSpace * (count - 1))
+		let baseWidth = (diameter * count) - (negSpace * (count - 1))
+
+		// add outer horizontal padding
+		return baseWidth + ((style.strokeWidth/2) * (count - 1))
 	}
 
 	// MARK: - Body
@@ -45,14 +47,17 @@ struct CutoutV2AvatarStack: View {
 		GeometryReader { geo in
 			stackContent(diameter: avatarDiameter)
 				.onAppear {
+					print("Height onAppear:", geo.size.height)
 					isRasterized = false
 					updateDiameterIfNeeded(from: geo.size.height)
 				}
 				.onChange(of: geo.size.height) { _, newValue in
+					print("Height changed:", newValue)
 					updateDiameterIfNeeded(from: newValue)
 				}
 		}
 		.onChange(of: stackWidth) { _, newValue in
+			print("Final width:", stackWidth)
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
 				Task { @MainActor in
 					try? await Task.sleep(
@@ -72,7 +77,7 @@ struct CutoutV2AvatarStack: View {
 			ratio: style.overlapRatio
 		)
 
-		let step = diameter + overlap
+		let step = diameter + overlap * 0.2
 
 		HStack(spacing: overlap) {
 			ForEach(avatars.indices, id: \.self) { index in
@@ -89,13 +94,14 @@ struct CutoutV2AvatarStack: View {
 				.offset(
 					x: animateIn
 					? 0
-					: -step * CGFloat(index + 1)
+					: -(step * CGFloat(index + 1)) * CGFloat(index)
 				)
 			}
 		}
 		.padding(style.strokeWidth * 2)
-		.background(backgroundCapsule)
-		.clipShape(Capsule())
+		.background(
+			backgroundCapsule.clipShape(Capsule())
+		)
 		.opacity(animateIn ? 1 : 0)
 		.animation(.easeOut(duration: 0.2), value: isHeightLocked)
 		.if(isRasterized) { view in
@@ -139,18 +145,18 @@ struct CutoutV2AvatarStack: View {
 
 	@ViewBuilder
 	private var backgroundCapsule: some View {
-		if showBorder {
-			Capsule()
-				.fill(style.stackBackgroundColor)
-				.overlay(
+		Capsule()
+			.fill(style.stackBackgroundColor.opacity(animateIn ? 1 : 0))
+			.overlay {
+				if showBorder {
 					Capsule()
 						.inset(by: style.strokeWidth / 2)
 						.stroke(
 							style.strokeColor,
 							lineWidth: style.strokeWidth
 						)
-				)
-		}
+				}
+			}
 	}
 }
 

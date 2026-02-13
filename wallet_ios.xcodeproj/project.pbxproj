@@ -277,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				15C963FF2F363B3000960C5C /* Inline Flow */,
-				15C964132F39CFA800960C5C /* Avatar Cutout 2 */,
-				15C963D22F29F7F900960C5C /* Avatar Cutouts */,
+				15C964132F39CFA800960C5C /* Avatar Cutout */,
+				15C963D22F29F7F900960C5C /* Avatar Cutouts (Deprecate) */,
 				15C963C02F1E77AD00960C5C /* Funky Donut */,
 				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
 			);
@@ -309,14 +309,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		15C963D22F29F7F900960C5C /* Avatar Cutouts */ = {
+		15C963D22F29F7F900960C5C /* Avatar Cutouts (Deprecate) */ = {
 			isa = PBXGroup;
 			children = (
 				15C963D52F29F94800960C5C /* Demo1.swift */,
 				15C963D82F2A116000960C5C /* Demo2.swift */,
 				15C963D72F2A114100960C5C /* Helpers */,
 			);
-			path = "Avatar Cutouts";
+			path = "Avatar Cutouts (Deprecate)";
 			sourceTree = "<group>";
 		};
 		15C963D72F2A114100960C5C /* Helpers */ = {
@@ -357,14 +357,14 @@
 			path = "Inline Flow";
 			sourceTree = "<group>";
 		};
-		15C964132F39CFA800960C5C /* Avatar Cutout 2 */ = {
+		15C964132F39CFA800960C5C /* Avatar Cutout */ = {
 			isa = PBXGroup;
 			children = (
 				15C9641A2F3A1C8700960C5C /* ACPreview2.swift */,
 				15C964142F39D08400960C5C /* ACPreview.swift */,
 				15C9641C2F3B1FFA00960C5C /* Helper */,
 			);
-			path = "Avatar Cutout 2";
+			path = "Avatar Cutout";
 			sourceTree = "<group>";
 		};
 		15C9641C2F3B1FFA00960C5C /* Helper */ = {

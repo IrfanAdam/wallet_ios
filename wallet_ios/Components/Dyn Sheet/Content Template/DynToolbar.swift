@@ -15,13 +15,19 @@ private extension AuxiliaryToolbar {
 	@ViewBuilder
 	var leading: some View {
 		if route == .levelTwo {
-			AvatarStackView(
-				avatars: [
-					AvatarData(content: .image(Image("LargeDP")), hasBorder: false),
-					AvatarData(content: .icon(Image(systemName: "arrow.up")), hasBorder: false)
-				],
-				shouldCutout: true
-			)
+//			CutoutV2AvatarStack(
+//				avatars: demoAvatars,
+//				style: .init(
+//					strokeWidth: 1.5,
+//					strokeColor: .blue,
+//					iconBackgroundColor: .white,
+//					stackBackgroundColor: .black,
+//					overlapRatio: 0.12
+//				),
+//				shouldCutout: true,
+//				showBorder: false
+//			)
+			FullHeightCirclesCutout().drawingGroup()
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {
 			Button(action: onDismiss) {
@@ -29,7 +35,18 @@ private extension AuxiliaryToolbar {
 			}
 		}
 	}
-	
+
+	private var demoAvatars: [CutoutV2AvatarData] {
+		[
+			.init(
+				content: .image(Image("LargeDP"))
+			),
+			.init(
+				content: .icon(Image(systemName: "arrow.up"))
+			)
+		]
+	}
+
 	@ViewBuilder
 	var trailing: some View {
 		if route == .levelTwo {

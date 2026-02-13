@@ -32,10 +32,10 @@ private struct ToolbarLeadingContent: View {
 				strokeColor: .blue,
 				iconBackgroundColor: .white,
 				stackBackgroundColor: .black,
-				overlapRatio: 0.24
+				overlapRatio: 0.12
 			),
-			shouldCutout: false,
-			showBorder: true
+			shouldCutout: true,
+			showBorder: false
 		)
 		.onTapGesture { dismiss() }
 	}
