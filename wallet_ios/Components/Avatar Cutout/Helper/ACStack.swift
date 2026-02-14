@@ -37,7 +37,7 @@ struct CutoutV2AvatarStack: View {
 		let baseWidth = (diameter * count) - (negSpace * (count - 1))
 
 		// add outer horizontal padding
-		return baseWidth + ((style.strokeWidth/2) * (count - 1))
+		return baseWidth + (style.strokeWidth * 2)
 	}
 
 	// MARK: - Body
@@ -99,15 +99,12 @@ struct CutoutV2AvatarStack: View {
 			}
 		}
 		.padding(style.strokeWidth * 2)
-		.background(
-			backgroundCapsule.clipShape(Capsule())
-		)
 		.opacity(animateIn ? 1 : 0)
 		.animation(.easeOut(duration: 0.2), value: isHeightLocked)
 		.if(isRasterized) { view in
 			view.drawingGroup()
 		}
-		.frame(maxWidth: .infinity, alignment: .leading)
+//		.frame(maxWidth: .infinity, alignment: .leading)
 		.onAppear {
 			animateIn = false
 
@@ -117,6 +114,10 @@ struct CutoutV2AvatarStack: View {
 				}
 			}
 		}
+		.fixedSize(horizontal: true, vertical: false)
+		.background(
+			backgroundCapsule
+		)
 	}
 
 
