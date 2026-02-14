@@ -1,58 +1,29 @@
 import SwiftUI
 
 struct FullHeightCirclesCutout: View {
-	private let count = 3
-
-	@State private var height: CGFloat = 0
-	@State private var overlap: CGFloat = 0.12
-	@State private var animateSpace: Bool = false
-	@State private var stackWidth: CGFloat = 0
-
-	private var spacing: CGFloat {
-		-height * overlap
-	}
-
-	private var totalWidth: CGFloat {
-		(height * CGFloat(count)) +
-		(spacing * CGFloat(count - 1)) + padded * 2
-	}
-
-	private let padded: CGFloat = 4
-
+	@State private var context = FullHeightCirclesContext()
+	@State private var heightRead: CGFloat = 0
 	var body: some View {
 		GeometryReader { proxy in
-			let newHeight = max(proxy.size.height - padded * 2, 0)
-
-			HStack(alignment: .center, spacing: spacing) {
-				ForEach(0..<count, id: \.self) { index in
-//					circle(index: index, height: newHeight)
-					FullHeightCutoutCircle(
-						index: index,
-						height: newHeight,
-						count: count,
-						padded: padded,
-						overlap: overlap,
-						animateSpace: animateSpace,
-						spacing: spacing
-					)
+			HStack(alignment: .center, spacing: context.layout.spacing) {
+				ForEach(0..<context.model.count, id: \.self) { index in
+					FullHeightCutoutCircle(index: index)
 				}
 			}
+			.padding(context.model.padding)
 			.onAppear {
-				if height == 0 {
-					height = newHeight
-				}
+				heightRead = proxy.size.height
+				context.updateCircSize(from: heightRead)
 			}
-			.onChange(of: newHeight) { _, value in
-				height = value
+			.onChange(of: proxy.size.height) { _, _ in
+				heightRead = proxy.size.height
+				context.updateCircSize(from: heightRead)
 			}
-			.padding(padded)
 		}
+		.environment(context)
 		.modifier(
-			ExpandingCapsuleStackModifier(
-				height: $height,
-				animateSpace: $animateSpace,
-				stackWidth: $stackWidth,
-				totalWidth: totalWidth
+			ContextCapsuleStackModifier(
+				context: context
 			)
 		)
 	}

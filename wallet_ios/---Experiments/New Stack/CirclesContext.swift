@@ -3,28 +3,47 @@ import Observation
 
 @Observable
 final class FullHeightCirclesContext {
-
+	
+	// MARK: - Model
+	
 	struct Model {
 		let count: Int
 		let overlap: CGFloat
 		let padding: CGFloat
 	}
-
+	
+	// MARK: - Layout
+	
 	struct Layout {
+		/// heightRead
 		var height: CGFloat = 0
+		/// height defined for circle
+		var circDia: CGFloat = 0
 		var spacing: CGFloat = 0
 		var totalWidth: CGFloat = 0
-		var stackWidth: CGFloat = 0
 	}
-
-	struct Animation {
+	
+	// MARK: - Interaction
+	
+	struct Interaction {
 		var isExpanded: Bool = false
 	}
-
+	
+	// MARK: - Animation
+	
+	struct Animation {
+		var hasAppeared: Bool = false
+	}
+	
+	// MARK: - Stored Sections
+	
 	let model: Model
 	var layout = Layout()
+	var interaction = Interaction()
 	var animation = Animation()
-
+	
+	// MARK: - Init
+	
 	init(
 		count: Int = 3,
 		overlap: CGFloat = 0.12,
@@ -36,31 +55,46 @@ final class FullHeightCirclesContext {
 			padding: padding
 		)
 	}
-
-	func updateLayout(from proxy: GeometryProxy) {
-		let height = max(proxy.size.height - model.padding * 2, 0)
+	
+	// MARK: - Geometry Input
+	
+	/// Only updates raw bounds from GeometryReader
+	func updateCircSize(from heightRead: CGFloat) {
+		layout.circDia = max(heightRead - model.padding * 2, 0)
+	}
+	
+	// MARK: - Layout Commit
+	
+	/// Commits layout using current bounds
+	func resolveLayout() {
+		
+		let height = layout.circDia
 		let spacing = -height * model.overlap
 		let totalWidth =
-		height * CGFloat(model.count) +
-		spacing * CGFloat(model.count - 1) +
-		model.padding * 2
-
+		height * CGFloat(model.count)
+		+ spacing * CGFloat(model.count - 1)
+		+ model.padding * 2
+		
 		layout.height = height
 		layout.spacing = spacing
 		layout.totalWidth = totalWidth
 	}
-
+	
+	// MARK: - Derived
+	
+	var stackWidth: CGFloat {
+		interaction.isExpanded
+		? layout.totalWidth
+		: layout.totalWidth
+	}
+	
+	// MARK: - Interaction
+	
 	func spread() {
-		animation.isExpanded = false
-		withAnimation(.spring(response: 0.36, dampingFraction: 0.8).delay(0.2)) {
-			animation.isExpanded = true
+		interaction.isExpanded = false
+		
+		withAnimation(.spring(response: 0.36, dampingFraction: 0.7).delay(0.2)) {
+			interaction.isExpanded = true
 		}
 	}
-
-//	func expand() {
-//		stackWidth = Layout.height
-//		withAnimation(.spring(response: 0.36, dampingFraction: 0.8).delay(0.2)) {
-//			stackWidth = Layout.totalWidth
-//		}
-//	}
 }

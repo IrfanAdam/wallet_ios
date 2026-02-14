@@ -309,10 +309,10 @@
 			isa = PBXGroup;
 			children = (
 				EE10F20B2F24CE4800944690 /* DataInitializers.swift */,
-				EE10F2092F1D374500944690 /* DonutContext.swift */,
 				EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */,
 				15C963C92F1E855800960C5C /* DonutAnimate.swift */,
 				15C963CB2F1E877000960C5C /* DonutInteract.swift */,
+				EE10F2092F1D374500944690 /* DonutContext.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -418,12 +418,12 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
-				15C964272F3F7C9E00960C5C /* New Stack */,
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
+				15C964272F3F7C9E00960C5C /* New Stack */,
 				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
