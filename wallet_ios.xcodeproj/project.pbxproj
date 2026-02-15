@@ -91,6 +91,14 @@
 		EE6623BF2F41C36E00F17D74 /* ACGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623BE2F41C36500F17D74 /* ACGeometry.swift */; };
 		EE6623C12F41C38A00F17D74 /* ACAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C02F41C38700F17D74 /* ACAnimator.swift */; };
 		EE6623C42F41E40300F17D74 /* ACStackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */; };
+		EE6623C62F41EA1900F17D74 /* ACContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C52F41EA1300F17D74 /* ACContext.swift */; };
+		EE6623C92F41F5C300F17D74 /* CACContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C82F41F5B800F17D74 /* CACContext.swift */; };
+		EE6623CB2F41F68200F17D74 /* CACComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623CA2F41F67D00F17D74 /* CACComp.swift */; };
+		EE6623CD2F41F6A100F17D74 /* CACStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623CC2F41F69D00F17D74 /* CACStack.swift */; };
+		EE6623CF2F41F74200F17D74 /* CACCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623CE2F41F74000F17D74 /* CACCircle.swift */; };
+		EE6623D12F41F77700F17D74 /* CACModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623D02F41F77300F17D74 /* CACModels.swift */; };
+		EE6623D32F41F85B00F17D74 /* CACPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623D22F41F85600F17D74 /* CACPreview.swift */; };
+		EE6623D52F42002E00F17D74 /* CACFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623D42F42002800F17D74 /* CACFunction.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
@@ -193,6 +201,14 @@
 		EE6623BE2F41C36500F17D74 /* ACGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACGeometry.swift; sourceTree = "<group>"; };
 		EE6623C02F41C38700F17D74 /* ACAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAnimator.swift; sourceTree = "<group>"; };
 		EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStackContent.swift; sourceTree = "<group>"; };
+		EE6623C52F41EA1300F17D74 /* ACContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACContext.swift; sourceTree = "<group>"; };
+		EE6623C82F41F5B800F17D74 /* CACContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACContext.swift; sourceTree = "<group>"; };
+		EE6623CA2F41F67D00F17D74 /* CACComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACComp.swift; sourceTree = "<group>"; };
+		EE6623CC2F41F69D00F17D74 /* CACStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACStack.swift; sourceTree = "<group>"; };
+		EE6623CE2F41F74000F17D74 /* CACCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACCircle.swift; sourceTree = "<group>"; };
+		EE6623D02F41F77300F17D74 /* CACModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACModels.swift; sourceTree = "<group>"; };
+		EE6623D22F41F85600F17D74 /* CACPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACPreview.swift; sourceTree = "<group>"; };
+		EE6623D42F42002800F17D74 /* CACFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACFunction.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
@@ -292,8 +308,9 @@
 		15C963B72F1A36FD00960C5C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EE6623C72F41F5AD00F17D74 /* Avatar Cutout v3 */,
 				15C963FF2F363B3000960C5C /* Inline Flow */,
-				15C964132F39CFA800960C5C /* Avatar Cutout */,
+				15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */,
 				15C963D22F29F7F900960C5C /* Avatar Cutouts (Deprecate) */,
 				15C963C02F1E77AD00960C5C /* Funky Donut */,
 				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
@@ -373,7 +390,7 @@
 			path = "Inline Flow";
 			sourceTree = "<group>";
 		};
-		15C964132F39CFA800960C5C /* Avatar Cutout */ = {
+		15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */ = {
 			isa = PBXGroup;
 			children = (
 				15C9641A2F3A1C8700960C5C /* ACPreview2.swift */,
@@ -381,7 +398,7 @@
 				EE6623C22F41CA7300F17D74 /* View */,
 				15C9641C2F3B1FFA00960C5C /* Helper */,
 			);
-			path = "Avatar Cutout";
+			path = "Avatar Cutout (Also Deprecate)";
 			sourceTree = "<group>";
 		};
 		15C9641C2F3B1FFA00960C5C /* Helper */ = {
@@ -392,6 +409,7 @@
 				EE6623BE2F41C36500F17D74 /* ACGeometry.swift */,
 				EE6623C02F41C38700F17D74 /* ACAnimator.swift */,
 				EE9517792F38D8290007F91E /* ACSetup.swift */,
+				EE6623C52F41EA1300F17D74 /* ACContext.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -578,6 +596,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EE6623C72F41F5AD00F17D74 /* Avatar Cutout v3 */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623D22F41F85600F17D74 /* CACPreview.swift */,
+				EE6623D72F4200B500F17D74 /* View */,
+				EE6623D62F42007E00F17D74 /* Helper */,
+			);
+			path = "Avatar Cutout v3";
+			sourceTree = "<group>";
+		};
+		EE6623D62F42007E00F17D74 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623D42F42002800F17D74 /* CACFunction.swift */,
+				EE6623C82F41F5B800F17D74 /* CACContext.swift */,
+				EE6623D02F41F77300F17D74 /* CACModels.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		EE6623D72F4200B500F17D74 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623CC2F41F69D00F17D74 /* CACStack.swift */,
+				EE6623CA2F41F67D00F17D74 /* CACComp.swift */,
+				EE6623CE2F41F74000F17D74 /* CACCircle.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,13 +764,16 @@
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
 				15C963F22F33750E00960C5C /* MorphDemo.swift in Sources */,
 				EE9517722F2F85760007F91E /* Navigator.swift in Sources */,
+				EE6623CF2F41F74200F17D74 /* CACCircle.swift in Sources */,
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
+				EE6623D32F41F85B00F17D74 /* CACPreview.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
+				EE6623D12F41F77700F17D74 /* CACModels.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
 				EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */,
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
@@ -761,6 +812,8 @@
 				EE6623BD2F41BFF500F17D74 /* ACLayout.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
+				EE6623CD2F41F6A100F17D74 /* CACStack.swift in Sources */,
+				EE6623CB2F41F68200F17D74 /* CACComp.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				15C963EE2F335BA800960C5C /* MorphingCap.swift in Sources */,
 				EE8802FC2EF8398100A4D79D /* Tags.swift in Sources */,
@@ -772,6 +825,7 @@
 				15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */,
 				EE9517752F2FA1700007F91E /* PayContext.swift in Sources */,
 				15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */,
+				EE6623C92F41F5C300F17D74 /* CACContext.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
 				1549ECDD2EF5472500876D2D /* AvatarStack.swift in Sources */,
@@ -801,9 +855,11 @@
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				EE95177A2F38D82C0007F91E /* ACSetup.swift in Sources */,
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
+				EE6623D52F42002E00F17D74 /* CACFunction.swift in Sources */,
 				15C964122F36403900960C5C /* RenderHelper.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
 				15C964172F39D0C300960C5C /* ACCircle.swift in Sources */,
+				EE6623C62F41EA1900F17D74 /* ACContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
