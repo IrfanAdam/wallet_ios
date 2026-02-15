@@ -19,23 +19,13 @@ struct CutoutAvatarStackContent: View {
 					isCutout: cutout,
 					diameter: context.layout.avatarDiameter
 				)
-				.offset(
-					x: context.animation.animateIn ? 0 : -(context.layout.avatarDiameter * CGFloat(index))
-				)
 			}
 		}
 		.padding(context.model.style.strokeWidth * 2)
-		.opacity(context.animation.animateIn ? 1 : 0)
-		.if(context.animation.isRasterized) { $0.drawingGroup() }
-		.background(
-			CutoutAvatarStackBackground()
-				.environment(context)
-		)
 	}
 }
 
 struct CutoutAvatarStackBackground: View {
-	
 	@Environment(CutoutAvatarStackContext.self)
 	private var context
 	
@@ -55,22 +45,5 @@ struct CutoutAvatarStackBackground: View {
 						)
 				}
 			}
-	}
-}
-
-// MARK: - Conditional Modifier Helper
-
-private extension View {
-	
-	@ViewBuilder
-	func `if`<Content: View>(
-		_ condition: Bool,
-		transform: (Self) -> Content
-	) -> some View {
-		if condition {
-			transform(self)
-		} else {
-			self
-		}
 	}
 }

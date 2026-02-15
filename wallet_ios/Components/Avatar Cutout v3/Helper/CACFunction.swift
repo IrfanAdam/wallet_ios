@@ -2,6 +2,7 @@ import SwiftUI
 
 extension CutoutAvatarStackContext {
 	func updateContainerHeight(_ height: CGFloat) {
+		print("Container height:", height)
 		layout.containerHeight = height
 		resolveLayout()
 	}
@@ -15,17 +16,11 @@ private extension CutoutAvatarStackContext {
 		
 		let diameter = max(layout.containerHeight - (stroke * 4), 0)
 		
-		let overlapDistance =
-		(diameter - stroke * 2) * model.style.overlapRatio
+		let overlapDistance = (diameter - stroke * 2) * model.style.overlapRatio
 		
-		let overlapSpacing =
-		-overlapDistance - (stroke * 2)
+		let overlapSpacing = -overlapDistance - (stroke * 2)
 		
-		let baseWidth =
-		(diameter * count)
-		- (model.style.overlapRatio * diameter * (count - 1))
-		
-		let totalWidth = baseWidth + (stroke * 2)
+		let totalWidth = (diameter * count) - (model.style.overlapRatio * diameter * (count - 1))
 		
 		layout.avatarDiameter = diameter
 		layout.overlapSpacing = overlapSpacing

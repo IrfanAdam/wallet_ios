@@ -310,8 +310,6 @@
 			children = (
 				EE6623C72F41F5AD00F17D74 /* Avatar Cutout v3 */,
 				15C963FF2F363B3000960C5C /* Inline Flow */,
-				15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */,
-				15C963D22F29F7F900960C5C /* Avatar Cutouts (Deprecate) */,
 				15C963C02F1E77AD00960C5C /* Funky Donut */,
 				15DA4B092EEBFD100046EBC6 /* Dyn Sheet */,
 			);
@@ -447,6 +445,8 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */,
+				15C963D22F29F7F900960C5C /* Avatar Cutouts (Deprecate) */,
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
@@ -619,8 +619,8 @@
 		EE6623D72F4200B500F17D74 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EE6623CC2F41F69D00F17D74 /* CACStack.swift */,
 				EE6623CA2F41F67D00F17D74 /* CACComp.swift */,
+				EE6623CC2F41F69D00F17D74 /* CACStack.swift */,
 				EE6623CE2F41F74000F17D74 /* CACCircle.swift */,
 			);
 			path = View;

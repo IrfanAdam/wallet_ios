@@ -2,6 +2,9 @@ import SwiftUI
 
 struct CutoutAvatarCircle: View {
 	
+	@Environment(CutoutAvatarStackContext.self)
+	private var context
+	
 	let avatar: CutoutAvatarData
 	let style: CutoutAvatarStyle
 	let isCutout: Bool
@@ -20,17 +23,18 @@ struct CutoutAvatarCircle: View {
 	}
 	
 	var body: some View {
-		
-		ZStack {
-			content
-			
+		content.overlay {
 			if isCutout {
 				cutoutShape
 			}
 		}
+		.offset(
+			x: context.animation.animateIn ? 0 : -(context.layout.avatarDiameter)
+		)
+		.opacity(context.animation.animateIn ? 1 : 0)
+		.clipShape(Circle())
 		.frame(width: diameter, height: diameter)
 		.compositingGroup()
-		.clipShape(Circle())
 	}
 	
 	@ViewBuilder
@@ -63,6 +67,6 @@ struct CutoutAvatarCircle: View {
 			.frame(width: cutoutDiameter, height: cutoutDiameter)
 			.offset(x: cutoutOffset)
 			.blendMode(.destinationOut)
-			.padding(-style.strokeWidth * 2)
+//			.padding(-style.strokeWidth * 2)
 	}
 }

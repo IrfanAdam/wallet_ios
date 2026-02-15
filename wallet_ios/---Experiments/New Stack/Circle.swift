@@ -22,7 +22,14 @@ struct FullHeightCutoutCircle: View {
 		let cutoutOffX = (height - padding) * (1 - overlap)
 		
 		Circle()
-			.fill(.blue)
+			.fill(Color.white) // background for the icon
+			.overlay {
+				Image(systemName: "person.fill") // or your custom icon
+					.resizable()
+					.scaledToFit()
+					.padding(height * 0.25) // keeps icon proportional
+					.foregroundStyle(.blue)
+			}
 			.frame(width: height, height: height)
 			.overlay {
 				if index < count - 1 {

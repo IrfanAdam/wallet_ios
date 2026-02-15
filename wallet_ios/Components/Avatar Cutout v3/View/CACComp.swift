@@ -32,6 +32,32 @@ struct CutoutAvatarStack: View {
 					context.updateContainerHeight(newValue)
 				}
 		}
-		.frame(width: context.layout.totalWidth, alignment: .leading)
+//		.if(context.animation.isRasterized) { $0.drawingGroup() }
+		.drawingGroup()
+		.frame(
+			width: context.layout.totalWidth,
+			alignment: .leading
+		)
+		.fixedSize(horizontal: true, vertical: false)
+		.background(
+			CutoutAvatarStackBackground()
+				.environment(context)
+		)
 	}
 }
+
+// MARK: - Conditional Modifier Helper
+private extension View {
+	@ViewBuilder
+	func `if`<Content: View>(
+		_ condition: Bool,
+		transform: (Self) -> Content
+	) -> some View {
+		if condition {
+			transform(self)
+		} else {
+			self
+		}
+	}
+}
+
