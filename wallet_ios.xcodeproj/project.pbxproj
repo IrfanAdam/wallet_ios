@@ -87,6 +87,10 @@
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
 		EE10F2172F2665A500944690 /* DynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2162F26659E00944690 /* DynLayout.swift */; };
 		EE10F2192F2787B600944690 /* Page 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2182F2787B300944690 /* Page 2.swift */; };
+		EE6623BD2F41BFF500F17D74 /* ACLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623BC2F41BFF200F17D74 /* ACLayout.swift */; };
+		EE6623BF2F41C36E00F17D74 /* ACGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623BE2F41C36500F17D74 /* ACGeometry.swift */; };
+		EE6623C12F41C38A00F17D74 /* ACAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C02F41C38700F17D74 /* ACAnimator.swift */; };
+		EE6623C42F41E40300F17D74 /* ACStackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
@@ -185,6 +189,10 @@
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
 		EE10F2162F26659E00944690 /* DynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLayout.swift; sourceTree = "<group>"; };
 		EE10F2182F2787B300944690 /* Page 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Page 2.swift"; sourceTree = "<group>"; };
+		EE6623BC2F41BFF200F17D74 /* ACLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLayout.swift; sourceTree = "<group>"; };
+		EE6623BE2F41C36500F17D74 /* ACGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACGeometry.swift; sourceTree = "<group>"; };
+		EE6623C02F41C38700F17D74 /* ACAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAnimator.swift; sourceTree = "<group>"; };
+		EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStackContent.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
@@ -370,6 +378,7 @@
 			children = (
 				15C9641A2F3A1C8700960C5C /* ACPreview2.swift */,
 				15C964142F39D08400960C5C /* ACPreview.swift */,
+				EE6623C22F41CA7300F17D74 /* View */,
 				15C9641C2F3B1FFA00960C5C /* Helper */,
 			);
 			path = "Avatar Cutout";
@@ -378,8 +387,10 @@
 		15C9641C2F3B1FFA00960C5C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				15C964182F39D0E600960C5C /* ACStack.swift */,
+				EE6623BC2F41BFF200F17D74 /* ACLayout.swift */,
 				15C964162F39D0BF00960C5C /* ACCircle.swift */,
+				EE6623BE2F41C36500F17D74 /* ACGeometry.swift */,
+				EE6623C02F41C38700F17D74 /* ACAnimator.swift */,
 				EE9517792F38D8290007F91E /* ACSetup.swift */,
 			);
 			path = Helper;
@@ -558,6 +569,15 @@
 			path = PageTransition;
 			sourceTree = "<group>";
 		};
+		EE6623C22F41CA7300F17D74 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15C964182F39D0E600960C5C /* ACStack.swift */,
+				EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +736,7 @@
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
 				EE10F2192F2787B600944690 /* Page 2.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
+				EE6623C42F41E40300F17D74 /* ACStackContent.swift in Sources */,
 				15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */,
 				15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */,
 				15C964152F39D08900960C5C /* ACPreview.swift in Sources */,
@@ -732,10 +753,12 @@
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15C963F82F34EAFE00960C5C /* EdgeAccesoryDemo.swift in Sources */,
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
+				EE6623BF2F41C36E00F17D74 /* ACGeometry.swift in Sources */,
 				15C963D62F29F94D00960C5C /* Demo1.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15C963D92F2A116400960C5C /* Demo2.swift in Sources */,
 				15C963E22F30E98700960C5C /* GlassDemo.swift in Sources */,
+				EE6623BD2F41BFF500F17D74 /* ACLayout.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
@@ -773,6 +796,7 @@
 				15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
+				EE6623C12F41C38A00F17D74 /* ACAnimator.swift in Sources */,
 				15C9642D2F3F811500960C5C /* CirclesContext.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
 				EE95177A2F38D82C0007F91E /* ACSetup.swift in Sources */,
