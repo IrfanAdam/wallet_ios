@@ -11,30 +11,23 @@ struct AuxiliaryToolbar: ToolbarContent {
 	}
 }
 
-private let previewStyle = CutoutAvatarStyle(
-	strokeWidth: 8,
-	strokeColor: .blue,
-	iconBackgroundColor: .white,
-	stackBackgroundColor: .gray,
-	overlapRatio: 0.3
-)
-
 private extension AuxiliaryToolbar {
 	@ViewBuilder
 	var leading: some View {
 		if route == .levelTwo {
-			CutoutV2AvatarStack(
-				avatars: demoAvatars,
-				style: .init(
-					strokeWidth: 1.5,
-					strokeColor: .blue,
-					iconBackgroundColor: .white,
-					stackBackgroundColor: .black,
-					overlapRatio: 0.12
-				),
-				shouldCutout: true,
-				showBorder: false
-			)
+//			CutoutV2AvatarStack(
+//				avatars: demoAvatars,
+//				style: .init(
+//					strokeWidth: 1.5,
+//					strokeColor: .blue,
+//					iconBackgroundColor: .white,
+//					stackBackgroundColor: .black,
+//					overlapRatio: 0.12
+//				),
+//				shouldCutout: true,
+//				showBorder: false
+//			)
+			FullHeightCirclesCutout(avatars: avatars)
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {
 			Button(action: onDismiss) {
@@ -60,3 +53,10 @@ private extension AuxiliaryToolbar {
 		}
 	}
 }
+
+private let avatars: [AvatarData] = [
+	AvatarData(content: .image(Image("LargeDP"))),
+	AvatarData(content: .image(Image("LargeDP"))),
+	AvatarData(content: .icon(Image(systemName: "creditcard.fill")), hasBorder: true),
+	AvatarData(content: .image(Image("LargeDP"))),
+]
