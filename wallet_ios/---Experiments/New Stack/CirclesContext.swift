@@ -47,7 +47,7 @@ final class FullHeightCirclesContext {
 	init(
 		count: Int = 4,
 		overlap: CGFloat = 0.12,
-		padding: CGFloat = 3
+		padding: CGFloat = 1.5
 	) {
 		self.model = Model(
 			count: count,
@@ -93,7 +93,7 @@ final class FullHeightCirclesContext {
 	func spread() {
 		interaction.isExpanded = false
 		
-		withAnimation(.spring(response: 0.36, dampingFraction: 0.7).delay(0.2)) {
+		withAnimation(.spring(response: 0.36, dampingFraction: 0.76).delay(0.2)) {
 			interaction.isExpanded = true
 		}
 	}

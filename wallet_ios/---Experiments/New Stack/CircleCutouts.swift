@@ -6,11 +6,6 @@ struct FullHeightCirclesCutout: View {
 	let avatars: [AvatarData]
 	var body: some View {
 		GeometryReader { proxy in
-//			HStack(alignment: .center, spacing: context.layout.spacing) {
-//				ForEach(0..<context.model.count, id: \.self) { index in
-//					FullHeightCutoutCircle(index: index)
-//				}
-//			}
 			HStack(alignment: .center, spacing: context.layout.spacing) {
 				ForEach(Array(avatars.enumerated()), id: \.element.id) { index, avatar in
 					FullHeightCutoutCircle(

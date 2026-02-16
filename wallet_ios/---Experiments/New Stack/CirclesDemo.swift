@@ -7,7 +7,7 @@ import SwiftUI
 private let avatars: [AvatarData] = [
 	AvatarData(content: .image(Image("LargeDP"))),
 	AvatarData(content: .image(Image("LargeDP"))),
-	AvatarData(content: .icon(Image(systemName: "creditcard.fill")), hasBorder: false),
+	AvatarData(content: .icon(Image(systemName: "creditcard.fill")), hasBorder: true),
 	AvatarData(content: .image(Image("LargeDP"))),
 ]
 

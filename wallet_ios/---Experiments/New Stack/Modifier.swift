@@ -17,7 +17,7 @@ struct ContextCapsuleStackModifier: ViewModifier {
 			.fixedSize(horizontal: true, vertical: false)
 			.background(
 				Capsule()
-					.fill(Color.black)
+					.fill(Color.clear)
 			)
 	}
 }

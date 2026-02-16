@@ -29,7 +29,7 @@ struct AvatarData: Identifiable {
 	let hasBorder: Bool
 	let isCutout: Bool?
 
-	init(content: AvatarContent, hasBorder: Bool = true, isCutout: Bool? = nil) {
+	init(content: AvatarContent, hasBorder: Bool = false, isCutout: Bool? = nil) {
 		self.content = content
 		self.hasBorder = hasBorder
 		self.isCutout = isCutout
