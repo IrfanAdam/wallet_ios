@@ -15,18 +15,6 @@ private extension AuxiliaryToolbar {
 	@ViewBuilder
 	var leading: some View {
 		if route == .levelTwo {
-//			CutoutV2AvatarStack(
-//				avatars: demoAvatars,
-//				style: .init(
-//					strokeWidth: 1.5,
-//					strokeColor: .blue,
-//					iconBackgroundColor: .white,
-//					stackBackgroundColor: .black,
-//					overlapRatio: 0.12
-//				),
-//				shouldCutout: true,
-//				showBorder: false
-//			)
 			FullHeightCirclesCutout(avatars: avatars)
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {

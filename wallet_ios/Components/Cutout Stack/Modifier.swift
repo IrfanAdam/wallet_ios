@@ -6,12 +6,11 @@ struct ContextCapsuleStackModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
 			.onAppear {
-				context.spread()
 				context.resolveLayout()
 			}
 			.onChange(of: context.layout.circDia) { _, _ in
+				context.resolveLayout() 
 				context.spread()
-				context.resolveLayout()
 			}
 			.frame(width: context.stackWidth)
 			.fixedSize(horizontal: true, vertical: false)

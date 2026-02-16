@@ -10,6 +10,7 @@ final class FullHeightCirclesContext {
 		let count: Int
 		let overlap: CGFloat
 		let padding: CGFloat
+//		let style: AvatarStyle
 	}
 	
 	// MARK: - Layout
@@ -27,6 +28,7 @@ final class FullHeightCirclesContext {
 	
 	struct Interaction {
 		var isExpanded: Bool = false
+		var animatedWidth: CGFloat = 0
 	}
 	
 	// MARK: - Animation
@@ -47,12 +49,14 @@ final class FullHeightCirclesContext {
 	init(
 		count: Int = 4,
 		overlap: CGFloat = 0.12,
-		padding: CGFloat = 1.5
+		padding: CGFloat = 1.5,
+//		style: AvatarStyle
 	) {
 		self.model = Model(
 			count: count,
 			overlap: overlap,
-			padding: padding
+			padding: padding,
+//			style: style
 		)
 	}
 	
@@ -83,18 +87,24 @@ final class FullHeightCirclesContext {
 	// MARK: - Derived
 	
 	var stackWidth: CGFloat {
-		interaction.isExpanded
-		? layout.totalWidth
-		: layout.totalWidth
+//		layout.totalWidth
+		interaction.animatedWidth
 	}
-	
+
 	// MARK: - Interaction
 	
 	func spread() {
 		interaction.isExpanded = false
-		
-		withAnimation(.spring(response: 0.36, dampingFraction: 0.76).delay(0.2)) {
-			interaction.isExpanded = true
+		interaction.animatedWidth = layout.height
+
+		withAnimation(.easeOut(duration: 0.25)) {
+			interaction.animatedWidth = layout.totalWidth
+		}
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+			withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+				self.interaction.isExpanded = true
+			}
 		}
 	}
 }
