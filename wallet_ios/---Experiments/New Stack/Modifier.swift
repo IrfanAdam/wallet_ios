@@ -13,7 +13,6 @@ struct ContextCapsuleStackModifier: ViewModifier {
 				context.spread()
 				context.resolveLayout()
 			}
-			.drawingGroup()
 			.frame(width: context.stackWidth)
 			.fixedSize(horizontal: true, vertical: false)
 			.background(

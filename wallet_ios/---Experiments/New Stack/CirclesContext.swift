@@ -45,9 +45,9 @@ final class FullHeightCirclesContext {
 	// MARK: - Init
 	
 	init(
-		count: Int = 3,
+		count: Int = 4,
 		overlap: CGFloat = 0.12,
-		padding: CGFloat = 4
+		padding: CGFloat = 3
 	) {
 		self.model = Model(
 			count: count,
@@ -98,3 +98,5 @@ final class FullHeightCirclesContext {
 		}
 	}
 }
+
+

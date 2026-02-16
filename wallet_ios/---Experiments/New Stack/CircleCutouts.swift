@@ -3,11 +3,21 @@ import SwiftUI
 struct FullHeightCirclesCutout: View {
 	@State private var context = FullHeightCirclesContext()
 	@State private var heightRead: CGFloat = 0
+	let avatars: [AvatarData]
 	var body: some View {
 		GeometryReader { proxy in
+//			HStack(alignment: .center, spacing: context.layout.spacing) {
+//				ForEach(0..<context.model.count, id: \.self) { index in
+//					FullHeightCutoutCircle(index: index)
+//				}
+//			}
 			HStack(alignment: .center, spacing: context.layout.spacing) {
-				ForEach(0..<context.model.count, id: \.self) { index in
-					FullHeightCutoutCircle(index: index)
+				ForEach(Array(avatars.enumerated()), id: \.element.id) { index, avatar in
+					FullHeightCutoutCircle(
+						index: index,
+						avatar: avatar,
+						totalCount: avatars.count
+					)
 				}
 			}
 			.padding(context.model.padding)

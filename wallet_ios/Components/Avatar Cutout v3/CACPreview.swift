@@ -10,16 +10,16 @@ import SwiftUI
 //				showBorder: true
 //			)
 		}
-		.frame(height: 110)
+		.frame(height: 120)
 		.toolbar {
 			ToolbarItem(placement: .topBarLeading) {
-//				CutoutAvatarStack(
-//					avatars: previewAvatars,
-//					style: previewStyle,
-//					shouldCutout: true,
-//					showBorder: true
-//				)
-				FullHeightCirclesCutout()
+				CutoutAvatarStack(
+					avatars: previewAvatars,
+					style: previewStyle,
+					shouldCutout: true,
+					showBorder: true
+				)
+//				FullHeightCirclesCutout()
 			}
 		}
 	}
