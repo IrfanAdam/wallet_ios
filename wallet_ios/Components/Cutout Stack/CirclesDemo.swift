@@ -5,7 +5,6 @@ import SwiftUI
 }
 
 private let avatars: [AvatarData] = [
-	AvatarData(content: .image(Image("LargeDP"))),
 	AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
 	AvatarData(content: .icon(Image(systemName: "creditcard.fill")), hasBorder: true),
 	AvatarData(content: .image(Image("LargeDP"))),
@@ -17,7 +16,7 @@ struct ToolbarFullHeightCirclesDemo: View {
 		NavigationStack {
 			VStack {
 				Spacer()
-				FullHeightCirclesCutout(avatars: avatars, style: .default).frame(height: 90)
+				FullHeightCirclesCutout(avatars: avatars, style: .default).frame(height: 150)
 				Text("Content Area")
 				Button("Open Sheet") {
 					isAuxiliaryPlanePresented.toggle()

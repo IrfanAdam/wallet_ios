@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct FullHeightCirclesCutout: View {
-//	@State private var context = FullHeightCirclesContext()
-
 	@State private var context: FullHeightCirclesContext
 	let avatars: [AvatarData]
 
@@ -32,7 +30,6 @@ struct FullHeightCirclesCutout: View {
 					)
 				}
 			}
-			.padding(context.model.style.strokeWidth)
 			.onAppear {
 				heightRead = proxy.size.height
 				context.updateCircSize(from: heightRead)

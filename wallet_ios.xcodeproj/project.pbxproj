@@ -56,6 +56,7 @@
 		15C964332F43843F00960C5C /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964322F43843C00960C5C /* Slot.swift */; };
 		15D8626B2F445D66009E35AB /* ComputeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626A2F445D61009E35AB /* ComputeEngine.swift */; };
 		15D8626D2F445DC3009E35AB /* StackSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626C2F445DBF009E35AB /* StackSetup.swift */; };
+		15D862712F4485AB009E35AB /* ConfigureDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D862702F4485A7009E35AB /* ConfigureDemo.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -147,6 +148,7 @@
 		15C964322F43843C00960C5C /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		15D8626A2F445D61009E35AB /* ComputeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeEngine.swift; sourceTree = "<group>"; };
 		15D8626C2F445DBF009E35AB /* StackSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackSetup.swift; sourceTree = "<group>"; };
+		15D862702F4485A7009E35AB /* ConfigureDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureDemo.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -334,15 +336,32 @@
 		15C964272F3F7C9E00960C5C /* Cutout Stack */ = {
 			isa = PBXGroup;
 			children = (
+				15D862702F4485A7009E35AB /* ConfigureDemo.swift */,
 				15C964212F3CA14A00960C5C /* CirclesDemo.swift */,
-				15C964252F3F484A00960C5C /* CircleCutouts.swift */,
-				15C9642A2F3F7CE500960C5C /* Circle.swift */,
+				15D8626F2F4484E4009E35AB /* View */,
+				15D8626E2F4484CA009E35AB /* Helper */,
+			);
+			path = "Cutout Stack";
+			sourceTree = "<group>";
+		};
+		15D8626E2F4484CA009E35AB /* Helper */ = {
+			isa = PBXGroup;
+			children = (
 				15C964282F3F7CBC00960C5C /* Modifier.swift */,
 				15D8626A2F445D61009E35AB /* ComputeEngine.swift */,
 				15C9642C2F3F811000960C5C /* StackContext.swift */,
 				15D8626C2F445DBF009E35AB /* StackSetup.swift */,
 			);
-			path = "Cutout Stack";
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		15D8626F2F4484E4009E35AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15C964252F3F484A00960C5C /* CircleCutouts.swift */,
+				15C9642A2F3F7CE500960C5C /* Circle.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
@@ -658,6 +677,7 @@
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
+				15D862712F4485AB009E35AB /* ConfigureDemo.swift in Sources */,
 				15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */,
 				15C964312F437E6B00960C5C /* ScratchReveal.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,

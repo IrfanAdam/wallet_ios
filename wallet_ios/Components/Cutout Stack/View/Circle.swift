@@ -44,7 +44,7 @@ struct FullHeightCutoutCircle: View {
 		}
 		.frame(width: height - padding * 2, height: height - padding * 2)
 		.clipShape(Circle())
-		.padding(padding)
+		.padding(padding * 2)
 		.overlay {
 			if avatar.hasBorder {
 				Circle()
@@ -56,8 +56,8 @@ struct FullHeightCutoutCircle: View {
 		}
 		.clipShape(
 			CutoutCircleShape(
-				cutoutOffset: cutoutOffX,
-				cutoutDiameter: circleDia,
+				cutoutOffset: cutoutOffX + context.model.style.strokeWidth / 2,
+				cutoutDiameter: circleDia - context.model.style.strokeWidth,
 				shouldCutout: shouldCutout
 			),
 			style: FillStyle(eoFill: true)

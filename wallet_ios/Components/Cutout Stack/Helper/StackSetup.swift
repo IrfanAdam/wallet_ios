@@ -27,7 +27,7 @@ struct AvatarStyle {
 	let overlapRatio: CGFloat
 
 	static let `default` = AvatarStyle(
-		strokeWidth: 1.5,
+		strokeWidth: 2,
 		strokeColor: .blue,
 		iconBackgroundColor: .white,
 		stackBackgroundColor: .clear,

@@ -11,10 +11,7 @@ extension FullHeightCirclesContext {
 		let height = layout.circDia
 		let spacing = -height * model.style.overlapRatio
 
-		let totalWidth =
-		height * CGFloat(model.count)
-		+ spacing * CGFloat(model.count - 1)
-		+ model.style.strokeWidth * 2
+		let totalWidth = (height + model.style.strokeWidth * 2) * CGFloat(model.count) + spacing * CGFloat(model.count - 1)
 
 		layout.height = height
 		layout.spacing = spacing

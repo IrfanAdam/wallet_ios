@@ -19,8 +19,7 @@ struct ContextCapsuleStackModifier: ViewModifier {
 					.fill(context.model.style.stackBackgroundColor)
 					.overlay {
 						Capsule()
-							.inset(by: context.model.style.strokeWidth / 2)
-							.stroke(
+							.strokeBorder (
 								context.model.style.strokeColor,
 								lineWidth: context.model.style.strokeWidth
 							)
