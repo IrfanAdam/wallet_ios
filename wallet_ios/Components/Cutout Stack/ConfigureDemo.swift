@@ -48,11 +48,11 @@ struct AvatarStyleStateDemo: View {
 				VStack(spacing: 16) {
 					VStack {
 						Text("Stroke Width: \(strokeWidth, specifier: "%.1f")")
-						Slider(value: $strokeWidth, in: 0...8)
+						Slider(value: $strokeWidth, in: 0...16)
 					}
 					VStack {
 						Text("Overlap: \(overlapRatio, specifier: "%.2f")")
-						Slider(value: $overlapRatio, in: 0...0.6)
+						Slider(value: $overlapRatio, in: 0...1)
 					}
 					HStack(spacing: 16) {
 						Button("Toggle Color") {
