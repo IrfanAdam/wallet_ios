@@ -1,9 +1,26 @@
 import SwiftUI
 
 struct FullHeightCirclesCutout: View {
-	@State private var context = FullHeightCirclesContext()
-	@State private var heightRead: CGFloat = 0
+//	@State private var context = FullHeightCirclesContext()
+
+	@State private var context: FullHeightCirclesContext
 	let avatars: [AvatarData]
+
+	init(
+		avatars: [AvatarData],
+		style: AvatarStyle
+	) {
+		self.avatars = avatars
+		_context = State(
+			initialValue: FullHeightCirclesContext(
+				count: avatars.count,
+				style: style
+			)
+		)
+	}
+
+	@State private var heightRead: CGFloat = 0
+
 	var body: some View {
 		GeometryReader { proxy in
 			HStack(alignment: .center, spacing: context.layout.spacing) {
@@ -15,7 +32,7 @@ struct FullHeightCirclesCutout: View {
 					)
 				}
 			}
-			.padding(context.model.padding)
+			.padding(context.model.style.strokeWidth)
 			.onAppear {
 				heightRead = proxy.size.height
 				context.updateCircSize(from: heightRead)

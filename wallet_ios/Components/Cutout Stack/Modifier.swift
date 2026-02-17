@@ -16,7 +16,15 @@ struct ContextCapsuleStackModifier: ViewModifier {
 			.fixedSize(horizontal: true, vertical: false)
 			.background(
 				Capsule()
-					.fill(Color.black)
+					.fill(context.model.style.stackBackgroundColor)
+					.overlay {
+						Capsule()
+							.inset(by: context.model.style.strokeWidth / 2)
+							.stroke(
+								context.model.style.strokeColor,
+								lineWidth: context.model.style.strokeWidth
+							)
+					}
 			)
 	}
 }

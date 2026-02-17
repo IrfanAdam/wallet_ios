@@ -25,25 +25,13 @@ private struct ToolbarLeadingContent: View {
 	let dismiss: DismissAction
 	
 	var body: some View {
-		CutoutV2AvatarStack(
-			avatars: demoAvatars,
-			style: .init(
-				strokeWidth: 1.5,
-				strokeColor: .blue,
-				iconBackgroundColor: .white,
-				stackBackgroundColor: .black,
-				overlapRatio: 0.12
-			),
-			shouldCutout: true,
-			showBorder: false
-		)
+		FullHeightCirclesCutout(avatars: avatars, style: .default)
 		.onTapGesture { dismiss() }
 	}
 
-	private var demoAvatars: [CutoutV2AvatarData] {
-		[
-			.init(content: .image(Image("LargeDP"))),
-			.init(content: .icon(Image("ph_credit-card-bold")))
-		]
-	}
+	private let avatars: [AvatarData] = [
+		AvatarData(content: .image(Image("LargeDP"))),
+		AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
+		AvatarData(content: .icon(Image(systemName: "arrow.up")), hasBorder: true)
+	]
 }

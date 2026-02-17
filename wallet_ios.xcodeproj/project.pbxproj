@@ -34,7 +34,6 @@
 		15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963C92F1E855800960C5C /* DonutAnimate.swift */; };
 		15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963CB2F1E877000960C5C /* DonutInteract.swift */; };
 		15C963CF2F213CD500960C5C /* OneSegmentChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963CE2F213CD100960C5C /* OneSegmentChart.swift */; };
-		15C963D42F29F84000960C5C /* AvatarContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963D32F29F83A00960C5C /* AvatarContext.swift */; };
 		15C963E22F30E98700960C5C /* GlassDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963E12F30E98100960C5C /* GlassDemo.swift */; };
 		15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963E52F31F49700960C5C /* CustomGlass.swift */; };
 		15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963E72F322BDC00960C5C /* PayProcessSheet.swift */; };
@@ -47,15 +46,16 @@
 		15C963FE2F361D6100960C5C /* LogicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C963FD2F361D5F00960C5C /* LogicHelper.swift */; };
 		15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964002F363B5800960C5C /* InlineFlowDemo.swift */; };
 		15C964122F36403900960C5C /* RenderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964112F36403400960C5C /* RenderHelper.swift */; };
-		15C964152F39D08900960C5C /* ACPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964142F39D08400960C5C /* ACPreview.swift */; };
-		15C964172F39D0C300960C5C /* ACCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964162F39D0BF00960C5C /* ACCircle.swift */; };
-		15C964192F39D0E900960C5C /* ACStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964182F39D0E600960C5C /* ACStack.swift */; };
-		15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9641A2F3A1C8700960C5C /* ACPreview2.swift */; };
 		15C964222F3CA14E00960C5C /* CirclesDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964212F3CA14A00960C5C /* CirclesDemo.swift */; };
 		15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964252F3F484A00960C5C /* CircleCutouts.swift */; };
 		15C964292F3F7CC000960C5C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964282F3F7CBC00960C5C /* Modifier.swift */; };
 		15C9642B2F3F7CE800960C5C /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642A2F3F7CE500960C5C /* Circle.swift */; };
-		15C9642D2F3F811500960C5C /* CirclesContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642C2F3F811000960C5C /* CirclesContext.swift */; };
+		15C9642D2F3F811500960C5C /* StackContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642C2F3F811000960C5C /* StackContext.swift */; };
+		15C9642F2F437BDC00960C5C /* SpinWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C9642E2F437BD900960C5C /* SpinWheel.swift */; };
+		15C964312F437E6B00960C5C /* ScratchReveal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964302F437E6400960C5C /* ScratchReveal.swift */; };
+		15C964332F43843F00960C5C /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C964322F43843C00960C5C /* Slot.swift */; };
+		15D8626B2F445D66009E35AB /* ComputeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626A2F445D61009E35AB /* ComputeEngine.swift */; };
+		15D8626D2F445DC3009E35AB /* StackSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626C2F445DBF009E35AB /* StackSetup.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -82,11 +82,6 @@
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
 		EE10F2172F2665A500944690 /* DynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2162F26659E00944690 /* DynLayout.swift */; };
 		EE10F2192F2787B600944690 /* Page 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2182F2787B300944690 /* Page 2.swift */; };
-		EE6623BD2F41BFF500F17D74 /* ACLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623BC2F41BFF200F17D74 /* ACLayout.swift */; };
-		EE6623BF2F41C36E00F17D74 /* ACGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623BE2F41C36500F17D74 /* ACGeometry.swift */; };
-		EE6623C12F41C38A00F17D74 /* ACAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C02F41C38700F17D74 /* ACAnimator.swift */; };
-		EE6623C42F41E40300F17D74 /* ACStackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */; };
-		EE6623C62F41EA1900F17D74 /* ACContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623C52F41EA1300F17D74 /* ACContext.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
@@ -96,7 +91,6 @@
 		EE9517722F2F85760007F91E /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517712F2F85720007F91E /* Navigator.swift */; };
 		EE9517752F2FA1700007F91E /* PayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517742F2FA16A0007F91E /* PayContext.swift */; };
 		EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517762F2FA25B0007F91E /* PayToolbar.swift */; };
-		EE95177A2F38D82C0007F91E /* ACSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9517792F38D8290007F91E /* ACSetup.swift */; };
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
@@ -131,7 +125,6 @@
 		15C963C92F1E855800960C5C /* DonutAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutAnimate.swift; sourceTree = "<group>"; };
 		15C963CB2F1E877000960C5C /* DonutInteract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInteract.swift; sourceTree = "<group>"; };
 		15C963CE2F213CD100960C5C /* OneSegmentChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSegmentChart.swift; sourceTree = "<group>"; };
-		15C963D32F29F83A00960C5C /* AvatarContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarContext.swift; sourceTree = "<group>"; };
 		15C963E12F30E98100960C5C /* GlassDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassDemo.swift; sourceTree = "<group>"; };
 		15C963E52F31F49700960C5C /* CustomGlass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGlass.swift; sourceTree = "<group>"; };
 		15C963E72F322BDC00960C5C /* PayProcessSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayProcessSheet.swift; sourceTree = "<group>"; };
@@ -144,15 +137,16 @@
 		15C963FD2F361D5F00960C5C /* LogicHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicHelper.swift; sourceTree = "<group>"; };
 		15C964002F363B5800960C5C /* InlineFlowDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineFlowDemo.swift; sourceTree = "<group>"; };
 		15C964112F36403400960C5C /* RenderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderHelper.swift; sourceTree = "<group>"; };
-		15C964142F39D08400960C5C /* ACPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview.swift; sourceTree = "<group>"; };
-		15C964162F39D0BF00960C5C /* ACCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCircle.swift; sourceTree = "<group>"; };
-		15C964182F39D0E600960C5C /* ACStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStack.swift; sourceTree = "<group>"; };
-		15C9641A2F3A1C8700960C5C /* ACPreview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPreview2.swift; sourceTree = "<group>"; };
 		15C964212F3CA14A00960C5C /* CirclesDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesDemo.swift; sourceTree = "<group>"; };
 		15C964252F3F484A00960C5C /* CircleCutouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCutouts.swift; sourceTree = "<group>"; };
 		15C964282F3F7CBC00960C5C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		15C9642A2F3F7CE500960C5C /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
-		15C9642C2F3F811000960C5C /* CirclesContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesContext.swift; sourceTree = "<group>"; };
+		15C9642C2F3F811000960C5C /* StackContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackContext.swift; sourceTree = "<group>"; };
+		15C9642E2F437BD900960C5C /* SpinWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheel.swift; sourceTree = "<group>"; };
+		15C964302F437E6400960C5C /* ScratchReveal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchReveal.swift; sourceTree = "<group>"; };
+		15C964322F43843C00960C5C /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		15D8626A2F445D61009E35AB /* ComputeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeEngine.swift; sourceTree = "<group>"; };
+		15D8626C2F445DBF009E35AB /* StackSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackSetup.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -180,11 +174,6 @@
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
 		EE10F2162F26659E00944690 /* DynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLayout.swift; sourceTree = "<group>"; };
 		EE10F2182F2787B300944690 /* Page 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Page 2.swift"; sourceTree = "<group>"; };
-		EE6623BC2F41BFF200F17D74 /* ACLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLayout.swift; sourceTree = "<group>"; };
-		EE6623BE2F41C36500F17D74 /* ACGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACGeometry.swift; sourceTree = "<group>"; };
-		EE6623C02F41C38700F17D74 /* ACAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAnimator.swift; sourceTree = "<group>"; };
-		EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACStackContent.swift; sourceTree = "<group>"; };
-		EE6623C52F41EA1300F17D74 /* ACContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACContext.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
@@ -194,7 +183,6 @@
 		EE9517712F2F85720007F91E /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		EE9517742F2FA16A0007F91E /* PayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayContext.swift; sourceTree = "<group>"; };
 		EE9517762F2FA25B0007F91E /* PayToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayToolbar.swift; sourceTree = "<group>"; };
-		EE9517792F38D8290007F91E /* ACSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSetup.swift; sourceTree = "<group>"; };
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
@@ -343,30 +331,6 @@
 			path = "Inline Flow";
 			sourceTree = "<group>";
 		};
-		15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */ = {
-			isa = PBXGroup;
-			children = (
-				15C9641A2F3A1C8700960C5C /* ACPreview2.swift */,
-				15C964142F39D08400960C5C /* ACPreview.swift */,
-				EE6623C22F41CA7300F17D74 /* View */,
-				15C9641C2F3B1FFA00960C5C /* Helper */,
-			);
-			path = "Avatar Cutout (Also Deprecate)";
-			sourceTree = "<group>";
-		};
-		15C9641C2F3B1FFA00960C5C /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				EE6623BC2F41BFF200F17D74 /* ACLayout.swift */,
-				15C964162F39D0BF00960C5C /* ACCircle.swift */,
-				EE6623BE2F41C36500F17D74 /* ACGeometry.swift */,
-				EE6623C02F41C38700F17D74 /* ACAnimator.swift */,
-				EE9517792F38D8290007F91E /* ACSetup.swift */,
-				EE6623C52F41EA1300F17D74 /* ACContext.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		15C964272F3F7C9E00960C5C /* Cutout Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,8 +338,9 @@
 				15C964252F3F484A00960C5C /* CircleCutouts.swift */,
 				15C9642A2F3F7CE500960C5C /* Circle.swift */,
 				15C964282F3F7CBC00960C5C /* Modifier.swift */,
-				15C963D32F29F83A00960C5C /* AvatarContext.swift */,
-				15C9642C2F3F811000960C5C /* CirclesContext.swift */,
+				15D8626A2F445D61009E35AB /* ComputeEngine.swift */,
+				15C9642C2F3F811000960C5C /* StackContext.swift */,
+				15D8626C2F445DBF009E35AB /* StackSetup.swift */,
 			);
 			path = "Cutout Stack";
 			sourceTree = "<group>";
@@ -401,7 +366,9 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
-				15C964132F39CFA800960C5C /* Avatar Cutout (Also Deprecate) */,
+				15C964322F43843C00960C5C /* Slot.swift */,
+				15C964302F437E6400960C5C /* ScratchReveal.swift */,
+				15C9642E2F437BD900960C5C /* SpinWheel.swift */,
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
@@ -539,15 +506,6 @@
 				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
 			);
 			path = PageTransition;
-			sourceTree = "<group>";
-		};
-		EE6623C22F41CA7300F17D74 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				15C964182F39D0E600960C5C /* ACStack.swift */,
-				EE6623C32F41E3FC00F17D74 /* ACStackContent.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
@@ -701,17 +659,16 @@
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
 				15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */,
+				15C964312F437E6B00960C5C /* ScratchReveal.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
-				15C9641B2F3A1C8C00960C5C /* ACPreview2.swift in Sources */,
 				15C964292F3F7CC000960C5C /* Modifier.swift in Sources */,
 				EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */,
 				EE10F2192F2787B600944690 /* Page 2.swift in Sources */,
+				15D8626B2F445D66009E35AB /* ComputeEngine.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
-				EE6623C42F41E40300F17D74 /* ACStackContent.swift in Sources */,
 				15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */,
 				15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */,
-				15C964152F39D08900960C5C /* ACPreview.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15C963F62F3395BA00960C5C /* EdgeAccesory.swift in Sources */,
 				15C963F02F33706500960C5C /* MorphModifier.swift in Sources */,
@@ -724,10 +681,8 @@
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15C963F82F34EAFE00960C5C /* EdgeAccesoryDemo.swift in Sources */,
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
-				EE6623BF2F41C36E00F17D74 /* ACGeometry.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15C963E22F30E98700960C5C /* GlassDemo.swift in Sources */,
-				EE6623BD2F41BFF500F17D74 /* ACLayout.swift in Sources */,
 				15A79E5F2F115296000C6B4E /* DynContext.swift in Sources */,
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
@@ -750,12 +705,13 @@
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,
 				15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */,
-				15C963D42F29F84000960C5C /* AvatarContext.swift in Sources */,
+				15C9642F2F437BDC00960C5C /* SpinWheel.swift in Sources */,
 				EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */,
 				15DA4B3E2EEBFD100046EBC6 /* Chart.swift in Sources */,
 				1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */,
 				EE10F20A2F1D374B00944690 /* DonutContext.swift in Sources */,
-				15C964192F39D0E900960C5C /* ACStack.swift in Sources */,
+				15C964332F43843F00960C5C /* Slot.swift in Sources */,
+				15D8626D2F445DC3009E35AB /* StackSetup.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
@@ -763,15 +719,11 @@
 				15C963BF2F1E76EC00960C5C /* DonutDemo.swift in Sources */,
 				EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */,
 				15DA4B422EEBFD100046EBC6 /* Pay.swift in Sources */,
-				EE6623C12F41C38A00F17D74 /* ACAnimator.swift in Sources */,
-				15C9642D2F3F811500960C5C /* CirclesContext.swift in Sources */,
+				15C9642D2F3F811500960C5C /* StackContext.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
-				EE95177A2F38D82C0007F91E /* ACSetup.swift in Sources */,
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
 				15C964122F36403900960C5C /* RenderHelper.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
-				15C964172F39D0C300960C5C /* ACCircle.swift in Sources */,
-				EE6623C62F41EA1900F17D74 /* ACContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

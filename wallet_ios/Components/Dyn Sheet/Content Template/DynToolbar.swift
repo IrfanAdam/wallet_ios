@@ -15,20 +15,13 @@ private extension AuxiliaryToolbar {
 	@ViewBuilder
 	var leading: some View {
 		if route == .levelTwo {
-			FullHeightCirclesCutout(avatars: avatars)
+			FullHeightCirclesCutout(avatars: avatars, style: .default)
 			.onTapGesture { onBack() }
 		} else if route == .levelOne {
 			Button(action: onDismiss) {
 				Label("Dismiss", systemImage: "chevron.down")
 			}
 		}
-	}
-
-	private var demoAvatars: [CutoutV2AvatarData] {
-		[
-			.init(content: .image(Image("LargeDP"))),
-			.init(content: .icon(Image(systemName: "arrow.up")))
-		]
 	}
 
 	@ViewBuilder

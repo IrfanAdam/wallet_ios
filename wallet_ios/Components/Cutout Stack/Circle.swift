@@ -11,8 +11,8 @@ struct FullHeightCutoutCircle: View {
 	var body: some View {
 
 		let height = context.layout.height
-		let padding = context.model.padding
-		let overlap = context.model.overlap
+		let padding = context.model.style.strokeWidth
+		let overlap = context.model.style.overlapRatio
 		let isExpanded = context.interaction.isExpanded
 		let circleDia = context.layout.circDia
 
@@ -31,12 +31,12 @@ struct FullHeightCutoutCircle: View {
 
 			case .icon(let icon):
 				Circle()
-					.fill(Color.white)
+					.fill(context.model.style.iconBackgroundColor)
 					.overlay {
 						icon
 							.resizable()
 							.scaledToFit()
-							.foregroundStyle(.blue)
+							.foregroundStyle(context.model.style.strokeColor)
 							.padding(height * 0.18)
 					}
 					.compositingGroup()
@@ -44,11 +44,14 @@ struct FullHeightCutoutCircle: View {
 		}
 		.frame(width: height - padding * 2, height: height - padding * 2)
 		.clipShape(Circle())
-		.padding(context.model.padding)
+		.padding(padding)
 		.overlay {
 			if avatar.hasBorder {
 				Circle()
-					.strokeBorder(Color.blue, lineWidth: 2)
+					.strokeBorder(
+						context.model.style.strokeColor,
+						lineWidth: context.model.style.strokeWidth
+					)
 			}
 		}
 		.clipShape(
