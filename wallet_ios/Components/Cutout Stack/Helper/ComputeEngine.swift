@@ -9,7 +9,7 @@ extension FullHeightCirclesContext {
 	func resolveLayout() {
 
 		let height = layout.circDia
-		let spacing = -height * model.style.overlapRatio
+		let spacing = -(height + model.style.strokeWidth * 2) * model.style.overlapRatio
 
 		let totalWidth = (height + model.style.strokeWidth * 2) * CGFloat(model.count) + spacing * CGFloat(model.count - 1)
 
@@ -19,7 +19,6 @@ extension FullHeightCirclesContext {
 	}
 
 	var stackWidth: CGFloat {
-		//		layout.totalWidth
 		interaction.animatedWidth
 	}
 

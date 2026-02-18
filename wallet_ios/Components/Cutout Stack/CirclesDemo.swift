@@ -16,7 +16,11 @@ struct ToolbarFullHeightCirclesDemo: View {
 		NavigationStack {
 			VStack {
 				Spacer()
-				FullHeightCirclesCutout(avatars: avatars, style: .default).frame(height: 150)
+				FullHeightCirclesCutout(
+					avatars: avatars,
+					style: .default
+				)
+				.frame(height: 150)
 				Text("Content Area")
 				Button("Open Sheet") {
 					isAuxiliaryPlanePresented.toggle()

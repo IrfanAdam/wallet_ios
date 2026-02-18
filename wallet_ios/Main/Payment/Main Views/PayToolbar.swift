@@ -32,6 +32,7 @@ private struct ToolbarLeadingContent: View {
 	private let avatars: [AvatarData] = [
 		AvatarData(content: .image(Image("LargeDP"))),
 		AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
+		AvatarData(content: .image(Image("LargeDP"))),
 		AvatarData(content: .icon(Image(systemName: "arrow.up")), hasBorder: true)
 	]
 }

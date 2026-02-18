@@ -5,9 +5,10 @@ import SwiftUI
 }
 
 private let avatars: [AvatarData] = [
-	AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
 	AvatarData(content: .icon(Image(systemName: "creditcard.fill")), hasBorder: true),
-	AvatarData(content: .image(Image("LargeDP")))
+	AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
+	AvatarData(content: .image(Image("LargeDP")), hasBorder: true),
+	AvatarData(content: .image(Image("LargeDP")), hasBorder: true)
 ]
 
 struct AvatarStyleStateDemo: View {
@@ -34,7 +35,7 @@ struct AvatarStyleStateDemo: View {
 				Spacer()
 
 				FullHeightCirclesCutout(avatars: avatars, style: style)
-					.frame(height: 150)
+					.frame(height: 100)
 					.id("\(strokeWidth)-\(overlapRatio)-\(strokeColor)-\(stackBackground)")
 
 				Text("Content Area").font(.headline)

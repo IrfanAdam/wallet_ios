@@ -17,8 +17,7 @@ struct FullHeightCutoutCircle: View {
 		let circleDia = context.layout.circDia
 
 		let circleOffX = (context.stackWidth * CGFloat(index)) * 0.9
-		let cutoutOffX = circleDia * (1 - overlap) + padding * 3
-
+		let cutoutOffX = (circleDia + padding * 0.5) * (1 - overlap) 
 		let shouldCutout = avatar.isCutout ?? (index < totalCount - 1)
 
 		Group {
@@ -56,7 +55,7 @@ struct FullHeightCutoutCircle: View {
 		}
 		.clipShape(
 			CutoutCircleShape(
-				cutoutOffset: cutoutOffX - padding * 2,
+				cutoutOffset: cutoutOffX,
 				cutoutDiameter: circleDia,
 				shouldCutout: shouldCutout
 			),

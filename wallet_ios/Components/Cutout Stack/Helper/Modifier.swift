@@ -25,5 +25,6 @@ struct ContextCapsuleStackModifier: ViewModifier {
 							)
 					}
 			)
+			.clipShape(Capsule())
 	}
 }
