@@ -176,8 +176,13 @@ private extension RewardSpinner {
 				let segmentAngle = 360.0 / Double(config.segments)
 				let normalized = snappedRotation.truncatingRemainder(dividingBy: 360)
 				let positive = normalized < 0 ? normalized + 360 : normalized
+				
+				// Invert wheel rotation to get what's under the pointer
 				let pointerAngle = (360 - positive).truncatingRemainder(dividingBy: 360)
-				let index = Int((pointerAngle / segmentAngle).rounded()) % config.segments
+				
+				// Swift Charts starts at 3 o'clock → subtract 90°
+				let adjusted = (pointerAngle - (segmentAngle / 2) + 360).truncatingRemainder(dividingBy: 360)
+				let safeIndex = (Int(adjusted / segmentAngle) % config.segments + config.segments) % config.segments
 				
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 					let haptic = UIImpactFeedbackGenerator(style: .heavy)
@@ -185,10 +190,22 @@ private extension RewardSpinner {
 					haptic.impactOccurred()
 					
 					withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-						selectedSegmentIndex = index - 1
-						spinnerState = .completed(segmentIndex: index - 1)
+						selectedSegmentIndex = safeIndex
+						spinnerState = .completed(segmentIndex: safeIndex)
 					}
 				}
+				
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+					let haptic = UIImpactFeedbackGenerator(style: .heavy)
+					haptic.prepare()
+					haptic.impactOccurred()
+					
+					withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+						selectedSegmentIndex = safeIndex
+						spinnerState = .completed(segmentIndex: safeIndex)
+					}
+				}
+				print("rotation: \(snappedRotation), pointerAngle: \(pointerAngle), index: \(index), selected: \(safeIndex)")
 			}
 		)
 	}
@@ -196,21 +213,21 @@ private extension RewardSpinner {
 	private var completionOverlay: some View {
 		VStack(spacing: 12) {
 			Button {
-				withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-					selectedSegmentIndex = nil
-					spinnerState = .idle
-				}
+				revealPrize()
 			} label: {
-				Label("Spin Again", systemImage: "arrow.clockwise")
+				Label("Reveal Prize", systemImage: "dollarsign.circle.fill")
 					.frame(maxWidth: .infinity)
 			}
 			.buttonStyle(.borderedProminent)
 			.tint(.brandBlue)
 			
 			Button {
-				revealPrize()
+				withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+					selectedSegmentIndex = nil
+					spinnerState = .idle
+				}
 			} label: {
-				Label("Reveal Prize", systemImage: "dollarsign.circle.fill")
+				Label("Spin Again", systemImage: "arrow.clockwise")
 					.frame(maxWidth: .infinity)
 			}
 			.buttonStyle(.bordered)
