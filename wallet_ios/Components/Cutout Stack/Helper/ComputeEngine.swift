@@ -3,11 +3,11 @@ import SwiftUI
 extension FullHeightCirclesContext {
 
 	func updateCircSize(from heightRead: CGFloat) {
+		layout.height = heightRead
 		layout.circDia = max(heightRead - model.style.strokeWidth * 2, 0)
 	}
 
 	func resolveLayout() {
-
 		let height = layout.circDia
 		let spacing = -(height + model.style.strokeWidth * 2) * model.style.overlapRatio
 
@@ -16,6 +16,14 @@ extension FullHeightCirclesContext {
 		layout.height = height
 		layout.spacing = spacing
 		layout.totalWidth = totalWidth
+		
+//		
+//		let outer = layout.height
+//		let spacing = -outer * (1 - model.style.overlapRatio)
+//		let circleToCircle = outer * CGFloat(model.count - 1)
+//		
+//		layout.spacing = spacing
+//		layout.totalWidth = circleToCircle + spacing
 	}
 
 	var stackWidth: CGFloat {
