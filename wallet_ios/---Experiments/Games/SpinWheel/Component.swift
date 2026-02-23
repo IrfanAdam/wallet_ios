@@ -13,7 +13,7 @@ struct RewardSpinner: View {
 	private let config: RewardSpinnerConfig
 	@State private var physics: RewardSpinnerPhysics
 	
-	@State private var rotation: Double = 0
+	@State private var rotation: Double
 	@State private var lastRotation: Double = 0
 	@State private var isSpinning = false
 	
@@ -27,12 +27,15 @@ struct RewardSpinner: View {
 	init(config: RewardSpinnerConfig = .init()) {
 		self.config = config
 		self.physics = RewardSpinnerPhysics(config: config)
+
+		let segmentAngle = 360.0 / Double(config.segments)
+		_rotation = State(initialValue: -segmentAngle / 2)
 	}
-	
+
 	var body: some View {
 		ZStack {
 			Circle()
-				.fill(.ultraThinMaterial)
+				.fill(Color.gray.opacity(0.1))
 				.overlay(
 					SpinnerSegments(count: config.segments, selectedIndex: selectedSegmentIndex)
 				)
@@ -40,10 +43,22 @@ struct RewardSpinner: View {
 							 height: config.wheelSize)
 				.rotationEffect(.degrees(rotation))
 				.gesture(dragGesture)
-			
+
+			let segmentAngle = 360.0 / Double(config.segments)
+			let boundaryAngle = -90 - segmentAngle / 2
+			let radius = config.wheelSize / 2
+			let radians = boundaryAngle * .pi / 180
+
+			let x = cos(radians) * radius
+			let y = sin(radians) * radius
+
 			SpinnerPointer(rotation: rotation, segmentCount: config.segments)
-				.offset(y: -(config.wheelSize / 2 + 16))
-			
+				.rotationEffect(.degrees(-segmentAngle / 2))
+				.offset(
+					x: x - 4,
+					y: y - 8
+				)
+
 			// 🏁 Completion Panel
 			if case .completed = spinnerState {
 				completionOverlay
@@ -60,7 +75,7 @@ struct RewardSpinner: View {
 						.padding(.vertical, 10)
 						.background(.ultraThinMaterial)
 						.clipShape(Capsule())
-						.shadow(radius: 8)
+						.shadow(color: Color.black.opacity(0.1), radius: 12, y: 12)
 						.padding(.bottom, 40)
 						.transition(.move(edge: .bottom).combined(with: .opacity))
 				}
@@ -90,49 +105,59 @@ private extension RewardSpinner {
 	var dragGesture: some Gesture {
 		DragGesture(minimumDistance: 0)
 			.onChanged { value in
-				guard case .idle = spinnerState else { return } // blocks drag when spinning or completed
-				
-				if selectedSegmentIndex != nil {
-					withAnimation(.easeOut(duration: 0.2)) {
-						selectedSegmentIndex = nil
-					}
-				}
-				
+				guard case .idle = spinnerState else { return }
+
 				let center = CGPoint(
 					x: config.wheelSize / 2,
 					y: config.wheelSize / 2
 				)
-				
+
 				let currentAngle = angle(from: center, to: value.location)
-				
+
+				// 🔥 FIX: If this is first frame of drag,
+				// just store angle and DO NOT move wheel.
+				if physics.lastDragAngle == nil {
+					physics.lastDragAngle = currentAngle
+					physics.lastTimestamp = CACurrentMediaTime()
+					physics.lastRotationSample = rotation
+					return
+				}
+
+				// Normal delta logic
 				if let last = physics.lastDragAngle {
 					let delta = normalizedDelta(currentAngle - last)
 					rotation += delta
 				}
-				
+
 				physics.lastDragAngle = currentAngle
-				
-				
+
 				let now = CACurrentMediaTime()
-				
+
 				if let lastTime = physics.lastTimestamp,
 					 let lastRot = physics.lastRotationSample {
-					
+
 					let dt = now - lastTime
-					let velocity = (rotation - lastRot) / dt
-					physics.currentAngularVelocity = velocity
+					if dt > 0 {
+						physics.currentAngularVelocity = (rotation - lastRot) / dt
+					}
 				}
-				
+
 				physics.lastTimestamp = now
 				physics.lastRotationSample = rotation
 			}
 			.onEnded { value in
 				guard case .idle = spinnerState else { return }
+
+				// 🔥 IMPORTANT: Reset drag tracking
+				physics.lastDragAngle = nil
+				physics.lastTimestamp = nil
+				physics.lastRotationSample = nil
+
 				lastRotation = rotation
 				handleSpin(value)
 			}
 	}
-	
+
 	func handleSpin(_ value: DragGesture.Value) {
 		
 		let initialVelocity = physics.currentAngularVelocity
@@ -140,28 +165,43 @@ private extension RewardSpinner {
 		let predictedTravel = abs(initialVelocity) / (1 - friction)
 		
 		if predictedTravel < config.minimumSpinDegrees {
-			
+
 			// 🔔 Haptic feedback
 			let generator = UINotificationFeedbackGenerator()
 			generator.prepare()
 			generator.notificationOccurred(.warning)
-			
+
 			toastMessage = "Spin harder to win 🎯"
-			
+
 			withAnimation {
 				showToast = true
 			}
-			
+
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
 				withAnimation {
 					showToast = false
 				}
 			}
-			
+
+			// 🔥 NEW: Snap to nearest segment with spring
+			let snapped = physics.snapToSegment(rotation)
+
+			withAnimation(
+				.interpolatingSpring(
+					mass: 0.6,
+					stiffness: 140,
+					damping: 16
+				)
+			) {
+				rotation = snapped
+			}
+
+			lastRotation = snapped
 			physics.currentAngularVelocity = 0
+
 			return
 		}
-		
+
 		isSpinning = true
 		physics.startSpin(
 			currentRotation: rotation,
@@ -205,32 +245,33 @@ private extension RewardSpinner {
 						spinnerState = .completed(segmentIndex: safeIndex)
 					}
 				}
-				print("rotation: \(snappedRotation), pointerAngle: \(pointerAngle), index: \(index), selected: \(safeIndex)")
 			}
 		)
 	}
 	
 	private var completionOverlay: some View {
 		VStack(spacing: 12) {
-			Button {
-				revealPrize()
-			} label: {
-				Label("Reveal Prize", systemImage: "dollarsign.circle.fill")
-					.frame(maxWidth: .infinity)
-			}
-			.buttonStyle(.borderedProminent)
-			.tint(.brandBlue)
-			
-			Button {
-				withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-					selectedSegmentIndex = nil
-					spinnerState = .idle
+			HStack {
+				Button {
+					revealPrize()
+				} label: {
+					Label("Reveal Prize", systemImage: "dollarsign.circle.fill")
+						.frame(maxWidth: .infinity)
 				}
-			} label: {
-				Label("Spin Again", systemImage: "arrow.clockwise")
-					.frame(maxWidth: .infinity)
+				.buttonStyle(.borderedProminent)
+				.tint(.brandBlue)
+				
+				Button {
+					withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+						selectedSegmentIndex = nil
+						spinnerState = .idle
+					}
+				} label: {
+					Label("Spin Again", systemImage: "arrow.clockwise")
+						.frame(maxWidth: .infinity)
+				}
+				.buttonStyle(.bordered)
 			}
-			.buttonStyle(.bordered)
 		}
 		.padding(.horizontal, 40)
 		.offset(y: config.wheelSize / 2 + 60)

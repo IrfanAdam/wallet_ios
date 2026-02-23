@@ -5,37 +5,68 @@ struct SpinnerSegments: View {
 	let count: Int
 	let selectedIndex: Int?
 	private let innerRadiusRatio: CGFloat = 0.36
-	
-	private var segments: [(index: Int, value: Double)] {
-		(0..<count).map { (index: $0, value: 1.0) }
-	}
-	
+
 	var body: some View {
-		ZStack {
-			// Subtle background circle
-			Circle()
-				.fill(Color.brandBlue.opacity(0.08))
-				.blur(radius: 8)
-				.padding(-8)
-			
-			Chart(segments, id: \.index) { segment in
-				let isSelected = segment.index == selectedIndex
-				SectorMark(
-					angle: .value("Segment", segment.value),
-					innerRadius: .ratio(isSelected ? innerRadiusRatio - 0.04 : innerRadiusRatio),
-					outerRadius: .ratio(isSelected ? 1.0 : 0.95),
-					angularInset: 2
-				)
-				.cornerRadius(10)
-				.foregroundStyle(
-					segment.index.isMultiple(of: 2) ? Color.brandBlue : Color.brandSky
-				)
-				.opacity(selectedIndex == nil || isSelected ? 1.0 : 0.45)
+		GeometryReader { geo in
+			let size = geo.size.width
+			let radius = size / 2
+			let segmentAngle = 360.0 / Double(count)
+			let imageRadius = radius * ((1 + innerRadiusRatio) / 2)
+
+			ZStack {
+
+				// Background glow
+				Circle()
+					.fill(Color.brandBlue.opacity(0.08))
+					.blur(radius: 8)
+					.padding(-8)
+
+				// MARK: Chart
+				Chart(0..<count, id: \.self) { index in
+					let isSelected = index == selectedIndex
+
+					SectorMark(
+						angle: .value("Segment", 1),
+						innerRadius: .ratio(isSelected ? innerRadiusRatio - 0.04 : innerRadiusRatio),
+						outerRadius: .ratio(isSelected ? 1.0 : 0.95),
+						angularInset: 2
+					)
+					.cornerRadius(8)
+					.foregroundStyle(
+						index.isMultiple(of: 2)
+						? Color.brandBlue
+						: Color.brandSky
+					)
+					.opacity(selectedIndex == nil || isSelected ? 1.0 : 0.32)
+				}
+
+				// MARK: Images
+				ForEach(0..<count, id: \.self) { index in
+
+					let isSelected = index == selectedIndex
+
+					let midAngle = (Double(index) * segmentAngle)
+					+ (segmentAngle / 2)
+					- 90
+
+					let radians = midAngle * .pi / 180
+					let x = cos(radians) * imageRadius
+					let y = sin(radians) * imageRadius
+
+					Image(systemName: "star.fill")
+						.resizable()
+						.scaledToFit()
+						.frame(width: (selectedIndex == nil || isSelected ? 28 : 0), height: (selectedIndex == nil || isSelected ? 28 : 0))
+						.foregroundStyle(.white)
+						.background(
+							Circle()
+								.fill(Color.brandOrange)
+						)
+						.scaleEffect(selectedIndex == index ? 1.15 : 1.0)
+						.animation(.spring(response: 0.4), value: selectedIndex)
+						.offset(x: x, y: y)
+				}
 			}
-			.shadow(
-				color: selectedIndex != nil ? .white.opacity(0.6) : .clear,
-				radius: 12
-			)
 		}
 	}
 }

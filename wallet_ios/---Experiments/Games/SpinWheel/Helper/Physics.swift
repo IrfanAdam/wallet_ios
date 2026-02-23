@@ -53,7 +53,7 @@ struct RewardSpinnerPhysics {
 
 // MARK: - Private Simulation
 
-private extension RewardSpinnerPhysics {
+extension RewardSpinnerPhysics {
 	
 	func runFrictionSimulation(
 		startRotation: Double,

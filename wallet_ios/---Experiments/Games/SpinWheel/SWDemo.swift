@@ -46,13 +46,18 @@ struct SpinWheelContentView: View {
 					
 					RewardSpinner()
 				}
-				.navigationTitle("Spin & Win")
-				.navigationBarTitleDisplayMode(.inline)
 				.toolbar {
+					ToolbarItem(placement: .title) {
+						Text("Spin & Win")
+					}
 					ToolbarItem(placement: .topBarTrailing) {
-						Button("Done") { showSpinner = false }
+						Button(action: {showSpinner = false}) {
+							Image(systemName: "xmark")
+						}
+						.buttonStyle(.plain)
 					}
 				}
+				.toolbarTitleDisplayMode(.inlineLarge)
 			}
 			.presentationDetents([.medium])
 			.interactiveDismissDisabled()
