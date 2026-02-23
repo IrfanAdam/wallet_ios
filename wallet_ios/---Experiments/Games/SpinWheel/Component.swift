@@ -253,15 +253,6 @@ private extension RewardSpinner {
 		VStack(spacing: 12) {
 			HStack {
 				Button {
-					revealPrize()
-				} label: {
-					Label("Reveal Prize", systemImage: "dollarsign.circle.fill")
-						.frame(maxWidth: .infinity)
-				}
-				.buttonStyle(.borderedProminent)
-				.tint(.brandBlue)
-				
-				Button {
 					withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
 						selectedSegmentIndex = nil
 						spinnerState = .idle
@@ -271,6 +262,15 @@ private extension RewardSpinner {
 						.frame(maxWidth: .infinity)
 				}
 				.buttonStyle(.bordered)
+
+				Button {
+					revealPrize()
+				} label: {
+					Label("Rewards", systemImage: "dollarsign.circle.fill")
+						.frame(maxWidth: .infinity)
+				}
+				.buttonStyle(.borderedProminent)
+				.tint(.brandBlue)
 			}
 		}
 		.padding(.horizontal, 40)
