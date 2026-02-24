@@ -61,6 +61,7 @@
 		15D862792F4C7F57009E35AB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D862782F4C7F56009E35AB /* Model.swift */; };
 		15D8627B2F4C7F66009E35AB /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627A2F4C7F64009E35AB /* Body.swift */; };
 		15D8627D2F4C7F80009E35AB /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627C2F4C7F7E009E35AB /* Reel.swift */; };
+		15D862802F4D8CFD009E35AB /* Lever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627F2F4D8CFB009E35AB /* Lever.swift */; };
 		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
@@ -162,6 +163,7 @@
 		15D862782F4C7F56009E35AB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		15D8627A2F4C7F64009E35AB /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
 		15D8627C2F4C7F7E009E35AB /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
+		15D8627F2F4D8CFB009E35AB /* Lever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lever.swift; sourceTree = "<group>"; };
 		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 			children = (
 				15D862762F4C7F2A009E35AB /* View.swift */,
 				15D8627A2F4C7F64009E35AB /* Body.swift */,
+				15D8627F2F4D8CFB009E35AB /* Lever.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15C963F62F3395BA00960C5C /* EdgeAccesory.swift in Sources */,
 				15C963F02F33706500960C5C /* MorphModifier.swift in Sources */,
+				15D862802F4D8CFD009E35AB /* Lever.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,

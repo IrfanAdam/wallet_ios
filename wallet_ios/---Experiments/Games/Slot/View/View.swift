@@ -6,16 +6,12 @@ struct SlotMachineView: View {
 
 	var body: some View {
 		VStack(spacing: 40) {
-
-			Text("Slot Machine")
-				.font(.system(size: 36, weight: .bold, design: .rounded))
-				.foregroundStyle(.black)
-
 			SlotMachineBody(
 				reels: viewModel.reels,
 				symbols: viewModel.symbols,
 				isSpinning: viewModel.isSpinning,
-				reelHeight: viewModel.reelHeight
+				reelHeight: viewModel.reelHeight,
+				onLeverPulled: viewModel.spin
 			)
 
 			if viewModel.isWinner {
@@ -23,10 +19,10 @@ struct SlotMachineView: View {
 					.transition(.scale.combined(with: .opacity))
 			}
 
-			SpinButton(
-				isSpinning: viewModel.isSpinning,
-				action: viewModel.spin
-			)
+//			SpinButton(
+//				isSpinning: viewModel.isSpinning,
+//				action: viewModel.spin
+//			)
 		}
 		.padding()
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

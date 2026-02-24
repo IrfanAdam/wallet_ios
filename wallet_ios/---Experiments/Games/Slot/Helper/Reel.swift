@@ -10,12 +10,12 @@ struct ReelView: View {
 	var body: some View {
 		ZStack {
 
-			RoundedRectangle(cornerRadius: 12)
+			RoundedRectangle(cornerRadius: 24)
 				.fill(Color.white)
 				.frame(width: 90, height: reelHeight)
 
-			RoundedRectangle(cornerRadius: 12)
-				.strokeBorder(Color.black.opacity(0.2), lineWidth: 2)
+			RoundedRectangle(cornerRadius: 24)
+				.strokeBorder(Color.black.opacity(0.1), lineWidth: 1)
 				.frame(width: 90, height: reelHeight)
 
 			Text(symbols[currentIndex])
