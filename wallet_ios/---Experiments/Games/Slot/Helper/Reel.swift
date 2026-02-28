@@ -6,6 +6,9 @@ struct ReelView: View {
 	let currentIndex: Int
 	let isSpinning: Bool
 	let reelHeight: CGFloat
+	
+	@State private var wasSpinning = false
+	private let sounds = SlotSoundEngine.shared
 
 	var body: some View {
 		ZStack {
@@ -24,6 +27,16 @@ struct ReelView: View {
 				.transition(.push(from: .top))
 		}
 		.clipped(antialiased: true)
+		.onChange(of: isSpinning) { _, spinning in
+			if spinning {
+				sounds.startSpinLoop()
+			} else {
+				// Delay stop to match reel settling
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+					sounds.stopSpinLoop()
+				}
+			}
+		}
 	}
 }
 

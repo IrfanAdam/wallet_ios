@@ -1,23 +1,24 @@
 import SwiftUI
 
 #Preview {
-	SlotMachineDemo()
+	RewardGames()
 }
 
-struct SlotMachineDemo: View {
+struct RewardGames: View {
 	@State private var showSpinner = false
-
+	@State private var showSlot = false
+	
 	var body: some View {
 		NavigationStack {
 			ZStack {
 				Color(.systemGroupedBackground)
 					.ignoresSafeArea()
-
+				
 				VStack(spacing: 24) {
 					Image(systemName: "gift.circle.fill")
 						.font(.system(size: 72))
 						.foregroundStyle(Color.brandBlue)
-
+					
 					VStack(spacing: 8) {
 						Text("Daily Reward")
 							.font(.title.bold())
@@ -26,11 +27,23 @@ struct SlotMachineDemo: View {
 							.foregroundStyle(.secondary)
 							.multilineTextAlignment(.center)
 					}
-
+					
 					Button {
 						showSpinner = true
 					} label: {
-						Label("Spin Now", systemImage: "arrow.clockwise.circle.fill")
+						Label("Spin Wheel", systemImage: "arrow.clockwise.circle.fill")
+							.font(.headline)
+							.frame(maxWidth: .infinity)
+							.padding(.vertical, 4)
+					}
+					.buttonStyle(.borderedProminent)
+					.tint(.brandBlue)
+					.padding(.horizontal, 40)
+					
+					Button {
+						showSlot = true
+					} label: {
+						Label("Slot Machine", systemImage: "arrow.clockwise.circle.fill")
 							.font(.headline)
 							.frame(maxWidth: .infinity)
 							.padding(.vertical, 4)
@@ -47,8 +60,8 @@ struct SlotMachineDemo: View {
 				ZStack {
 					Color(.systemGroupedBackground)
 						.ignoresSafeArea()
-
-					SlotMachineView()
+					
+					RewardSpinner()
 				}
 				.toolbar {
 					ToolbarItem(placement: .title) {
@@ -56,6 +69,30 @@ struct SlotMachineDemo: View {
 					}
 					ToolbarItem(placement: .topBarTrailing) {
 						Button(action: {showSpinner = false}) {
+							Image(systemName: "xmark")
+						}
+						.buttonStyle(.plain)
+					}
+				}
+				.toolbarTitleDisplayMode(.inlineLarge)
+			}
+			.presentationDetents([.medium])
+			.interactiveDismissDisabled()
+		}
+		.sheet(isPresented: $showSlot) {
+			NavigationStack {
+				ZStack {
+					Color(.systemGroupedBackground)
+						.ignoresSafeArea()
+					
+					SlotMachineView()
+				}
+				.toolbar {
+					ToolbarItem(placement: .title) {
+						Text("Slot Machine")
+					}
+					ToolbarItem(placement: .topBarTrailing) {
+						Button(action: {showSlot = false}) {
 							Image(systemName: "xmark")
 						}
 						.buttonStyle(.plain)
