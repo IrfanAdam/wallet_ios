@@ -333,12 +333,8 @@
 			children = (
 				15C963F72F34EAF900960C5C /* EdgeAccesoryDemo.swift */,
 				15C963F52F3395B200960C5C /* EdgeAccesory.swift */,
-				15C963E12F30E98100960C5C /* GlassDemo.swift */,
-				15C963ED2F335BA200960C5C /* MorphingCap.swift */,
 				15C963EB2F335A9600960C5C /* SwipeToUnlock.swift */,
-				15C963E52F31F49700960C5C /* CustomGlass.swift */,
-				15C963E72F322BDC00960C5C /* PayProcessSheet.swift */,
-				15C963F12F33750900960C5C /* MorphDemo.swift */,
+				15C963ED2F335BA200960C5C /* MorphingCap.swift */,
 				15C963EF2F33706100960C5C /* MorphModifier.swift */,
 			);
 			path = "Slide To Close";
@@ -443,6 +439,7 @@
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
 				EE6623D82F4AF6E600F17D74 /* Games */,
+				EE6623EE2F543B8500F17D74 /* Custom Glass */,
 				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
@@ -622,6 +619,17 @@
 				EE6623E42F4B3B7E00F17D74 /* Pointer.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EE6623EE2F543B8500F17D74 /* Custom Glass */ = {
+			isa = PBXGroup;
+			children = (
+				15C963E52F31F49700960C5C /* CustomGlass.swift */,
+				15C963E72F322BDC00960C5C /* PayProcessSheet.swift */,
+				15C963F12F33750900960C5C /* MorphDemo.swift */,
+				15C963E12F30E98100960C5C /* GlassDemo.swift */,
+			);
+			path = "Custom Glass";
 			sourceTree = "<group>";
 		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {

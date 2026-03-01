@@ -35,23 +35,3 @@ struct EdgeAccessory: View {
 		)
 	}
 }
-
-struct NativeGlass2: UIViewRepresentable {
-	var tintColor: UIColor
-	var interactive: Bool
-
-	func makeUIView(context: Context) -> UIVisualEffectView {
-		let glass = UIGlassEffect(style: .clear)
-		glass.tintColor = tintColor
-		glass.isInteractive = interactive
-
-		return UIVisualEffectView(effect: glass)
-	}
-
-	func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-		if let glass = uiView.effect as? UIGlassEffect {
-			glass.tintColor = tintColor
-			glass.isInteractive = interactive
-		}
-	}
-}

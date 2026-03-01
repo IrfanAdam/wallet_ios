@@ -31,19 +31,6 @@ struct SwipeCap: View {
 				Image(systemName: "chevron.right.2")
 					.foregroundColor(.white)
 					.frame(width: capSize.width, height: trackHeight)
-//					.background(
-//						NativeGlass(
-//							tintColor: UIColor(
-//								red: 0 / 255,
-//								green: 111 / 255,
-//								blue: 235 / 255,
-//								alpha: 0.9
-//							),
-//							interactive: true,
-//							cornerRadius: 20
-//						)
-//						.frame(width: capSize.width, height: capSize.height)
-//					)
 			}
 		}
 		.frame(width: capSize.width, height: trackHeight)

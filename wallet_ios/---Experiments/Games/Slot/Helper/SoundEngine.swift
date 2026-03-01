@@ -255,10 +255,10 @@ final class SlotSoundEngine {
 			let white = Float.random(in: -1...1)
 			
 			// Heavy low-pass to remove metallic highs
-			lowPassed += 0.08 * (white - lowPassed)
+			lowPassed += 0.2 * (white - lowPassed)
 			
 			// Simple band emphasis in mid frequencies (cardboard texture)
-			bandPassed += 0.04 * (lowPassed - bandPassed)
+			bandPassed += 0.24 * (lowPassed - bandPassed)
 			
 			// Soft rolling amplitude movement (friction variation)
 			let slowWobble = 0.6 + 0.4 * sin(progress * .pi * Float.random(in: 1.5...3.0))
@@ -266,7 +266,7 @@ final class SlotSoundEngine {
 			// Smooth envelope (no sharp transient)
 			let env = pow(1 - progress, 1.8)
 			
-			data[i] = bandPassed * slowWobble * env * 0.95
+			data[i] = bandPassed * slowWobble * env * 3.2
 		}
 		
 		let player = AVAudioPlayerNode()

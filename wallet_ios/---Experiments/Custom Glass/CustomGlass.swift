@@ -91,3 +91,32 @@ struct CustomGlass_Previews: PreviewProvider {
 		CustomGlass()
 	}
 }
+
+
+
+// MARK: - Native UIKit Glass View (UIGlassEffect)
+struct NativeGlass: UIViewRepresentable {
+	var tintColor: UIColor
+	var interactive: Bool
+	var cornerRadius: CGFloat
+	
+	func makeUIView(context: Context) -> UIVisualEffectView {
+		let glass = UIGlassEffect(style: .clear) // native iOS 26+ glass style
+		glass.tintColor = tintColor
+		glass.isInteractive = interactive
+		
+		let view = UIVisualEffectView(effect: glass)
+		view.layer.cornerRadius = cornerRadius
+		view.clipsToBounds = true
+		
+		return view
+	}
+	
+	func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+		// Update tint/interactive dynamically if needed
+		if let glass = uiView.effect as? UIGlassEffect {
+			glass.tintColor = tintColor
+			glass.isInteractive = interactive
+		}
+	}
+}
