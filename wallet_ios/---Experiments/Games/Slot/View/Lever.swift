@@ -48,7 +48,7 @@ struct SlotLever: View {
 				
 				// MARK: - Progress Fill
 				VStack(spacing: 0) {
-					Color.blue.opacity(0.9)
+					Color.blue.opacity(0.8)
 						.frame(height: trackHeight * progress)
 						.clipShape(Capsule())
 					Spacer(minLength: 0)
@@ -61,7 +61,7 @@ struct SlotLever: View {
 						red: 0/255,
 						green: 111/255,
 						blue: 235/255,
-						alpha: 0.6
+						alpha: 0.8
 					),
 					interactive: true,
 					cornerRadius: knobSize / 2

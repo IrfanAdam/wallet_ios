@@ -98,9 +98,9 @@ final class SlotSoundEngine {
 	/// Quick soft tick — ratchet while dragging
 	func playTick() {
 		play(
-			frequency: 1400,
-			duration: 0.025,
-			volume: 0.35,
+			frequency: 600,
+			duration: 0.04,
+			volume: 0.3,
 			envelope: (0.001, 0.85),
 			shape: .square,
 			harmonics: [(2, 0.4), (3, 0.2)]

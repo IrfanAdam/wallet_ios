@@ -7,6 +7,7 @@ import SwiftUI
 struct RewardGames: View {
 	@State private var showSpinner = false
 	@State private var showSlot = false
+	@State private var showScratch = false
 	
 	var body: some View {
 		NavigationStack {
@@ -28,29 +29,29 @@ struct RewardGames: View {
 							.multilineTextAlignment(.center)
 					}
 					
-					Button {
+					RewardGameButton(
+						title: "Spin Wheel",
+						systemImage: "circle.dotted",
+						tint: .brandBlue
+					) {
 						showSpinner = true
-					} label: {
-						Label("Spin Wheel", systemImage: "arrow.clockwise.circle.fill")
-							.font(.headline)
-							.frame(maxWidth: .infinity)
-							.padding(.vertical, 4)
 					}
-					.buttonStyle(.borderedProminent)
-					.tint(.brandBlue)
-					.padding(.horizontal, 40)
 					
-					Button {
+					RewardGameButton(
+						title: "Slot Machine",
+						systemImage: "rectangle.3.group.fill",
+						tint: .brandBlue
+					) {
 						showSlot = true
-					} label: {
-						Label("Slot Machine", systemImage: "arrow.clockwise.circle.fill")
-							.font(.headline)
-							.frame(maxWidth: .infinity)
-							.padding(.vertical, 4)
 					}
-					.buttonStyle(.borderedProminent)
-					.tint(.brandBlue)
-					.padding(.horizontal, 40)
+					
+					RewardGameButton(
+						title: "Scratch Reveal",
+						systemImage: "sparkles.rectangle.stack.fill",
+						tint: .brandBlue
+					) {
+						showScratch = true
+					}
 				}
 			}
 			.navigationTitle("Rewards")
@@ -103,5 +104,67 @@ struct RewardGames: View {
 			.presentationDetents([.medium])
 			.interactiveDismissDisabled()
 		}
+		.sheet(isPresented: $showScratch) {
+			NavigationStack {
+				ZStack {
+					Color(.systemGroupedBackground)
+						.ignoresSafeArea()
+
+					ScratchRevealCard(revealThreshold: 0.5) {
+						VStack(spacing: 12) {
+							Text("🎉 You Won!")
+								.font(.largeTitle.bold())
+							
+							Text("Scratch 50% to reveal")
+								.font(.subheadline)
+								.foregroundStyle(.secondary)
+						}
+					}
+					.frame(width: 300, height: 180)
+				}
+				.toolbar {
+					ToolbarItem(placement: .title) {
+						Text("Scratch Reveal")
+					}
+					ToolbarItem(placement: .topBarTrailing) {
+						Button(action: {showScratch = false}) {
+							Image(systemName: "xmark")
+						}
+						.buttonStyle(.plain)
+					}
+				}
+				.toolbarTitleDisplayMode(.inlineLarge)
+			}
+			.presentationDetents([.medium])
+			.presentationDragIndicator(.hidden)   // hide grabber
+			.interactiveDismissDisabled()
+		}
+	}
+}
+
+
+struct RewardGameButton: View {
+	
+	let title: String
+	let systemImage: String
+	let tint: Color
+	let action: () -> Void
+	
+	var body: some View {
+		Button(action: action) {
+			HStack(spacing: 12) {
+				Image(systemName: systemImage)
+					.font(.system(size: 20, weight: .semibold))
+				
+				Text(title)
+					.font(.headline)
+			}
+			.frame(maxWidth: .infinity)
+			.padding(.vertical, 8)
+		}
+		.buttonStyle(.borderedProminent)
+		.tint(tint)
+		.clipShape(RoundedRectangle(cornerRadius: 16))
+		.padding(.horizontal, 40)
 	}
 }
