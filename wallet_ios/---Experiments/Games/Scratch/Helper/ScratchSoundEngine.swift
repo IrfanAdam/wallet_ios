@@ -99,8 +99,7 @@ final class ScratchSoundEngine {
 			
 			// ── 1. Per-sample smoothing ───────────────────────────────────
 			// Coefficient 0.004 ≈ 5 ms ramp at 44.1 kHz — smooth but responsive.
-			let smoothing: Float = ampTarget == 0 ? 0.02 : 0.004
-			currentAmplitude += smoothing * (ampTarget - currentAmplitude)
+			currentAmplitude  += 0.004 * (ampTarget   - currentAmplitude)
 			currentBrightness += 0.004 * (brightTarget - currentBrightness)
 			
 			// ── 2. White noise source ─────────────────────────────────────
@@ -125,36 +124,24 @@ final class ScratchSoundEngine {
 			// svfBand is now a band-pass centred at fc with gentle resonance.
 			
 			// ── 5. Mix body + texture ─────────────────────────────────────
-			// Body gives weight; texture gives the "paper grain" character.
-			// At low brightness the body dominates (soft, quiet scratch).
-			// At high brightness texture dominates (fast, bright scratch).
-			let bodyMix    = 1.0 - currentBrightness * 0.6
-			let textureMix = 0.3 + currentBrightness * 0.7
-			var mixed = lpState * bodyMix * 0.5 + svfBand * textureMix
+			// Raise the low-pass body contribution and narrow the texture mix
+			// so the SVF band-pass adds sheen rather than grit.
+			let bodyMix    = 0.75 - currentBrightness * 0.25   // 0.75 → 0.50
+			let textureMix = 0.15 + currentBrightness * 0.30   // 0.15 → 0.45
+			let mixed = lpState * bodyMix + svfBand * textureMix
 			
-			// ── 6. Soft clip ──────────────────────────────────────────────
-			// Prevents any stray peak from clipping hard while adding subtle
-			// warmth. tanh saturates smoothly unlike a hard limiter.
-			mixed = tanh(mixed * 1.4) / 1.4
+			// ── 6. Smooth saturation ──────────────────────────────────────
+			// x / (1 + |x|)  is a rational soft-clipper: it rolls off peaks
+			// gently with no discontinuity, producing none of the high-order
+			// harmonics that make tanh(x*1.4) or hard-clip sound rough.
+			// It also requires no transcendental function so it's cheap on
+			// the audio thread.
+			let saturated = mixed / (1.0 + abs(mixed))
 			
 			// ── 7. Apply amplitude envelope + hard gate ───────────────────
-			// Below this floor currentAmplitude is inaudible but the smoothing
-			// loop keeps it asymptotically approaching zero forever, leaking
-			// noise into a stationary touch. Snap to zero so output is silent.
-			if currentAmplitude < 0.0005 && ampTarget == 0 {
-				
-				// Fully silent frame
-				for ch in 0..<channelCount {
-					guard let data = abl[ch].mData else { continue }
-					data.assumingMemoryBound(to: Float.self)[frame] = 0
-				}
-				
-				continue
-			}
-		
-			let gain: Float = 2.5
-			let raw = mixed * currentAmplitude * gain
-			let output = max(-1.0, min(1.0, raw))
+			if currentAmplitude < 0.001 { currentAmplitude = 0 }
+			// Gain of 1.1 — enough presence without driving the saturator hard.
+			let output = saturated * currentAmplitude * 1.1
 			
 			// ── 8. Write to all channels ──────────────────────────────────
 			for ch in 0..<channelCount {
@@ -186,11 +173,8 @@ final class ScratchSoundEngine {
 	func stop() {
 		targetAmplitude  = 0
 		targetBrightness = 0
-		
-		// Immediate kill of amplitude
-		currentAmplitude = 0
-		
-		// Reset filters completely
+		// Reset filter state — any energy stored in lpState / svfBand would
+		// otherwise ring through into the next touch even at zero amplitude.
 		lpState  = 0
 		svfLow   = 0
 		svfBand  = 0

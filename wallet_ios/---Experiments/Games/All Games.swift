@@ -8,6 +8,7 @@ struct RewardGames: View {
 	@State private var showSpinner = false
 	@State private var showSlot = false
 	@State private var showScratch = false
+	@State private var showQuiz = false
 	
 	var body: some View {
 		NavigationStack {
@@ -15,7 +16,7 @@ struct RewardGames: View {
 				Color(.systemGroupedBackground)
 					.ignoresSafeArea()
 				
-				VStack(spacing: 24) {
+				VStack(spacing: 16) {
 					Image(systemName: "gift.circle.fill")
 						.font(.system(size: 72))
 						.foregroundStyle(Color.brandBlue)
@@ -52,92 +53,47 @@ struct RewardGames: View {
 					) {
 						showScratch = true
 					}
+					
+					RewardGameButton(
+						title: "Quiz",
+						systemImage: "questionmark.circle.fill",
+						tint: .brandBlue
+					) {
+						showQuiz = true
+					}
 				}
 			}
 			.navigationTitle("Rewards")
 		}
 		.sheet(isPresented: $showSpinner) {
-			NavigationStack {
-				ZStack {
-					Color(.systemGroupedBackground)
-						.ignoresSafeArea()
-					
-					RewardSpinner()
-				}
-				.toolbar {
-					ToolbarItem(placement: .title) {
-						Text("Slot Machine")
-					}
-					ToolbarItem(placement: .topBarTrailing) {
-						Button(action: {showSpinner = false}) {
-							Image(systemName: "xmark")
-						}
-						.buttonStyle(.plain)
-					}
-				}
-				.toolbarTitleDisplayMode(.inlineLarge)
+			RewardSheetContainer(title: "Spin Wheel") {
+				RewardSpinner()
 			}
-			.presentationDetents([.medium])
-			.interactiveDismissDisabled()
 		}
 		.sheet(isPresented: $showSlot) {
-			NavigationStack {
-				ZStack {
-					Color(.systemGroupedBackground)
-						.ignoresSafeArea()
-					
-					SlotMachineView()
-				}
-				.toolbar {
-					ToolbarItem(placement: .title) {
-						Text("Slot Machine")
-					}
-					ToolbarItem(placement: .topBarTrailing) {
-						Button(action: {showSlot = false}) {
-							Image(systemName: "xmark")
-						}
-						.buttonStyle(.plain)
-					}
-				}
-				.toolbarTitleDisplayMode(.inlineLarge)
+			RewardSheetContainer(title: "Slot Machine") {
+				SlotMachineView()
 			}
-			.presentationDetents([.medium])
-			.interactiveDismissDisabled()
 		}
 		.sheet(isPresented: $showScratch) {
-			NavigationStack {
-				ZStack {
-					Color(.systemGroupedBackground)
-						.ignoresSafeArea()
-
-					ScratchRevealCard(revealThreshold: 0.5) {
-						VStack(spacing: 12) {
-							Text("🎉 You Won!")
-								.font(.largeTitle.bold())
-							
-							Text("Scratch 50% to reveal")
-								.font(.subheadline)
-								.foregroundStyle(.secondary)
-						}
-					}
-					.frame(width: 300, height: 180)
-				}
-				.toolbar {
-					ToolbarItem(placement: .title) {
-						Text("Scratch Reveal")
-					}
-					ToolbarItem(placement: .topBarTrailing) {
-						Button(action: {showScratch = false}) {
-							Image(systemName: "xmark")
-						}
-						.buttonStyle(.plain)
+			RewardSheetContainer(title: "Scratch Reveal") {
+				ScratchRevealCard(revealThreshold: 0.8) {
+					VStack(spacing: 12) {
+						Text("🎉 You Won!")
+							.font(.largeTitle.bold())
+						
+						Text("Scratch 50% to reveal")
+							.font(.subheadline)
+							.foregroundStyle(.secondary)
 					}
 				}
-				.toolbarTitleDisplayMode(.inlineLarge)
+				.frame(width: 300, height: 180)
 			}
-			.presentationDetents([.medium])
-			.presentationDragIndicator(.hidden)   // hide grabber
-			.interactiveDismissDisabled()
+		}
+		.sheet(isPresented: $showQuiz) {
+			RewardSheetContainer(title: "Answer to Win") {
+				QuizDemoView()
+			}
 		}
 	}
 }
@@ -160,11 +116,59 @@ struct RewardGameButton: View {
 					.font(.headline)
 			}
 			.frame(maxWidth: .infinity)
-			.padding(.vertical, 8)
+			.padding(.vertical, 4)
 		}
 		.buttonStyle(.borderedProminent)
 		.tint(tint)
 		.clipShape(RoundedRectangle(cornerRadius: 16))
 		.padding(.horizontal, 40)
+	}
+}
+
+struct RewardSheetContainer<Content: View>: View {
+	
+	let title: String
+	let detents: Set<PresentationDetent>
+	let content: Content
+	
+	@Environment(\.dismiss) private var dismiss
+	
+	init(
+		title: String,
+		detents: Set<PresentationDetent> = [.medium],
+		@ViewBuilder content: () -> Content
+	) {
+		self.title = title
+		self.detents = detents
+		self.content = content()
+	}
+	
+	var body: some View {
+		NavigationStack {
+			ZStack {
+				Color(.systemGroupedBackground)
+					.ignoresSafeArea()
+				
+				content
+			}
+			.toolbar {
+				ToolbarItem(placement: .principal) {
+					Text(title)
+						.font(.headline)
+				}
+				ToolbarItem(placement: .topBarTrailing) {
+					Button {
+						dismiss()
+					} label: {
+						Image(systemName: "xmark")
+					}
+					.buttonStyle(.plain)
+				}
+			}
+			.toolbarTitleDisplayMode(.inline)
+		}
+		.presentationDetents(detents)
+		.presentationDragIndicator(.hidden)
+		.interactiveDismissDisabled()
 	}
 }

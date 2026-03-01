@@ -97,7 +97,7 @@
 		EE6623F22F54502300F17D74 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F12F54502100F17D74 /* Canvas.swift */; };
 		EE6623F42F54505D00F17D74 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F32F54505900F17D74 /* ViewModel.swift */; };
 		EE6623F62F54507000F17D74 /* ScratchLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F52F54506D00F17D74 /* ScratchLayer.swift */; };
-		EE6623F82F54508900F17D74 /* Reveal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F72F54508700F17D74 /* Reveal.swift */; };
+		EE6623F82F54508900F17D74 /* ScratchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F72F54508700F17D74 /* ScratchComponent.swift */; };
 		EE6623FA2F5450A000F17D74 /* ScratchDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F92F54509D00F17D74 /* ScratchDemo.swift */; };
 		EE6623FC2F545C0900F17D74 /* ScratchSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
@@ -112,6 +112,7 @@
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
+		EEFF6F252F5472B200E4CCF1 /* QuizProgressDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFF6F242F5472A800E4CCF1 /* QuizProgressDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,7 +208,7 @@
 		EE6623F12F54502100F17D74 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		EE6623F32F54505900F17D74 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EE6623F52F54506D00F17D74 /* ScratchLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchLayer.swift; sourceTree = "<group>"; };
-		EE6623F72F54508700F17D74 /* Reveal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reveal.swift; sourceTree = "<group>"; };
+		EE6623F72F54508700F17D74 /* ScratchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchComponent.swift; sourceTree = "<group>"; };
 		EE6623F92F54509D00F17D74 /* ScratchDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchDemo.swift; sourceTree = "<group>"; };
 		EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchSoundEngine.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
+		EEFF6F242F5472A800E4CCF1 /* QuizProgressDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +593,7 @@
 			children = (
 				EE6623E72F53363600F17D74 /* All Games.swift */,
 				EE6623E62F5335A200F17D74 /* Scratch */,
+				EEFF6F232F5472A200E4CCF1 /* Quiz */,
 				15D862722F4C7EAB009E35AB /* Slot */,
 				EE6623D92F4AFA0400F17D74 /* SpinWheel */,
 			);
@@ -620,12 +623,9 @@
 			isa = PBXGroup;
 			children = (
 				EE6623F92F54509D00F17D74 /* ScratchDemo.swift */,
-				EE6623F72F54508700F17D74 /* Reveal.swift */,
-				EE6623F52F54506D00F17D74 /* ScratchLayer.swift */,
-				EE6623F12F54502100F17D74 /* Canvas.swift */,
-				EE6623EF2F544FE700F17D74 /* Point.swift */,
-				EE6623F32F54505900F17D74 /* ViewModel.swift */,
-				EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */,
+				EE6623F72F54508700F17D74 /* ScratchComponent.swift */,
+				EEFF6F222F546C8800E4CCF1 /* View */,
+				EEFF6F212F546C7700E4CCF1 /* Helper */,
 			);
 			path = Scratch;
 			sourceTree = "<group>";
@@ -708,6 +708,33 @@
 			path = "Main Views";
 			sourceTree = "<group>";
 		};
+		EEFF6F212F546C7700E4CCF1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623F32F54505900F17D74 /* ViewModel.swift */,
+				EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		EEFF6F222F546C8800E4CCF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623F52F54506D00F17D74 /* ScratchLayer.swift */,
+				EE6623F12F54502100F17D74 /* Canvas.swift */,
+				EE6623EF2F544FE700F17D74 /* Point.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EEFF6F232F5472A200E4CCF1 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				EEFF6F242F5472A800E4CCF1 /* QuizProgressDemo.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -785,7 +812,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE6623F82F54508900F17D74 /* Reveal.swift in Sources */,
+				EE6623F82F54508900F17D74 /* ScratchComponent.swift in Sources */,
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
 				15C963F22F33750E00960C5C /* MorphDemo.swift in Sources */,
 				EE9517722F2F85760007F91E /* Navigator.swift in Sources */,
@@ -813,6 +840,7 @@
 				EE10F2192F2787B600944690 /* Page 2.swift in Sources */,
 				15D8626B2F445D66009E35AB /* ComputeEngine.swift in Sources */,
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
+				EEFF6F252F5472B200E4CCF1 /* QuizProgressDemo.swift in Sources */,
 				15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */,
 				15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,

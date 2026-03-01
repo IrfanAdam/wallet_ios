@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 // MARK: - Reward Spinner View
 
@@ -236,6 +237,7 @@ private extension RewardSpinner {
 				}
 				
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+					AudioServicesPlaySystemSound(1158)
 					let haptic = UIImpactFeedbackGenerator(style: .heavy)
 					haptic.prepare()
 					haptic.impactOccurred()

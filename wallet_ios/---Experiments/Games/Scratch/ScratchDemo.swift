@@ -13,7 +13,7 @@ struct ScratchRevealDemo: View {
 		VStack(spacing: 32) {
 			Spacer()
 			
-			ScratchRevealCard(revealThreshold: 0.6) {
+			ScratchRevealCard(revealThreshold: 0.4) {
 				VStack(spacing: 12) {
 					Text("🎉 You Won!")
 						.font(.largeTitle.bold())
