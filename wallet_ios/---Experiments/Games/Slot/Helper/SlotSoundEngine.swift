@@ -266,7 +266,7 @@ final class SlotSoundEngine {
 			// Smooth envelope (no sharp transient)
 			let env = pow(1 - progress, 1.8)
 			
-			data[i] = bandPassed * slowWobble * env * 3.2
+			data[i] = bandPassed * slowWobble * env * 2.6
 		}
 		
 		let player = AVAudioPlayerNode()

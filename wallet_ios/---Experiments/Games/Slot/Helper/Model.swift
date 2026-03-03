@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import AudioToolbox
 
 final class SlotMachineViewModel: ObservableObject {
 
@@ -10,6 +11,21 @@ final class SlotMachineViewModel: ObservableObject {
 
 	let symbols = ["🍒", "🍋", "🍊", "🍉", "⭐️", "💎", "7️⃣"]
 	let reelHeight: CGFloat = 120
+
+	init() {
+		// Start in a random non-winning state
+		var initial: [Int]
+		repeat {
+			initial = [
+				Int.random(in: 0..<symbols.count),
+				Int.random(in: 0..<symbols.count),
+				Int.random(in: 0..<symbols.count)
+			]
+		} while initial[0] == initial[1] && initial[1] == initial[2]
+
+		self.reels = initial
+		self.targetReels = initial
+	}
 
 	var isWinner: Bool {
 		!isSpinning &&
@@ -24,6 +40,9 @@ final class SlotMachineViewModel: ObservableObject {
 		isSpinning = true
 
 		let shouldWin = Int.random(in: 0..<4) == 0  // 25% chance
+		let reel1Duration = 4.0
+		let reel2Duration = 3.9
+		let reel3Duration = 4.3
 
 		if shouldWin {
 			let winningIndex = Int.random(in: 0..<symbols.count)
@@ -36,22 +55,32 @@ final class SlotMachineViewModel: ObservableObject {
 			]
 		}
 
-		animateReel(index: 0, duration: 4.0)
+		animateReel(index: 0, duration: reel1Duration)
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-			self.animateReel(index: 1, duration: 3.9)
+			self.animateReel(index: 1, duration: reel2Duration)
 		}
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-			self.animateReel(index: 2, duration: 4.3)
+			self.animateReel(index: 2, duration: reel3Duration)
 		}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+		let finalCompletion = 0.6 + reel3Duration
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + finalCompletion + 0.05) {
 			self.isSpinning = false
 
 			if self.isWinner {
 				UINotificationFeedbackGenerator()
 					.notificationOccurred(.success)
+
+				AudioServicesPlaySystemSound(1025)
+			} else {
+
+				UIImpactFeedbackGenerator(style: .light)
+					.impactOccurred(intensity: 0.6)
+
+				AudioServicesPlaySystemSound(1026)
 			}
 		}
 	}

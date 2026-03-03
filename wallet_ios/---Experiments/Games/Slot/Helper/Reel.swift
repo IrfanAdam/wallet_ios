@@ -32,7 +32,7 @@ struct ReelView: View {
 				sounds.startSpinLoop()
 			} else {
 				// Delay stop to match reel settling
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
 					sounds.stopSpinLoop()
 				}
 			}

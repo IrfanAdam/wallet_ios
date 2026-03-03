@@ -17,12 +17,9 @@ struct SlotMachineView: View {
 			if viewModel.isWinner {
 				WinnerBanner()
 					.transition(.scale.combined(with: .opacity))
+			} else {
+				Text(viewModel.isSpinning ? "Spinning..." : "Drag to spin")
 			}
-			
-			//			SpinButton(
-			//				isSpinning: viewModel.isSpinning,
-			//				action: viewModel.spin
-			//			)
 		}
 		.padding()
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

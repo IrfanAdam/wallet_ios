@@ -139,10 +139,23 @@ final class ScratchSoundEngine {
 			let saturated = mixed / (1.0 + abs(mixed))
 			
 			// ── 7. Apply amplitude envelope + hard gate ───────────────────
-			if currentAmplitude < 0.001 { currentAmplitude = 0 }
-			// Gain of 1.1 — enough presence without driving the saturator hard.
-			let output = saturated * currentAmplitude * 1.1
+			if currentAmplitude < 0.002 {
+				currentAmplitude = 0
+				// Safe to reset here — we're ON the audio thread
+				lpState = 0; svfLow = 0; svfBand = 0
+			}
+
+			// Early exit: skip all DSP and write silence when fully quiet
+			guard currentAmplitude > 0 else {
+				for ch in 0..<channelCount {
+					guard let data = abl[ch].mData else { continue }
+					data.assumingMemoryBound(to: Float.self)[frame] = 0
+				}
+				continue
+			}
 			
+			let output = saturated * currentAmplitude * 1.1
+
 			// ── 8. Write to all channels ──────────────────────────────────
 			for ch in 0..<channelCount {
 				guard let data = abl[ch].mData else { continue }
@@ -164,20 +177,16 @@ final class ScratchSoundEngine {
 		let v = Float(velocity.clamped(to: 0...1))
 		// Amplitude: audible even at low speed, loud at high speed.
 		// sqrt curve keeps slow scratches from feeling silent.
-		targetAmplitude  = 0.18 + sqrt(v) * 0.55
 		// Brightness: linear — directly controls SVF frequency.
+		targetAmplitude  = sqrt(v) * 0.72
+
 		targetBrightness = v
 	}
-	
+
 	/// Call from `touchesEnded` / `touchesCancelled`.
 	func stop() {
 		targetAmplitude  = 0
 		targetBrightness = 0
-		// Reset filter state — any energy stored in lpState / svfBand would
-		// otherwise ring through into the next touch even at zero amplitude.
-		lpState  = 0
-		svfLow   = 0
-		svfBand  = 0
 	}
 }
 

@@ -54,7 +54,6 @@
 		15D8626B2F445D66009E35AB /* ComputeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626A2F445D61009E35AB /* ComputeEngine.swift */; };
 		15D8626D2F445DC3009E35AB /* StackSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8626C2F445DBF009E35AB /* StackSetup.swift */; };
 		15D862712F4485AB009E35AB /* ConfigureDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D862702F4485A7009E35AB /* ConfigureDemo.swift */; };
-		15D862772F4C7F2E009E35AB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D862762F4C7F2A009E35AB /* Button.swift */; };
 		15D862792F4C7F57009E35AB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D862782F4C7F56009E35AB /* Model.swift */; };
 		15D8627B2F4C7F66009E35AB /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627A2F4C7F64009E35AB /* Body.swift */; };
 		15D8627D2F4C7F80009E35AB /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627C2F4C7F7E009E35AB /* Reel.swift */; };
@@ -98,7 +97,6 @@
 		EE6623F42F54505D00F17D74 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F32F54505900F17D74 /* ViewModel.swift */; };
 		EE6623F62F54507000F17D74 /* ScratchLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F52F54506D00F17D74 /* ScratchLayer.swift */; };
 		EE6623F82F54508900F17D74 /* ScratchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F72F54508700F17D74 /* ScratchComponent.swift */; };
-		EE6623FA2F5450A000F17D74 /* ScratchDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F92F54509D00F17D74 /* ScratchDemo.swift */; };
 		EE6623FC2F545C0900F17D74 /* ScratchSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
@@ -164,7 +162,6 @@
 		15D8626A2F445D61009E35AB /* ComputeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeEngine.swift; sourceTree = "<group>"; };
 		15D8626C2F445DBF009E35AB /* StackSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackSetup.swift; sourceTree = "<group>"; };
 		15D862702F4485A7009E35AB /* ConfigureDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureDemo.swift; sourceTree = "<group>"; };
-		15D862762F4C7F2A009E35AB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		15D862782F4C7F56009E35AB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		15D8627A2F4C7F64009E35AB /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
 		15D8627C2F4C7F7E009E35AB /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
@@ -209,7 +206,6 @@
 		EE6623F32F54505900F17D74 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EE6623F52F54506D00F17D74 /* ScratchLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchLayer.swift; sourceTree = "<group>"; };
 		EE6623F72F54508700F17D74 /* ScratchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchComponent.swift; sourceTree = "<group>"; };
-		EE6623F92F54509D00F17D74 /* ScratchDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchDemo.swift; sourceTree = "<group>"; };
 		EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchSoundEngine.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
@@ -419,7 +415,6 @@
 		15D8627E2F4C8208009E35AB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				15D862762F4C7F2A009E35AB /* Button.swift */,
 				15D8627A2F4C7F64009E35AB /* Body.swift */,
 				15D8627F2F4D8CFB009E35AB /* Lever.swift */,
 			);
@@ -622,7 +617,6 @@
 		EE6623E62F5335A200F17D74 /* Scratch */ = {
 			isa = PBXGroup;
 			children = (
-				EE6623F92F54509D00F17D74 /* ScratchDemo.swift */,
 				EE6623F72F54508700F17D74 /* ScratchComponent.swift */,
 				EEFF6F222F546C8800E4CCF1 /* View */,
 				EEFF6F212F546C7700E4CCF1 /* Helper */,
@@ -881,7 +875,6 @@
 				15C963FE2F361D6100960C5C /* LogicHelper.swift in Sources */,
 				15C963CF2F213CD500960C5C /* OneSegmentChart.swift in Sources */,
 				EE6623ED2F533AC700F17D74 /* SlotSoundEngine.swift in Sources */,
-				EE6623FA2F5450A000F17D74 /* ScratchDemo.swift in Sources */,
 				15C964222F3CA14E00960C5C /* CirclesDemo.swift in Sources */,
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
 				15C963EC2F335A9F00960C5C /* SwipeToUnlock.swift in Sources */,
@@ -897,7 +890,6 @@
 				EE6623E02F4B040A00F17D74 /* Config.swift in Sources */,
 				EE6623F62F54507000F17D74 /* ScratchLayer.swift in Sources */,
 				EE6623FC2F545C0900F17D74 /* ScratchSoundEngine.swift in Sources */,
-				15D862772F4C7F2E009E35AB /* Button.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
 				EE6623F22F54502300F17D74 /* Canvas.swift in Sources */,
