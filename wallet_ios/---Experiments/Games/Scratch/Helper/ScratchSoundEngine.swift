@@ -12,181 +12,76 @@ import AVFoundation
 ///   never from a per-buffer frame index that resets to 0.
 /// - Amplitude and brightness smoothing uses a per-sample lerp so there are
 ///   no step discontinuities when `update(velocity:)` is called mid-buffer.
+
 final class ScratchSoundEngine {
-	
 	static let shared = ScratchSoundEngine()
-	
-	// MARK: - Engine
-	
-	private let engine     = AVAudioEngine()
+
+	private let engine = AVAudioEngine()
 	private var sourceNode: AVAudioSourceNode!
-	
-	// MARK: - Modulation targets (written on main thread, read on audio thread)
-	// Both are `_Atomic`-equivalent via simple Float — safe because we only
-	// ever do single-word reads/writes and can tolerate one torn frame.
-	
-	private var targetAmplitude:  Float = 0
+
+	// Main-thread targets
+	private var targetAmplitude: Float = 0
 	private var targetBrightness: Float = 0
-	
-	// MARK: - Audio-thread-only state (never touched from main thread)
-	
-	private var currentAmplitude:  Float = 0
-	private var currentBrightness: Float = 0
-	
-	/// One-pole low-pass: shapes white noise into "paper body" rumble.
-	private var lpState: Float = 0
-	
-	/// State-variable band-pass filter (SVF) — stable across the full
-	/// frequency range and requires no coefficient table.
-	/// State variables:
-	private var svfLow:  Float = 0   // low-pass output
-	private var svfBand: Float = 0   // band-pass output (the one we use)
-	
-	/// Continuous phase for any future tonal layer — kept so adding one
-	/// later won't introduce the buffer-boundary discontinuity that caused
-	/// the original static.
-	private var phase: Float = 0
-	
-	// MARK: - Init
-	
+
+	// Audio-thread state
+	private var amp: Float = 0
+	private var brightness: Float = 0
+	private var lp1: Float = 0   // body (low-pass)
+	private var lp2: Float = 0   // texture (second pole)
+
 	private init() {
-		configureSession()
-		buildGraph()
-	}
-	
-	// MARK: - Session
-	
-	private func configureSession() {
-		let session = AVAudioSession.sharedInstance()
-		try? session.setCategory(.ambient, options: .mixWithOthers)
-		try? session.setActive(true)
-	}
-	
-	// MARK: - Graph
-	
-	private func buildGraph() {
-		let outputFormat = engine.outputNode.inputFormat(forBus: 0)
-		let sampleRate   = Float(outputFormat.sampleRate)
-		
-		sourceNode = AVAudioSourceNode(format: outputFormat) {
-			[weak self] _, _, frameCount, audioBufferList -> OSStatus in
+		try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+		try? AVAudioSession.sharedInstance().setActive(true)
+
+		let format = engine.outputNode.inputFormat(forBus: 0)
+
+		sourceNode = AVAudioSourceNode(format: format) { [weak self] _, _, frameCount, abl -> OSStatus in
 			guard let self else { return noErr }
-			self.renderFrames(Int(frameCount),
-												sampleRate: sampleRate,
-												into: audioBufferList)
+			let ptr = UnsafeMutableAudioBufferListPointer(abl)
+			guard let raw = ptr[0].mData else { return noErr }
+			let buf = raw.assumingMemoryBound(to: Float.self)
+			let n = Int(frameCount)
+
+			let ampTarget  = self.targetAmplitude
+			let briTarget  = self.targetBrightness
+
+			for i in 0..<n {
+				self.amp        += 0.004 * (ampTarget - self.amp)
+				self.brightness += 0.004 * (briTarget - self.brightness)
+
+				// Snap to zero — prevents denormal spin and re-trigger glitch
+				if self.amp < 0.002 { self.amp = 0; self.lp1 = 0; self.lp2 = 0 }
+
+				guard self.amp > 0 else { buf[i] = 0; continue }
+
+				let white = Float.random(in: -1...1)
+				self.lp1 += 0.157 * (white   - self.lp1)
+				let fc2   = 0.05 + self.brightness * 0.35
+				self.lp2 += fc2   * (self.lp1 - self.lp2)
+
+				buf[i] = (self.lp1 * 0.7 + (self.lp1 - self.lp2) * 0.5) * self.amp
+			}
+
+			// Copy ch0 to all remaining channels
+			for ch in 1..<ptr.count {
+				guard let dst = ptr[ch].mData else { continue }
+				memcpy(dst, raw, n * MemoryLayout<Float>.size)
+			}
 			return noErr
 		}
-		
+
 		engine.attach(sourceNode)
-		engine.connect(sourceNode, to: engine.mainMixerNode, format: outputFormat)
+		engine.connect(sourceNode, to: engine.mainMixerNode, format: format)
 		try? engine.start()
 	}
-	
-	// MARK: - Render
-	
-	private func renderFrames(_ count: Int,
-														sampleRate: Float,
-														into audioBufferList: UnsafeMutablePointer<AudioBufferList>) {
-		
-		let abl        = UnsafeMutableAudioBufferListPointer(audioBufferList)
-		let channelCount = abl.count
-		
-		// Pre-fetch targets once — avoids repeated volatile reads inside the loop.
-		let ampTarget   = targetAmplitude
-		let brightTarget = targetBrightness
-		
-		for frame in 0..<count {
-			
-			// ── 1. Per-sample smoothing ───────────────────────────────────
-			// Coefficient 0.004 ≈ 5 ms ramp at 44.1 kHz — smooth but responsive.
-			currentAmplitude  += 0.004 * (ampTarget   - currentAmplitude)
-			currentBrightness += 0.004 * (brightTarget - currentBrightness)
-			
-			// ── 2. White noise source ─────────────────────────────────────
-			let white = Float.random(in: -1.0...1.0)
-			
-			// ── 3. One-pole low-pass (body layer) ─────────────────────────
-			// Cutoff ~1.2 kHz at 44.1 kHz.  coefficient = 1 - e^(-2π·fc/fs)
-			// Pre-baked: fc=1200, fs=44100 → coeff ≈ 0.157
-			let lpCoeff: Float = 0.157
-			lpState += lpCoeff * (white - lpState)
-			
-			// ── 4. State-variable band-pass (texture layer) ───────────────
-			// SVF from Hal Chamberlin / Andrew Simper — numerically stable.
-			// Frequency sweeps from ~800 Hz (brightness=0) to ~3500 Hz (brightness=1).
-			let fc    = 800 + currentBrightness * 2700     // Hz
-			let f     = 2.0 * sin(Float.pi * fc / sampleRate)   // SVF drive
-			let q: Float = 0.55   // resonance — lower = wider / less ringy
-			
-			svfLow  = svfLow  + f * svfBand
-			let high = lpState - svfLow - q * svfBand
-			svfBand = f * high + svfBand
-			// svfBand is now a band-pass centred at fc with gentle resonance.
-			
-			// ── 5. Mix body + texture ─────────────────────────────────────
-			// Raise the low-pass body contribution and narrow the texture mix
-			// so the SVF band-pass adds sheen rather than grit.
-			let bodyMix    = 0.75 - currentBrightness * 0.25   // 0.75 → 0.50
-			let textureMix = 0.15 + currentBrightness * 0.30   // 0.15 → 0.45
-			let mixed = lpState * bodyMix + svfBand * textureMix
-			
-			// ── 6. Smooth saturation ──────────────────────────────────────
-			// x / (1 + |x|)  is a rational soft-clipper: it rolls off peaks
-			// gently with no discontinuity, producing none of the high-order
-			// harmonics that make tanh(x*1.4) or hard-clip sound rough.
-			// It also requires no transcendental function so it's cheap on
-			// the audio thread.
-			let saturated = mixed / (1.0 + abs(mixed))
-			
-			// ── 7. Apply amplitude envelope + hard gate ───────────────────
-			if currentAmplitude < 0.002 {
-				currentAmplitude = 0
-				// Safe to reset here — we're ON the audio thread
-				lpState = 0; svfLow = 0; svfBand = 0
-			}
 
-			// Early exit: skip all DSP and write silence when fully quiet
-			guard currentAmplitude > 0 else {
-				for ch in 0..<channelCount {
-					guard let data = abl[ch].mData else { continue }
-					data.assumingMemoryBound(to: Float.self)[frame] = 0
-				}
-				continue
-			}
-			
-			let output = saturated * currentAmplitude * 1.1
+	func start()  { targetAmplitude = 0 }
+	func stop()   { targetAmplitude = 0; targetBrightness = 0 }
 
-			// ── 8. Write to all channels ──────────────────────────────────
-			for ch in 0..<channelCount {
-				guard let data = abl[ch].mData else { continue }
-				data.assumingMemoryBound(to: Float.self)[frame] = output
-			}
-		}
-	}
-	
-	// MARK: - Public API
-	
-	/// Call once when the scratch surface appears.
-	func start() {
-		targetAmplitude = 0
-	}
-	
-	/// Call from `touchesMoved`.
-	/// - Parameter velocity: Normalised finger speed, 0 (still) … 1 (fast).
 	func update(velocity: CGFloat) {
-		let v = Float(velocity.clamped(to: 0...1))
-		// Amplitude: audible even at low speed, loud at high speed.
-		// sqrt curve keeps slow scratches from feeling silent.
-		// Brightness: linear — directly controls SVF frequency.
+		let v = Float(min(max(velocity, 0), 1))
 		targetAmplitude  = sqrt(v) * 0.72
-
 		targetBrightness = v
-	}
-
-	/// Call from `touchesEnded` / `touchesCancelled`.
-	func stop() {
-		targetAmplitude  = 0
-		targetBrightness = 0
 	}
 }
 

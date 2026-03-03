@@ -77,7 +77,7 @@ struct RewardGames: View {
 		}
 		.sheet(isPresented: $showScratch) {
 			RewardSheetContainer(title: "Scratch Reveal") {
-				ScratchRevealCard(revealThreshold: 0.8) {
+				ScratchRevealCard(revealThreshold: 0.36) {
 					VStack(spacing: 12) {
 						Text("🎉 You Won!")
 							.font(.largeTitle.bold())

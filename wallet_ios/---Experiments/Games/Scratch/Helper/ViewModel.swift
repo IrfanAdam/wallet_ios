@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import AudioToolbox
 
 /// Owns scratch state and determines when the reveal threshold is crossed.
 ///
@@ -137,6 +138,9 @@ final class ScratchViewModel: ObservableObject {
 		if fraction >= revealThreshold {
 			withAnimation(.spring(response: 0.45, dampingFraction: 0.82)) {
 				isFullyRevealed = true
+			}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
+				AudioServicesPlaySystemSound(1407)
 			}
 		}
 	}
