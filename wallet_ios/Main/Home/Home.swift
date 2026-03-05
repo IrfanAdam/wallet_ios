@@ -58,6 +58,19 @@ struct HomeView: View {
 				Button("Open Global Sheet") {
 					sheetController.present()
 				}
+
+
+				NavigationLink {
+					// Add your destination view here
+					RewardGames()
+				} label: {
+					Text("View My Rewards")
+						.font(.headline)
+						.foregroundStyle(.white)
+						.padding()
+						.background(Color.blue)
+						.cornerRadius(12)
+				}
 			}
 			.navigationTitle("Home")
 			.navigationBarTitleDisplayMode(.inline)

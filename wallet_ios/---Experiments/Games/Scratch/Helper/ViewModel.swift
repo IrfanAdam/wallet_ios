@@ -140,7 +140,7 @@ final class ScratchViewModel: ObservableObject {
 				isFullyRevealed = true
 			}
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
-				AudioServicesPlaySystemSound(1407)
+				AudioServicesPlaySystemSound(1158)
 			}
 		}
 	}
