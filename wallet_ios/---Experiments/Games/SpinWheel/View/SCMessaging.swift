@@ -1,6 +1,11 @@
 import SwiftUI
 
-// RewardSpinnerMessagingView.swift
+// MARK: - Animations
+
+private let msg = MessagingConfig()
+private let dismissAnimation = Animation.spring(response: msg.dismissSpringResponse, dampingFraction: msg.dismissSpringDamping)
+
+// MARK: - View
 
 struct RewardSpinnerMessagingView: View {
 
@@ -10,7 +15,7 @@ struct RewardSpinnerMessagingView: View {
 		ZStack {
 			if case .completed = store.spinnerState {
 				panelContainer { completionContent }
-					.transition(.scale(scale: 0.85).combined(with: .opacity))
+					.transition(.scale(scale: msg.scaleTransition).combined(with: .opacity))
 			} else if store.showToast {
 				panelContainer { toastContent }
 					.transition(.move(edge: .bottom).combined(with: .opacity))
@@ -23,9 +28,9 @@ struct RewardSpinnerMessagingView: View {
 	private func panelContainer<Content: View>(
 		@ViewBuilder content: () -> Content
 	) -> some View {
-		VStack(spacing: 16) { content() }
-			.padding(.horizontal, 40)
-			.offset(y: store.config.wheelSize / 2 + 60)
+		VStack(spacing: msg.vStackSpacing) { content() }
+			.padding(.horizontal, msg.horizontalPadding)
+			.offset(y: store.config.wheelSize / 2 + msg.yOffset)
 	}
 
 	// MARK: - Toast Content
@@ -35,9 +40,9 @@ struct RewardSpinnerMessagingView: View {
 			.font(.subheadline.weight(.semibold))
 			.multilineTextAlignment(.center)
 			.frame(maxWidth: .infinity)
-			.padding(.vertical, 12)
+			.padding(.vertical, msg.toastVerticalPadding)
 			.background(.ultraThinMaterial)
-			.clipShape(RoundedRectangle(cornerRadius: 14))
+			.clipShape(RoundedRectangle(cornerRadius: msg.toastCornerRadius))
 	}
 
 	// MARK: - Completion Content
@@ -45,7 +50,7 @@ struct RewardSpinnerMessagingView: View {
 	private var completionContent: some View {
 		HStack {
 			Button {
-				withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+				withAnimation(dismissAnimation) {
 					store.selectedSegmentIndex = nil
 					store.spinnerState = .idle
 					store.toastMessage = ""

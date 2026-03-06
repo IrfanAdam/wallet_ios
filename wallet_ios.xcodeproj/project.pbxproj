@@ -18,9 +18,12 @@
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
 		158C9DF72F598B630020691D /* SCGestureHandles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF62F598B5D0020691D /* SCGestureHandles.swift */; };
-		158C9DF92F599F2D0020691D /* SCOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF82F599F280020691D /* SCOverlay.swift */; };
+		158C9DF92F599F2D0020691D /* SCMessaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF82F599F280020691D /* SCMessaging.swift */; };
 		158C9DFB2F59A7730020691D /* SCContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFA2F59A76F0020691D /* SCContext.swift */; };
 		158C9DFD2F59EBF30020691D /* SCBetterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */; };
+		158C9DFF2F5AC90F0020691D /* SCDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFE2F5AC90C0020691D /* SCDemo.swift */; };
+		158C9E012F5ADB000020691D /* SCSegmentImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E002F5ADB000020691D /* SCSegmentImage.swift */; };
+		158C9E032F5ADB960020691D /* SCSegmentSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E022F5ADB900020691D /* SCSegmentSector.swift */; };
 		15A79E412F0FE423000C6B4E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Demo.swift */; };
 		15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */; };
 		15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E542F1125E9000C6B4E /* DynRouting.swift */; };
@@ -129,9 +132,12 @@
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
 		158C9DF62F598B5D0020691D /* SCGestureHandles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureHandles.swift; sourceTree = "<group>"; };
-		158C9DF82F599F280020691D /* SCOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCOverlay.swift; sourceTree = "<group>"; };
+		158C9DF82F599F280020691D /* SCMessaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMessaging.swift; sourceTree = "<group>"; };
 		158C9DFA2F59A76F0020691D /* SCContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCContext.swift; sourceTree = "<group>"; };
 		158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBetterContext.swift; sourceTree = "<group>"; };
+		158C9DFE2F5AC90C0020691D /* SCDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDemo.swift; sourceTree = "<group>"; };
+		158C9E002F5ADB000020691D /* SCSegmentImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegmentImage.swift; sourceTree = "<group>"; };
+		158C9E022F5ADB900020691D /* SCSegmentSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegmentSector.swift; sourceTree = "<group>"; };
 		15A79E402F0FE423000C6B4E /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFullStack.swift; sourceTree = "<group>"; };
 		15A79E542F1125E9000C6B4E /* DynRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynRouting.swift; sourceTree = "<group>"; };
@@ -604,6 +610,7 @@
 		EE6623D92F4AFA0400F17D74 /* SpinWheel */ = {
 			isa = PBXGroup;
 			children = (
+				158C9DFE2F5AC90C0020691D /* SCDemo.swift */,
 				EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */,
 				EE6623EB2F5337DB00F17D74 /* View */,
 				EE6623DE2F4B03FA00F17D74 /* Helper */,
@@ -635,8 +642,10 @@
 		EE6623EB2F5337DB00F17D74 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				158C9DF82F599F280020691D /* SCOverlay.swift */,
 				EE6623E22F4B046A00F17D74 /* SCSegments.swift */,
+				158C9E022F5ADB900020691D /* SCSegmentSector.swift */,
+				158C9E002F5ADB000020691D /* SCSegmentImage.swift */,
+				158C9DF82F599F280020691D /* SCMessaging.swift */,
 				EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */,
 			);
 			path = View;
@@ -825,6 +834,7 @@
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */,
+				158C9E012F5ADB000020691D /* SCSegmentImage.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
@@ -847,6 +857,7 @@
 				15C963CA2F1E855C00960C5C /* DonutAnimate.swift in Sources */,
 				EEFF6F252F5472B200E4CCF1 /* QuizProgressDemo.swift in Sources */,
 				15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */,
+				158C9E032F5ADB960020691D /* SCSegmentSector.swift in Sources */,
 				15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15C963F62F3395BA00960C5C /* EdgeAccesory.swift in Sources */,
@@ -902,7 +913,7 @@
 				EE6623F62F54507000F17D74 /* ScratchLayer.swift in Sources */,
 				EE6623FC2F545C0900F17D74 /* ScratchSoundEngine.swift in Sources */,
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
-				158C9DF92F599F2D0020691D /* SCOverlay.swift in Sources */,
+				158C9DF92F599F2D0020691D /* SCMessaging.swift in Sources */,
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
 				EE6623F22F54502300F17D74 /* Canvas.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
@@ -913,6 +924,7 @@
 				15D8627B2F4C7F66009E35AB /* Body.swift in Sources */,
 				15C9642D2F3F811500960C5C /* StackContext.swift in Sources */,
 				15DA4B432EEBFD100046EBC6 /* AppView.swift in Sources */,
+				158C9DFF2F5AC90F0020691D /* SCDemo.swift in Sources */,
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
 				15C964122F36403900960C5C /* RenderHelper.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,

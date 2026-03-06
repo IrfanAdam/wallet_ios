@@ -67,7 +67,7 @@ struct RewardGames: View {
 		}
 		.sheet(isPresented: $showSpinner) {
 			RewardSheetContainer(title: "Spin Wheel") {
-				RewardSpinner()
+				RewardSpinnerDemo()
 			}
 		}
 		.sheet(isPresented: $showSlot) {

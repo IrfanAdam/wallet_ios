@@ -27,15 +27,21 @@ final class RewardSpinnerPhysics {
 
 	let config: RewardSpinnerConfig
 	let segmentCount: Int
+	let geometry: RewardSpinnerGeometry
 
 	var lastDragAngle: Double?
 	var lastTimestamp: TimeInterval?
 	var lastRotationSample: Double?
 	var currentAngularVelocity: Double = 0
 
-	init(config: RewardSpinnerConfig, segmentCount: Int) {
+	init(
+		config: RewardSpinnerConfig,
+		segmentCount: Int,
+		geometry: RewardSpinnerGeometry
+	) {
 		self.config = config
 		self.segmentCount = segmentCount
+		self.geometry = geometry
 	}
 
 	// MARK: - Public Entry
@@ -62,7 +68,6 @@ final class RewardSpinnerPhysics {
 // MARK: - Simulation
 
 extension RewardSpinnerPhysics {
-
 	func runFrictionSimulation(
 		startRotation: Double,
 		initialVelocity: Double,
@@ -73,8 +78,8 @@ extension RewardSpinnerPhysics {
 		var rotation = startRotation
 		var velocity = initialVelocity
 
-		let friction: Double = 0.97
-		let stopThreshold: Double = 5
+		let friction = config.friction
+		let stopThreshold = config.stopThreshold
 
 		let proxy = DisplayLinkProxy {}
 
@@ -82,6 +87,7 @@ extension RewardSpinnerPhysics {
 			target: proxy,
 			selector: #selector(DisplayLinkProxy.step)
 		)
+
 
 		proxy.setHandler { [weak displayLink] in
 			guard let link = displayLink else { return }
@@ -107,12 +113,11 @@ extension RewardSpinnerPhysics {
 		displayLink.add(to: .main, forMode: .common)
 	}
 
-
 	func snapToSegment(_ angle: Double) -> Double {
 
-		let segmentAngle = 360.0 / Double(segmentCount)
-		let halfSegment = segmentAngle / 2
+		let halfSegment = geometry.segmentAngle / 2
 
-		return ((angle + halfSegment) / segmentAngle).rounded() * segmentAngle - halfSegment
+		return ((angle + halfSegment) / geometry.segmentAngle)
+			.rounded() * geometry.segmentAngle - halfSegment
 	}
 }

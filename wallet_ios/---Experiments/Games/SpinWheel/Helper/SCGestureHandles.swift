@@ -1,9 +1,23 @@
 import SwiftUI
 import AVFoundation
 
+// MARK: - Animations
+private let anim = SpinAnimationConfig()
+
+private let snapFailAnimation    = Animation.interpolatingSpring(mass: anim.failSnapMass, stiffness: anim.failSnapStiffness, damping: anim.failSnapDamping)
+private let snapSuccessAnimation = Animation.interpolatingSpring(mass: anim.successSnapMass, stiffness: anim.successSnapStiffness, damping: anim.successSnapDamping)
+private let completionAnimation  = Animation.spring(response: anim.completionSpringResponse, dampingFraction: anim.completionSpringDamping)
+
+private let toastDismissDelay = anim.toastDismissDelay
+private let completionDelay   = anim.completionDelay
+
+// MARK: - Drag Gesture
+
 struct RewardSpinnerDragGesture {
 
 	let store: RewardSpinnerStore
+
+	private var geometry: RewardSpinnerGeometry { store.geometry }
 
 	func makeGesture() -> some Gesture {
 		DragGesture(minimumDistance: 0)
@@ -61,16 +75,16 @@ private extension RewardSpinnerDragGesture {
 
 	func handleSpin(_ value: DragGesture.Value) {
 		let physics = store.physics
-		let predictedTravel = abs(physics.currentAngularVelocity) / (1 - 0.97)
+		let predictedTravel = abs(physics.currentAngularVelocity) / (1 - store.config.friction)
 
 		guard predictedTravel >= store.config.minimumSpinDegrees else {
 			UINotificationFeedbackGenerator().notificationOccurred(.warning)
 			store.toastMessage = "Spin harder to win 🎯"
 			withAnimation { store.showToast = true }
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + toastDismissDelay) {
 				withAnimation { store.showToast = false }
 			}
-			withAnimation(.interpolatingSpring(mass: 0.6, stiffness: 140, damping: 16)) {
+			withAnimation(snapFailAnimation) {
 				store.rotation = physics.snapToSegment(store.rotation)
 			}
 			physics.currentAngularVelocity = 0
@@ -85,22 +99,18 @@ private extension RewardSpinnerDragGesture {
 			update: { store.rotation = $0 },
 			completion: { snappedRotation in
 
-				withAnimation(.interpolatingSpring(mass: 0.6, stiffness: 120, damping: 14)) {
+				withAnimation(snapSuccessAnimation) {
 					store.rotation = snappedRotation
 				}
 
-				let segmentAngle = 360.0 / Double(store.segmentCount)
-				let positive = (snappedRotation.truncatingRemainder(dividingBy: 360) + 360)
-					.truncatingRemainder(dividingBy: 360)
-				let adjusted = ((360 - positive) - segmentAngle / 2 + 360)
-					.truncatingRemainder(dividingBy: 360)
-				let safeIndex = (Int(adjusted / segmentAngle) % store.segmentCount
-												 + store.segmentCount) % store.segmentCount
+				let positive = (snappedRotation.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
+				let adjusted = ((360 - positive) - geometry.segmentAngle / 2 + 360).truncatingRemainder(dividingBy: 360)
+				let safeIndex = (Int(adjusted / geometry.segmentAngle) % store.segmentCount + store.segmentCount) % store.segmentCount
 
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
 					UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
 					AudioServicesPlaySystemSound(1158)
-					withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+					withAnimation(completionAnimation) {
 						store.selectedSegmentIndex = safeIndex
 						store.spinnerState = .completed(segmentIndex: safeIndex)
 					}

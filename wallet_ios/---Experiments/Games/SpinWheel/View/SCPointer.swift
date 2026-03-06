@@ -13,54 +13,60 @@ final class TickSoundPlayer {
 	}
 }
 
-// MARK: - Pointer View (reactive)
+// MARK: - Config & Animations
+
+private let ptr = PointerConfig()
+private let wobbleAnimation = Animation.interpolatingSpring(mass: ptr.wobbleSpringMass, stiffness: ptr.wobbleSpringStiffness, damping: ptr.wobbleSpringDamping)
+private let wobbleReturnAnimation = Animation.interpolatingSpring(mass: ptr.wobbleSpringMass, stiffness: ptr.returnSpringStiffness, damping: ptr.returnSpringDamping)
+
+// MARK: - Pointer View
+
 struct SpinnerPointer: View {
-	let rotation: Double
-	let segmentCount: Int
-	
+
+	let store: RewardSpinnerStore
+
 	@State private var wobble: Double = 0
 	@State private var lastSegmentIndex: Int = -1
 	@State private var lastRotation: Double = 0
-	
-	private var segmentAngle: Double { 360.0 / Double(segmentCount) }
-	
+
 	private var currentBoundaryIndex: Int {
-		let normalized = rotation.truncatingRemainder(dividingBy: 360)
+		let normalized = store.rotation.truncatingRemainder(dividingBy: 360)
 		let positive = normalized < 0 ? normalized + 360 : normalized
-		return Int((positive / segmentAngle).rounded()) % segmentCount
+		return Int((positive / store.geometry.segmentAngle).rounded()) % store.segmentCount
 	}
-	
-	// Positive = clockwise, negative = counter-clockwise
+
 	private var spinDirection: Double {
-		rotation - lastRotation > 0 ? 1 : -1
+		store.rotation - lastRotation > 0 ? 1 : -1
 	}
-	
+
 	var body: some View {
 		TrianglePointer()
 			.fill(Color.black)
-			.frame(width: 22, height: 22)
-			.rotationEffect(.degrees(wobble), anchor: .bottom)
+			.frame(width: ptr.frameSize, height: ptr.frameSize)
+			.rotationEffect(.degrees(wobble), anchor: UnitPoint(x: 0.5, y: ptr.anchorY))
+			.rotationEffect(.degrees(store.geometry.pointerRotation))
+			.offset(store.geometry.pointerOffset())
 			.onChange(of: currentBoundaryIndex) { _, newIndex in
 				guard newIndex != lastSegmentIndex else { return }
 				lastSegmentIndex = newIndex
 				triggerTick()
 			}
-			.onChange(of: rotation) { _, newRotation in
+			.onChange(of: store.rotation) { _, newRotation in
 				lastRotation = newRotation
 			}
 	}
-	
+
 	private func triggerTick() {
 		TickSoundPlayer.shared.tick()
-		
-		// Wobble AGAINST the spin direction
-		let deflection = -18.0 * spinDirection
-		
-		withAnimation(.interpolatingSpring(mass: 0.3, stiffness: 300, damping: 6)) {
+
+		let deflection = -ptr.wobbleDeflection * spinDirection
+
+		withAnimation(wobbleAnimation) {
 			wobble = deflection
 		}
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-			withAnimation(.interpolatingSpring(mass: 0.3, stiffness: 200, damping: 8)) {
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + ptr.wobbleDelay) {
+			withAnimation(wobbleReturnAnimation) {
 				wobble = 0
 			}
 		}
