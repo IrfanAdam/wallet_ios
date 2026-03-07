@@ -9,7 +9,6 @@ struct SpinnerSegmentImages: View {
 	var colors: BrandColors { store.config.colors }
 
 	var body: some View {
-
 		ForEach(0..<store.segmentCount, id: \.self) { index in
 			let segProps = segmentState(for: index)
 
@@ -24,7 +23,6 @@ struct SpinnerSegmentImages: View {
 				.clipShape(Circle())
 				.rotationEffect(.degrees(segProps.imageRotation))
 				.scaleEffect(segProps.scale)
-				.animation(.spring(response: 0.4), value: store.selectedSegmentIndex)
 				.offset(
 					x: segProps.offsetX,
 					y: segProps.offsetY

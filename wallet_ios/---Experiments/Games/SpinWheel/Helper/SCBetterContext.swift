@@ -3,8 +3,8 @@ import SwiftUI
 struct SegmentConfig {
 	var innerRadiusRatio: CGFloat = 0.32
 	var innerRadiusSelectedOffset: CGFloat = 0.04
-	var outerRadiusNormal: CGFloat = 0.95
-	var outerRadiusSelected: CGFloat = 1.0
+	var outerRadiusNormal: CGFloat = 0.98
+	var outerRadiusSelected: CGFloat = 1.1
 	var angularInset: CGFloat = 2
 	var cornerRadius: CGFloat = 8
 	var dimOpacity: Double = 0.32

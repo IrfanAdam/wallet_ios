@@ -20,7 +20,7 @@ struct RewardSpinner: View {
 	var body: some View {
 		ZStack {
 			Circle()
-				.fill(Color.gray.opacity(0.1))
+				.fill(Color.white.opacity(0.48))
 				.frame(width: store.config.wheelSize, height: store.config.wheelSize)
 				.overlay(
 					SpinnerSegments(store: store)

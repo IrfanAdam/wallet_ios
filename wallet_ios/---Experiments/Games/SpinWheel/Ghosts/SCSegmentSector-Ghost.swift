@@ -1,7 +1,6 @@
 import SwiftUI
 
 extension SpinnerSegmentChart {
-
 	struct SegmentState {
 		let innerRadius: CGFloat
 		let outerRadius: CGFloat
@@ -10,10 +9,10 @@ extension SpinnerSegmentChart {
 	}
 
 	func segmentState(for index: Int) -> SegmentState {
-
 		let selectedIndex = store.selectedSegmentIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil
+		let colors = store.config.colors
 
 		let innerRadius =
 		isSelected

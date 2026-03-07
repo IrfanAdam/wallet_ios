@@ -1,7 +1,6 @@
 import SwiftUI
 
 extension SpinnerSegmentImages {
-
 	struct SegmentState {
 		let imageName: String
 		let imageSize: CGFloat
@@ -12,7 +11,6 @@ extension SpinnerSegmentImages {
 	}
 
 	func segmentState(for index: Int) -> SegmentState {
-
 		let selectedIndex = store.selectedSegmentIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil

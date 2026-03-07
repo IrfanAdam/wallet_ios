@@ -147,6 +147,7 @@ struct RewardSheetContainer<Content: View>: View {
 		NavigationStack {
 			ZStack {
 				Color(.systemGroupedBackground)
+					.opacity(0.001)
 					.ignoresSafeArea()
 				
 				content
