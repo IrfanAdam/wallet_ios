@@ -6,13 +6,15 @@ struct RewardSpinner: View {
 	@State private var store: RewardSpinnerStore
 
 	init(
-		segments: [SpinnerSegment],
+		segments: [SpinnerSegment] = [],
 		config: RewardSpinnerConfig = .init()
 	) {
-		_store = State(initialValue: RewardSpinnerStore(
-			segments: segments,
-			config: config
-		))
+		_store = State(
+			initialValue: RewardSpinnerStore(
+				segments: segments,
+				config: config
+			)
+		)
 	}
 
 	var body: some View {
@@ -32,4 +34,5 @@ struct RewardSpinner: View {
 			RewardSpinnerMessagingView(store: store)
 		}
 	}
+
 }

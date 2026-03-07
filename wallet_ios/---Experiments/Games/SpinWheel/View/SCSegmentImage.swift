@@ -1,43 +1,34 @@
 import SwiftUI
 
 struct SpinnerSegmentImages: View {
-
 	let store: RewardSpinnerStore
 	let radius: CGFloat
 
-	private var geometry: RewardSpinnerGeometry { store.geometry }
-	private var seg: SegmentConfig { geometry.segments }
+	var geometry: RewardSpinnerGeometry { store.geometry }
+	var seg: SegmentConfig { geometry.segments }
+	var colors: BrandColors { store.config.colors }
 
 	var body: some View {
 
-		let segmentAngle = geometry.segmentAngle
-
 		ForEach(0..<store.segmentCount, id: \.self) { index in
+			let segProps = segmentState(for: index)
 
-			let isSelected = index == store.selectedSegmentIndex
-			let midAngle = Double(index) * segmentAngle + (segmentAngle / 2) - 90
-			let radians = midAngle * .pi / 180
-
-			Image(store.segments[index].imageName)
+			Image(segProps.imageName)
 				.resizable()
 				.scaledToFill()
 				.frame(
-					width: isActiveImage(isSelected) ? seg.imageSize : 0,
-					height: isActiveImage(isSelected) ? seg.imageSize : 0
+					width: segProps.imageSize,
+					height: segProps.imageSize
 				)
-				.background(Circle().fill(Color.brandOrange))
+				.background(Circle().fill(colors.brandOrange))
 				.clipShape(Circle())
-				.rotationEffect(.degrees(-store.rotation))
-				.scaleEffect(isSelected ? seg.selectedScale : 1.0)
+				.rotationEffect(.degrees(segProps.imageRotation))
+				.scaleEffect(segProps.scale)
 				.animation(.spring(response: 0.4), value: store.selectedSegmentIndex)
 				.offset(
-					x: cos(radians) * radius,
-					y: sin(radians) * radius
+					x: segProps.offsetX,
+					y: segProps.offsetY
 				)
 		}
-	}
-
-	private func isActiveImage(_ isSelected: Bool) -> Bool {
-		store.selectedSegmentIndex == nil || isSelected
 	}
 }

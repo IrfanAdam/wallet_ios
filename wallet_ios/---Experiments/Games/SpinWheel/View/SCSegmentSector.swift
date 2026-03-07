@@ -5,38 +5,23 @@ struct SpinnerSegmentChart: View {
 
 	let store: RewardSpinnerStore
 
-	private var geometry: RewardSpinnerGeometry { store.geometry }
-	private var seg: SegmentConfig { geometry.segments }
+	var geometry: RewardSpinnerGeometry { store.geometry }
+	var seg: SegmentConfig { geometry.segments }
+	var colors: BrandColors { store.config.colors }
 
 	var body: some View {
 		Chart(0..<store.segmentCount, id: \.self) { index in
-			let isSelected = index == store.selectedSegmentIndex
+			let segProps = segmentState(for: index)
 
 			SectorMark(
 				angle: .value("Segment", 1),
-				innerRadius: .ratio(
-					isSelected
-					? seg.innerRadiusRatio - seg.innerRadiusSelectedOffset
-					: seg.innerRadiusRatio
-				),
-				outerRadius: .ratio(
-					isSelected
-					? seg.outerRadiusSelected
-					: seg.outerRadiusNormal
-				),
+				innerRadius: .ratio(segProps.innerRadius),
+				outerRadius: .ratio(segProps.outerRadius),
 				angularInset: seg.angularInset
 			)
 			.cornerRadius(seg.cornerRadius)
-			.foregroundStyle(
-				index.isMultiple(of: 2)
-				? Color.brandBlue
-				: Color.brandSky
-			)
-			.opacity(
-				store.selectedSegmentIndex == nil || isSelected
-				? 1.0
-				: seg.dimOpacity
-			)
+			.foregroundStyle(segProps.color)
+			.opacity(segProps.opacity)
 		}
 	}
 }

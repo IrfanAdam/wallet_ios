@@ -24,6 +24,9 @@
 		158C9DFF2F5AC90F0020691D /* SCDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFE2F5AC90C0020691D /* SCDemo.swift */; };
 		158C9E012F5ADB000020691D /* SCSegmentImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E002F5ADB000020691D /* SCSegmentImage.swift */; };
 		158C9E032F5ADB960020691D /* SCSegmentSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E022F5ADB900020691D /* SCSegmentSector.swift */; };
+		158C9E052F5AF7830020691D /* SCPointerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E042F5AF7780020691D /* SCPointerShape.swift */; };
+		158C9E072F5AFF250020691D /* SCSegmentImage-Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E062F5AFF210020691D /* SCSegmentImage-Ghost.swift */; };
+		158C9E0A2F5B01B60020691D /* SCSegmentSector-Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E092F5B01B40020691D /* SCSegmentSector-Ghost.swift */; };
 		15A79E412F0FE423000C6B4E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Demo.swift */; };
 		15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */; };
 		15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E542F1125E9000C6B4E /* DynRouting.swift */; };
@@ -138,6 +141,9 @@
 		158C9DFE2F5AC90C0020691D /* SCDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDemo.swift; sourceTree = "<group>"; };
 		158C9E002F5ADB000020691D /* SCSegmentImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegmentImage.swift; sourceTree = "<group>"; };
 		158C9E022F5ADB900020691D /* SCSegmentSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegmentSector.swift; sourceTree = "<group>"; };
+		158C9E042F5AF7780020691D /* SCPointerShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPointerShape.swift; sourceTree = "<group>"; };
+		158C9E062F5AFF210020691D /* SCSegmentImage-Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCSegmentImage-Ghost.swift"; sourceTree = "<group>"; };
+		158C9E092F5B01B40020691D /* SCSegmentSector-Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCSegmentSector-Ghost.swift"; sourceTree = "<group>"; };
 		15A79E402F0FE423000C6B4E /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFullStack.swift; sourceTree = "<group>"; };
 		15A79E542F1125E9000C6B4E /* DynRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynRouting.swift; sourceTree = "<group>"; };
@@ -313,6 +319,15 @@
 				1549ECE92F03D7C300876D2D /* AvatarResize.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		158C9E082F5B01500020691D /* Ghosts */ = {
+			isa = PBXGroup;
+			children = (
+				158C9E092F5B01B40020691D /* SCSegmentSector-Ghost.swift */,
+				158C9E062F5AFF210020691D /* SCSegmentImage-Ghost.swift */,
+			);
+			path = Ghosts;
 			sourceTree = "<group>";
 		};
 		15C963B72F1A36FD00960C5C /* Components */ = {
@@ -613,6 +628,7 @@
 				158C9DFE2F5AC90C0020691D /* SCDemo.swift */,
 				EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */,
 				EE6623EB2F5337DB00F17D74 /* View */,
+				158C9E082F5B01500020691D /* Ghosts */,
 				EE6623DE2F4B03FA00F17D74 /* Helper */,
 			);
 			path = SpinWheel;
@@ -647,6 +663,7 @@
 				158C9E002F5ADB000020691D /* SCSegmentImage.swift */,
 				158C9DF82F599F280020691D /* SCMessaging.swift */,
 				EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */,
+				158C9E042F5AF7780020691D /* SCPointerShape.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -846,6 +863,7 @@
 				15D862712F4485AB009E35AB /* ConfigureDemo.swift in Sources */,
 				15C964262F3F484E00960C5C /* CircleCutouts.swift in Sources */,
 				EE6623EA2F53374E00F17D74 /* SlotComponent.swift in Sources */,
+				158C9E072F5AFF250020691D /* SCSegmentImage-Ghost.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
 				EE6623F42F54505D00F17D74 /* ViewModel.swift in Sources */,
@@ -872,6 +890,7 @@
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15C963F82F34EAFE00960C5C /* EdgeAccesoryDemo.swift in Sources */,
 				158C9DFD2F59EBF30020691D /* SCBetterContext.swift in Sources */,
+				158C9E052F5AF7830020691D /* SCPointerShape.swift in Sources */,
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15C963E22F30E98700960C5C /* GlassDemo.swift in Sources */,
@@ -902,6 +921,7 @@
 				15DA4B3B2EEBFD100046EBC6 /* DummyData.swift in Sources */,
 				15C963EC2F335A9F00960C5C /* SwipeToUnlock.swift in Sources */,
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
+				158C9E0A2F5B01B60020691D /* SCSegmentSector-Ghost.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,
 				EE6623E82F53363A00F17D74 /* All Games.swift in Sources */,
 				15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */,

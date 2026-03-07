@@ -1,16 +1,14 @@
 import SwiftUI
 import Charts
 
-struct SpinnerSegment: Identifiable {
-	let id = UUID()
-	let imageName: String
-}
-
 struct SpinnerSegments: View {
 	let store: RewardSpinnerStore
 
 	private var geometry: RewardSpinnerGeometry { store.geometry }
 	private var seg: SegmentConfig { geometry.segments }
+	private var colors: BrandColors {
+		store.config.colors
+	}
 
 	var body: some View {
 		GeometryReader { geo in
@@ -35,14 +33,9 @@ struct SpinnerSegments: View {
 	private var glowLayer: some View {
 		let glow = geometry.glow
 		return Circle()
-			.fill(Color.brandBlue.opacity(glow.opacity))
+			.fill(colors.brandBlue.opacity(glow.opacity))
 			.blur(radius: glow.blur)
 			.padding(glow.padding)
 	}
 }
 
-extension Color {
-	static let brandBlue   = Color(red: 0/255,   green: 111/255, blue: 235/255)
-	static let brandSky    = Color(red: 82/255,  green: 178/255, blue: 255/255)
-	static let brandOrange = Color(red: 235/255, green: 124/255, blue: 0/255)
-}

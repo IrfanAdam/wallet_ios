@@ -19,8 +19,8 @@ struct RewardGames: View {
 				VStack(spacing: 16) {
 					Image(systemName: "gift.circle.fill")
 						.font(.system(size: 72))
-						.foregroundStyle(Color.brandBlue)
-					
+						.foregroundStyle(Color.blue)
+
 					VStack(spacing: 8) {
 						Text("Daily Reward")
 							.font(.title.bold())
@@ -33,7 +33,7 @@ struct RewardGames: View {
 					RewardGameButton(
 						title: "Spin Wheel",
 						systemImage: "circle.dotted",
-						tint: .brandBlue
+						tint: .blue
 					) {
 						showSpinner = true
 					}
@@ -41,7 +41,7 @@ struct RewardGames: View {
 					RewardGameButton(
 						title: "Slot Machine",
 						systemImage: "rectangle.3.group.fill",
-						tint: .brandBlue
+						tint: .blue
 					) {
 						showSlot = true
 					}
@@ -49,7 +49,7 @@ struct RewardGames: View {
 					RewardGameButton(
 						title: "Scratch Reveal",
 						systemImage: "sparkles.rectangle.stack.fill",
-						tint: .brandBlue
+						tint: .blue
 					) {
 						showScratch = true
 					}
@@ -57,7 +57,7 @@ struct RewardGames: View {
 					RewardGameButton(
 						title: "Quiz",
 						systemImage: "questionmark.circle.fill",
-						tint: .brandBlue
+						tint: .blue
 					) {
 						showQuiz = true
 					}

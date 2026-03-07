@@ -66,7 +66,7 @@ struct RewardSpinnerMessagingView: View {
 					.frame(maxWidth: .infinity)
 			}
 			.buttonStyle(.borderedProminent)
-			.tint(.brandBlue)
+			.tint(.blue)
 		}
 	}
 
