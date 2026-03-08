@@ -21,6 +21,7 @@ struct SpinnerSegmentImages: View {
 				)
 				.background(Circle().fill(colors.brandOrange))
 				.clipShape(Circle())
+				.overlay(Circle().strokeBorder(Color.white, lineWidth: 1.5))
 				.rotationEffect(.degrees(segProps.imageRotation))
 				.scaleEffect(segProps.scale)
 				.offset(

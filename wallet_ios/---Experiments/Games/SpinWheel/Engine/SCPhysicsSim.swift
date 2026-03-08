@@ -57,3 +57,22 @@ extension RewardSpinnerPhysics {
 			.rounded() * geometry.segmentAngle - halfSegment
 	}
 }
+
+// MARK: - DisplayLink Proxy
+
+final class DisplayLinkProxy {
+	
+	private var handler: (() -> Void)?
+	
+	init(handler: @escaping () -> Void = {}) {
+		self.handler = handler
+	}
+	
+	func setHandler(_ newHandler: @escaping () -> Void) {
+		self.handler = newHandler
+	}
+	
+	@objc func step() {
+		handler?()
+	}
+}

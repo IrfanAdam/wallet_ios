@@ -17,7 +17,7 @@
 		1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECD82EF4220E00876D2D /* Integer Only.swift */; };
 		1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE52EFEB40000876D2D /* SheetController.swift */; };
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
-		158C9DF72F598B630020691D /* SCGestureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF62F598B5D0020691D /* SCGestureEngine.swift */; };
+		158C9DF72F598B630020691D /* SCGestureListen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF62F598B5D0020691D /* SCGestureListen.swift */; };
 		158C9DF92F599F2D0020691D /* SCMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF82F599F280020691D /* SCMsg.swift */; };
 		158C9DFB2F59A7730020691D /* SCContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFA2F59A76F0020691D /* SCContext.swift */; };
 		158C9DFD2F59EBF30020691D /* SCBetterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */; };
@@ -112,7 +112,8 @@
 		EE7A58B72F5C6AD700B8C379 /* SCMsgCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58B62F5C6AC300B8C379 /* SCMsgCompletion.swift */; };
 		EE7A58B92F5C772500B8C379 /* SCPointer-Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58B82F5C771D00B8C379 /* SCPointer-Ghost.swift */; };
 		EE7A58BD2F5C7D9700B8C379 /* SCPhysicsSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */; };
-		EE7A58BF2F5C7F0B00B8C379 /* SCGestureSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58BE2F5C7F0600B8C379 /* SCGestureSpin.swift */; };
+		EE7A58BF2F5C7F0B00B8C379 /* SCGestureHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */; };
+		EE7A58C12F5D686B00B8C379 /* SCConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58C02F5D686700B8C379 /* SCConfig.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
 		EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F72EF8225C00A4D79D /* Pay Grid.swift */; };
@@ -139,7 +140,7 @@
 		1549ECD82EF4220E00876D2D /* Integer Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Integer Only.swift"; sourceTree = "<group>"; };
 		1549ECE52EFEB40000876D2D /* SheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
-		158C9DF62F598B5D0020691D /* SCGestureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureEngine.swift; sourceTree = "<group>"; };
+		158C9DF62F598B5D0020691D /* SCGestureListen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureListen.swift; sourceTree = "<group>"; };
 		158C9DF82F599F280020691D /* SCMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMsg.swift; sourceTree = "<group>"; };
 		158C9DFA2F59A76F0020691D /* SCContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCContext.swift; sourceTree = "<group>"; };
 		158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBetterContext.swift; sourceTree = "<group>"; };
@@ -235,7 +236,8 @@
 		EE7A58B62F5C6AC300B8C379 /* SCMsgCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMsgCompletion.swift; sourceTree = "<group>"; };
 		EE7A58B82F5C771D00B8C379 /* SCPointer-Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCPointer-Ghost.swift"; sourceTree = "<group>"; };
 		EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPhysicsSim.swift; sourceTree = "<group>"; };
-		EE7A58BE2F5C7F0600B8C379 /* SCGestureSpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureSpin.swift; sourceTree = "<group>"; };
+		EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureHandle.swift; sourceTree = "<group>"; };
+		EE7A58C02F5D686700B8C379 /* SCConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCConfig.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
 		EE8802F72EF8225C00A4D79D /* Pay Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pay Grid.swift"; sourceTree = "<group>"; };
@@ -331,14 +333,14 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
-		158C9E082F5B01500020691D /* Ghosts */ = {
+		158C9E082F5B01500020691D /* SubComp Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				158C9E092F5B01B40020691D /* SCSegmentSector-Ghost.swift */,
 				158C9E062F5AFF210020691D /* SCSegmentImage-Ghost.swift */,
 				EE7A58B82F5C771D00B8C379 /* SCPointer-Ghost.swift */,
 			);
-			path = Ghosts;
+			path = "SubComp Helpers";
 			sourceTree = "<group>";
 		};
 		15C963B72F1A36FD00960C5C /* Components */ = {
@@ -638,24 +640,23 @@
 			children = (
 				158C9DFE2F5AC90C0020691D /* SCDemo.swift */,
 				EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */,
-				EE6623EB2F5337DB00F17D74 /* View */,
-				158C9E082F5B01500020691D /* Ghosts */,
-				EE6623DE2F4B03FA00F17D74 /* Helper */,
+				EE6623EB2F5337DB00F17D74 /* SubComp */,
+				158C9E082F5B01500020691D /* SubComp Helpers */,
+				EE6623DE2F4B03FA00F17D74 /* Engine */,
+				EE7A58C22F5D687400B8C379 /* Setup */,
 			);
 			path = SpinWheel;
 			sourceTree = "<group>";
 		};
-		EE6623DE2F4B03FA00F17D74 /* Helper */ = {
+		EE6623DE2F4B03FA00F17D74 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				158C9DF62F598B5D0020691D /* SCGestureEngine.swift */,
-				EE7A58BE2F5C7F0600B8C379 /* SCGestureSpin.swift */,
+				158C9DF62F598B5D0020691D /* SCGestureListen.swift */,
+				EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */,
 				EE6623DC2F4B020D00F17D74 /* SCPhysicsEngine.swift */,
 				EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */,
-				158C9DFA2F59A76F0020691D /* SCContext.swift */,
-				158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */,
 			);
-			path = Helper;
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		EE6623E62F5335A200F17D74 /* Scratch */ = {
@@ -668,19 +669,14 @@
 			path = Scratch;
 			sourceTree = "<group>";
 		};
-		EE6623EB2F5337DB00F17D74 /* View */ = {
+		EE6623EB2F5337DB00F17D74 /* SubComp */ = {
 			isa = PBXGroup;
 			children = (
-				EE6623E22F4B046A00F17D74 /* SCSegments.swift */,
-				158C9E022F5ADB900020691D /* SCSegmentSector.swift */,
-				158C9E002F5ADB000020691D /* SCSegmentImage.swift */,
-				158C9DF82F599F280020691D /* SCMsg.swift */,
-				EE7A58B42F5C6AA700B8C379 /* SCMsgToast.swift */,
-				EE7A58B62F5C6AC300B8C379 /* SCMsgCompletion.swift */,
-				EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */,
-				158C9E042F5AF7780020691D /* SCPointerShape.swift */,
+				EE7A58C32F5D68E800B8C379 /* Segments */,
+				EE7A58C42F5D68F900B8C379 /* Message */,
+				EE7A58C52F5D690900B8C379 /* Pointer */,
 			);
-			path = View;
+			path = SubComp;
 			sourceTree = "<group>";
 		};
 		EE6623EE2F543B8500F17D74 /* Custom Glass */ = {
@@ -692,6 +688,45 @@
 				15C963E12F30E98100960C5C /* GlassDemo.swift */,
 			);
 			path = "Custom Glass";
+			sourceTree = "<group>";
+		};
+		EE7A58C22F5D687400B8C379 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				158C9DFA2F59A76F0020691D /* SCContext.swift */,
+				EE7A58C02F5D686700B8C379 /* SCConfig.swift */,
+				158C9DFC2F59EBEC0020691D /* SCBetterContext.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		EE7A58C32F5D68E800B8C379 /* Segments */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623E22F4B046A00F17D74 /* SCSegments.swift */,
+				158C9E022F5ADB900020691D /* SCSegmentSector.swift */,
+				158C9E002F5ADB000020691D /* SCSegmentImage.swift */,
+			);
+			path = Segments;
+			sourceTree = "<group>";
+		};
+		EE7A58C42F5D68F900B8C379 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				158C9DF82F599F280020691D /* SCMsg.swift */,
+				EE7A58B42F5C6AA700B8C379 /* SCMsgToast.swift */,
+				EE7A58B62F5C6AC300B8C379 /* SCMsgCompletion.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		EE7A58C52F5D690900B8C379 /* Pointer */ = {
+			isa = PBXGroup;
+			children = (
+				EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */,
+				158C9E042F5AF7780020691D /* SCPointerShape.swift */,
+			);
+			path = Pointer;
 			sourceTree = "<group>";
 		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
@@ -858,7 +893,7 @@
 			files = (
 				EE6623F82F54508900F17D74 /* ScratchComponent.swift in Sources */,
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
-				158C9DF72F598B630020691D /* SCGestureEngine.swift in Sources */,
+				158C9DF72F598B630020691D /* SCGestureListen.swift in Sources */,
 				15C963F22F33750E00960C5C /* MorphDemo.swift in Sources */,
 				EE7A58B72F5C6AD700B8C379 /* SCMsgCompletion.swift in Sources */,
 				EE9517722F2F85760007F91E /* Navigator.swift in Sources */,
@@ -881,6 +916,7 @@
 				EE6623EA2F53374E00F17D74 /* SlotComponent.swift in Sources */,
 				158C9E072F5AFF250020691D /* SCSegmentImage-Ghost.swift in Sources */,
 				15A79E5B2F1126D0000C6B4E /* DynToolbar.swift in Sources */,
+				EE7A58C12F5D686B00B8C379 /* SCConfig.swift in Sources */,
 				15A79E412F0FE423000C6B4E /* Demo.swift in Sources */,
 				EE6623F42F54505D00F17D74 /* ViewModel.swift in Sources */,
 				15C964292F3F7CC000960C5C /* Modifier.swift in Sources */,
@@ -901,7 +937,7 @@
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,
 				15A79E592F1126A0000C6B4E /* Page 1.swift in Sources */,
-				EE7A58BF2F5C7F0B00B8C379 /* SCGestureSpin.swift in Sources */,
+				EE7A58BF2F5C7F0B00B8C379 /* SCGestureHandle.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
