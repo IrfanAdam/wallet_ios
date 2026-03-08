@@ -9,28 +9,27 @@ extension SpinnerPointer {
 
 
 	var boundaryIndex: Int {
-		let normalized = store.rotation.truncatingRemainder(dividingBy: 360)
+		let normalized = store.anim.rotation.truncatingRemainder(dividingBy: 360)
 		let positive   = normalized < 0 ? normalized + 360 : normalized
 		return Int((positive / store.geometry.segmentAngle).rounded()) % store.segmentCount
 	}
 	
 	var spinDirection: Double {
-		store.rotation - lastRotation > 0 ? 1 : -1
+		store.anim.rotation - lastRotation > 0 ? 1 : -1
 	}
 	
 	var wobbleAnimation: Animation {
 		.interpolatingSpring(
-			mass:      ptr.wobbleSpringMass,
-			stiffness: ptr.wobbleSpringStiffness,
-			damping:   ptr.wobbleSpringDamping
+			mass:      pointerAnim.wobbleMass,
+			stiffness: pointerAnim.wobbleStiffness,
+			damping:   pointerAnim.wobbleDamping
 		)
 	}
-	
 	var wobbleReturnAnimation: Animation {
 		.interpolatingSpring(
-			mass:      ptr.wobbleSpringMass,
-			stiffness: ptr.returnSpringStiffness,
-			damping:   ptr.returnSpringDamping
+			mass:      pointerAnim.wobbleMass,
+			stiffness: pointerAnim.returnStiffness,
+			damping:   pointerAnim.returnDamping
 		)
 	}
 }

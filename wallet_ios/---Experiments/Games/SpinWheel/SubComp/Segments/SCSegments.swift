@@ -21,7 +21,7 @@ struct SpinnerSegments: View {
 				)
 			}
 		}
-		.rotationEffect(.degrees(store.rotation))
+		.rotationEffect(.degrees(store.anim.rotation))
 	}
 }
 

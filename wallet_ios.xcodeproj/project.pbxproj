@@ -114,6 +114,8 @@
 		EE7A58BD2F5C7D9700B8C379 /* SCPhysicsSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */; };
 		EE7A58BF2F5C7F0B00B8C379 /* SCGestureHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */; };
 		EE7A58C12F5D686B00B8C379 /* SCMainConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58C02F5D686700B8C379 /* SCMainConfig.swift */; };
+		EE7A58C72F5D986100B8C379 /* SCAnimConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58C62F5D985A00B8C379 /* SCAnimConfigs.swift */; };
+		EE7A58C92F5D9BB200B8C379 /* SCGestureAnim.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A58C82F5D9BA900B8C379 /* SCGestureAnim.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
 		EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F72EF8225C00A4D79D /* Pay Grid.swift */; };
@@ -238,6 +240,8 @@
 		EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPhysicsSim.swift; sourceTree = "<group>"; };
 		EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureHandle.swift; sourceTree = "<group>"; };
 		EE7A58C02F5D686700B8C379 /* SCMainConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMainConfig.swift; sourceTree = "<group>"; };
+		EE7A58C62F5D985A00B8C379 /* SCAnimConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAnimConfigs.swift; sourceTree = "<group>"; };
+		EE7A58C82F5D9BA900B8C379 /* SCGestureAnim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGestureAnim.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
 		EE8802F72EF8225C00A4D79D /* Pay Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pay Grid.swift"; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 			children = (
 				158C9DF62F598B5D0020691D /* SCGestureListen.swift */,
 				EE7A58BE2F5C7F0600B8C379 /* SCGestureHandle.swift */,
+				EE7A58C82F5D9BA900B8C379 /* SCGestureAnim.swift */,
 				EE6623DC2F4B020D00F17D74 /* SCPhysicsEngine.swift */,
 				EE7A58BC2F5C7D9300B8C379 /* SCPhysicsSim.swift */,
 			);
@@ -696,6 +701,7 @@
 				158C9DFA2F59A76F0020691D /* SCContext.swift */,
 				EE7A58C02F5D686700B8C379 /* SCMainConfig.swift */,
 				158C9DFC2F59EBEC0020691D /* SCSubConfigs.swift */,
+				EE7A58C62F5D985A00B8C379 /* SCAnimConfigs.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -929,6 +935,7 @@
 				15C964012F363B5A00960C5C /* InlineFlowDemo.swift in Sources */,
 				158C9E032F5ADB960020691D /* SCSegmentSector.swift in Sources */,
 				15C963E62F31F49E00960C5C /* CustomGlass.swift in Sources */,
+				EE7A58C72F5D986100B8C379 /* SCAnimConfigs.swift in Sources */,
 				15DA4B4D2EEC5A0F0046EBC6 /* PageTransition.swift in Sources */,
 				15C963F62F3395BA00960C5C /* EdgeAccesory.swift in Sources */,
 				15C963F02F33706500960C5C /* MorphModifier.swift in Sources */,
@@ -977,6 +984,7 @@
 				1549ECBF2EF1598F00876D2D /* TransactionOptions.swift in Sources */,
 				158C9E0A2F5B01B60020691D /* SCSegmentSector-H.swift in Sources */,
 				15DA4B3C2EEBFD100046EBC6 /* Card Declare.swift in Sources */,
+				EE7A58C92F5D9BB200B8C379 /* SCGestureAnim.swift in Sources */,
 				EE6623E82F53363A00F17D74 /* All Games.swift in Sources */,
 				15DA4B3D2EEBFD100046EBC6 /* Home.swift in Sources */,
 				EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */,

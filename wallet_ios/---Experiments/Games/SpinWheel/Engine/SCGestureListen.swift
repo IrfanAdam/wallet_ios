@@ -3,10 +3,15 @@ import AVFoundation
 
 // MARK: - Drag Gesture
 
-private let anim = SpinAnimationConfig()
+//private let anim = SpinAnimationConfig()
 
 struct RewardSpinnerDragGesture {
 	let store: RewardSpinnerStore
+	var animConfig: RewardSpinnerAnimationConfig.Spin { store.animations.spin }
+	var anim: RewardSpinnerAnimState {
+		get { store.anim }
+		nonmutating set { store.anim = newValue }
+	}
 }
 
 // MARK: - Gesture
@@ -23,36 +28,25 @@ extension RewardSpinnerDragGesture {
 
 extension RewardSpinnerDragGesture {
 	private func handleDragChanged(_ value: DragGesture.Value) {
-		guard case .idle = store.spinnerState else { return }
+		guard case .idle = store.anim.spinnerState else { return }
 		
 		let physics      = store.physics
 		let currentAngle = angle(from: wheelCenter, to: value.location)
 		
 		guard let lastAngle = physics.lastDragAngle else {
-			physics.seed(rotation: store.rotation, angle: currentAngle)
+			physics.seed(rotation: store.anim.rotation, angle: currentAngle)
 			return
 		}
 		
-		store.rotation += normalizedDelta(currentAngle - lastAngle)
-		physics.updateVelocity(rotation: store.rotation, currentAngle: currentAngle)
+		store.anim.rotation += normalizedDelta(currentAngle - lastAngle)
+		physics.updateVelocity(rotation: store.anim.rotation, currentAngle: currentAngle)
 	}
 	
 	private func handleDragEnded(_ value: DragGesture.Value) {
-		guard case .idle = store.spinnerState else { return }
+		guard case .idle = store.anim.spinnerState else { return }
 		store.physics.clear()
 		handleSpin(value)
 	}
-}
-
-// MARK: - Animations
-
-extension RewardSpinnerDragGesture {
-	var snapFailAnimation:    Animation { .interpolatingSpring(mass: anim.failSnapMass,    stiffness: anim.failSnapStiffness,    damping: anim.failSnapDamping) }
-	var snapSuccessAnimation: Animation { .interpolatingSpring(mass: anim.successSnapMass, stiffness: anim.successSnapStiffness, damping: anim.successSnapDamping) }
-	var completionAnimation:  Animation { .spring(response: anim.completionSpringResponse, dampingFraction: anim.completionSpringDamping) }
-	
-	var toastDismissDelay: Double { anim.toastDismissDelay }
-	var completionDelay:   Double { anim.completionDelay }
 }
 
 // MARK: - Geometry & Math

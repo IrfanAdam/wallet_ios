@@ -8,7 +8,7 @@ struct RewardSpinnerToastPanel: View {
 	
 	var body: some View {
 		RewardSpinnerPanelContainer(store: store) {
-			Text(store.toastMessage)
+			Text(store.anim.toastMessage)
 				.font(.subheadline.weight(.semibold))
 				.multilineTextAlignment(.center)
 				.frame(maxWidth: .infinity)

@@ -9,7 +9,7 @@ extension SpinnerSegmentChart {
 	}
 
 	func segmentState(for index: Int) -> SegmentState {
-		let selectedIndex = store.selectedSegmentIndex
+		let selectedIndex = store.anim.selectedSegmentIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil
 		let colors = store.config.colors

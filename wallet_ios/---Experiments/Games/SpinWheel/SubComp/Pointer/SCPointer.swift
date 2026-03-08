@@ -9,6 +9,9 @@ struct SpinnerPointer: View {
 	@State var lastRotation: Double = 0
 	
 	var ptr: PointerConfig { PointerConfig() }
+	var pointerAnim: RewardSpinnerAnimationConfig.Pointer {
+		store.animations.pointer
+	}
 	
 	var body: some View {
 		TrianglePointer()
@@ -22,7 +25,7 @@ struct SpinnerPointer: View {
 				lastSegmentIndex = newIndex
 				triggerTick()
 			}
-			.onChange(of: store.rotation) { _, newRotation in
+			.onChange(of: store.anim.rotation) { _, newRotation in
 				lastRotation = newRotation
 			}
 	}

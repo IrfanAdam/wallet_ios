@@ -1,16 +1,26 @@
 import SwiftUI
 
-private let msg = MessagingConfig()
-
-private let dismissAnimation = Animation.spring(
-	response: msg.dismissSpringResponse,
-	dampingFraction: msg.dismissSpringDamping
-)
+//private let msg = MessagingConfig()
+//
+//private let dismissAnimation = Animation.spring(
+//	response: msg.dismissSpringResponse,
+//	dampingFraction: msg.dismissSpringDamping
+//)
+//
 
 
 struct RewardSpinnerCompletionPanel: View {
 	
 	let store: RewardSpinnerStore
+	
+	var anim: RewardSpinnerAnimationConfig.Messaging { store.animations.messaging }
+	
+	var dismissAnimation: Animation {
+		.spring(
+			response:       anim.dismissResponse,
+			dampingFraction: anim.dismissDamping
+		)
+	}
 	
 	var body: some View {
 		RewardSpinnerPanelContainer(store: store) {
@@ -34,9 +44,9 @@ struct RewardSpinnerCompletionPanel: View {
 	
 	private func resetSpinner() {
 		withAnimation(dismissAnimation) {
-			store.selectedSegmentIndex = nil
-			store.spinnerState = .idle
-			store.toastMessage = ""
+			store.anim.selectedSegmentIndex = nil
+			store.anim.spinnerState = .idle
+			store.anim.toastMessage = ""
 		}
 	}
 	

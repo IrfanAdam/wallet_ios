@@ -32,18 +32,12 @@ final class RewardSpinnerStore {
 
 	var colors = BrandColors()
 
-	// MARK: - Interaction
-	var spinnerState: SpinnerState = .idle
-	var selectedSegmentIndex: Int? = nil
-	var showToast: Bool = false
-	var toastMessage: String = ""
-
-	// MARK: - Animation
-	var rotation: Double
-	var isSpinning: Bool = false
+	var anim = RewardSpinnerAnimState()
 
 	// MARK: - Physics
 	let physics: RewardSpinnerPhysics
+
+	let animations = RewardSpinnerAnimationConfig()
 
 	init(
 		segments: [SpinnerSegment],
@@ -64,6 +58,17 @@ final class RewardSpinnerStore {
 		)
 
 		let segmentAngle = geometry.segmentAngle
-		self.rotation = -segmentAngle / 2
+		anim.rotation = -segmentAngle / 2
 	}
 }
+
+@Observable
+final class RewardSpinnerAnimState {
+	var rotation: Double = 0
+	var spinnerState: SpinnerState = .idle
+	var selectedSegmentIndex: Int? = nil
+	var showToast: Bool = false
+	var toastMessage: String = ""
+	var isSpinning: Bool = false
+}
+

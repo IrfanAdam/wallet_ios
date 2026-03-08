@@ -11,7 +11,7 @@ extension SpinnerSegmentImages {
 	}
 
 	func segmentState(for index: Int) -> SegmentState {
-		let selectedIndex = store.selectedSegmentIndex
+		let selectedIndex = store.anim.selectedSegmentIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil
 
@@ -31,7 +31,7 @@ extension SpinnerSegmentImages {
 			imageName: store.segments[index].imageName,
 			imageSize: imageSize,
 			scale: scale,
-			imageRotation: -store.rotation,
+			imageRotation: -store.anim.rotation,
 			offsetX: offsetX,
 			offsetY: offsetY
 		)

@@ -7,6 +7,7 @@ struct SpinnerSegmentChart: View {
 
 	var geometry: RewardSpinnerGeometry { store.geometry }
 	var seg: SegmentConfig { geometry.segments }
+	var segAnim: RewardSpinnerAnimationConfig.Segments { store.animations.segments }
 
 	var body: some View {
 		Chart(0..<store.segmentCount, id: \.self) { index in
@@ -22,6 +23,12 @@ struct SpinnerSegmentChart: View {
 			.foregroundStyle(segProps.color)
 			.opacity(segProps.opacity)
 		}
-		.animation(.spring(response: 0.4), value: store.selectedSegmentIndex)
+		.animation(
+			.spring(
+				response:       segAnim.selectionResponse,
+				dampingFraction: segAnim.selectionDamping
+			),
+			value: store.anim.selectedSegmentIndex
+		)
 	}
 }

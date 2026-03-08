@@ -10,12 +10,12 @@ extension RewardSpinnerDragGesture {
 			return
 		}
 		
-		store.isSpinning = true
+		store.anim.isSpinning = true
 		
 		store.physics.startSpin(
-			currentRotation: store.rotation,
+			currentRotation: store.anim.rotation,
 			dragValue: value,
-			update: { store.rotation = $0 },
+			update: { store.anim.rotation = $0 },
 			completion: handleSpinCompletion
 		)
 	}
@@ -27,19 +27,21 @@ private extension RewardSpinnerDragGesture {
 	func handleFailedSpin() {
 		UINotificationFeedbackGenerator().notificationOccurred(.warning)
 		showToast("Spin harder to win 🎯")
-		withAnimation(snapFailAnimation) { store.rotation = store.physics.snapToSegment(store.rotation) }
+		withAnimation(snapFailAnimation) {
+			store.anim.rotation = store.physics.snapToSegment(store.anim.rotation)
+		}
 		store.physics.currentAngularVelocity = 0
 	}
 	
 	func handleSpinCompletion(_ snappedRotation: Double) {
-		withAnimation(snapSuccessAnimation) { store.rotation = snappedRotation }
+		withAnimation(snapSuccessAnimation) { store.anim.rotation = snappedRotation }
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
 			let index = winningIndex(from: snappedRotation)
 			triggerCompletionFeedback()
 			withAnimation(completionAnimation) {
-				store.selectedSegmentIndex = index
-				store.spinnerState = .completed(segmentIndex: index)
+				store.anim.selectedSegmentIndex = index
+				store.anim.spinnerState = .completed(segmentIndex: index)
 			}
 		}
 	}
@@ -60,10 +62,10 @@ private extension RewardSpinnerDragGesture {
 	}
 	
 	func showToast(_ message: String) {
-		store.toastMessage = message
-		withAnimation { store.showToast = true }
+		store.anim.toastMessage = message
+		withAnimation { store.anim.showToast = true }
 		DispatchQueue.main.asyncAfter(deadline: .now() + toastDismissDelay) {
-			withAnimation { store.showToast = false }
+			withAnimation { store.anim.showToast = false }
 		}
 	}
 	

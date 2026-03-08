@@ -10,11 +10,11 @@ struct RewardSpinnerMessagingView: View {
 	
 	var body: some View {
 		ZStack {
-			if case .completed = store.spinnerState {
+			if case .completed = store.anim.spinnerState {
 				RewardSpinnerCompletionPanel(store: store)
 					.transition(.scale(scale: msg.scaleTransition).combined(with: .opacity))
 			}
-			else if store.showToast {
+			else if store.anim.showToast {
 				RewardSpinnerToastPanel(store: store)
 					.transition(.move(edge: .bottom).combined(with: .opacity))
 			}
