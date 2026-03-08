@@ -17,11 +17,6 @@ struct PointerConfig {
 	var anchorY: CGFloat = 0.35
 	var wobbleDeflection: Double = 18.0
 	var wobbleDelay: Double = 0.08
-	var wobbleSpringMass: Double = 0.3
-	var wobbleSpringStiffness: Double = 300
-	var wobbleSpringDamping: Double = 6
-	var returnSpringStiffness: Double = 200
-	var returnSpringDamping: Double = 8
 	var offsetX: CGFloat = -4
 	var offsetY: CGFloat = -8
 }
@@ -33,39 +28,13 @@ struct MessagingConfig {
 	var yOffset: CGFloat = 60
 	var toastVerticalPadding: CGFloat = 12
 	var toastCornerRadius: CGFloat = 14
-	var dismissSpringResponse: Double = 0.4
-	var dismissSpringDamping: Double = 0.7
-	var toastDismissDelay: Double = 1.4
-}
-
-struct SpinAnimationConfig {
-	var failSnapMass: Double = 0.6
-	var failSnapStiffness: Double = 140
-	var failSnapDamping: Double = 16
-	var successSnapMass: Double = 0.6
-	var successSnapStiffness: Double = 120
-	var successSnapDamping: Double = 14
-	var completionSpringResponse: Double = 0.4
-	var completionSpringDamping: Double = 0.6
-	var completionDelay: Double = 0.3
-	var toastDismissDelay: Double = 1.4
-}
-
-struct GlowConfig {
-	var opacity: Double = 0.04
-	var blur: CGFloat = 4
-	var padding: CGFloat = -2
 }
 
 struct RewardSpinnerGeometry {
 	let config: RewardSpinnerConfig
 	
 	var segments: SegmentConfig = .init()
-	// add alongside segments
 	var pointer: PointerConfig = .init()
-	var glow: GlowConfig = .init()
-	var messaging: MessagingConfig = .init()
-	var spinAnimation: SpinAnimationConfig = .init()
 
 	let segmentCount: Int
 

@@ -12,13 +12,7 @@ struct RewardSpinnerConfig {
 	var dragSensitivity: Double = 0.25
 	var momentumMultiplier: Double = 8
 	var minimumSpinDegrees: Double = 720
-	
-	// MARK: Animation
-	var springMass: Double = 1.2
-	var springStiffness: Double = 40
-	var springDamping: Double = 8
-	var animationDuration: Double = 2.4
-	
+
 	// MARK: Physics  ← NEW
 	var friction: Double = 0.97
 	var stopThreshold: Double = 5
