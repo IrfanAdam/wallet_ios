@@ -44,3 +44,32 @@ final class RewardSpinnerPhysics {
 		)
 	}
 }
+
+
+extension RewardSpinnerPhysics {
+	func seed(rotation: Double, angle: Double) {
+		lastDragAngle      = angle
+		lastTimestamp      = CACurrentMediaTime()
+		lastRotationSample = rotation
+	}
+	
+	func updateVelocity(rotation: Double, currentAngle: Double) {
+		let now = CACurrentMediaTime()
+		
+		if let lastTime = lastTimestamp,
+			 let lastRot  = lastRotationSample,
+			 now - lastTime > 0 {
+			currentAngularVelocity = (rotation - lastRot) / (now - lastTime)
+		}
+		
+		lastDragAngle      = currentAngle
+		lastTimestamp      = now
+		lastRotationSample = rotation
+	}
+	
+	func clear() {
+		lastDragAngle      = nil
+		lastTimestamp      = nil
+		lastRotationSample = nil
+	}
+}

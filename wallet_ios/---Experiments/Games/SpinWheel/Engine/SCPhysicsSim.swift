@@ -10,15 +10,11 @@ extension RewardSpinnerPhysics {
 		update: @escaping (Double) -> Void,
 		completion: @escaping (Double) -> Void
 	) {
-		
 		var rotation = startRotation
 		var velocity = initialVelocity
-		
 		let friction = config.friction
 		let stopThreshold = config.stopThreshold
-		
 		let proxy = DisplayLinkProxy {}
-		
 		let displayLink = CADisplayLink(
 			target: proxy,
 			selector: #selector(DisplayLinkProxy.step)
@@ -27,21 +23,16 @@ extension RewardSpinnerPhysics {
 		
 		proxy.setHandler { [weak displayLink] in
 			guard let link = displayLink else { return }
-			
+		
 			let deltaTime = link.targetTimestamp - link.timestamp
 			
 			rotation += velocity * deltaTime
-			
 			velocity *= pow(friction, deltaTime * 60)
-			
 			update(rotation)
 			
 			if abs(velocity) < stopThreshold {
-				
 				link.invalidate()
-				
 				let snapped = self.snapToSegment(rotation)
-				
 				completion(snapped)
 			}
 		}
@@ -52,7 +43,6 @@ extension RewardSpinnerPhysics {
 	func snapToSegment(_ angle: Double) -> Double {
 		
 		let halfSegment = geometry.segmentAngle / 2
-		
 		return ((angle + halfSegment) / geometry.segmentAngle)
 			.rounded() * geometry.segmentAngle - halfSegment
 	}

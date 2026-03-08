@@ -1,23 +1,11 @@
 import SwiftUI
 import AVFoundation
 
-// MARK: - Math Helpers
-
-extension RewardSpinnerDragGesture {
-	func angle(from center: CGPoint, to point: CGPoint) -> Double {
-		atan2(point.y - center.y, point.x - center.x) * 180 / .pi
-	}
-	
-	func normalizedDelta(_ delta: Double) -> Double {
-		(delta + 180).truncatingRemainder(dividingBy: 360) - 180
-	}
-}
-
 // MARK: - Spin Handling
 
 extension RewardSpinnerDragGesture {
 	func handleSpin(_ value: DragGesture.Value) {
-		guard predictedTravel >= store.config.minimumSpinDegrees else {
+		guard hasSufficientVelocity else {
 			handleFailedSpin()
 			return
 		}
@@ -33,29 +21,25 @@ extension RewardSpinnerDragGesture {
 	}
 }
 
-// MARK: - Spin Outcomes
+// MARK: - Outcomes
 
 private extension RewardSpinnerDragGesture {
 	func handleFailedSpin() {
 		UINotificationFeedbackGenerator().notificationOccurred(.warning)
 		showToast("Spin harder to win 🎯")
-		
-		withAnimation(snapFailAnimation) {
-			store.rotation = store.physics.snapToSegment(store.rotation)
-		}
+		withAnimation(snapFailAnimation) { store.rotation = store.physics.snapToSegment(store.rotation) }
 		store.physics.currentAngularVelocity = 0
 	}
 	
 	func handleSpinCompletion(_ snappedRotation: Double) {
-		withAnimation(snapSuccessAnimation) {
-			store.rotation = snappedRotation
-		}
+		withAnimation(snapSuccessAnimation) { store.rotation = snappedRotation }
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
+			let index = winningIndex(from: snappedRotation)
 			triggerCompletionFeedback()
 			withAnimation(completionAnimation) {
-				store.selectedSegmentIndex = winningIndex(from: snappedRotation)
-				store.spinnerState = .completed(segmentIndex: winningIndex(from: snappedRotation))
+				store.selectedSegmentIndex = index
+				store.spinnerState = .completed(segmentIndex: index)
 			}
 		}
 	}
@@ -64,8 +48,9 @@ private extension RewardSpinnerDragGesture {
 // MARK: - Helpers
 
 private extension RewardSpinnerDragGesture {
-	var predictedTravel: Double {
-		abs(store.physics.currentAngularVelocity) / (1 - store.config.friction)
+	var hasSufficientVelocity: Bool {
+		let predicted = abs(store.physics.currentAngularVelocity) / (1 - store.config.friction)
+		return predicted >= store.config.minimumSpinDegrees
 	}
 	
 	func winningIndex(from snappedRotation: Double) -> Int {
