@@ -30,13 +30,11 @@ final class RewardSpinnerStore {
 	let geometry: RewardSpinnerGeometry
 	var segmentCount: Int { segments.count }
 
-	var colors = BrandColors()
-
-	var anim = RewardSpinnerAnimState()
-
 	// MARK: - Physics
 	let physics: RewardSpinnerPhysics
 
+	// MARK: - Animation
+	var anim = RewardSpinnerAnimState()
 	let animations = RewardSpinnerAnimationConfig()
 
 	init(

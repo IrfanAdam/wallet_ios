@@ -15,7 +15,7 @@ struct SpinnerPointer: View {
 	
 	var body: some View {
 		TrianglePointer()
-			.fill(Color.black)
+			.fill(store.config.colors.pointerBlack)
 			.frame(width: frameSize, height: frameSize)
 			.rotationEffect(.degrees(wobble), anchor: wobbleAnchor)
 			.rotationEffect(.degrees(pointerRotation))
