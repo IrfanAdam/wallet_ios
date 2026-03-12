@@ -666,8 +666,8 @@
 				EE6623EB2F5337DB00F17D74 /* SubComp */,
 				158C9E082F5B01500020691D /* SubComp Helpers */,
 				EE6623DE2F4B03FA00F17D74 /* Engine */,
-				158C9E0D2F619B600020691D /* New Context */,
 				EE7A58C22F5D687400B8C379 /* Setup */,
+				158C9E0D2F619B600020691D /* New Context */,
 			);
 			path = SpinWheel;
 			sourceTree = "<group>";

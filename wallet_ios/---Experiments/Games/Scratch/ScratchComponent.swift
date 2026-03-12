@@ -17,7 +17,9 @@ public struct ScratchRevealCard<Content: View>: View {
 	
 	/// Live reference to the UIKit canvas — set once on first makeUIView.
 	@State private var canvas: ScratchCanvas?
-	
+
+	@State private var appearTilt: Double = 8
+
 	public init(
 		revealThreshold: CGFloat = 0.50,
 		@ViewBuilder content: () -> Content
@@ -45,6 +47,16 @@ public struct ScratchRevealCard<Content: View>: View {
 			}
 			.onAppear {
 				viewModel.canvasSize = geo.size
+
+				appearTilt = 14
+
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+					appearTilt = -4   // reverse tilt
+
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+						appearTilt = 0   // settle
+					}
+				}
 			}
 			// Watch for threshold crossing and drive the reveal animation.
 			.onChange(of: viewModel.isFullyRevealed) {_, revealed in
@@ -60,6 +72,12 @@ public struct ScratchRevealCard<Content: View>: View {
 				}
 			}
 		}
+		.rotation3DEffect(
+			.degrees(appearTilt),
+			axis: (x: 1, y: -0.6, z: 0),
+			perspective: 0.9
+		)
+		.animation(.spring(response: 1.0, dampingFraction: 0.78, blendDuration: 0), value: appearTilt)
 	}
 	
 	private var cardBackground: some View {

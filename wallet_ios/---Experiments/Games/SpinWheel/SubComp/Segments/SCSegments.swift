@@ -22,6 +22,17 @@ struct SpinnerSegments: View {
 			}
 		}
 		.rotationEffect(.degrees(store.anim.rotation))
+		.onAppear {
+			let base = store.anim.rotation
+			withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+				store.anim.rotation = base - 90   // small nudge
+			}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+				withAnimation(.spring(response: 0.6, dampingFraction: 0.72)) {
+					store.anim.rotation = base
+				}
+			}
+		}
 	}
 }
 

@@ -95,9 +95,9 @@ final class ScratchCanvas: UIView {
 	
 	private func drawSilverSurface(into ctx: CGContext) {
 		let colors: [CGColor] = [
-			UIColor(white: 0.80, alpha: 1.0).cgColor,
-			UIColor(white: 0.64, alpha: 1.0).cgColor,
-			UIColor(white: 0.72, alpha: 1.0).cgColor,
+			UIColor(red: 120/255, green: 190/255, blue: 255/255, alpha: 1).cgColor, // highlight
+			UIColor(red: 0/255,   green: 111/255, blue: 235/255, alpha: 1).cgColor, // brand blue
+			UIColor(red: 0/255,   green: 70/255,  blue: 160/255, alpha: 1).cgColor  // shadow
 		]
 		guard let gradient = CGGradient(
 			colorsSpace: CGColorSpaceCreateDeviceRGB(),
@@ -112,8 +112,86 @@ final class ScratchCanvas: UIView {
 													 start: .zero,
 													 end: CGPoint(x: 0, y: bounds.height),
 													 options: [])
+
+		drawGiftPattern(into: ctx)
 	}
-	
+
+	private func drawGiftPattern(into ctx: CGContext) {
+		ctx.saveGState()
+
+		let stripeSpacing: CGFloat = 8
+		let diamondSpacing: CGFloat = 14
+
+		let ribbonDark = UIColor(red: 0/255,  green: 90/255,  blue: 200/255, alpha: 1)
+		let ribbonLight = UIColor(red: 110/255, green: 200/255, blue: 255/255, alpha: 1)
+
+		// --- 1. Dense diagonal weave ---
+		var index = 0
+		for x in stride(from: -bounds.height, through: bounds.width, by: stripeSpacing) {
+
+			let color = index.isMultiple(of: 2) ? ribbonDark : ribbonLight
+			ctx.setStrokeColor(color.withAlphaComponent(0.20).cgColor)
+			ctx.setLineWidth(0.8)
+
+			ctx.move(to: CGPoint(x: x, y: 0))
+			ctx.addLine(to: CGPoint(x: x + bounds.height, y: bounds.height))
+			ctx.strokePath()
+
+			index += 1
+		}
+
+		// --- 2. Cross weave (opposite direction) ---
+		ctx.setStrokeColor(UIColor.white.withAlphaComponent(0.10).cgColor)
+		ctx.setLineWidth(0.6)
+
+		for x in stride(from: -bounds.height, through: bounds.width, by: stripeSpacing) {
+			ctx.move(to: CGPoint(x: x, y: bounds.height))
+			ctx.addLine(to: CGPoint(x: x + bounds.height, y: 0))
+		}
+
+		ctx.strokePath()
+
+		// --- 3. Dense diamond pattern ---
+		ctx.setStrokeColor(UIColor.white.withAlphaComponent(0.18).cgColor)
+		ctx.setLineWidth(0.5)
+
+		for x in stride(from: 0, to: bounds.width, by: diamondSpacing) {
+			for y in stride(from: 0, to: bounds.height, by: diamondSpacing) {
+
+				let size: CGFloat = 4
+
+				let path = CGMutablePath()
+				path.move(to: CGPoint(x: x, y: y - size))
+				path.addLine(to: CGPoint(x: x + size, y: y))
+				path.addLine(to: CGPoint(x: x, y: y + size))
+				path.addLine(to: CGPoint(x: x - size, y: y))
+				path.closeSubpath()
+
+				ctx.addPath(path)
+				ctx.strokePath()
+			}
+		}
+
+		// --- 4. Metallic micro sparkles ---
+		ctx.setFillColor(UIColor.white.withAlphaComponent(0.25).cgColor)
+
+		let sparkleSpacing: CGFloat = 10
+
+		for x in stride(from: 0, to: bounds.width, by: sparkleSpacing) {
+			for y in stride(from: 0, to: bounds.height, by: sparkleSpacing) {
+
+				ctx.fillEllipse(in: CGRect(
+					x: x + 1,
+					y: y + 1,
+					width: 1.5,
+					height: 1.5
+				))
+			}
+		}
+
+		ctx.restoreGState()
+	}
+
 	// MARK: - Erase helpers
 	
 	private func erase(stroke: [ScratchPoint], into ctx: CGContext) {

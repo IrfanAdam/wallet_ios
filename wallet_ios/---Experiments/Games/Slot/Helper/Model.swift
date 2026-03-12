@@ -104,4 +104,39 @@ final class SlotMachineViewModel: ObservableObject {
 			}
 		}
 	}
+
+	func runIntro() {
+		// 1. Pre-existing initial/target logic
+		let start = [0, 0, 0]
+		let target = reels
+
+		// 2. Start aligned and spin ruffle sound
+		reels = start
+		SlotSoundEngine.shared.startSpinLoop()
+
+		let introDuration = 0.42
+
+		for index in 0..<3 {
+			let steps = (target[index] - start[index] + symbols.count) % symbols.count
+			guard steps > 0 else { continue }
+
+			for step in 1...steps {
+				let delay = introDuration * Double(step) / Double(steps)
+				DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+					withAnimation(.linear(duration: 0.05)) {
+						self.reels[index] = (start[index] + step) % self.symbols.count
+					}
+					if step % 2 == 0 {
+						// light mechanical tick
+						UIImpactFeedbackGenerator(style: .light).impactOccurred()
+					}
+				}
+			}
+		}
+
+		// 3. Stop ruffle after intro settles
+		DispatchQueue.main.asyncAfter(deadline: .now() + introDuration + 0.1) {
+			SlotSoundEngine.shared.stopSpinLoop()
+		}
+	}
 }

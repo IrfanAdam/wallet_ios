@@ -12,7 +12,8 @@ struct SlotLever: View {
 	@State private var isDragging = false
 	@State private var lastTickOffset: CGFloat = 0
 	@State private var hasLockedIn = false
-	
+	@State private var introNudge: CGFloat = 0
+
 	private let knobSize: CGFloat = 36
 	private let triggerThresholdRatio: CGFloat = 0.95
 	private let tickSpacing: CGFloat = 18
@@ -49,7 +50,7 @@ struct SlotLever: View {
 				// MARK: - Progress Fill
 				VStack(spacing: 0) {
 					Color.blue.opacity(0.8)
-						.frame(height: trackHeight * progress)
+						.frame(height: introNudge + trackHeight * progress)
 						.clipShape(Capsule())
 					Spacer(minLength: 0)
 				}
@@ -70,7 +71,19 @@ struct SlotLever: View {
 						.foregroundColor(.white)
 				}
 				.frame(width: knobSize, height: knobSize)
-				.offset(y: clampedOffset)
+				.offset(y: clampedOffset + introNudge)
+				.onAppear {
+					// small downward nudge, then back
+					let nudge: CGFloat = 60
+					withAnimation(.interpolatingSpring(stiffness: 200, damping: 18)) {
+						introNudge = nudge
+					}
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+						withAnimation(.interpolatingSpring(stiffness: 180, damping: 20)) {
+							introNudge = 0
+						}
+					}
+				}
 				.gesture(
 					DragGesture(minimumDistance: 0)
 						.onChanged { value in

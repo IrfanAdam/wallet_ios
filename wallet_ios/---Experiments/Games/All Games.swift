@@ -87,7 +87,7 @@ struct RewardGames: View {
 							.foregroundStyle(.secondary)
 					}
 				}
-				.frame(width: 300, height: 180)
+				.frame(width: 340, height: 200)
 			}
 		}
 		.sheet(isPresented: $showQuiz) {
@@ -147,7 +147,7 @@ struct RewardSheetContainer<Content: View>: View {
 		NavigationStack {
 			ZStack {
 				Color(.systemGroupedBackground)
-					.opacity(0.001)
+					.opacity(0.54)
 					.ignoresSafeArea()
 				
 				content

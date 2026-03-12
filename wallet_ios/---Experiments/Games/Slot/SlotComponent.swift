@@ -23,5 +23,11 @@ struct SlotMachineView: View {
 		}
 		.padding()
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+		.onAppear {
+			Task {
+				try? await Task.sleep(nanoseconds: 500_000_000) // 1 second
+				viewModel.runIntro()
+			}
+		}
 	}
 }
