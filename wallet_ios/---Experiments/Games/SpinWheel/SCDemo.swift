@@ -12,7 +12,6 @@ struct RewardSpinnerDemo: View {
 
 	var body: some View {
 		RewardSpinner(segments: demoSegments)
-		
 	}
 }
 

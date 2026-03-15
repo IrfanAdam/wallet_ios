@@ -18,7 +18,7 @@ struct SlotMachineView: View {
 				WinnerBanner()
 					.transition(.scale.combined(with: .opacity))
 			} else {
-				Text(viewModel.isSpinning ? "Spinning..." : "Drag to spin")
+				Text(viewModel.isSpinning ? "Spinning..." : "Drag and realase to spin")
 			}
 		}
 		.padding()

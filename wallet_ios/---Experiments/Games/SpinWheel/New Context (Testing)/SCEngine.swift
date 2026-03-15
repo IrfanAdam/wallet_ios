@@ -8,7 +8,7 @@ final class Engine {
 	// MARK: Subcontexts
 
 	var model = Model()           // what user sees
-	var physics = Physics()       // motion state
+	var physics = Physics()       // motion state and runtime rotation values live exclusively here, not in geometry
 	var anim    = Anim()
 	var interaction = Interaction()   // interaction helpers
 
@@ -17,7 +17,12 @@ final class Engine {
 	enum Phase: Equatable {
 		case idle
 		case spinning
-		case completed(index: Int)
+		case completed(Result)
+	}
+	
+	enum Result: Equatable {
+		case win(index: Int)
+		case lose(index: Int)
 	}
 
 	struct Model {
@@ -28,15 +33,18 @@ final class Engine {
 	}
 
 	// MARK: Physics (runtime motion)
-
+	// Rotation and related runtime values live exclusively here.
+	// This struct is initialized independently and does not rely on geometry for initial rotation.
 	struct Physics {
+		// For Rotation
 		var rotation: Double = 0
-		var angularVelocity: Double = 0
 		var lastDragAngle: Double?
-		var lastTimestamp: TimeInterval?
 		var lastRotationSample: Double?
+		// For Velocity
+		var angularVelocity: Double = 0
 		var friction: Double = 0.97
 		var stopThreshold: Double = 5
+		var lastTimestamp: TimeInterval?
 	}
 
 	struct Anim {
@@ -47,6 +55,11 @@ final class Engine {
 
 	struct Interaction {
 		// e.g. helpers that compute Animations from `anim`
+	}
+	
+	func initializeRotation(segmentCount: Int) {
+		let segmentAngle = 360.0 / Double(max(segmentCount, 1))
+		physics.rotation = -segmentAngle / 2
 	}
 
 	// MARK: Intents (what views call)
@@ -59,6 +72,16 @@ final class Engine {
 		// check velocity/friction, start spin, snap, update model
 	}
 
+	// Reset or re-initialize rotation.
+	// Takes segment count as input for initial placement, not geometry.
+	func resetRotation(for segmentCount: Int) {
+		physics.rotation = 0
+		physics.lastDragAngle = nil
+		physics.lastRotationSample = nil
+		physics.angularVelocity = 0
+		physics.lastTimestamp = nil
+	}
+
 	func spinAgain() {
 		model.phase = .idle
 		model.selectedIndex = nil
@@ -66,5 +89,3 @@ final class Engine {
 		model.toastMessage = ""
 	}
 }
-
-

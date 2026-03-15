@@ -5,27 +5,17 @@ import SwiftUI
 struct Geometry2 {
 
 	// Inputs
-	let segmentCount: Int
 	var spinWheel: SpinWheel
-	var parts: Parts = .init()
+	var components: Components = .init()
 
 	// Convenience init, keeps your old call site
 	init(wheelSize: CGFloat, segmentCount: Int) {
-		self.segmentCount = segmentCount
 		self.spinWheel = SpinWheel(wheelSize: wheelSize, segmentCount: segmentCount)
-		self.parts = Parts()
+		self.components = Components()
 	}
+	
 
 	// MARK: - Sub-structs
-
-
-
-	struct Parts {
-		var segment = Segment()
-		var pointer = Pointer()
-		var image   = Image()
-	}
-
 	struct SpinWheel {
 		let wheelSize: CGFloat
 		let segmentCount: Int
@@ -34,9 +24,12 @@ struct Geometry2 {
 
 		var radius: CGFloat { wheelSize / 2 }
 		var segmentAngle: Double { 360.0 / Double(max(segmentCount, 1)) }
-
-		var initialRotation: Double { -segmentAngle / 2 }
-		var pointerRotation: Double { -segmentAngle / 2 }
+	}
+	
+	struct Components {
+		var segment = Segment()
+		var pointer = Pointer()
+		var image   = Image()
 	}
 
 	struct Segment {
@@ -70,8 +63,9 @@ struct Geometry2 {
 		let boundaryAngle: Double = -90 - segmentAngle / 2
 		let radians = boundaryAngle * .pi / 180
 		return CGSize(
-			width: cos(radians) * Double(radius) + Double(parts.pointer.offsetX),
-			height: sin(radians) * Double(radius) + Double(parts.pointer.offsetY)
+			width: cos(radians) * Double(radius) + Double(components.pointer.offsetX),
+			height: sin(radians) * Double(radius) + Double(components.pointer.offsetY)
 		)
 	}
 }
+
