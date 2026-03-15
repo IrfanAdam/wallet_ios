@@ -10,11 +10,11 @@ struct RewardSpinnerMessagingView: View {
 	
 	var body: some View {
 		ZStack {
-			if case .completed = store.anim.spinnerState {
+			if case .completed = store.engine.model.phase {
 				RewardSpinnerCompletionPanel(store: store)
 					.transition(.scale(scale: msg.scaleTransition).combined(with: .opacity))
 			}
-			else if store.anim.showToast {
+			else if store.engine.model.showToast {
 				RewardSpinnerToastPanel(store: store)
 					.transition(.move(edge: .bottom).combined(with: .opacity))
 			}
@@ -40,7 +40,7 @@ struct RewardSpinnerPanelContainer<Content: View>: View {
 			content
 		}
 		.padding(.horizontal, msg.horizontalPadding)
-		.offset(y: store.config.wheelSize / 2 + msg.yOffset)
+		.offset(y: store.geometry.spinWheel.wheelSize / 2 + msg.yOffset)
 	}
 }
 
@@ -50,7 +50,7 @@ struct RewardSpinnerToastPanel: View {
 	
 	var body: some View {
 		RewardSpinnerPanelContainer(store: store) {
-			Text(store.anim.toastMessage)
+			Text(store.engine.model.toastMessage)
 				.font(.subheadline.weight(.semibold))
 				.multilineTextAlignment(.center)
 				.frame(maxWidth: .infinity)
@@ -67,14 +67,7 @@ struct RewardSpinnerCompletionPanel: View {
 	
 	let store: RewardSpinnerStore
 	
-	var anim: RewardSpinnerAnimationConfig.Messaging { store.animations.messaging }
-	
-	var dismissAnimation: Animation {
-		.spring(
-			response:       anim.dismissResponse,
-			dampingFraction: anim.dismissDamping
-		)
-	}
+	var dismissAnimation: Animation {store.engine.anim.spinSmooth.animation}
 	
 	var body: some View {
 		RewardSpinnerPanelContainer(store: store) {
@@ -98,9 +91,9 @@ struct RewardSpinnerCompletionPanel: View {
 	
 	private func resetSpinner() {
 		withAnimation(dismissAnimation) {
-			store.anim.selectedSegmentIndex = nil
-			store.anim.spinnerState = .idle
-			store.anim.toastMessage = ""
+			store.engine.model.selectedIndex = nil
+			store.engine.model.phase = .idle
+			store.engine.model.toastMessage = ""
 		}
 	}
 	

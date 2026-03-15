@@ -41,6 +41,10 @@ struct Geometry2 {
 		var cornerRadius: CGFloat = 8
 		var dimOpacity: Double = 0.32
 	}
+	
+	var pointerRotation: Double {
+		-spinWheel.segmentAngle / 2
+	}
 
 	struct Pointer {
 		var size: CGFloat = 22
@@ -48,9 +52,24 @@ struct Geometry2 {
 		var offsetX: CGFloat = -4
 		var offsetY: CGFloat = -8
 	}
+	
+	var imageSize: CGFloat {
+		spinWheel.radius * components.image.sizeRatio
+	}
+	
+	func imageOffset(for index: Int) -> (x: CGFloat, y: CGFloat) {
+		let imageRadius = spinWheel.radius * ((1 + components.segment.innerRadiusRatio) / 2)
+		let midAngle = Double(index) * spinWheel.segmentAngle + (spinWheel.segmentAngle / 2) - 90
+		let radians = midAngle * .pi / 180
+		
+		return (
+			x: cos(radians) * imageRadius,
+			y: sin(radians) * imageRadius
+		)
+	}
 
 	struct Image {
-		var size: CGFloat = 48
+		var sizeRatio: CGFloat = 0.22
 		var selectedScale: CGFloat = 1.15
 	}
 

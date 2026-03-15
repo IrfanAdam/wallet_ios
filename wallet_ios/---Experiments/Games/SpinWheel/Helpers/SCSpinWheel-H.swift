@@ -10,10 +10,10 @@ extension SpinnerSegmentChart {
 	}
 
 	func segmentState(for index: Int) -> SegmentState {
-		let selectedIndex = store.anim.selectedSegmentIndex
+		let selectedIndex = store.engine.model.selectedIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil
-		let colors = store.config.colors
+		let colors = store.theme.colors
 
 		let innerRadius =
 		isSelected
@@ -55,27 +55,27 @@ extension SpinnerSegmentImages {
 	}
 	
 	func segmentState(for index: Int) -> SegmentState {
-		let selectedIndex = store.anim.selectedSegmentIndex
+		let selectedIndex = store.engine.model.selectedIndex
 		let isSelected = index == selectedIndex
 		let hasSelection = selectedIndex != nil
 		
-		let segmentAngle = geometry.segmentAngle
+		let segmentAngle = geometry.spinWheel.segmentAngle
 		let midAngle = Double(index) * segmentAngle + (segmentAngle / 2) - 90
 		let radians = midAngle * .pi / 180
 		
 		let isActive = !hasSelection || isSelected
 		
-		let imageSize = isActive ? seg.imageSize : 0
-		let scale = isSelected ? seg.selectedScale : 1.0
+		let imageSize = isActive ? geometry.imageSize : 0
+		let scale = isSelected ? geometry.components.image.selectedScale : 1.0
 		
-		let offsetX = cos(radians) * radius
-		let offsetY = sin(radians) * radius
+		let offsetX = cos(radians) * geometry.imageSize / 2
+		let offsetY = sin(radians) * geometry.imageSize / 2
 		
 		return SegmentState(
 			imageName: store.segments[index].imageName,
 			imageSize: imageSize,
 			scale: scale,
-			imageRotation: -store.anim.rotation,
+			imageRotation: -store.engine.physics.rotation,
 			offsetX: offsetX,
 			offsetY: offsetY
 		)
@@ -90,28 +90,13 @@ extension SpinnerPointer {
 	
 	
 	var boundaryIndex: Int {
-		let normalized = store.anim.rotation.truncatingRemainder(dividingBy: 360)
+		let normalized = store.engine.physics.rotation.truncatingRemainder(dividingBy: 360)
 		let positive   = normalized < 0 ? normalized + 360 : normalized
-		return Int((positive / store.geometry.segmentAngle).rounded()) % store.segmentCount
+		return Int((positive / store.geometry.spinWheel.segmentAngle).rounded()) % store.segments.count
 	}
 	
 	var spinDirection: Double {
-		store.anim.rotation - lastRotation > 0 ? 1 : -1
-	}
-	
-	var wobbleAnimation: Animation {
-		.interpolatingSpring(
-			mass:      pointerAnim.wobbleMass,
-			stiffness: pointerAnim.wobbleStiffness,
-			damping:   pointerAnim.wobbleDamping
-		)
-	}
-	var wobbleReturnAnimation: Animation {
-		.interpolatingSpring(
-			mass:      pointerAnim.wobbleMass,
-			stiffness: pointerAnim.returnStiffness,
-			damping:   pointerAnim.returnDamping
-		)
+		store.engine.physics.rotation - lastRotation > 0 ? 1 : -1
 	}
 }
 

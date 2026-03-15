@@ -3,14 +3,11 @@ import AVFoundation
 
 struct RewardSpinnerDragGesture {
 	let store: RewardSpinnerStore
-	var animConfig: RewardSpinnerAnimationConfig.Spin { store.animations.spin }
-	var anim: RewardSpinnerAnimState {
-		get { store.anim }
-		nonmutating set { store.anim = newValue }
+	
+	private var geometry: Geometry2 {
+		store.geometry
 	}
-}
 
-extension RewardSpinnerDragGesture {
 	func makeGesture() -> some Gesture {
 		DragGesture(minimumDistance: 0)
 			.onChanged(handleDragChanged)
@@ -18,28 +15,28 @@ extension RewardSpinnerDragGesture {
 	}
 	
 	private func handleDragChanged(_ value: DragGesture.Value) {
-		guard case .idle = anim.spinnerState else { return }
+		guard case .idle = store.engine.model.phase else { return }
 		
-		let physics = store.physics
+		let physics = store.engine.physics
 		let currentAngle = angle(from: wheelCenter, to: value.location)
 		
 		guard let lastAngle = physics.lastDragAngle else {
-			physics.seed(rotation: anim.rotation, angle: currentAngle)
+			store.engine.physics.lastDragAngle = currentAngle
+			store.engine.physics.lastRotationSample = store.engine.physics.rotation
 			return
 		}
 		
-		anim.rotation += normalizedDelta(currentAngle - lastAngle)
-		physics.updateVelocity(rotation: anim.rotation, currentAngle: currentAngle)
+		store.engine.physics.rotation += normalizedDelta(currentAngle - lastAngle)
+		store.engine.physics.updateVelocity(rotation: store.engine.physics.rotation)
 	}
 	
 	private func handleDragEnded(_ value: DragGesture.Value) {
-		guard case .idle = anim.spinnerState else { return }
-		store.physics.clear()
+		guard case .idle = store.engine.model.phase else { return }
+		store.engine.physics.clear()
 		handleSpin(value)
 	}
 	
-	var geometry: RewardSpinnerGeometry { store.geometry }
-	var wheelCenter: CGPoint { .init(x: store.config.wheelSize / 2, y: store.config.wheelSize / 2) }
+	var wheelCenter: CGPoint { .init(x: geometry.spinWheel.wheelSize / 2, y: geometry.spinWheel.wheelSize / 2) }
 	
 	private func angle(from center: CGPoint, to point: CGPoint) -> Double {
 		atan2(point.y - center.y, point.x - center.x) * 180 / .pi
@@ -59,13 +56,18 @@ extension RewardSpinnerDragGesture {
 			return
 		}
 		
-		store.anim.isSpinning = true
+		store.engine.model.phase = .spinning
 		
-		store.physics.startSpin(
-			currentRotation: store.anim.rotation,
-			dragValue: value,
-			update: { store.anim.rotation = $0 },
-			completion: handleSpinCompletion
+//		store.engine.physics.startSpin(
+//			currentRotation: store.engine.physics.rotation,
+//			dragValue: value,
+//			update: { store.engine.physics.rotation = $0 },
+//			completion: handleSpinCompletion
+//		)
+		store.engine.physics.startSpin(
+			update: { store.engine.physics.rotation = $0 },
+			completion: handleSpinCompletion,
+			segmentAngle: geometry.spinWheel.segmentAngle
 		)
 	}
 }
@@ -77,20 +79,23 @@ private extension RewardSpinnerDragGesture {
 		UINotificationFeedbackGenerator().notificationOccurred(.warning)
 		showToast("Spin harder to win 🎯")
 		withAnimation(snapFailAnimation) {
-			store.anim.rotation = store.physics.snapToSegment(store.anim.rotation)
+			store.engine.physics.rotation = store.engine.physics.snapToSegment(
+				store.engine.physics.rotation,
+				segmentAngle: geometry.spinWheel.segmentAngle
+			)
 		}
-		store.physics.currentAngularVelocity = 0
+		store.engine.physics.angularVelocity = 0
 	}
 	
 	func handleSpinCompletion(_ snappedRotation: Double) {
-		withAnimation(snapSuccessAnimation) { store.anim.rotation = snappedRotation }
+		withAnimation(snapSuccessAnimation) { store.engine.physics.rotation = snappedRotation }
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
 			let index = winningIndex(from: snappedRotation)
 			triggerCompletionFeedback()
 			withAnimation(completionAnimation) {
-				store.anim.selectedSegmentIndex = index
-				store.anim.spinnerState = .completed(segmentIndex: index)
+				store.engine.model.selectedIndex = index
+				store.engine.model.phase = .completed(.win(index: index))
 			}
 		}
 	}
@@ -100,21 +105,21 @@ private extension RewardSpinnerDragGesture {
 
 private extension RewardSpinnerDragGesture {
 	var hasSufficientVelocity: Bool {
-		let predicted = abs(store.physics.currentAngularVelocity) / (1 - store.config.friction)
-		return predicted >= store.config.minimumSpinDegrees
+		let predicted = abs(store.engine.physics.angularVelocity) / (1 - store.engine.physics.friction)
+		return predicted >= store.geometry.spinWheel.minimumSpinDegrees
 	}
 	
 	func winningIndex(from snappedRotation: Double) -> Int {
 		let positive = (snappedRotation.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
-		let adjusted = ((360 - positive) - geometry.segmentAngle / 2 + 360).truncatingRemainder(dividingBy: 360)
-		return (Int(adjusted / geometry.segmentAngle) % store.segmentCount + store.segmentCount) % store.segmentCount
+		let adjusted = ((360 - positive) - geometry.spinWheel.segmentAngle / 2 + 360).truncatingRemainder(dividingBy: 360)
+		return (Int(adjusted / geometry.spinWheel.segmentAngle) % store.segments.count + store.segments.count) % store.segments.count
 	}
 	
 	func showToast(_ message: String) {
-		store.anim.toastMessage = message
-		withAnimation { store.anim.showToast = true }
+		store.engine.model.toastMessage = message
+		withAnimation { store.engine.model.showToast = true }
 		DispatchQueue.main.asyncAfter(deadline: .now() + toastDismissDelay) {
-			withAnimation { store.anim.showToast = false }
+			withAnimation { store.engine.model.showToast = false }
 		}
 	}
 	
@@ -127,28 +132,9 @@ private extension RewardSpinnerDragGesture {
 // MARK: - Animations
 
 extension RewardSpinnerDragGesture {
-	var snapFailAnimation: Animation {
-		.interpolatingSpring(
-			mass:      animConfig.failSnapMass,
-			stiffness: animConfig.failSnapStiffness,
-			damping:   animConfig.failSnapDamping
-		)
-	}
-	var snapSuccessAnimation: Animation {
-		.interpolatingSpring(
-			mass:      animConfig.successSnapMass,
-			stiffness: animConfig.successSnapStiffness,
-			damping:   animConfig.successSnapDamping
-		)
-	}
-	var completionAnimation: Animation {
-		.spring(
-			response:       animConfig.completionResponse,
-			dampingFraction: animConfig.completionDamping
-		)
-	}
-	var toastDismissDelay: Double { animConfig.toastDismissDelay }
-	var completionDelay:   Double { animConfig.completionDelay }
+	var snapFailAnimation: Animation {store.engine.anim.spinSnap.animation}
+	var snapSuccessAnimation: Animation {store.engine.anim.spinSnap.animation}
+	var completionAnimation: Animation {store.engine.anim.spinBounce.animation}
+	var toastDismissDelay: Double { 1.4 }
+	var completionDelay:   Double { 0.3 }
 }
-
-

@@ -45,6 +45,114 @@ final class Engine {
 		var friction: Double = 0.97
 		var stopThreshold: Double = 5
 		var lastTimestamp: TimeInterval?
+		
+		
+		mutating func updateVelocity(rotation: Double) {
+			
+			let now = CACurrentMediaTime()
+			
+			guard
+				let lastRotation = lastRotationSample,
+				let lastTime = lastTimestamp
+			else {
+				lastRotationSample = rotation
+				lastTimestamp = now
+				return
+			}
+			
+			let deltaRotation = rotation - lastRotation
+			let deltaTime = now - lastTime
+			
+			guard deltaTime > 0 else { return }
+			
+			angularVelocity = deltaRotation / deltaTime
+			
+			lastRotationSample = rotation
+			lastTimestamp = now
+		}
+		
+		mutating func snapToSegment(
+			_ rotation: Double,
+			segmentAngle: Double
+		) -> Double {
+			
+			let normalized =
+			(rotation.truncatingRemainder(dividingBy: 360) + 360)
+				.truncatingRemainder(dividingBy: 360)
+			
+			let snapped =
+			round(normalized / segmentAngle) * segmentAngle
+			
+			return snapped
+		}
+		
+		mutating func startSpin(
+			update: @escaping (Double) -> Void,
+			completion: @escaping (Double) -> Void,
+			segmentAngle: Double
+		) {
+			
+			let initialVelocity = angularVelocity
+			let startRotation = rotation
+			
+			runFrictionSimulation(
+				startRotation: startRotation,
+				initialVelocity: initialVelocity,
+				update: update,
+				completion: completion,
+				segmentAngle: segmentAngle
+			)
+		}
+		
+		mutating func clear() {
+			lastDragAngle      = nil
+			lastTimestamp      = nil
+			lastRotationSample = nil
+		}
+		
+		mutating func runFrictionSimulation(
+			startRotation: Double,
+			initialVelocity: Double,
+			update: @escaping (Double) -> Void,
+			completion: @escaping (Double) -> Void,
+			segmentAngle: Double
+		) {
+			
+			var rotation = startRotation
+			var velocity = initialVelocity
+			
+			let friction = self.friction
+			let stopThreshold = self.stopThreshold
+			
+			let proxy = DisplayLinkProxy()
+			let displayLink = CADisplayLink(target: proxy, selector: #selector(DisplayLinkProxy.step))
+			
+			proxy.setHandler { [weak displayLink] in
+				guard let link = displayLink else { return }
+				
+				let dt = link.targetTimestamp - link.timestamp
+				
+				rotation += velocity * dt
+				velocity *= pow(friction, dt * 60)
+				
+				update(rotation)
+				
+				if abs(velocity) < stopThreshold {
+					link.invalidate()
+					
+					let normalized =
+					(rotation.truncatingRemainder(dividingBy: 360) + 360)
+						.truncatingRemainder(dividingBy: 360)
+					
+					let snapped =
+					round(normalized / segmentAngle) * segmentAngle
+					
+					completion(snapped)
+				}
+			}
+			
+			displayLink.add(to: .main, forMode: .common)
+		}
 	}
 
 	struct Anim {

@@ -3,16 +3,16 @@ import AVFoundation
 
 // MARK: - Reward Spinner View
 struct RewardSpinner: View {
-	@State private var store: RewardSpinnerStore
+	@State var store: RewardSpinnerStore
 
 	init(
 		segments: [SpinnerSegment] = [],
-		config: RewardSpinnerConfig = .init()
+		theme: SCTheme = .default
 	) {
 		_store = State(
 			initialValue: RewardSpinnerStore(
 				segments: segments,
-				config: config
+				theme: theme
 			)
 		)
 	}
@@ -20,8 +20,8 @@ struct RewardSpinner: View {
 	var body: some View {
 		ZStack {
 			Circle()
-				.fill(store.config.colors.wheelBG)
-				.frame(width: store.config.wheelSize, height: store.config.wheelSize)
+				.fill(store.theme.colors.wheelBackground)
+				.frame(width: store.geometry.spinWheel.wheelSize, height: store.geometry.spinWheel.wheelSize)
 				.overlay(
 					SpinnerSegments(store: store)
 				)

@@ -9,13 +9,10 @@ struct SpinnerPointer: View {
 	@State var lastRotation: Double = 0
 	
 	var ptr: PointerConfig { PointerConfig() }
-	var pointerAnim: RewardSpinnerAnimationConfig.Pointer {
-		store.animations.pointer
-	}
 	
 	var body: some View {
 		TrianglePointer()
-			.fill(store.config.colors.pointerBlack)
+			.fill(store.theme.colors.brandOrange)
 			.frame(width: frameSize, height: frameSize)
 			.rotationEffect(.degrees(wobble), anchor: wobbleAnchor)
 			.rotationEffect(.degrees(pointerRotation))
@@ -25,17 +22,19 @@ struct SpinnerPointer: View {
 				lastSegmentIndex = newIndex
 				triggerTick()
 			}
-			.onChange(of: store.anim.rotation) { _, newRotation in
+			.onChange(of: store.engine.physics.rotation) { _, newRotation in
 				lastRotation = newRotation
 			}
 	}
 	
+	var animStyle : Animation {store.engine.anim.spinSnap.animation}
+	
 	func triggerTick() {
 		TickSoundPlayer.shared.tick()
-		withAnimation(wobbleAnimation) {
+		withAnimation(animStyle) {
 			wobble = -ptr.wobbleDeflection * spinDirection
 		}
-		withAnimation(wobbleReturnAnimation.delay(ptr.wobbleDelay)) {
+		withAnimation(animStyle.delay(ptr.wobbleDelay)) {
 			wobble = 0
 		}
 	}

@@ -1,7 +1,7 @@
 import SwiftUI
 
 
-struct SpinnerSegment2: Identifiable {
+struct SpinnerSegment: Identifiable {
 	let id = UUID()
 	let imageName: String
 }
@@ -10,18 +10,18 @@ struct SpinnerSegment2: Identifiable {
 // MARK: - Public Store (what views see)
 
 @Observable
-final class RewardSpinnerStore2 {
+final class RewardSpinnerStore {
 
 	// MARK: Inputs
 
-	let segments: [SpinnerSegment2]
-	let theme: Theme2
-	let geometry: Geometry2
+	let segments: [SpinnerSegment]
+	let theme: SCTheme
+	var geometry: Geometry2
 	var engine: Engine
 
 	init(
-		segments: [SpinnerSegment2],
-		theme: Theme2 = .default,
+		segments: [SpinnerSegment],
+		theme: SCTheme = .default,
 		engine: Engine = .init()
 	) {
 		self.segments = segments
@@ -54,13 +54,13 @@ final class RewardSpinnerStore2 {
 }
 
 
-struct Theme2 {
-	var colors: BrandColors2
+struct SCTheme {
+	var colors: SCColors
 	
-	static let `default` = Theme2(colors: .init())
+	static let `default` = SCTheme(colors: .init())
 }
 
-struct BrandColors2 {
+struct SCColors {
 	var wheelBackground = Color.white.opacity(0.48)
 	var brandBlue       = Color(red: 0/255, green: 111/255, blue: 235/255)
 	var brandSky        = Color(red: 82/255, green: 178/255, blue: 255/255)
