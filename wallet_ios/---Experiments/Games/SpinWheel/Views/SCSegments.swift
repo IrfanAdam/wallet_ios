@@ -41,7 +41,9 @@ struct SpinnerSegmentChart: View {
 	var body: some View {
 		Chart(0..<store.segments.count, id: \.self) { index in
 			let segProps = segmentState(for: index)
-			
+
+			let s = store.segmentState(for: index)
+
 			SectorMark(
 				angle: .value("Segment", 1),
 				innerRadius: .ratio(segProps.innerRadius),
@@ -67,9 +69,27 @@ struct SpinnerSegmentImages: View {
 	
 	var body: some View {
 		ForEach(0..<store.segments.count, id: \.self) { index in
-			let offset = geometry.imageOffset(for: index)
-			
-			Image(store.segments[index].imageName)
+//			let offset = geometry.imageOffset(for: index)
+
+//			Image(store.segments[index].imageName)
+//				.resizable()
+//				.scaledToFill()
+//				.frame(width: geometry.imageSize, height: geometry.imageSize)
+//				.background(Circle().fill(colors.brandOrange))
+//				.clipShape(Circle())
+//				.overlay(
+//					Circle().strokeBorder(colors.wheelBackground, lineWidth: 1.5)
+//				)
+//				.rotationEffect(.degrees(-store.engine.physics.rotation))
+//				.scaleEffect(img.selectedScale)
+//				.offset(
+//					x: offset.x,
+//					y: offset.y
+//				)
+
+			let s = store.segmentState(for: index)
+
+			Image(s.imageName)
 				.resizable()
 				.scaledToFill()
 				.frame(width: geometry.imageSize, height: geometry.imageSize)
@@ -78,12 +98,10 @@ struct SpinnerSegmentImages: View {
 				.overlay(
 					Circle().strokeBorder(colors.wheelBackground, lineWidth: 1.5)
 				)
-				.rotationEffect(.degrees(-store.engine.physics.rotation))
-				.scaleEffect(img.selectedScale)
-				.offset(
-					x: offset.x,
-					y: offset.y
-				)
+				.rotationEffect(.degrees(s.imageRotation))
+				.scaleEffect(s.imageScale)
+				.offset(x: s.offset.x, y: s.offset.y)
+				.opacity(s.imgOpacity)
 		}
 	}
 }

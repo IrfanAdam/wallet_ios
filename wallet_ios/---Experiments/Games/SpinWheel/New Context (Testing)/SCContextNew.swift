@@ -51,8 +51,65 @@ final class RewardSpinnerStore {
 		get { engine.model.phase }
 		set { engine.model.phase = newValue }
 	}
+
+
+	func segmentState(for index: Int) -> SpinnerSegmentState {
+
+		let seg = self.geometry.components.segment
+		let img = self.geometry.components.image
+
+		let selected = engine.model.selectedIndex
+		let isSelected = index == selected
+		let hasSelection = selected != nil
+
+		let innerRadius =
+		isSelected
+		? seg.innerRadiusRatio - seg.innerRadiusSelectedOffset
+		: seg.innerRadiusRatio
+
+		let outerRadius =
+		isSelected
+		? seg.outerRadiusSelected
+		: seg.outerRadiusNormal
+
+		let opacity =
+		(!hasSelection || isSelected)
+		? 1.0
+		: seg.dimOpacity
+
+		let imgOpacity =
+		(!hasSelection || isSelected)
+		? 1.0
+		: 0
+
+
+		let scale = isSelected ? img.selectedScale : 1.0
+
+		let offset = self.geometry.imageOffset(for: index)
+
+		return SpinnerSegmentState(
+			innerRadius: innerRadius,
+			outerRadius: outerRadius,
+			opacity: opacity,
+			imgOpacity: imgOpacity,
+			imageName: segments[index].imageName,
+			imageScale: scale,
+			imageRotation: -engine.physics.rotation,
+			offset: CGPoint(x: offset.x, y: offset.y)
+		)
+	}
 }
 
+struct SpinnerSegmentState {
+	let innerRadius: CGFloat
+	let outerRadius: CGFloat
+	let opacity: Double
+	let imgOpacity: Double
+	let imageName: String
+	let imageScale: CGFloat
+	let imageRotation: Double
+	let offset: CGPoint
+}
 
 struct SCTheme {
 	var colors: SCColors

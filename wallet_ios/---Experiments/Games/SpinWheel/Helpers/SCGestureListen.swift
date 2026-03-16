@@ -27,7 +27,10 @@ struct RewardSpinnerDragGesture {
 		}
 		
 		store.engine.physics.rotation += normalizedDelta(currentAngle - lastAngle)
-		store.engine.physics.updateVelocity(rotation: store.engine.physics.rotation)
+		store.engine.physics.updateVelocity(
+			rotation: store.engine.physics.rotation,
+			currentAngle: currentAngle
+		)
 	}
 	
 	private func handleDragEnded(_ value: DragGesture.Value) {

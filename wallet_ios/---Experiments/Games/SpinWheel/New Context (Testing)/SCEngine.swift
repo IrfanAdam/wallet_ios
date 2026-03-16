@@ -46,46 +46,40 @@ final class Engine {
 		var stopThreshold: Double = 5
 		var lastTimestamp: TimeInterval?
 		
-		
-		mutating func updateVelocity(rotation: Double) {
-			
+		mutating func updateVelocity(rotation: Double, currentAngle: Double) {
+
 			let now = CACurrentMediaTime()
-			
+
 			guard
 				let lastRotation = lastRotationSample,
 				let lastTime = lastTimestamp
 			else {
 				lastRotationSample = rotation
 				lastTimestamp = now
+				lastDragAngle = currentAngle
 				return
 			}
-			
+
 			let deltaRotation = rotation - lastRotation
 			let deltaTime = now - lastTime
-			
+
 			guard deltaTime > 0 else { return }
-			
+
 			angularVelocity = deltaRotation / deltaTime
-			
+
 			lastRotationSample = rotation
 			lastTimestamp = now
+			lastDragAngle = currentAngle
 		}
-		
-		mutating func snapToSegment(
+
+		func snapToSegment(
 			_ rotation: Double,
 			segmentAngle: Double
 		) -> Double {
-			
-			let normalized =
-			(rotation.truncatingRemainder(dividingBy: 360) + 360)
-				.truncatingRemainder(dividingBy: 360)
-			
-			let snapped =
-			round(normalized / segmentAngle) * segmentAngle
-			
-			return snapped
+			let half = segmentAngle / 2
+			return ((rotation + half) / segmentAngle).rounded() * segmentAngle - half
 		}
-		
+
 		mutating func startSpin(
 			update: @escaping (Double) -> Void,
 			completion: @escaping (Double) -> Void,
@@ -123,7 +117,8 @@ final class Engine {
 			
 			let friction = self.friction
 			let stopThreshold = self.stopThreshold
-			
+			let snap = self.snapToSegment
+
 			let proxy = DisplayLinkProxy()
 			let displayLink = CADisplayLink(target: proxy, selector: #selector(DisplayLinkProxy.step))
 			
@@ -134,19 +129,26 @@ final class Engine {
 				
 				rotation += velocity * dt
 				velocity *= pow(friction, dt * 60)
-				
+
 				update(rotation)
 				
+//				if abs(velocity) < stopThreshold {
+//					link.invalidate()
+//					
+//					let normalized =
+//					(rotation.truncatingRemainder(dividingBy: 360) + 360)
+//						.truncatingRemainder(dividingBy: 360)
+//					
+//					let snapped =
+//					round(normalized / segmentAngle) * segmentAngle
+//					
+//					completion(snapped)
+//				}
+
 				if abs(velocity) < stopThreshold {
 					link.invalidate()
-					
-					let normalized =
-					(rotation.truncatingRemainder(dividingBy: 360) + 360)
-						.truncatingRemainder(dividingBy: 360)
-					
-					let snapped =
-					round(normalized / segmentAngle) * segmentAngle
-					
+
+					let snapped = snap(rotation, segmentAngle)
 					completion(snapped)
 				}
 			}
@@ -163,6 +165,9 @@ final class Engine {
 
 	struct Interaction {
 		// e.g. helpers that compute Animations from `anim`
+		var dragSensitivity: Double = 0.25
+		var momentumMultiplier: Double = 8
+		var minimumSpinDegrees: Double = 720
 	}
 	
 	func initializeRotation(segmentCount: Int) {

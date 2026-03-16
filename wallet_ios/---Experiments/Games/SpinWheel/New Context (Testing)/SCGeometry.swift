@@ -69,8 +69,9 @@ struct Geometry2 {
 	}
 
 	struct Image {
-		var sizeRatio: CGFloat = 0.22
+		var sizeRatio: CGFloat = 0.36
 		var selectedScale: CGFloat = 1.15
+		var opacity: CGFloat = 0
 	}
 
 	// MARK: - Derived helpers
