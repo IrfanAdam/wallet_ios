@@ -1,6 +1,12 @@
 import SwiftUI
+import AVFoundation
 
 extension Engine {
+
+	// MARK: - Config
+
+	private var toastDismissDelay: Double { 1.4 }
+	private var completionDelay: Double { 0.3 }
 
 	// MARK: - Drag Handling
 
@@ -23,7 +29,7 @@ extension Engine {
 		)
 	}
 
-	func handleDragEnded(location: CGPoint) {
+	func handleDragEnded() {
 		guard case .idle = model.phase else { return }
 
 		physics.clear()
@@ -34,9 +40,8 @@ extension Engine {
 			failSpin()
 		}
 	}
-}
 
-extension Engine {
+	// MARK: - Spin Flow
 
 	private func startSpin() {
 		model.phase = .spinning
@@ -55,6 +60,9 @@ extension Engine {
 	private func failSpin() {
 		model.phase = .idle
 
+		// Haptic (restored)
+		UINotificationFeedbackGenerator().notificationOccurred(.warning)
+
 		let snapped = physics.snapToSegment(
 			physics.rotation,
 			segmentAngle: geometry.spinWheel.segmentAngle
@@ -66,18 +74,20 @@ extension Engine {
 
 		physics.angularVelocity = 0
 
+		// Toast (fixed animation)
 		model.toastMessage = "Spin harder to win 🎯"
-		model.showToast = true
+		withAnimation {
+			model.showToast = true
+		}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + toastDismissDelay) {
 			withAnimation {
 				self.model.showToast = false
 			}
 		}
 	}
-}
 
-extension Engine {
+	// MARK: - Completion
 
 	private func completeSpin(_ snappedRotation: Double) {
 
@@ -85,8 +95,10 @@ extension Engine {
 			physics.rotation = snappedRotation
 		}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
 			let index = self.winningIndex(from: snappedRotation)
+
+			self.triggerCompletionFeedback()
 
 			withAnimation(self.anim.spinBounce.animation) {
 				self.model.selectedIndex = index
@@ -112,7 +124,14 @@ extension Engine {
 						% segments.count + segments.count)
 		% segments.count
 	}
+
+	func triggerCompletionFeedback() {
+		UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+		AudioServicesPlaySystemSound(1158)
+	}
 }
+
+// MARK: - Interaction Helpers
 
 extension Engine.Interaction {
 

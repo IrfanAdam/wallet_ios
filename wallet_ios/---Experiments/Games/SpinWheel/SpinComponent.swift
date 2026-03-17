@@ -33,5 +33,18 @@ struct RewardSpinner: View {
 			RewardSpinnerMessagingView(store: store)
 		}
 	}
+}
 
+struct RewardSpinnerDragGesture {
+	let store: RewardSpinnerStore
+
+	func makeGesture() -> some Gesture {
+		DragGesture(minimumDistance: 0)
+			.onChanged { value in
+				store.engine.handleDragChanged(location: value.location)
+			}
+			.onEnded { value in
+				store.engine.handleDragEnded()
+			}
+	}
 }
