@@ -30,7 +30,6 @@ struct RewardSpinner: View {
 				)
 
 			SpinnerPointer(store: store)
-
 			RewardSpinnerMessagingView(store: store)
 		}
 	}

@@ -5,6 +5,14 @@ import SwiftUI
 @Observable
 final class Engine {
 
+	var geometry: Geometry2
+	var segments: [SpinnerSegment]   // ✅ ADD THIS
+
+	init(geometry: Geometry2, segments: [SpinnerSegment]) {
+		self.geometry = geometry
+		self.segments = segments
+	}
+
 	// MARK: Subcontexts
 
 	var model = Model()           // what user sees
@@ -131,19 +139,6 @@ final class Engine {
 				velocity *= pow(friction, dt * 60)
 
 				update(rotation)
-				
-//				if abs(velocity) < stopThreshold {
-//					link.invalidate()
-//					
-//					let normalized =
-//					(rotation.truncatingRemainder(dividingBy: 360) + 360)
-//						.truncatingRemainder(dividingBy: 360)
-//					
-//					let snapped =
-//					round(normalized / segmentAngle) * segmentAngle
-//					
-//					completion(snapped)
-//				}
 
 				if abs(velocity) < stopThreshold {
 					link.invalidate()
@@ -202,3 +197,17 @@ final class Engine {
 		model.toastMessage = ""
 	}
 }
+
+final class DisplayLinkProxy {
+
+	private var handler: (() -> Void)?
+
+	func setHandler(_ handler: @escaping () -> Void) {
+		self.handler = handler
+	}
+
+	@objc func step() {
+		handler?()
+	}
+}
+

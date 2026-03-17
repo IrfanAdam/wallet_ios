@@ -3,11 +3,6 @@ import Charts
 
 struct SpinnerSegments: View {
 	let store: RewardSpinnerStore
-	
-	private var geometry: Geometry2 {
-		store.geometry
-	}
-
 	var body: some View {
 		GeometryReader { geo in
 			ZStack {
@@ -18,11 +13,11 @@ struct SpinnerSegments: View {
 		.rotationEffect(.degrees(store.engine.physics.rotation))
 		.onAppear {
 			let base = store.engine.physics.rotation
-			withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+			withAnimation(store.engine.anim.spinSmooth.animation) {
 				store.engine.physics.rotation = base - 90   // small nudge
 			}
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-				withAnimation(.spring(response: 0.6, dampingFraction: 0.72)) {
+				withAnimation(store.engine.anim.spinBounce.animation) {
 					store.engine.physics.rotation = base
 				}
 			}
@@ -31,31 +26,22 @@ struct SpinnerSegments: View {
 }
 
 struct SpinnerSegmentChart: View {
-	
 	let store: RewardSpinnerStore
-	
-	var geometry: Geometry2 { store.geometry }
-	var anim: Engine.Anim { store.engine.anim }
-	var seg: Geometry2.Segment { geometry.components.segment }
-	
 	var body: some View {
 		Chart(0..<store.segments.count, id: \.self) { index in
-			let segProps = segmentState(for: index)
-
 			let s = store.segmentState(for: index)
-
 			SectorMark(
 				angle: .value("Segment", 1),
-				innerRadius: .ratio(segProps.innerRadius),
-				outerRadius: .ratio(segProps.outerRadius),
-				angularInset: seg.angularInset
+				innerRadius: .ratio(s.innerRadius),
+				outerRadius: .ratio(s.outerRadius),
+				angularInset: store.geometry.components.segment.angularInset
 			)
-			.cornerRadius(seg.cornerRadius)
-			.foregroundStyle(segProps.color)
-			.opacity(segProps.opacity)
+			.cornerRadius(store.geometry.components.segment.cornerRadius)
+			.foregroundStyle(s.color)
+			.opacity(s.opacity)
 		}
 		.animation(
-			anim.spinBounce.animation,
+			store.engine.anim.spinBounce.animation,
 			value: store.engine.model.selectedIndex
 		)
 	}
@@ -63,40 +49,17 @@ struct SpinnerSegmentChart: View {
 
 struct SpinnerSegmentImages: View {
 	let store: RewardSpinnerStore
-	var geometry: Geometry2 { store.geometry }
-	var img: Geometry2.Image { geometry.components.image }
-	var colors: SCColors { store.theme.colors }
-	
 	var body: some View {
 		ForEach(0..<store.segments.count, id: \.self) { index in
-//			let offset = geometry.imageOffset(for: index)
-
-//			Image(store.segments[index].imageName)
-//				.resizable()
-//				.scaledToFill()
-//				.frame(width: geometry.imageSize, height: geometry.imageSize)
-//				.background(Circle().fill(colors.brandOrange))
-//				.clipShape(Circle())
-//				.overlay(
-//					Circle().strokeBorder(colors.wheelBackground, lineWidth: 1.5)
-//				)
-//				.rotationEffect(.degrees(-store.engine.physics.rotation))
-//				.scaleEffect(img.selectedScale)
-//				.offset(
-//					x: offset.x,
-//					y: offset.y
-//				)
-
 			let s = store.segmentState(for: index)
-
 			Image(s.imageName)
 				.resizable()
 				.scaledToFill()
-				.frame(width: geometry.imageSize, height: geometry.imageSize)
-				.background(Circle().fill(colors.brandOrange))
+				.frame(width: store.geometry.imageSize, height: store.geometry.imageSize)
+				.background(Circle().fill(store.theme.colors.brandOrange))
 				.clipShape(Circle())
 				.overlay(
-					Circle().strokeBorder(colors.wheelBackground, lineWidth: 1.5)
+					Circle().strokeBorder(store.theme.colors.wheelBackground, lineWidth: 1.5)
 				)
 				.rotationEffect(.degrees(s.imageRotation))
 				.scaleEffect(s.imageScale)

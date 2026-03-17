@@ -87,5 +87,12 @@ struct Geometry2 {
 			height: sin(radians) * Double(radius) + Double(components.pointer.offsetY)
 		)
 	}
+
+	var center: CGPoint {
+		CGPoint(
+			x: spinWheel.wheelSize / 2,
+			y: spinWheel.wheelSize / 2
+		)
+	}
 }
 

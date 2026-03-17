@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 // MARK: - View
 
@@ -12,7 +13,7 @@ struct SpinnerPointer: View {
 	
 	var body: some View {
 		TrianglePointer()
-			.fill(store.theme.colors.brandOrange)
+			.fill(store.theme.colors.content)
 			.frame(width: frameSize, height: frameSize)
 			.rotationEffect(.degrees(wobble), anchor: wobbleAnchor)
 			.rotationEffect(.degrees(pointerRotation))
@@ -96,4 +97,34 @@ struct TrianglePointer: Shape {
 		return path
 	}
 }
+
+extension SpinnerPointer {
+	var frameSize:       CGFloat   { ptr.frameSize }
+	var wobbleAnchor:    UnitPoint { UnitPoint(x: 0.5, y: ptr.anchorY) }
+	var pointerRotation: Double    { store.geometry.pointerRotation }
+	var pointerOffset:   CGSize    { store.geometry.pointerOffset() }
+
+
+	var boundaryIndex: Int {
+		let normalized = store.engine.physics.rotation.truncatingRemainder(dividingBy: 360)
+		let positive   = normalized < 0 ? normalized + 360 : normalized
+		return Int((positive / store.geometry.spinWheel.segmentAngle).rounded()) % store.segments.count
+	}
+
+	var spinDirection: Double {
+		store.engine.physics.rotation - lastRotation > 0 ? 1 : -1
+	}
+}
+
+final class TickSoundPlayer {
+	static let shared = TickSoundPlayer()
+	private var players: [AVAudioPlayer] = []
+
+	func tick(intensity: Double = 1.0) {
+		AudioServicesPlaySystemSound(1157) // crisp tick sound
+	}
+}
+
+
+
 
