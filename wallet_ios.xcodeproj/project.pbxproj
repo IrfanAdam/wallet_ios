@@ -19,10 +19,12 @@
 		1549ECEA2F03D7CE00876D2D /* AvatarResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECE92F03D7C300876D2D /* AvatarResize.swift */; };
 		158C9DF92F599F2D0020691D /* SCMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DF82F599F280020691D /* SCMsg.swift */; };
 		158C9DFF2F5AC90F0020691D /* SCDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9DFE2F5AC90C0020691D /* SCDemo.swift */; };
-		158C9E0C2F618CB60020691D /* SCContextNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E0B2F618CB10020691D /* SCContextNew.swift */; };
+		158C9E0C2F618CB60020691D /* SCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E0B2F618CB10020691D /* SCStore.swift */; };
 		158C9E0F2F619B930020691D /* SCEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E0E2F619B900020691D /* SCEngine.swift */; };
 		158C9E132F619D3C0020691D /* SCGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E122F619D380020691D /* SCGeometry.swift */; };
 		158C9E172F69849B0020691D /* SCEngineExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E162F6984950020691D /* SCEngineExtenstion.swift */; };
+		158C9E1B2F6AA1300020691D /* SCPointerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E1A2F6AA1230020691D /* SCPointerShape.swift */; };
+		158C9E1D2F6AADC20020691D /* SCTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C9E1C2F6AADBE0020691D /* SCTheme.swift */; };
 		15A79E412F0FE423000C6B4E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E402F0FE423000C6B4E /* Demo.swift */; };
 		15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */; };
 		15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A79E542F1125E9000C6B4E /* DynRouting.swift */; };
@@ -131,10 +133,12 @@
 		1549ECE92F03D7C300876D2D /* AvatarResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarResize.swift; sourceTree = "<group>"; };
 		158C9DF82F599F280020691D /* SCMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCMsg.swift; sourceTree = "<group>"; };
 		158C9DFE2F5AC90C0020691D /* SCDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDemo.swift; sourceTree = "<group>"; };
-		158C9E0B2F618CB10020691D /* SCContextNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCContextNew.swift; sourceTree = "<group>"; };
+		158C9E0B2F618CB10020691D /* SCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCStore.swift; sourceTree = "<group>"; };
 		158C9E0E2F619B900020691D /* SCEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCEngine.swift; sourceTree = "<group>"; };
 		158C9E122F619D380020691D /* SCGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCGeometry.swift; sourceTree = "<group>"; };
 		158C9E162F6984950020691D /* SCEngineExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCEngineExtenstion.swift; sourceTree = "<group>"; };
+		158C9E1A2F6AA1230020691D /* SCPointerShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPointerShape.swift; sourceTree = "<group>"; };
+		158C9E1C2F6AADBE0020691D /* SCTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTheme.swift; sourceTree = "<group>"; };
 		15A79E402F0FE423000C6B4E /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFullStack.swift; sourceTree = "<group>"; };
 		15A79E542F1125E9000C6B4E /* DynRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynRouting.swift; sourceTree = "<group>"; };
@@ -311,15 +315,16 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
-		158C9E0D2F619B600020691D /* New Context (Testing) */ = {
+		158C9E0D2F619B600020691D /* New Context */ = {
 			isa = PBXGroup;
 			children = (
-				158C9E0B2F618CB10020691D /* SCContextNew.swift */,
+				158C9E0B2F618CB10020691D /* SCStore.swift */,
+				158C9E1C2F6AADBE0020691D /* SCTheme.swift */,
 				158C9E122F619D380020691D /* SCGeometry.swift */,
 				158C9E0E2F619B900020691D /* SCEngine.swift */,
 				158C9E162F6984950020691D /* SCEngineExtenstion.swift */,
 			);
-			path = "New Context (Testing)";
+			path = "New Context";
 			sourceTree = "<group>";
 		};
 		15C963B72F1A36FD00960C5C /* Components */ = {
@@ -620,7 +625,7 @@
 				158C9DFE2F5AC90C0020691D /* SCDemo.swift */,
 				EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */,
 				EE6623EB2F5337DB00F17D74 /* Views */,
-				158C9E0D2F619B600020691D /* New Context (Testing) */,
+				158C9E0D2F619B600020691D /* New Context */,
 			);
 			path = SpinWheel;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				EE6623E22F4B046A00F17D74 /* SCSegments.swift */,
 				158C9DF82F599F280020691D /* SCMsg.swift */,
 				EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */,
+				158C9E1A2F6AA1230020691D /* SCPointerShape.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -824,12 +830,13 @@
 				EE9517722F2F85760007F91E /* Navigator.swift in Sources */,
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
-				158C9E0C2F618CB60020691D /* SCContextNew.swift in Sources */,
+				158C9E0C2F618CB60020691D /* SCStore.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */,
 				EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */,
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
+				158C9E1B2F6AA1300020691D /* SCPointerShape.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
 				EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */,
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
@@ -906,6 +913,7 @@
 				15DA4B3F2EEBFD100046EBC6 /* ContactCard.swift in Sources */,
 				158C9DF92F599F2D0020691D /* SCMsg.swift in Sources */,
 				15A79E552F1125ED000C6B4E /* DynRouting.swift in Sources */,
+				158C9E1D2F6AADC20020691D /* SCTheme.swift in Sources */,
 				EE6623F22F54502300F17D74 /* Canvas.swift in Sources */,
 				15DA4B412EEBFD100046EBC6 /* Search.swift in Sources */,
 				15C963BD2F1E3AA400960C5C /* ContextTest.swift in Sources */,

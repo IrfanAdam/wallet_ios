@@ -23,7 +23,6 @@ struct RewardSpinnerMessagingView: View {
 }
 
 struct RewardSpinnerPanelContainer<Content: View>: View {
-	
 	let store: RewardSpinnerStore
 	let content: Content
 	
@@ -45,7 +44,6 @@ struct RewardSpinnerPanelContainer<Content: View>: View {
 }
 
 struct RewardSpinnerToastPanel: View {
-	
 	let store: RewardSpinnerStore
 	
 	var body: some View {
@@ -64,10 +62,7 @@ struct RewardSpinnerToastPanel: View {
 }
 
 struct RewardSpinnerCompletionPanel: View {
-	
 	let store: RewardSpinnerStore
-	
-	var dismissAnimation: Animation {store.engine.anim.spinSmooth.animation}
 	
 	var body: some View {
 		RewardSpinnerPanelContainer(store: store) {
@@ -90,7 +85,7 @@ struct RewardSpinnerCompletionPanel: View {
 	}
 	
 	private func resetSpinner() {
-		withAnimation(dismissAnimation) {
+		withAnimation(store.engine.anim.spinSmooth.animation) {
 			store.engine.model.selectedIndex = nil
 			store.engine.model.phase = .idle
 			store.engine.model.toastMessage = ""

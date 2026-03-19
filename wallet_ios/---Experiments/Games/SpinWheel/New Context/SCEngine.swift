@@ -170,16 +170,6 @@ final class Engine {
 		physics.rotation = -segmentAngle / 2
 	}
 
-	// MARK: Intents (what views call)
-
-	func onDragChanged(_ value: DragGesture.Value, geometry: Geometry2) {
-		// mutate physics + maybe model; use geometry.spinWheel.segmentAngle etc.
-	}
-
-	func onDragEnded(_ value: DragGesture.Value, geometry: Geometry2, segmentCount: Int) {
-		// check velocity/friction, start spin, snap, update model
-	}
-
 	// Reset or re-initialize rotation.
 	// Takes segment count as input for initial placement, not geometry.
 	func resetRotation(for segmentCount: Int) {
