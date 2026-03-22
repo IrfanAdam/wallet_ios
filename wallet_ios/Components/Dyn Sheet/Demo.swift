@@ -3,6 +3,7 @@ import SwiftUI
 struct PeripheralLaunchSurface: View {
 	@State private var isAuxiliaryPlanePresented = false
 	@State private var showDetail = false
+	@State private var showDropdown = false
 	@State private var sheetState = AuxiliarySheetState()
 	@State private var contentState = AuxiliaryContentState(
 		route: .levelOne
@@ -24,6 +25,10 @@ struct PeripheralLaunchSurface: View {
 				Button("Go Deeper") {
 					showDetail.toggle()
 				}
+				
+				Button("Show Dropdown") {
+					showDropdown.toggle()
+				}
 			}
 			.padding()
 			.sheet(isPresented: $isAuxiliaryPlanePresented) {
@@ -43,6 +48,9 @@ struct PeripheralLaunchSurface: View {
 			}
 			.fullScreenCover(isPresented: $showDetail) {
 				EdgeAccessoryDemo()
+			}
+			.fullScreenCover(isPresented: $showDropdown) {
+				TitleDropdownView()
 			}
 		}
 	}

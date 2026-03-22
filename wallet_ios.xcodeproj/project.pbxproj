@@ -116,6 +116,7 @@
 		EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148B2EEEC216003A5926 /* SearchTab.swift */; };
 		EE9C14902EF6C03C003A5926 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C148F2EF6C039003A5926 /* Authenticate.swift */; };
 		EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C14922EF6C609003A5926 /* CTAs.swift */; };
+		EEDB0F142F6FCEA000174F90 /* DropdownSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB0F132F6FCE9900174F90 /* DropdownSelect.swift */; };
 		EEFF6F252F5472B200E4CCF1 /* QuizProgressDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFF6F242F5472A800E4CCF1 /* QuizProgressDemo.swift */; };
 /* End PBXBuildFile section */
 
@@ -231,6 +232,7 @@
 		EE9C148B2EEEC216003A5926 /* SearchTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTab.swift; sourceTree = "<group>"; };
 		EE9C148F2EF6C039003A5926 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
 		EE9C14922EF6C609003A5926 /* CTAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAs.swift; sourceTree = "<group>"; };
+		EEDB0F132F6FCE9900174F90 /* DropdownSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownSelect.swift; sourceTree = "<group>"; };
 		EEFF6F242F5472A800E4CCF1 /* QuizProgressDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -471,6 +473,7 @@
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
+				EEDB0F132F6FCE9900174F90 /* DropdownSelect.swift */,
 				EE6623D82F4AF6E600F17D74 /* Games */,
 				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
@@ -891,6 +894,7 @@
 				15A79E532F11195A000C6B4E /* RecursiveFullStack.swift in Sources */,
 				EE9517752F2FA1700007F91E /* PayContext.swift in Sources */,
 				15C963BB2F1E123800960C5C /* ChartTest.swift in Sources */,
+				EEDB0F142F6FCEA000174F90 /* DropdownSelect.swift in Sources */,
 				15DA4B3A2EEBFD100046EBC6 /* DataWidget.swift in Sources */,
 				15DA4B4B2EEC4E160046EBC6 /* BlurReplace.swift in Sources */,
 				15C963FE2F361D6100960C5C /* LogicHelper.swift in Sources */,

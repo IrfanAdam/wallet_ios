@@ -32,7 +32,8 @@ import SwiftUI
 					Image(systemName: "eraser.fill")
 						.frame(width: 60.0, height: 60.0)
 						.font(.system(size: 32))
-						.glassEffect(.regular.interactive())
+						.glassEffect(.regular.interactive().tint(Color.blue))
+						.foregroundStyle(Color.white)
 						.offset(x: -40.0, y: 0.0)
 				}
 			}
