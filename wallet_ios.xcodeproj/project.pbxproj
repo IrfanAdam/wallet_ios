@@ -92,6 +92,7 @@
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
 		EE10F2172F2665A500944690 /* DynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2162F26659E00944690 /* DynLayout.swift */; };
 		EE10F2192F2787B600944690 /* Page 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2182F2787B300944690 /* Page 2.swift */; };
+		EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE58CE302F82A31B008E23A6 /* CustomArc.swift */; };
 		EE6623DB2F4AFA2800F17D74 /* SpinComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */; };
 		EE6623E32F4B046D00F17D74 /* SCSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623E22F4B046A00F17D74 /* SCSegments.swift */; };
 		EE6623E52F4B3B7F00F17D74 /* SCPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */; };
@@ -208,6 +209,7 @@
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
 		EE10F2162F26659E00944690 /* DynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLayout.swift; sourceTree = "<group>"; };
 		EE10F2182F2787B300944690 /* Page 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Page 2.swift"; sourceTree = "<group>"; };
+		EE58CE302F82A31B008E23A6 /* CustomArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomArc.swift; sourceTree = "<group>"; };
 		EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinComponent.swift; sourceTree = "<group>"; };
 		EE6623E22F4B046A00F17D74 /* SCSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegments.swift; sourceTree = "<group>"; };
 		EE6623E42F4B3B7E00F17D74 /* SCPointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPointer.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 		15C963CD2F1F9BB800960C5C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EE58CE302F82A31B008E23A6 /* CustomArc.swift */,
 				EE10F20B2F24CE4800944690 /* DataInitializers.swift */,
 				EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */,
 				15C963C92F1E855800960C5C /* DonutAnimate.swift */,
@@ -866,6 +869,7 @@
 				15C963F02F33706500960C5C /* MorphModifier.swift in Sources */,
 				15D862802F4D8CFD009E35AB /* Lever.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */,
+				EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,
 				15A79E592F1126A0000C6B4E /* Page 1.swift in Sources */,

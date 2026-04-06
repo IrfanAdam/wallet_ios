@@ -11,7 +11,7 @@ struct ChartDonutDemoView: View {
 	var body: some View {
 		ZStack {
 			ZStack {
-				ChartDonutView(context: pseudoContext)
+//				ChartDonutView(context: pseudoContext)
 				ChartDonutView(context: mainContext)
 			}
 			.modifier(
