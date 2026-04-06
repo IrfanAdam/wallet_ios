@@ -11,7 +11,22 @@ struct ChartDonutDemoView: View {
 	var body: some View {
 		ZStack {
 			ZStack {
-//				ChartDonutView(context: pseudoContext)
+				ArcSegment(
+					context: mainContext,
+					opacity: 0.9,
+					offset: 0.02
+				)
+					.frame(width: 192, height: 192)
+					.scaleEffect(x: -1, y: 1)
+					.rotationEffect(mainContext.animation.rotationAngle)
+				ArcSegment(
+					context: mainContext,
+					opacity: 0.5,
+					offset: 0.03
+				)
+					.frame(width: 162, height: 162)
+					.scaleEffect(x: -1, y: 1)
+					.rotationEffect(mainContext.animation.rotationAngle)
 				ChartDonutView(context: mainContext)
 			}
 			.modifier(

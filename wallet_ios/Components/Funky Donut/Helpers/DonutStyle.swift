@@ -21,8 +21,8 @@ extension DonutChartContext {
 		let isHighlightRing: Bool
 		let allData: [SalesData]
 		
-		var innerRadius: CGFloat { isHighlightRing ? 0.94 : 0.7 }
-		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.9 : 0.8) }
+		var innerRadius: CGFloat { isSelected ? 0.71 : 0.7 }
+		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.84 : 0.8) }
 		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 3 : 1) }
 		var cornerRadius: CGFloat { isHighlightRing ? 12 : 8 }
 		
