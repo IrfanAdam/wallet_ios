@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150567952F84F67E004B200B /* DonutInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567942F84F675004B200B /* DonutInfoView.swift */; };
+		150567972F851BDE004B200B /* DonutSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567962F851BD8004B200B /* DonutSelection.swift */; };
 		1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB62EF1386A00876D2D /* Charts.swift */; };
 		1549ECBB2EF1386A00876D2D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB72EF1386A00876D2D /* Data.swift */; };
 		1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */; };
@@ -122,6 +124,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150567942F84F675004B200B /* DonutInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInfoView.swift; sourceTree = "<group>"; };
+		150567962F851BD8004B200B /* DonutSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutSelection.swift; sourceTree = "<group>"; };
 		1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSheet.swift; sourceTree = "<group>"; };
 		1549ECB62EF1386A00876D2D /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		1549ECB72EF1386A00876D2D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				15C963C32F1E781200960C5C /* DonutView.swift */,
 				15C963C52F1E78F300960C5C /* DonutChart.swift */,
 				15C963C72F1E79C700960C5C /* DonutModifier.swift */,
+				150567942F84F675004B200B /* DonutInfoView.swift */,
 				15C963CD2F1F9BB800960C5C /* Helpers */,
 			);
 			path = "Funky Donut";
@@ -472,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
+				150567962F851BD8004B200B /* DonutSelection.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
@@ -837,6 +843,7 @@
 				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				158C9E0C2F618CB60020691D /* SCStore.swift in Sources */,
+				150567972F851BDE004B200B /* DonutSelection.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */,
@@ -872,6 +879,7 @@
 				EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,
+				150567952F84F67E004B200B /* DonutInfoView.swift in Sources */,
 				15A79E592F1126A0000C6B4E /* Page 1.swift in Sources */,
 				1549ECD92EF4221500876D2D /* Integer Only.swift in Sources */,
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,

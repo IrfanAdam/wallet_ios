@@ -7,6 +7,7 @@ struct ArcSegment: View {
 	@Bindable var context: DonutChartContext
 	let opacity: CGFloat
 	let offset:  CGFloat
+	let maxSpan:  CGFloat
 
 	private let minSpan: CGFloat = 0.01
 
@@ -16,10 +17,15 @@ struct ArcSegment: View {
 		let rawTo   = end   - offset
 		let span    = rawTo - rawFrom
 
-		guard span < minSpan else { return (rawFrom, rawTo) }
-
 		let mid = (rawFrom + rawTo) / 2
-		return (mid - minSpan / 2, mid + minSpan / 2)
+
+		// Clamp span between minSpan and maxSpan
+		let clampedSpan = min(max(span, minSpan), maxSpan)
+
+		return (
+			mid - clampedSpan / 2,
+			mid + clampedSpan / 2
+		)
 	}
 
 	private func applyTrim(start: CGFloat, end: CGFloat) {

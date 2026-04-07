@@ -13,22 +13,3 @@ struct DonutChartModifier: ViewModifier {
 			.allowsHitTesting(context.layout.isPseudo != true)
 	}
 }
-
-struct DonutSelectionInfoView: View {
-	@Bindable var mainContext: DonutChartContext
-	@Bindable var pseudoContext: DonutChartContext
-
-	var body: some View {
-		if let selected = mainContext.interaction.selectedData {
-			Text("Sales of: \(selected.name)").font(.headline)
-			Button("Clear") {
-				withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
-					mainContext.interaction.selectedData = nil
-					pseudoContext.interaction.selectedData = nil
-				}
-			}.font(.subheadline).foregroundStyle(.secondary)
-		} else {
-			Text("Tap a segment").foregroundStyle(.secondary)
-		}
-	}
-}
