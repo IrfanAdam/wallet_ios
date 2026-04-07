@@ -23,14 +23,16 @@ extension DonutChartContext {
 		
 		var innerRadius: CGFloat { isSelected ? 0.69 : 0.72 }
 		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.82 : 0.82) }
-		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 4 : 1) }
+		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 4 : 2) }
 		var cornerRadius: CGFloat { isHighlightRing ? 12 : 8 }
 		
 		var color: Color {
 			element.name == "Remaining"
-			? .gray.opacity(0.1)
+			? .white
 			: ChartColors.color(for: element, in: allData)
 		}
+
+		var borderColor: Color {isSelected ? Color.blue : Color.blue.opacity(0.5)}
 	}
 	
 	func sectorStyle(for element: SalesData) -> SegmentStyle {

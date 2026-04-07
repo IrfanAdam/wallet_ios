@@ -14,6 +14,30 @@ struct ChartDonutView: View {
 			)
 			.foregroundStyle(style.color)
 			.cornerRadius(style.cornerRadius)
+			.shadow(
+				color: style.borderColor,
+				radius: 0,
+				x: 0,
+				y: -1
+			)
+			.shadow(
+				color: style.borderColor,
+				radius: 0,
+				x: -1,
+				y: 0
+			)
+			.shadow(
+				color: style.borderColor,
+				radius: 0,
+				x: 0,
+				y: 1
+			)
+			.shadow(
+				color: style.borderColor,
+				radius: 0,
+				x: 1,
+				y: 0
+			)
 		}
 		.modifier(DonutChartModifier(context: context))
 	}
