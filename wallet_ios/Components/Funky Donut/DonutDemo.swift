@@ -9,7 +9,7 @@ struct ChartDonutDemoView_Previews: PreviewProvider {
 				.init(name: "C", sales: 90),
 				.init(name: "D", sales: 32)
 			],
-			dataMax: 240
+			dataMax: 260
 		)
 	}
 }

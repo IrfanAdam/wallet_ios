@@ -7,7 +7,7 @@ struct DonutChartModifier: ViewModifier {
 		content
 			.chartAngleSelection(value: $context.interaction.rawSelectedValue)
 			.chartLegend(.hidden)
-			.frame(width: 360, height: 360)
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.scaleEffect(x: -1, y: 1)
 			.rotationEffect(context.animation.rotationAngle)
 			.allowsHitTesting(context.layout.isPseudo != true)

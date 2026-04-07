@@ -9,37 +9,42 @@ struct ChartDonutDemoView: View {
 	@State private var mainContext: DonutChartContext
 
 	var body: some View {
-		ZStack {
+		GeometryReader { geo in
+			let size = min(geo.size.width, geo.size.height)
+			let firstHiglight = size * 0.54
+			let secondHiglight = size * 0.47
 			ZStack {
-				ArcSegment(
-					context: mainContext,
-					opacity: 0.9,
-					offset: 0.02
-				)
-					.frame(width: 192, height: 192)
+				ZStack {
+					ArcSegment(
+						context: mainContext,
+						opacity: 0.9,
+						offset: 0.02
+					)
+					.frame(width: firstHiglight, height: firstHiglight)
 					.scaleEffect(x: -1, y: 1)
 					.rotationEffect(mainContext.animation.rotationAngle)
-				ArcSegment(
-					context: mainContext,
-					opacity: 0.5,
-					offset: 0.03
-				)
-					.frame(width: 162, height: 162)
+					ArcSegment(
+						context: mainContext,
+						opacity: 0.5,
+						offset: 0.03
+					)
+					.frame(width: secondHiglight, height: secondHiglight)
 					.scaleEffect(x: -1, y: 1)
 					.rotationEffect(mainContext.animation.rotationAngle)
-				ChartDonutView(context: mainContext)
-			}
-			.modifier(
-				DonutChartCoordinator(
-					main: mainContext,
-					pseudo: pseudoContext
+					ChartDonutView(context: mainContext)
+				}
+				.modifier(
+					DonutChartCoordinator(
+						main: mainContext,
+						pseudo: pseudoContext
+					)
 				)
-			)
-			VStack(spacing: 8) {
-				DonutSelectionInfoView(
-					mainContext: mainContext,
-					pseudoContext: pseudoContext
-				)
+				VStack(spacing: 8) {
+					DonutSelectionInfoView(
+						mainContext: mainContext,
+						pseudoContext: pseudoContext
+					)
+				}
 			}
 		}
 	}
