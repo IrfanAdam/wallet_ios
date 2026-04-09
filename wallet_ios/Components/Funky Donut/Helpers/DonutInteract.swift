@@ -16,13 +16,11 @@ struct ChartSelection {
 
 struct DonutChartCoordinator: ViewModifier {
 	@Bindable var main: DonutChartContext
-	@Bindable var pseudo: DonutChartContext
 
 	func body(content: Content) -> some View {
 		content
 			.task {
 				prepare(main)
-				prepare(pseudo)
 			}
 			.onChange(of: main.interaction.rawSelectedValue) { _, newValue in
 				syncSelection(rawValue: newValue)
@@ -36,8 +34,6 @@ struct DonutChartCoordinator: ViewModifier {
 	}
 
 	private func syncSelection(rawValue: Double?) {
-		pseudo.interaction.rawSelectedValue = rawValue
 		ChartSelection.updateSelection(context: main)
-		ChartSelection.updateSelection(context: pseudo)
 	}
 }

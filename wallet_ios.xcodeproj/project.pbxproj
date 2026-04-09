@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		150567952F84F67E004B200B /* DonutInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567942F84F675004B200B /* DonutInfoView.swift */; };
 		150567972F851BDE004B200B /* DonutSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567962F851BD8004B200B /* DonutSelection.swift */; };
+		150567992F854605004B200B /* ShadowAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567982F854602004B200B /* ShadowAnimate.swift */; };
+		1505679B2F863B77004B200B /* ShadowChartAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505679A2F863B70004B200B /* ShadowChartAnimate.swift */; };
 		1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB62EF1386A00876D2D /* Charts.swift */; };
 		1549ECBB2EF1386A00876D2D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB72EF1386A00876D2D /* Data.swift */; };
 		1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */; };
@@ -126,6 +128,8 @@
 /* Begin PBXFileReference section */
 		150567942F84F675004B200B /* DonutInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInfoView.swift; sourceTree = "<group>"; };
 		150567962F851BD8004B200B /* DonutSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutSelection.swift; sourceTree = "<group>"; };
+		150567982F854602004B200B /* ShadowAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowAnimate.swift; sourceTree = "<group>"; };
+		1505679A2F863B70004B200B /* ShadowChartAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowChartAnimate.swift; sourceTree = "<group>"; };
 		1549ECB52EF1386A00876D2D /* AnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSheet.swift; sourceTree = "<group>"; };
 		1549ECB62EF1386A00876D2D /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		1549ECB72EF1386A00876D2D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				1505679A2F863B70004B200B /* ShadowChartAnimate.swift */,
+				150567982F854602004B200B /* ShadowAnimate.swift */,
 				15C963CE2F213CD100960C5C /* OneSegmentChart.swift */,
 				150567962F851BD8004B200B /* DonutSelection.swift */,
 				15C963BC2F1E3AA000960C5C /* ContextTest.swift */,
@@ -844,6 +850,7 @@
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				158C9E0C2F618CB60020691D /* SCStore.swift in Sources */,
 				150567972F851BDE004B200B /* DonutSelection.swift in Sources */,
+				1505679B2F863B77004B200B /* ShadowChartAnimate.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
 				1549ECBB2EF1386A00876D2D /* Data.swift in Sources */,
 				15A79E5D2F113306000C6B4E /* ContentContainer.swift in Sources */,
@@ -885,6 +892,7 @@
 				EE9C14932EF6C60D003A5926 /* CTAs.swift in Sources */,
 				15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */,
 				15C963F82F34EAFE00960C5C /* EdgeAccesoryDemo.swift in Sources */,
+				150567992F854605004B200B /* ShadowAnimate.swift in Sources */,
 				15C963C62F1E78F500960C5C /* DonutChart.swift in Sources */,
 				15C963CC2F1E877D00960C5C /* DonutInteract.swift in Sources */,
 				15C963E22F30E98700960C5C /* GlassDemo.swift in Sources */,

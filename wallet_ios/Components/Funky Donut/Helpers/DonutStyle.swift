@@ -21,7 +21,7 @@ extension DonutChartContext {
 		let isHighlightRing: Bool
 		let allData: [SalesData]
 		
-		var innerRadius: CGFloat { isSelected ? 0.69 : 0.72 }
+		var innerRadius: CGFloat { isSelected ? 0.7 : 0.72 }
 		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.82 : 0.82) }
 		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 4 : 2) }
 		var cornerRadius: CGFloat { isHighlightRing ? 12 : 8 }
@@ -32,7 +32,7 @@ extension DonutChartContext {
 			: ChartColors.color(for: element, in: allData)
 		}
 
-		var borderColor: Color {isSelected ? Color.blue : Color.blue.opacity(0.5)}
+		var borderColor: Color {isSelected ? Color.blue : Color.blue.opacity(0.32)}
 	}
 	
 	func sectorStyle(for element: SalesData) -> SegmentStyle {

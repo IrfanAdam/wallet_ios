@@ -37,8 +37,7 @@ struct ChartDonutDemoView: View {
 				}
 				.modifier(
 					DonutChartCoordinator(
-						main: mainContext,
-						pseudo: pseudoContext
+						main: mainContext
 					)
 				)
 				VStack(spacing: 8) {

@@ -3,6 +3,7 @@ import Charts
 
 struct ChartDonutView: View {
 	@Bindable var context: DonutChartContext
+	let borderWidth: CGFloat = 1
 	var body: some View {
 		Chart(context.animation.animatedData) { element in
 			let style = context.sectorStyle(for: element)
@@ -18,27 +19,28 @@ struct ChartDonutView: View {
 				color: style.borderColor,
 				radius: 0,
 				x: 0,
-				y: -1
+				y: -borderWidth
 			)
 			.shadow(
 				color: style.borderColor,
 				radius: 0,
-				x: -1,
+				x: -borderWidth,
 				y: 0
 			)
 			.shadow(
 				color: style.borderColor,
 				radius: 0,
 				x: 0,
-				y: 1
+				y: borderWidth
 			)
 			.shadow(
 				color: style.borderColor,
 				radius: 0,
-				x: 1,
-				y: 0
+				x: borderWidth,
+				y: 0,
 			)
 		}
 		.modifier(DonutChartModifier(context: context))
 	}
 }
+

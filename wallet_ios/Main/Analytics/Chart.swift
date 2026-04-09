@@ -14,6 +14,7 @@ struct RoundedDonut_Chart: View {
 						],
 						dataMax: 320
 					)
+					.frame(width: 360, height: 360)
 				}
 				.padding(.vertical, 24)
 			}
