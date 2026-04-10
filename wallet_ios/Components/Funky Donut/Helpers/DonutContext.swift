@@ -18,7 +18,6 @@ extension DonutChartContext {
 	}
 
 	struct Layout {
-		let isPseudo: Bool
 		var geometry: [SalesData] = []
 	}
 

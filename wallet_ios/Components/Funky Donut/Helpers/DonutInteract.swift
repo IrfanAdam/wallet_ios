@@ -8,9 +8,8 @@ struct ChartSelection {
 			cumulative += element.sales
 			return rawValue <= cumulative
 		}
-		withAnimation(.spring(response: 0.42, dampingFraction: 0.6)) {
-			context.interaction.selectedData = selected
-		}
+		context.interaction.selectedData = selected
+		print("Updates Selection")
 	}
 }
 

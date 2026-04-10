@@ -18,14 +18,13 @@ extension DonutChartContext {
 	struct SegmentStyle {
 		let element: SalesData
 		let isSelected: Bool
-		let isHighlightRing: Bool
 		let allData: [SalesData]
 		
-		var innerRadius: CGFloat { isSelected ? 0.7 : 0.72 }
-		var outerRadius: CGFloat { isHighlightRing ? 1.0 : (isSelected ? 0.82 : 0.82) }
-		var inset: CGFloat { isHighlightRing ? 12 : (isSelected ? 4 : 2) }
-		var cornerRadius: CGFloat { isHighlightRing ? 12 : 8 }
-		
+		var innerRadius: CGFloat { isSelected ? 0.72 : 0.72 }
+		var outerRadius: CGFloat { isSelected ? 0.82 : 0.82 }
+		var inset: CGFloat { isSelected ? 2.25 : 2 }
+		var cornerRadius: CGFloat { isSelected ? 10 : 8 }
+
 		var color: Color {
 			element.name == "Remaining"
 			? .white
@@ -34,13 +33,13 @@ extension DonutChartContext {
 
 		var borderColor: Color {isSelected ? Color.blue : Color.blue.opacity(0.32)}
 	}
-	
+
 	func sectorStyle(for element: SalesData) -> SegmentStyle {
-		let isSelected = interaction.selectedData?.id == element.id
+		let isSelectedVal = interaction.selectedData?.id == element.id
+
 		return SegmentStyle(
 			element: element,
-			isSelected: isSelected,
-			isHighlightRing: layout.isPseudo && isSelected,
+			isSelected: isSelectedVal,
 			allData: model.processedData
 		)
 	}

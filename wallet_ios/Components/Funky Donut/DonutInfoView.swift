@@ -2,7 +2,6 @@ import SwiftUI
 
 struct DonutSelectionInfoView: View {
 	@Bindable var mainContext: DonutChartContext
-	@Bindable var pseudoContext: DonutChartContext
 
 	var body: some View {
 		VStack {
@@ -39,7 +38,6 @@ struct DonutSelectionInfoView: View {
 				Button("Clear") {
 					withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
 						mainContext.interaction.selectedData = nil
-						pseudoContext.interaction.selectedData = nil
 					}
 				}
 				.font(.subheadline)

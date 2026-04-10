@@ -19,11 +19,11 @@ final class DonutChartContext {
 	var layout: Layout
 	
 	// MARK: - Initializers
-	init(data: [SalesData], dataMax: Double, isPseudo: Bool) {
+	init(data: [SalesData], dataMax: Double) {
 		self.model = Model(data: data, dataMax: dataMax)
 		self.interaction = Interaction()
 		self.animation = Animation()
-		self.layout = Layout(isPseudo: isPseudo)
+		self.layout = Layout()
 	}
 }
 

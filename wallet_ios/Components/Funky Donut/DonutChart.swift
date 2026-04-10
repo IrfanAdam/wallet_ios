@@ -2,9 +2,14 @@ import SwiftUI
 import Charts
 
 struct ChartDonutView: View {
+
 	@Bindable var context: DonutChartContext
-	let borderWidth: CGFloat = 1
+	let borderWidth: CGFloat = 1.5
+
+
 	var body: some View {
+		let _ = print("🔥 ChartDonutView body recomputed")
+
 		Chart(context.animation.animatedData) { element in
 			let style = context.sectorStyle(for: element)
 			SectorMark(
@@ -43,4 +48,3 @@ struct ChartDonutView: View {
 		.modifier(DonutChartModifier(context: context))
 	}
 }
-

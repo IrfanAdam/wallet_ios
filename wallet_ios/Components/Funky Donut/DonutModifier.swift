@@ -10,6 +10,5 @@ struct DonutChartModifier: ViewModifier {
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.scaleEffect(x: -1, y: 1)
 			.rotationEffect(context.animation.rotationAngle)
-			.allowsHitTesting(context.layout.isPseudo != true)
 	}
 }
