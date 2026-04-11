@@ -2,7 +2,7 @@ import SwiftUI
 import Charts
 
 struct ChartDonutDemoView: View {
-	let data: [SalesData]
+	let data: [DonutData]
 	let dataMax: Double
 
 	@State private var mainContext: DonutChartContext
@@ -10,8 +10,8 @@ struct ChartDonutDemoView: View {
 	var body: some View {
 		GeometryReader { geo in
 			let size = min(geo.size.width, geo.size.height)
-			let firstHiglight = size * 0.51
-			let secondHiglight = size * 0.44
+			let firstHiglight = size * 0.61
+			let secondHiglight = size * 0.54
 			ZStack {
 				ZStack {
 					ArcSegment(
@@ -50,7 +50,7 @@ struct ChartDonutDemoView: View {
 }
 
 extension ChartDonutDemoView {
-	init(data: [SalesData], dataMax: Double) {
+	init(data: [DonutData], dataMax: Double) {
 		self.data = data
 		self.dataMax = dataMax
 		_mainContext = State(initialValue: .init(data: data, dataMax: dataMax))

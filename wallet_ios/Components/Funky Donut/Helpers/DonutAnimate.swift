@@ -6,7 +6,7 @@ struct ChartDonutSnapperAnimation {
 		let totalSales = context.model.data.reduce(0.0) { $0 + $1.sales }
 		let totalAngle = (totalSales / context.model.dataMax) * 360
 		context.animation.animatedData = procsData.map {
-			SalesData(id: $0.id, name: $0.name, sales: .ulpOfOne)
+			DonutData(id: $0.id, name: $0.name, sales: .ulpOfOne, imgPath: $0.imgPath)
 		}
 		context.animation.rotationAngle = .degrees(0)
 		animateSegment(at: procsData.count - 1, context: context, totalAngle: totalAngle)

@@ -2,43 +2,46 @@ import SwiftUI
 
 extension DonutChartContext {
 	struct Model {
-		let data: [SalesData]
+		let data: [DonutData]
 		let dataMax: Double
-		var processedData: [SalesData] = []
+		var processedData: [DonutData] = []
 	}
 
 	struct Interaction {
 		var rawSelectedValue: Double? = nil
-		var selectedData: SalesData? = nil
+		var selectedData: DonutData? = nil
 	}
 
 	struct Animation {
-		var animatedData: [SalesData] = []
+		var animatedData: [DonutData] = []
 		var rotationAngle: Angle = .degrees(0) // combined rotation
+		var sliceAngles: [DonutSlice] = [] // combined rotation
 	}
 
 	struct Layout {
-		var geometry: [SalesData] = []
+		var geometry: [DonutData] = []
 	}
-
-	func selectedTrimRange() -> (start: CGFloat, end: CGFloat)? {
-		guard let selected = interaction.selectedData else { return nil }
-
-		let data = model.processedData
-		let total = model.dataMax
-
-		var cumulative: Double = 0
-
-		for element in data {
-			let start = cumulative / total
-			cumulative += element.sales
-			let end = cumulative / total
-
-			if element.id == selected.id {
-				return (CGFloat(start), CGFloat(end))
-			}
+	
+	func makeSlices(from data: [DonutData]) -> [DonutSlice] {
+		let total = data.reduce(0) { $0 + $1.sales }
+		var current: Double = 0
+		
+		return data.map { item in
+			let start = current
+			let angle = item.sales / total * 360
+			current += angle
+			
+			return DonutSlice(
+				id: item.id,
+				startAngle: start,
+				endAngle: current
+			)
 		}
-
-		return nil
+	}
+	
+	func selectedSlice() -> DonutSlice? {
+		guard let id = interaction.selectedData?.id else { return nil }
+		return animation.sliceAngles.first { $0.id == id }
 	}
 }
+

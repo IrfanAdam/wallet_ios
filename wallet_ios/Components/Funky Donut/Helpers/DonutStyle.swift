@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChartColors {
-	static func color(for element: SalesData, in data: [SalesData]) -> Color {
+	static func color(for element: DonutData, in data: [DonutData]) -> Color {
 		guard let index = data.firstIndex(where: { $0.id == element.id }) else {
 			return .clear
 		}
@@ -16,12 +16,12 @@ struct ChartColors {
 
 extension DonutChartContext {
 	struct SegmentStyle {
-		let element: SalesData
+		let element: DonutData
 		let isSelected: Bool
-		let allData: [SalesData]
+		let allData: [DonutData]
 		
-		var innerRadius: CGFloat { isSelected ? 0.72 : 0.72 }
-		var outerRadius: CGFloat { isSelected ? 0.82 : 0.82 }
+		var innerRadius: CGFloat { isSelected ? 0.76 : 0.76 }
+		var outerRadius: CGFloat { isSelected ? 0.88 : 0.88 }
 		var inset: CGFloat { isSelected ? 2.25 : 2 }
 		var cornerRadius: CGFloat { isSelected ? 10 : 8 }
 
@@ -34,7 +34,7 @@ extension DonutChartContext {
 		var borderColor: Color {isSelected ? Color.blue : Color.blue.opacity(0.32)}
 	}
 
-	func sectorStyle(for element: SalesData) -> SegmentStyle {
+	func sectorStyle(for element: DonutData) -> SegmentStyle {
 		let isSelectedVal = interaction.selectedData?.id == element.id
 
 		return SegmentStyle(

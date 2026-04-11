@@ -29,6 +29,12 @@ struct DonutChartCoordinator: ViewModifier {
 	private func prepare(_ context: DonutChartContext) {
 		context.model.processedData =
 		ChartDonutDataProcessor.preprocess(context: context)
+		
+		context.animation.sliceAngles = context.makeSlices(from: context.model.processedData)
+		
+		print(context.animation.sliceAngles)
+		print(context.model.processedData)
+		
 		ChartDonutSnapperAnimation.start(context: context)
 	}
 
