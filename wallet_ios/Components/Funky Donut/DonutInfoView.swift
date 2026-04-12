@@ -10,6 +10,14 @@ struct DonutSelectionInfoView: View {
 			$0.name == mainContext.interaction.selectedData?.name
 		} ?? 0
 		
+		let totalSales = mainContext.model.processedData.reduce(0) { $0 + $1.sales }
+		
+		let percentage: Double = {
+			guard totalSales > 0,
+						let selected = mainContext.interaction.selectedData else { return 0 }
+			return (selected.sales / totalSales) * 100
+		}()
+		
 		VStack {
 			if let selected = mainContext.interaction.selectedData {
 				VStack {
@@ -48,20 +56,42 @@ struct DonutSelectionInfoView: View {
 								.font(.system(size: 14, weight: .semibold))
 								.foregroundStyle(.black.opacity(0.8))
 							
-							Text("54%")
+							Text(percentage.formatted(.number.precision(.fractionLength(0))) + "%")
 								.font(.system(size: 14, weight: .semibold))
 								.foregroundStyle(Color.blue)
 								.padding(.horizontal, 4)
 								.padding(.vertical, 1)
 								.background(Capsule().fill(Color.blue.opacity(0.12)))
+								.contentTransition(.numericText(value: percentage))
+								.animation(.spring(response: 0.7, dampingFraction: 0.9), value: percentage)
 						}
 					}
 					
-					Text("User Name: \(selected.name)")
-						.font(.headline)
+					Text("\(selected.name)")
+						.font(.system(size: 16, weight: .bold))
+						.id(selected.name)
+						.transition(
+							.asymmetric(
+								insertion: .offset(x: direction * 12)
+									.combined(with: .opacity)
+									.combined(with: .modifier(
+										active: BlurModifier(radius: 8),
+										identity: BlurModifier(radius: 0)
+									)),
+								removal: .offset(x: -direction * 16)
+									.combined(with: .opacity)
+									.combined(with: .modifier(
+										active: BlurModifier(radius: 8),
+										identity: BlurModifier(radius: 0)
+									))
+							)
+						)
+						.animation(.spring(response: 0.25, dampingFraction: 0.7), value: selectedIndex)
 					
-					Text("CFA \(selected.sales)")
+					Text("\(selected.sales.formatted(.currency(code: "XOF")))")
 						.font(.title3).fontWeight(.bold)
+						.contentTransition(.numericText(value: selected.sales))
+						.animation(.spring(response: 0.45, dampingFraction: 0.85), value: selected.sales)
 					
 					Button("Clear") {
 						withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
@@ -72,29 +102,31 @@ struct DonutSelectionInfoView: View {
 					.foregroundStyle(.secondary)
 				}
 				.padding(.vertical, 4)
+				
+				// Dot indicator
+				HStack(spacing: 2) {
+					ForEach(mainContext.model.processedData.indices, id: \.self) { index in
+						let distance = abs(index - selectedIndex)
+						let width   = max(6, 12 - CGFloat(distance) * 6)
+						let height  = max(4,  8 - CGFloat(distance))
+						let opacity = max(0.1, 1.0 - Double(distance) * 0.3)
+						
+						Capsule()
+							.fill(Color.black.opacity(opacity))
+							.frame(width: width, height: height)
+							.animation(.spring(response: 0.35, dampingFraction: 0.75), value: selectedIndex)
+					}
+				}
+				
 			} else {
 				Text("Tap a segment")
 					.foregroundStyle(.secondary)
 					.transition(.opacity)
 			}
 			
-			// Dot indicator
-			HStack(spacing: 2) {
-				ForEach(mainContext.model.processedData.indices, id: \.self) { index in
-					let distance = abs(index - selectedIndex)
-					let width   = max(6, 12 - CGFloat(distance) * 6)
-					let height  = max(4,  8 - CGFloat(distance))
-					let opacity = max(0.1, 1.0 - Double(distance) * 0.3)
-					
-					Capsule()
-						.fill(Color.black.opacity(opacity))
-						.frame(width: width, height: height)
-						.animation(.spring(response: 0.35, dampingFraction: 0.75), value: selectedIndex)
-				}
-			}
 		}
 		.frame(width: 124, height: 142)
-		.padding(.horizontal, 12)
+		.padding(.horizontal, 10)
 		.padding(.vertical, 4)
 		.background(
 			RoundedRectangle(cornerRadius: 32, style: .continuous)
