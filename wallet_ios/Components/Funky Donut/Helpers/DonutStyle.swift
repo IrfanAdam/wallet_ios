@@ -23,7 +23,7 @@ extension DonutChartContext {
 		var innerRadius: CGFloat { isSelected ? 0.76 : 0.76 }
 		var outerRadius: CGFloat { isSelected ? 0.88 : 0.88 }
 		var inset: CGFloat { isSelected ? 2.25 : 2 }
-		var cornerRadius: CGFloat { isSelected ? 10 : 8 }
+		var cornerRadius: CGFloat { isSelected ? 8 : 8 }
 
 		var color: Color {
 			element.name == "Remaining"

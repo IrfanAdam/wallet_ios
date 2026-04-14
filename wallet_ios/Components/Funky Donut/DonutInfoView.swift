@@ -1,25 +1,48 @@
 import SwiftUI
+import Foundation
 
 struct DonutSelectionInfoView: View {
 	@Bindable var mainContext: DonutChartContext
 	@State private var previousIndex: Int = 0
 	@State private var direction: CGFloat = 1
-	
+
 	var body: some View {
-		let selectedIndex = mainContext.model.processedData.firstIndex {
-			$0.name == mainContext.interaction.selectedData?.name
-		} ?? 0
-		
-		let totalSales = mainContext.model.processedData.reduce(0) { $0 + $1.sales }
-		
+		let data = mainContext.animation.animatedData
+
+		let selectedIndex: Int? = mainContext.interaction.selectedData.flatMap { selected in
+			data.firstIndex { $0.name == selected.name }
+		}
+
+		let displayIndex = selectedIndex ?? previousIndex  // use for dots + direction math
+		let resolvedDirection: CGFloat = (selectedIndex ?? previousIndex) >= previousIndex ? 1 : -1
+
+		let offset: CGFloat = 32
+
+
+		let totalSales = mainContext.animation.animatedData.reduce(0) { $0 + $1.sales }
+
 		let percentage: Double = {
 			guard totalSales > 0,
 						let selected = mainContext.interaction.selectedData else { return 0 }
 			return (selected.sales / totalSales) * 100
 		}()
-		
+
 		VStack {
 			if let selected = mainContext.interaction.selectedData {
+				var currencySymbol: String {
+					let formatter = NumberFormatter()
+					formatter.numberStyle = .currency
+					formatter.currencyCode = "XOF"
+					return formatter.currencySymbol
+				}
+
+				var amountText: String {
+					let formatter = NumberFormatter()
+					formatter.numberStyle = .decimal
+					formatter.maximumFractionDigits = 0
+					return formatter.string(from: NSNumber(value: selected.sales)) ?? ""
+				}
+
 				VStack {
 					HStack(alignment: .top) {
 						HStack {
@@ -31,13 +54,13 @@ struct DonutSelectionInfoView: View {
 								.id(selected.name)
 								.transition(
 									.asymmetric(
-										insertion: .offset(x: direction * 24)
+										insertion: .offset(x: resolvedDirection * offset)
 											.combined(with: .opacity)
 											.combined(with: .modifier(
 												active: BlurModifier(radius: 8),
 												identity: BlurModifier(radius: 0)
 											)),
-										removal: .offset(x: -direction * 24)
+										removal: .offset(x: -resolvedDirection * offset)
 											.combined(with: .opacity)
 											.combined(with: .modifier(
 												active: BlurModifier(radius: 8),
@@ -46,9 +69,9 @@ struct DonutSelectionInfoView: View {
 									)
 								)
 						}
-						.clipped()
 						.clipShape(Circle())
-						
+						.compositingGroup()
+
 						Spacer()
 						
 						VStack(alignment: .trailing, spacing: 4) {
@@ -72,13 +95,13 @@ struct DonutSelectionInfoView: View {
 						.id(selected.name)
 						.transition(
 							.asymmetric(
-								insertion: .offset(x: direction * 12)
+								insertion: .offset(x: resolvedDirection * offset)
 									.combined(with: .opacity)
 									.combined(with: .modifier(
 										active: BlurModifier(radius: 8),
 										identity: BlurModifier(radius: 0)
 									)),
-								removal: .offset(x: -direction * 16)
+								removal: .offset(x: -resolvedDirection * offset)
 									.combined(with: .opacity)
 									.combined(with: .modifier(
 										active: BlurModifier(radius: 8),
@@ -87,12 +110,24 @@ struct DonutSelectionInfoView: View {
 							)
 						)
 						.animation(.spring(response: 0.25, dampingFraction: 0.7), value: selectedIndex)
-					
-					Text("\(selected.sales.formatted(.currency(code: "XOF")))")
-						.font(.title3).fontWeight(.bold)
-						.contentTransition(.numericText(value: selected.sales))
-						.animation(.spring(response: 0.45, dampingFraction: 0.85), value: selected.sales)
-					
+
+//					Text("\(selected.sales.formatted(.currency(code: "XOF")))")
+//						.font(.custom("OpenRunde-Bold", size: 18))
+//						.font(.system(size: 16, weight: .bold))
+//						.contentTransition(.numericText(value: selected.sales))
+//						.animation(.spring(response: 0.45, dampingFraction: 0.85), value: selected.sales)
+
+					HStack(alignment: .firstTextBaseline, spacing: 2) {
+						Text(currencySymbol)
+							.font(.custom("OpenRunde-Bold", size: 18))
+							.foregroundStyle(.gray.opacity(0.8))
+
+						Text(amountText)
+							.font(.custom("OpenRunde-Bold", size: 18))
+					}
+					.contentTransition(.numericText(value: selected.sales))
+					.animation(.spring(response: 0.45, dampingFraction: 0.85), value: selected.sales)
+
 					Button("Clear") {
 						withAnimation(.spring(response: 0.36, dampingFraction: 0.6)) {
 							mainContext.interaction.selectedData = nil
@@ -105,8 +140,8 @@ struct DonutSelectionInfoView: View {
 				
 				// Dot indicator
 				HStack(spacing: 2) {
-					ForEach(mainContext.model.processedData.indices, id: \.self) { index in
-						let distance = abs(index - selectedIndex)
+					ForEach(mainContext.animation.animatedData.indices, id: \.self) { index in
+						let distance = abs(index - displayIndex)
 						let width   = max(6, 12 - CGFloat(distance) * 6)
 						let height  = max(4,  8 - CGFloat(distance))
 						let opacity = max(0.1, 1.0 - Double(distance) * 0.3)
@@ -132,11 +167,13 @@ struct DonutSelectionInfoView: View {
 			RoundedRectangle(cornerRadius: 32, style: .continuous)
 				.fill(Color(.systemBackground))
 		)
+		.clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
 		.shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 4)
 		// ✅ Update direction BEFORE animation runs
 		.onChange(of: selectedIndex) { oldValue, newValue in
-			direction = newValue >= oldValue ? -1 : 1
-			previousIndex = newValue
+			if let newValue {
+				previousIndex = newValue
+			}
 		}
 		.animation(.spring(response: 0.4, dampingFraction: 0.75), value: selectedIndex)
 	}
