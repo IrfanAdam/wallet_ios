@@ -14,7 +14,6 @@ struct DonutSelectionInfoView: View {
 		}
 
 		let displayIndex = selectedIndex ?? previousIndex  // use for dots + direction math
-		let resolvedDirection: CGFloat = (selectedIndex ?? previousIndex) >= previousIndex ? 1 : -1
 
 		let offset: CGFloat = 32
 
@@ -26,6 +25,7 @@ struct DonutSelectionInfoView: View {
 						let selected = mainContext.interaction.selectedData else { return 0 }
 			return (selected.sales / totalSales) * 100
 		}()
+
 
 		VStack {
 			if let selected = mainContext.interaction.selectedData {
@@ -54,13 +54,13 @@ struct DonutSelectionInfoView: View {
 								.id(selected.name)
 								.transition(
 									.asymmetric(
-										insertion: .offset(x: resolvedDirection * offset)
+										insertion: .offset(x: -direction * offset)
 											.combined(with: .opacity)
 											.combined(with: .modifier(
 												active: BlurModifier(radius: 8),
 												identity: BlurModifier(radius: 0)
 											)),
-										removal: .offset(x: -resolvedDirection * offset)
+										removal: .offset(x: direction * offset)
 											.combined(with: .opacity)
 											.combined(with: .modifier(
 												active: BlurModifier(radius: 8),
@@ -95,13 +95,13 @@ struct DonutSelectionInfoView: View {
 						.id(selected.name)
 						.transition(
 							.asymmetric(
-								insertion: .offset(x: resolvedDirection * offset)
+								insertion: .offset(x: -direction * offset)
 									.combined(with: .opacity)
 									.combined(with: .modifier(
 										active: BlurModifier(radius: 8),
 										identity: BlurModifier(radius: 0)
 									)),
-								removal: .offset(x: -resolvedDirection * offset)
+								removal: .offset(x: direction * offset)
 									.combined(with: .opacity)
 									.combined(with: .modifier(
 										active: BlurModifier(radius: 8),
@@ -110,12 +110,6 @@ struct DonutSelectionInfoView: View {
 							)
 						)
 						.animation(.spring(response: 0.25, dampingFraction: 0.7), value: selectedIndex)
-
-//					Text("\(selected.sales.formatted(.currency(code: "XOF")))")
-//						.font(.custom("OpenRunde-Bold", size: 18))
-//						.font(.system(size: 16, weight: .bold))
-//						.contentTransition(.numericText(value: selected.sales))
-//						.animation(.spring(response: 0.45, dampingFraction: 0.85), value: selected.sales)
 
 					HStack(alignment: .firstTextBaseline, spacing: 2) {
 						Text(currencySymbol)
@@ -169,8 +163,10 @@ struct DonutSelectionInfoView: View {
 		)
 		.clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
 		.shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 4)
-		// ✅ Update direction BEFORE animation runs
 		.onChange(of: selectedIndex) { oldValue, newValue in
+			if let old = oldValue, let new = newValue {
+				direction = new >= old ? 1 : -1
+			}
 			if let newValue {
 				previousIndex = newValue
 			}
