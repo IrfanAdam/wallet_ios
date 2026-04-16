@@ -7,12 +7,12 @@ struct RoundedDonut_Chart: View {
 				LazyVStack {
 					ChartDonutDemoView(
 						data: [
-							.init(name: "A", sales: 20, imgPath: "LargeDP"),
-							.init(name: "B", sales: 15, imgPath: "LargeDP"),
-							.init(name: "C", sales: 40, imgPath: "LargeDP"),
-							.init(name: "D", sales: 25, imgPath: "LargeDP")
+							.init(name: "Rohit Kumar", sales: 20, imgPath: "LargeDP"),
+							.init(name: "Verma Sharma", sales: 24, imgPath: "LargeDP"),
+							.init(name: "Xaotong Monaco", sales: 90, imgPath: "LargeDP"),
+							.init(name: "Obi Wan Kanobi", sales: 32, imgPath: "LargeDP")
 						],
-						dataMax: 320
+						dataMax: 260
 					)
 					.frame(width: 360, height: 360)
 				}

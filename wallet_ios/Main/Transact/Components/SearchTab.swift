@@ -25,8 +25,10 @@ struct SearchTab: View {
 			.padding(.vertical, 12)
 			.background(
 				RoundedRectangle(cornerRadius: 14)
-					.fill(isSelected ? Color.blue : Color.gray.opacity(0.3))
+					.fill(isSelected ? Color.blue : Color.white.opacity(0.5))
 			)
+			.background(.thinMaterial)
+			.clipShape(RoundedRectangle(cornerRadius: 14))
 			.foregroundStyle(isSelected ? .white : .primary)
 			.animation(.easeInOut(duration: 0.2), value: isSelected)
 		}
