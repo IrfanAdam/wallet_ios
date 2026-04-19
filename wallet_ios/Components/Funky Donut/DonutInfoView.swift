@@ -31,8 +31,9 @@ struct DonutSelectionInfoView: View {
 			if let selected = mainContext.interaction.selectedData {
 				var currencySymbol: String {
 					let formatter = NumberFormatter()
+					formatter.locale = Locale(identifier: "en_NG")
 					formatter.numberStyle = .currency
-					formatter.currencyCode = "XOF"
+					formatter.currencyCode = "INR"
 					return formatter.currencySymbol
 				}
 

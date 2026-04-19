@@ -65,7 +65,6 @@
 		15D8627B2F4C7F66009E35AB /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627A2F4C7F64009E35AB /* Body.swift */; };
 		15D8627D2F4C7F80009E35AB /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627C2F4C7F7E009E35AB /* Reel.swift */; };
 		15D862802F4D8CFD009E35AB /* Lever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8627F2F4D8CFB009E35AB /* Lever.swift */; };
-		15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */; };
 		15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */; };
 		15DA4B302EEBFD100046EBC6 /* Morphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B012EEBFD100046EBC6 /* Morphy.swift */; };
 		15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA4B022EEBFD100046EBC6 /* Morphy2.swift */; };
@@ -105,6 +104,11 @@
 		EE6623F82F54508900F17D74 /* ScratchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623F72F54508700F17D74 /* ScratchComponent.swift */; };
 		EE6623FC2F545C0900F17D74 /* ScratchSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */; };
 		EE72EC1E2F192AC700F13FAE /* DonutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */; };
+		EE776D852F94E34300FF365B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE776D842F94E33F00FF365B /* CustomTabBar.swift */; };
+		EE776D882F94E58D00FF365B /* LGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE776D872F94E58900FF365B /* LGTabView.swift */; };
+		EE776D8A2F94E5CD00FF365B /* LGTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE776D892F94E5C800FF365B /* LGTabItem.swift */; };
+		EE776D8C2F94E60400FF365B /* LGTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE776D8B2F94E5FA00FF365B /* LGTabBar.swift */; };
+		EE776D8E2F94E62C00FF365B /* LGSegmented.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE776D8D2F94E62800FF365B /* LGSegmented.swift */; };
 		EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F12EF8036700A4D79D /* BottomAction.swift */; };
 		EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F32EF8039800A4D79D /* AmountInput.swift */; };
 		EE8802F82EF8226300A4D79D /* Pay Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8802F72EF8225C00A4D79D /* Pay Grid.swift */; };
@@ -180,7 +184,6 @@
 		15D8627A2F4C7F64009E35AB /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
 		15D8627C2F4C7F7E009E35AB /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		15D8627F2F4D8CFB009E35AB /* Lever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lever.swift; sourceTree = "<group>"; };
-		15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stroke Pie.swift"; sourceTree = "<group>"; };
 		15DA4B012EEBFD100046EBC6 /* Morphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy.swift; sourceTree = "<group>"; };
 		15DA4B022EEBFD100046EBC6 /* Morphy2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphy2.swift; sourceTree = "<group>"; };
@@ -221,6 +224,11 @@
 		EE6623F72F54508700F17D74 /* ScratchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchComponent.swift; sourceTree = "<group>"; };
 		EE6623FB2F545C0600F17D74 /* ScratchSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchSoundEngine.swift; sourceTree = "<group>"; };
 		EE72EC1D2F192AC100F13FAE /* DonutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutStyle.swift; sourceTree = "<group>"; };
+		EE776D842F94E33F00FF365B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		EE776D872F94E58900FF365B /* LGTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGTabView.swift; sourceTree = "<group>"; };
+		EE776D892F94E5C800FF365B /* LGTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGTabItem.swift; sourceTree = "<group>"; };
+		EE776D8B2F94E5FA00FF365B /* LGTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGTabBar.swift; sourceTree = "<group>"; };
+		EE776D8D2F94E62800FF365B /* LGSegmented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSegmented.swift; sourceTree = "<group>"; };
 		EE8802F12EF8036700A4D79D /* BottomAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAction.swift; sourceTree = "<group>"; };
 		EE8802F32EF8039800A4D79D /* AmountInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInput.swift; sourceTree = "<group>"; };
 		EE8802F72EF8225C00A4D79D /* Pay Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pay Grid.swift"; sourceTree = "<group>"; };
@@ -449,14 +457,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		15DA4AF72EEBFD100046EBC6 /* Toolbar */ = {
-			isa = PBXGroup;
-			children = (
-				15DA4AF62EEBFD100046EBC6 /* Toolbar.swift */,
-			);
-			path = Toolbar;
-			sourceTree = "<group>";
-		};
 		15DA4B092EEBFD100046EBC6 /* Dyn Sheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +470,7 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				EE776D862F94E4E100FF365B /* CustomTabBar */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
@@ -478,7 +479,6 @@
 				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				EE6623EE2F543B8500F17D74 /* Custom Glass */,
-				15DA4AF72EEBFD100046EBC6 /* Toolbar */,
 			);
 			path = "---Experiments";
 			sourceTree = "<group>";
@@ -665,6 +665,18 @@
 			path = "Custom Glass";
 			sourceTree = "<group>";
 		};
+		EE776D862F94E4E100FF365B /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				EE776D8D2F94E62800FF365B /* LGSegmented.swift */,
+				EE776D8B2F94E5FA00FF365B /* LGTabBar.swift */,
+				EE776D892F94E5C800FF365B /* LGTabItem.swift */,
+				EE776D872F94E58900FF365B /* LGTabView.swift */,
+				EE776D842F94E33F00FF365B /* CustomTabBar.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
 		EE8802EE2EF7DA4100A4D79D /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,7 +843,7 @@
 				EE8802F22EF8036E00A4D79D /* BottomAction.swift in Sources */,
 				15C963F22F33750E00960C5C /* MorphDemo.swift in Sources */,
 				EE9517722F2F85760007F91E /* Navigator.swift in Sources */,
-				15DA4B282EEBFD100046EBC6 /* Toolbar.swift in Sources */,
+				EE776D8C2F94E60400FF365B /* LGTabBar.swift in Sources */,
 				EE8802FE2EF839AD00A4D79D /* Chip.swift in Sources */,
 				158C9E0C2F618CB60020691D /* SCStore.swift in Sources */,
 				1549ECBA2EF1386A00876D2D /* Charts.swift in Sources */,
@@ -841,9 +853,11 @@
 				1549ECCF2EF29E5900876D2D /* PseudoCamera.swift in Sources */,
 				158C9E1B2F6AA1300020691D /* SCPointerShape.swift in Sources */,
 				1549ECBC2EF1386A00876D2D /* AnalyticsSheet.swift in Sources */,
+				EE776D8A2F94E5CD00FF365B /* LGTabItem.swift in Sources */,
 				EE9517772F2FA2600007F91E /* PayToolbar.swift in Sources */,
 				15C963C82F1E79C900960C5C /* DonutModifier.swift in Sources */,
 				EE6623E32F4B046D00F17D74 /* SCSegments.swift in Sources */,
+				EE776D852F94E34300FF365B /* CustomTabBar.swift in Sources */,
 				EE8802F42EF8039C00A4D79D /* AmountInput.swift in Sources */,
 				15A79E632F164E6C000C6B4E /* SheetShell.swift in Sources */,
 				15D862712F4485AB009E35AB /* ConfigureDemo.swift in Sources */,
@@ -866,6 +880,7 @@
 				15C963F02F33706500960C5C /* MorphModifier.swift in Sources */,
 				15D862802F4D8CFD009E35AB /* Lever.swift in Sources */,
 				15DA4B2B2EEBFD100046EBC6 /* Stroke Pie.swift in Sources */,
+				EE776D882F94E58D00FF365B /* LGTabView.swift in Sources */,
 				EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */,
 				EE9C148C2EEEC21E003A5926 /* SearchTab.swift in Sources */,
 				EE10F2172F2665A500944690 /* DynLayout.swift in Sources */,
@@ -887,6 +902,7 @@
 				15C963EE2F335BA800960C5C /* MorphingCap.swift in Sources */,
 				EE8802FC2EF8398100A4D79D /* Tags.swift in Sources */,
 				EE6623DB2F4AFA2800F17D74 /* SpinComponent.swift in Sources */,
+				EE776D8E2F94E62C00FF365B /* LGSegmented.swift in Sources */,
 				15C963C42F1E781400960C5C /* DonutView.swift in Sources */,
 				EE6623E52F4B3B7F00F17D74 /* SCPointer.swift in Sources */,
 				1549ECE62EFEB40700876D2D /* SheetController.swift in Sources */,
