@@ -15,7 +15,9 @@ public struct LiquidGlassTabBar: View {
 	public var body: some View {
 		ZStack {
 			// Layer 1: The invisible UISegmentedControl that provides the glass bubble
-			GlassSegmentedControl(count: tabs.count, selectedIndex: $selectedIndex)
+			GeometryReader {
+				GlassSegmentedControl(count: tabs.count, size: $0.size, selectedIndex: $selectedIndex)
+			}.frame(height: 64)
 			
 			// Layer 2: Our fully custom tab item views on top
 			HStack(spacing: 0) {
@@ -27,7 +29,6 @@ public struct LiquidGlassTabBar: View {
 				}
 			}
 			.allowsHitTesting(false) // Touches pass through to UISegmentedControl below
-			.padding(.vertical, 12)
 		}
 	}
 }

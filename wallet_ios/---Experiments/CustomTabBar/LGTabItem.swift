@@ -16,9 +16,9 @@ struct LiquidGlassTabItem: View {
 				.scaleEffect(isSelected ? 1.1 : 1.0)
 				.animation(.spring(response: 0.3, dampingFraction: 0.65), value: isSelected)
 			
-			Text(tab.label)
-				.font(.system(size: 10, weight: isSelected ? .semibold : .medium))
-				.foregroundStyle(isSelected ? .primary : .secondary)
+//			Text(tab.label)
+//				.font(.system(size: 10, weight: isSelected ? .semibold : .medium))
+//				.foregroundStyle(isSelected ? .primary : .secondary)
 		}
 		.frame(maxWidth: .infinity)
 		// Disable hit testing so touches fall through to the UISegmentedControl

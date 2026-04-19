@@ -5,10 +5,15 @@ import UIKit
 
 struct GlassSegmentedControl: UIViewRepresentable {
 	let count: Int
+	var size: CGSize
 	@Binding var selectedIndex: Int
 	
 	func makeCoordinator() -> Coordinator {
 		Coordinator(self)
+	}
+	
+	func sizeThatFits(_ proposal: ProposedViewSize, uiView: UISegmentedControl, context: Context) -> CGSize? {
+		return size
 	}
 	
 	func makeUIView(context: Context) -> UISegmentedControl {
@@ -20,7 +25,7 @@ struct GlassSegmentedControl: UIViewRepresentable {
 		// Make the control itself invisible — only the glass bubble remains
 		control.backgroundColor = .clear
 		control.selectedSegmentTintColor = .clear
-		
+
 		// Remove all text/divider attributes
 		let transparent: [NSAttributedString.Key: Any] = [
 			.foregroundColor: UIColor.clear,
@@ -34,6 +39,14 @@ struct GlassSegmentedControl: UIViewRepresentable {
 			rightSegmentState: .normal,
 			barMetrics: .default
 		)
+		
+		DispatchQueue.main.async {
+			for subview in control.subviews {
+				if subview is UIImageView && subview != control.subviews.last {
+					subview.alpha = 0
+				}
+			}
+		}
 		
 		control.addTarget(
 			context.coordinator,

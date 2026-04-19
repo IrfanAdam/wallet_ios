@@ -45,7 +45,7 @@ public struct LiquidGlassTabView<Content: View>: View {
 					
 					// Floating glass tab bar
 					LiquidGlassTabBar(tabs: tabs, selectedIndex: $selectedIndex)
-					
+						.glassEffect(.clear.interactive().tint(Color.white.opacity(0.2)), in: .capsule)
 					
 					Button(action: {
 						print("Button tapped")
@@ -53,13 +53,13 @@ public struct LiquidGlassTabView<Content: View>: View {
 						Image(systemName: "magnifyingglass")
 							.font(.system(size: 22, weight: .semibold))
 							.foregroundStyle(Color.white.opacity(0.8))
+							.frame(width: 56, height: 56)
 					}
 					.buttonStyle(.glass(.clear.interactive().tint(Color.blue)))
-					.frame(height: 60)
+					.padding(0)
 				}
 				.padding(.horizontal, 16)
 			}
-			
 		}
 	}
 }
