@@ -1,65 +1,52 @@
 import SwiftUI
 import UIKit
 
-// MARK: - Tab Item Model
-
-public struct LiquidGlassTab {
-	public let icon: String          // SF Symbol name
-	public let label: String
-	public let tag: Int
-	
-	public init(icon: String, label: String, tag: Int) {
-		self.icon = icon
-		self.label = label
-		self.tag = tag
-	}
-}
 
 // MARK: - Full Tab View Container (convenience wrapper)
 
 public struct LiquidGlassTabView<Content: View>: View {
-	let tabs: [LiquidGlassTab]
-	@Binding var selectedIndex: Int
 	@ViewBuilder let content: (Int) -> Content
-	
-	public init(
-		tabs: [LiquidGlassTab],
-		selectedIndex: Binding<Int>,
-		@ViewBuilder content: @escaping (Int) -> Content
-	) {
-		self.tabs = tabs
-		self._selectedIndex = selectedIndex
-		self.content = content
-	}
-	
+	@State private var activeTab: CustomTab = .home
+
 	public var body: some View {
 		ZStack(alignment: .bottom) {
 			// Page content
-			content(selectedIndex)
+			content(activeTab.index)
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.ignoresSafeArea()
 			
 			GlassEffectContainer {
 				
 				HStack(spacing: 12) {
-					
-					// Floating glass tab bar
-					LiquidGlassTabBar(tabs: tabs, selectedIndex: $selectedIndex)
-						.glassEffect(.clear.interactive().tint(Color.white.opacity(0.2)), in: .capsule)
-					
+					GeometryReader {
+						GlassSegmentedControl(size: $0.size, activeTab: $activeTab) { tab in
+							VStack(spacing: 4) {
+								Image(systemName: tab == activeTab ? "\(tab.symbol).fill" : tab.symbol)
+									.font(.system(size: 24, weight: .semibold))
+							}
+						}
+					}
+					.glassEffect(.clear.interactive(true).tint(Color.white.opacity(0.48)), in: .capsule)
+
+
 					Button(action: {
 						print("Button tapped")
 					}) {
 						Image(systemName: "magnifyingglass")
 							.font(.system(size: 22, weight: .semibold))
 							.foregroundStyle(Color.white.opacity(0.8))
-							.frame(width: 56, height: 56)
+							.frame(width: 44, height: 44)
 					}
-					.buttonStyle(.glass(.clear.interactive().tint(Color.blue)))
-					.padding(0)
+					.padding(8)
+					.buttonStyle(.plain)
+					.glassEffect(.clear.interactive(true).tint(Color.blue.opacity(0.9)), in: .capsule)
+
 				}
 				.padding(.horizontal, 16)
+				.frame(height: 56)
+				.frame(maxWidth: .infinity)
 			}
+			.shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: 8)
 		}
 	}
 }

@@ -3,43 +3,31 @@ import UIKit
 
 // MARK: - UISegmentedControl Wrapper (the glass "engine")
 
-struct GlassSegmentedControl: UIViewRepresentable {
-	let count: Int
+struct GlassSegmentedControl<TabItemView: View>: UIViewRepresentable {
 	var size: CGSize
-	@Binding var selectedIndex: Int
-	
+	var activeTint: Color = .blue
+	var barTint: Color = .white.opacity(0.4)
+	@Binding var activeTab: CustomTab
+	@ViewBuilder var tabItemView: (CustomTab) -> TabItemView
+
 	func makeCoordinator() -> Coordinator {
 		Coordinator(self)
 	}
 	
-	func sizeThatFits(_ proposal: ProposedViewSize, uiView: UISegmentedControl, context: Context) -> CGSize? {
-		return size
-	}
-	
 	func makeUIView(context: Context) -> UISegmentedControl {
-		// Build with empty-string segments — we overlay custom SwiftUI views on top
-		let items = Array(repeating: "" as Any, count: count)
+		let items = CustomTab.allCases.map(\.rawValue)
 		let control = UISegmentedControl(items: items)
-		control.selectedSegmentIndex = selectedIndex
-		
-		// Make the control itself invisible — only the glass bubble remains
-		control.backgroundColor = .clear
-		control.selectedSegmentTintColor = .clear
+		control.selectedSegmentIndex = 0
 
-		// Remove all text/divider attributes
-		let transparent: [NSAttributedString.Key: Any] = [
-			.foregroundColor: UIColor.clear,
-			.font: UIFont.systemFont(ofSize: 0)
-		]
-		control.setTitleTextAttributes(transparent, for: .normal)
-		control.setTitleTextAttributes(transparent, for: .selected)
-		control.setDividerImage(
-			UIImage(),
-			forLeftSegmentState: .normal,
-			rightSegmentState: .normal,
-			barMetrics: .default
-		)
-		
+		for (index, tab) in CustomTab.allCases.enumerated() {
+			let renderer = ImageRenderer(content: tabItemView(tab))
+			renderer.scale = 2
+
+			let image = renderer.uiImage
+
+			control.setImage(image, forSegmentAt: index)
+		}
+
 		DispatchQueue.main.async {
 			for subview in control.subviews {
 				if subview is UIImageView && subview != control.subviews.last {
@@ -47,27 +35,44 @@ struct GlassSegmentedControl: UIViewRepresentable {
 				}
 			}
 		}
-		
-		control.addTarget(
-			context.coordinator,
-			action: #selector(Coordinator.valueChanged(_:)),
-			for: .valueChanged
-		)
+
+		control.selectedSegmentTintColor = UIColor(Color.gray.opacity(0.2))
+		control.setTitleTextAttributes([
+			.foregroundColor: UIColor(activeTint)
+		], for: .selected)
+
+
+		control.addTarget(context.coordinator, action: #selector(context.coordinator.tabSelected(_:)), for: .valueChanged)
 		return control
 	}
-	
+
+
+	func sizeThatFits(_ proposal: ProposedViewSize, uiView: UISegmentedControl, context: Context) -> CGSize? {
+		return size
+	}
+
 	func updateUIView(_ uiView: UISegmentedControl, context: Context) {
-		if uiView.selectedSegmentIndex != selectedIndex {
-			uiView.selectedSegmentIndex = selectedIndex
+
+		uiView.selectedSegmentIndex = activeTab.index
+
+		for (index, tab) in CustomTab.allCases.enumerated() {
+			let renderer = ImageRenderer(content: tabItemView(tab))
+			renderer.scale = 2
+
+			if let image = renderer.uiImage {
+				uiView.setImage(image, forSegmentAt: index)
+			}
 		}
+
 	}
 	
 	class Coordinator: NSObject {
 		var parent: GlassSegmentedControl
 		init(_ parent: GlassSegmentedControl) { self.parent = parent }
 		
-		@objc func valueChanged(_ sender: UISegmentedControl) {
-			parent.selectedIndex = sender.selectedSegmentIndex
+		@objc func tabSelected(_ control: UISegmentedControl) {
+			parent.activeTab = CustomTab.allCases[control.selectedSegmentIndex]
 		}
 	}
 }
+

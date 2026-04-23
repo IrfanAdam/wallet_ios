@@ -45,48 +45,6 @@ struct CustomGlass: View {
 	}
 }
 
-struct CustomGlass2: View {
-	@State private var isHovered = false
-
-	var body: some View {
-		ZStack(alignment: .center) {
-			RoundedRectangle(cornerRadius: 24)
-				.glassEffect(
-					.clear.tint(Color.blue.opacity(0.9)),
-					in: .rect(cornerRadius: 24)
-				)
-				.clipShape(RoundedRectangle(cornerRadius: 24))
-				.frame(height: 100)
-
-			RoundedRectangle(cornerRadius: 16)
-				.fill(Color.blue) // optional fill/tint
-				.overlay(
-					RoundedRectangle(cornerRadius: 16)
-						.stroke(
-							Color.white.opacity(0.6),
-							lineWidth: 1
-						)
-				)
-				.clipShape(RoundedRectangle(cornerRadius: 16))
-				.frame(width: 180, height: 60)
-			
-			HStack {
-				Image(systemName: "chevron.right.2")
-					.foregroundStyle(Color.white)
-					.frame(width: 42, height: 42)
-					.background(
-						RoundedRectangle(cornerRadius: 12)
-							.glassEffect(
-								.regular.tint(Color.blue).interactive(),
-								in: .rect(cornerRadius: 12)
-							)
-					)
-			}
-		}
-		.padding(60)
-	}
-}
-
 struct CustomGlass_Previews: PreviewProvider {
 	static var previews: some View {
 		CustomGlass()

@@ -33,6 +33,7 @@ extension EnvironmentValues {
 struct HomeView: View {
 	@State private var showDetails = false
 	@State private var showScan = false
+	@State private var showLiquidGlassTest = false
 	let sheetController: AppSheetController
 	var body: some View {
 		// First tab
@@ -83,7 +84,12 @@ struct HomeView: View {
 							.font(.title2)
 					}
 				}
-				
+				ToolbarItem(placement: .navigationBarTrailing) {
+					Button("Test") {
+						showLiquidGlassTest = true
+					}
+				}
+
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button(action: {
 						print("Notifications tapped")
@@ -109,6 +115,9 @@ struct HomeView: View {
 			}
 			.fullScreenCover(isPresented: $showScan) {
 				transactOpts().ignoresSafeArea()
+			}
+			.fullScreenCover(isPresented: $showLiquidGlassTest) {
+				DemoTabView()
 			}
 		}
 	}
