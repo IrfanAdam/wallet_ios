@@ -17,6 +17,8 @@ struct FavContentView: View {
 	@State private var useNativeTabBar = false
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
+	@Environment(\.dismiss) private var dismiss
+
 	private var tabBarVisibility: Visibility {
 		if useNativeTabBar {
 			return .visible
@@ -54,6 +56,14 @@ struct FavContentView: View {
 									showingSettings = true
 								} label: {
 									Image(systemName: "gearshape")
+								}
+							}
+
+							ToolbarItem(placement: .topBarTrailing) {
+								Button {
+									dismiss()
+								} label: {
+									Image(systemName: "xmark")
 								}
 							}
 						}

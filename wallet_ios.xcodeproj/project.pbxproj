@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		150567952F84F67E004B200B /* DonutInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567942F84F675004B200B /* DonutInfoView.swift */; };
-		1505679D2F97D126004B200B /* NoFlickerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505679C2F97D120004B200B /* NoFlickerDemo.swift */; };
 		150567C12F98B35E004B200B /* FabBarSafeAreaPaddingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567BD2F98B35E004B200B /* FabBarSafeAreaPaddingModifier.swift */; };
 		150567C22F98B35E004B200B /* FabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567BA2F98B35E004B200B /* FabBar.swift */; };
 		150567C32F98B35E004B200B /* FabBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150567BC2F98B35E004B200B /* FabBarModifier.swift */; };
@@ -136,7 +135,6 @@
 
 /* Begin PBXFileReference section */
 		150567942F84F675004B200B /* DonutInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutInfoView.swift; sourceTree = "<group>"; };
-		1505679C2F97D120004B200B /* NoFlickerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFlickerDemo.swift; sourceTree = "<group>"; };
 		150567B42F98B35E004B200B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		150567B52F98B35E004B200B /* FabBarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabBarRepresentable.swift; sourceTree = "<group>"; };
 		150567B62F98B35E004B200B /* GlassTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassTabBarView.swift; sourceTree = "<group>"; };
@@ -523,7 +521,6 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
-				EE776D862F94E4E100FF365B /* CustomTabBar */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
@@ -532,6 +529,7 @@
 				15C963E02F30E73500960C5C /* Slide To Close */,
 				EE1A4E022F06B5F600352395 /* PageTransition */,
 				EE6623EE2F543B8500F17D74 /* Custom Glass */,
+				EE776D862F94E4E100FF365B /* CustomTabBar */,
 			);
 			path = "---Experiments";
 			sourceTree = "<group>";
@@ -711,7 +709,6 @@
 		EE6623EE2F543B8500F17D74 /* Custom Glass */ = {
 			isa = PBXGroup;
 			children = (
-				1505679C2F97D120004B200B /* NoFlickerDemo.swift */,
 				150567CB2F98B38F004B200B /* FABDemo.swift */,
 				15C963E52F31F49700960C5C /* CustomGlass.swift */,
 				15C963E72F322BDC00960C5C /* PayProcessSheet.swift */,
@@ -960,7 +957,6 @@
 				15DA4B312EEBFD100046EBC6 /* Morphy2.swift in Sources */,
 				15D8627D2F4C7F80009E35AB /* Reel.swift in Sources */,
 				15D862792F4C7F57009E35AB /* Model.swift in Sources */,
-				1505679D2F97D126004B200B /* NoFlickerDemo.swift in Sources */,
 				EE6623F02F544FEA00F17D74 /* Point.swift in Sources */,
 				1549ECD52EF4038F00876D2D /* Custom Decimal Style.swift in Sources */,
 				15C963EE2F335BA800960C5C /* MorphingCap.swift in Sources */,

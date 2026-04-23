@@ -40,7 +40,7 @@ struct ArcSegment: View {
 				.trim(from: animatedFrom, to: animatedTo)
 				.stroke(
 					Color.blue.opacity(opacity),
-					style: StrokeStyle(lineWidth: 8, lineCap: .round)
+					style: StrokeStyle(lineWidth: context.layout.arcWidth, lineCap: .round)
 				)
 				.rotationEffect(.degrees(-90))
 				.onAppear {

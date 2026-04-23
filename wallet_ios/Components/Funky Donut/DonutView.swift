@@ -10,8 +10,14 @@ struct ChartDonutDemoView: View {
 	var body: some View {
 		GeometryReader { geo in
 			let size = min(geo.size.width, geo.size.height)
-			let firstHiglight = size * 0.61
-			let secondHiglight = size * 0.54
+			let innerSpace = mainContext.layout.fillSpace - mainContext.layout.donutWidth * 2
+			let arcWidth = mainContext.layout.arcWidth
+			let base = size * innerSpace
+			let w = arcWidth
+
+			let firstHighlight = base - (1.5 * w)
+			let secondHighlight = firstHighlight - (3.5 * w)
+
 			ZStack {
 				ZStack {
 					ArcSegment(
@@ -20,7 +26,7 @@ struct ChartDonutDemoView: View {
 						offset: 0.02,
 						maxSpan: 0.08
 					)
-					.frame(width: firstHiglight, height: firstHiglight)
+					.frame(width: firstHighlight, height: firstHighlight)
 					.scaleEffect(x: -1, y: 1)
 					.rotationEffect(mainContext.animation.rotationAngle)
 					ArcSegment(
@@ -29,7 +35,7 @@ struct ChartDonutDemoView: View {
 						offset: 0.03,
 						maxSpan: 0.04
 					)
-					.frame(width: secondHiglight, height: secondHiglight)
+					.frame(width: secondHighlight, height: secondHighlight)
 					.scaleEffect(x: -1, y: 1)
 					.rotationEffect(mainContext.animation.rotationAngle)
 					ChartDonutView(context: mainContext)

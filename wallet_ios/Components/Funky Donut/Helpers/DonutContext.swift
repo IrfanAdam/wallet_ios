@@ -19,6 +19,9 @@ extension DonutChartContext {
 	}
 
 	struct Layout {
+		let fillSpace: CGFloat = 0.88
+		let donutWidth: CGFloat = 0.12
+		let arcWidth: CGFloat = 8
 		var geometry: [DonutData] = []
 	}
 	

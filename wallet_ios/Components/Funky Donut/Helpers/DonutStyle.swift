@@ -19,9 +19,10 @@ extension DonutChartContext {
 		let element: DonutData
 		let isSelected: Bool
 		let allData: [DonutData]
-		
-		var innerRadius: CGFloat { isSelected ? 0.76 : 0.76 }
-		var outerRadius: CGFloat { isSelected ? 0.88 : 0.88 }
+		let layout: Layout
+
+		var innerRadius: CGFloat { isSelected ? layout.fillSpace - layout.donutWidth : layout.fillSpace - layout.donutWidth }
+		var outerRadius: CGFloat { isSelected ? layout.fillSpace : layout.fillSpace }
 		var inset: CGFloat { isSelected ? 2.25 : 2 }
 		var cornerRadius: CGFloat { isSelected ? 8 : 8 }
 
@@ -40,7 +41,8 @@ extension DonutChartContext {
 		return SegmentStyle(
 			element: element,
 			isSelected: isSelectedVal,
-			allData: model.processedData
+			allData: model.processedData,
+			layout: layout
 		)
 	}
 }

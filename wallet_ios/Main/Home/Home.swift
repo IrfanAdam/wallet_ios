@@ -117,7 +117,7 @@ struct HomeView: View {
 				transactOpts().ignoresSafeArea()
 			}
 			.fullScreenCover(isPresented: $showLiquidGlassTest) {
-				DemoTabView()
+				FavContentView()
 			}
 		}
 	}
