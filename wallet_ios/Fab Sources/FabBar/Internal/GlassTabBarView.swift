@@ -30,14 +30,14 @@ final class GlassTabBarView: UIView {
         containerEffectView = UIVisualEffectView(effect: containerEffect)
 
         // Create segmented control glass effect
-        let segmentedGlassEffect = UIGlassEffect()
+			let segmentedGlassEffect = UIGlassEffect(style: .clear)
         segmentedGlassEffect.isInteractive = true
         segmentedGlassView = UIVisualEffectView(effect: segmentedGlassEffect)
 
         // Create FAB button
-        let fabGlassEffect = UIGlassEffect()
+			let fabGlassEffect = UIGlassEffect(style: .clear)
         fabGlassEffect.isInteractive = true
-        fabGlassEffect.tintColor = .tintColor
+        fabGlassEffect.tintColor = .tintColor.withAlphaComponent(0.84)
         fabGlassView = UIVisualEffectView(effect: fabGlassEffect)
 
         let button = UIButton(type: .system)
@@ -157,9 +157,9 @@ final class GlassTabBarView: UIView {
         super.tintColorDidChange()
         // Update FAB glass effect tint when tintAdjustmentMode changes
         // Create a new effect since modifying existing effect's tintColor doesn't update visuals
-        let newEffect = UIGlassEffect()
+			let newEffect = UIGlassEffect(style: .clear)
         newEffect.isInteractive = true
-        newEffect.tintColor = tintColor
+        newEffect.tintColor = tintColor.withAlphaComponent(0.8)
         fabGlassView.effect = newEffect
     }
 }

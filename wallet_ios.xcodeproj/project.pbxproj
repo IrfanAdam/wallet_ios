@@ -298,12 +298,12 @@
 			path = FabBar;
 			sourceTree = "<group>";
 		};
-		150567C02F98B35E004B200B /* Fab Sources 2 */ = {
+		150567C02F98B35E004B200B /* Fab Sources */ = {
 			isa = PBXGroup;
 			children = (
 				150567BF2F98B35E004B200B /* FabBar */,
 			);
-			path = "Fab Sources 2";
+			path = "Fab Sources";
 			sourceTree = "<group>";
 		};
 		1549ECB82EF1386A00876D2D /* Analytics */ = {
@@ -605,7 +605,7 @@
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
 				15C963B72F1A36FD00960C5C /* Components */,
-				150567C02F98B35E004B200B /* Fab Sources 2 */,
+				150567C02F98B35E004B200B /* Fab Sources */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
@@ -709,7 +709,6 @@
 		EE6623EE2F543B8500F17D74 /* Custom Glass */ = {
 			isa = PBXGroup;
 			children = (
-				150567CB2F98B38F004B200B /* FABDemo.swift */,
 				15C963E52F31F49700960C5C /* CustomGlass.swift */,
 				15C963E72F322BDC00960C5C /* PayProcessSheet.swift */,
 				15C963F12F33750900960C5C /* MorphDemo.swift */,
@@ -721,6 +720,7 @@
 		EE776D862F94E4E100FF365B /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				150567CB2F98B38F004B200B /* FABDemo.swift */,
 				EE776D8D2F94E62800FF365B /* LGSegmented.swift */,
 				EE776D872F94E58900FF365B /* LGTabView.swift */,
 				EE776D842F94E33F00FF365B /* CustomTabBarDemo.swift */,

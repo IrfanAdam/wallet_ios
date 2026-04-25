@@ -1,4 +1,5 @@
 import SwiftUI
+import os
 
 /// A customizable iOS 26 glass tab bar with a floating action button.
 ///

@@ -1,3 +1,4 @@
+import os
 import UIKit
 
 /// A UISegmentedControl subclass customized for use as a tab bar replacement.
@@ -38,7 +39,7 @@ final class TabBarSegmentedControl: UISegmentedControl {
     /// Display link for updating accent masks each frame.
     private var displayLink: CADisplayLink?
     /// Weak proxy to avoid CADisplayLink retain cycle.
-    private var displayLinkProxy: DisplayLinkProxy?
+    private var displayLinkProxy: TabBarDisplayLinkProxy?
 
     /// Tracks indicator position stability for display link pausing.
     private var lastIndicatorRect: CGRect = .zero
@@ -236,9 +237,9 @@ final class TabBarSegmentedControl: UISegmentedControl {
 
     private func startDisplayLink() {
         guard displayLink == nil else { return }
-        let proxy = DisplayLinkProxy(control: self)
+        let proxy = TabBarDisplayLinkProxy(control: self)
         displayLinkProxy = proxy
-        displayLink = CADisplayLink(target: proxy, selector: #selector(DisplayLinkProxy.handleDisplayLink))
+        displayLink = CADisplayLink(target: proxy, selector: #selector(TabBarDisplayLinkProxy.handleDisplayLink))
         displayLink?.add(to: .main, forMode: .common)
     }
 
@@ -463,7 +464,7 @@ final class TabBarSegmentedControl: UISegmentedControl {
 /// Weak-reference proxy that prevents `CADisplayLink` from retaining the segmented control.
 @available(iOS 26.0, *)
 @MainActor
-private final class DisplayLinkProxy: NSObject {
+private final class TabBarDisplayLinkProxy: NSObject {
     weak var control: TabBarSegmentedControl?
 
     init(control: TabBarSegmentedControl) {
