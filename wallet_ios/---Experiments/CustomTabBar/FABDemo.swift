@@ -28,16 +28,16 @@ struct FavContentView: View {
 
 	private var visibleTabs: [FabBarTab<FabAppTab>] {
 		let allTabs: [FabBarTab<FabAppTab>] = [
-			FabBarTab(value: .home, title: "Home", systemImage: "house.fill", onReselect: {
+			FabBarTab(value: .home, title: "Home", systemImage: "house", onReselect: {
 				print("Reselected: home")
 			}),
-			FabBarTab(value: .explore, title: "Explore", systemImage: "map.fill", onReselect: {
+			FabBarTab(value: .explore, title: "Explore", systemImage: "map", onReselect: {
 				print("Reselected: explore")
 			}),
-			FabBarTab(value: .profile, title: "Profile", systemImage: "person.fill", onReselect: {
+			FabBarTab(value: .profile, title: "Profile", systemImage: "person", onReselect: {
 				print("Reselected: profile")
 			}),
-			FabBarTab(value: .activity, title: "Activity", systemImage: "bell.fill", onReselect: {
+			FabBarTab(value: .activity, title: "Activity", systemImage: "bell", onReselect: {
 				print("Reselected: activity")
 			}),
 		]

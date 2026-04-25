@@ -605,7 +605,6 @@
 				15DA4B252EEBFD100046EBC6 /* Assets.xcassets */,
 				EE8802F92EF828AE00A4D79D /* Assets */,
 				15C963B72F1A36FD00960C5C /* Components */,
-				150567C02F98B35E004B200B /* Fab Sources */,
 				15DA4B0A2EEBFD100046EBC6 /* ---Experiments */,
 			);
 			path = wallet_ios;
@@ -720,6 +719,7 @@
 		EE776D862F94E4E100FF365B /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				150567C02F98B35E004B200B /* Fab Sources */,
 				150567CB2F98B38F004B200B /* FABDemo.swift */,
 				EE776D8D2F94E62800FF365B /* LGSegmented.swift */,
 				EE776D872F94E58900FF365B /* LGTabView.swift */,

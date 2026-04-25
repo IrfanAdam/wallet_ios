@@ -78,20 +78,21 @@ final class TabItemContentView: UIView {
         let tintColor = tintColor ?? .label
 
         let icon = loadIcon()
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .foregroundColor: tintColor,
-        ]
-        let textSize = (title as NSString).size(withAttributes: textAttributes)
-
-        let contentNudgeUp: CGFloat = 1
-        let iconTextGap: CGFloat = 1
+//        let textAttributes: [NSAttributedString.Key: Any] = [
+//            .font: font,
+//            .foregroundColor: tintColor,
+//        ]
+//        let textSize = (title as NSString).size(withAttributes: textAttributes)
+//
+//        let contentNudgeUp: CGFloat = 1
+//        let iconTextGap: CGFloat = 1
 
         // Draw icon centered in top area
         if let icon {
             let imageSize = icon.size
             let imageX = (bounds.width - imageSize.width) / 2
-            let imageY = (imageAreaHeight - imageSize.height) / 2 - contentNudgeUp
+//            let imageY = (imageAreaHeight - imageSize.height) / 2 - contentNudgeUp
+					let imageY = 4 + (imageAreaHeight - imageSize.height) / 2
             let imageRect = CGRect(x: imageX, y: imageY, width: imageSize.width, height: imageSize.height)
 
             tintColor.setFill()
@@ -99,9 +100,9 @@ final class TabItemContentView: UIView {
         }
 
         // Draw text centered below icon area
-        let textX = (bounds.width - textSize.width) / 2
-        let textPoint = CGPoint(x: textX, y: imageAreaHeight - contentNudgeUp + iconTextGap)
-        (title as NSString).draw(at: textPoint, withAttributes: textAttributes)
+//        let textX = (bounds.width - textSize.width) / 2
+//        let textPoint = CGPoint(x: textX, y: imageAreaHeight - contentNudgeUp + iconTextGap)
+//        (title as NSString).draw(at: textPoint, withAttributes: textAttributes)
     }
 
     // MARK: - Private

@@ -101,48 +101,80 @@ struct FabBarRepresentable<Value: Hashable>: UIViewRepresentable {
         // letting the native segment labels render crisply at popover scale.
         // Two views per segment: base (inactive) underneath, accent (active) on top
         // masked to the glass indicator position.
-        let baseViews = tabs.map(makeContentView)
-        let accentViews = tabs.map(makeContentView)
-        control.configureContentViews(baseViews, accentViews: accentViews)
+			
+			let baseViews = tabs.map { makeContentView(for: $0) }
+			let accentViews = tabs.map { makeContentView(for: $0, filled: true) }
+			
+			(baseViews + accentViews).forEach { view in
+				view.layer.shouldRasterize = true
+				view.layer.rasterizationScale = view.window?.windowScene?.screen.scale ?? view.traitCollection.displayScale
+			}
+			
+			control.configureContentViews(baseViews, accentViews: accentViews)
 
-        // Fixed width for <3 tabs (glass floats leading-aligned); 0 for 3+ (auto-distribute)
-        for index in 0..<tabs.count {
-            control.setWidth(tabs.count < 3 ? Constants.fewTabsSegmentWidth : 0, forSegmentAt: index)
-        }
+			// Fixed width for <3 tabs (glass floats leading-aligned); 0 for 3+ (auto-distribute)
+			for index in 0..<tabs.count {
+					control.setWidth(tabs.count < 3 ? Constants.fewTabsSegmentWidth : 0, forSegmentAt: index)
+			}
     }
-
-    private func makeContentView(for tab: FabBarTab<Value>) -> TabItemContentView {
-        if let imageName = tab.image {
-            TabItemContentView(title: tab.title, imageName: imageName, imageBundle: tab.imageBundle)
-        } else {
-            TabItemContentView(title: tab.title, symbolName: tab.systemImage ?? "")
-        }
-    }
+	
+	    private func makeContentView(
+				for tab: FabBarTab<Value>,
+				filled: Bool = false
+			) -> TabItemContentView {
+				if let imageName = tab.image {
+					return TabItemContentView(
+						title: tab.title,
+						imageName: imageName,
+						imageBundle: tab.imageBundle
+					)
+				} else {
+					let base = tab.systemImage ?? ""
+					let name = filled ? base + ".fill" : base
+					
+					return TabItemContentView(
+						title: tab.title,
+						symbolName: name
+					)
+				}
+			}
 
     private func segmentTintColor(for traitCollection: UITraitCollection) -> UIColor {
-        switch traitCollection.userInterfaceStyle {
-        case .dark:
-            return .label.withAlphaComponent(0.15)
-        default:
-            return .label.withAlphaComponent(0.08)
-        }
+			switch traitCollection.userInterfaceStyle {
+			case .dark:
+					return .baseBlue.withAlphaComponent(0.15)
+			default:
+					return .baseBlue.withAlphaComponent(0.08)
+			}
     }
 
     @MainActor
     class Coordinator: NSObject {
-        var parent: FabBarRepresentable<Value>
-        var previousTabValues: [Value]
+			var parent: FabBarRepresentable<Value>
+			var previousTabValues: [Value]
 
-        init(parent: FabBarRepresentable<Value>) {
-            self.parent = parent
-            self.previousTabValues = parent.tabs.map(\.value)
-        }
+			init(parent: FabBarRepresentable<Value>) {
+				self.parent = parent
+				self.previousTabValues = parent.tabs.map(\.value)
+			}
 
-        @objc func tabSelected(_ control: UISegmentedControl) {
-            let index = control.selectedSegmentIndex
-            if index >= 0 && index < parent.tabs.count {
-                parent.activeTab = parent.tabs[index].value
-            }
-        }
+			@objc func tabSelected(_ control: UISegmentedControl) {
+				let index = control.selectedSegmentIndex
+				if index >= 0 && index < parent.tabs.count {
+					parent.activeTab = parent.tabs[index].value
+				}
+				
+				UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseOut]) {
+					control.alpha = 0.98
+				} completion: { _ in
+					UIView.animate(withDuration: 0.1) {
+						control.alpha = 1.0
+					}
+				}
+			}
     }
+}
+
+extension UIColor {
+	static let baseBlue = UIColor(red: 0.0, green: 0.55, blue: 1.0, alpha: 1.0)
 }
