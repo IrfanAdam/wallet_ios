@@ -15,7 +15,10 @@ final class TabItemContentView: UIView {
     private var title: String = ""
 
     private let font = UIFont.systemFont(ofSize: Constants.tabTitleFontSize, weight: .semibold)
-    private let imageAreaHeight = Constants.iconViewSize
+//    private let imageAreaHeight = Constants.iconViewSize
+	private let iconSize: CGFloat = 32
+	private let verticalPadding: CGFloat = 6
+	private let spacing: CGFloat = 4
 
     init(title: String, symbolName: String) {
         self.title = title
@@ -68,8 +71,10 @@ final class TabItemContentView: UIView {
         let textSize = (title as NSString).size(withAttributes: [.font: font])
         let icon = loadIcon()
         let contentWidth = max(icon?.size.width ?? 0, textSize.width)
-        let height = imageAreaHeight + textSize.height
-        return CGSize(width: contentWidth, height: height)
+//        let height = imageAreaHeight + textSize.height
+
+			let height = verticalPadding + iconSize + spacing + textSize.height + verticalPadding
+			return CGSize(width: contentWidth, height: height)
     }
 
     // MARK: - Drawing
@@ -90,10 +95,42 @@ final class TabItemContentView: UIView {
         // Draw icon centered in top area
         if let icon {
             let imageSize = icon.size
-            let imageX = (bounds.width - imageSize.width) / 2
+//            let imageX = (bounds.width - imageSize.width) / 2
 //            let imageY = (imageAreaHeight - imageSize.height) / 2 - contentNudgeUp
-					let imageY = 4 + (imageAreaHeight - imageSize.height) / 2
-            let imageRect = CGRect(x: imageX, y: imageY, width: imageSize.width, height: imageSize.height)
+//					let imageY = 4 + (imageAreaHeight - imageSize.height) / 2
+					let aspect = icon.size.width / icon.size.height
+					
+					let drawSize: CGSize
+					
+					if aspect > 1 {
+						
+						// Wider than tall
+						
+						drawSize = CGSize(width: iconSize, height: iconSize / aspect)
+						
+					} else {
+						
+						// Taller than wide
+						
+						drawSize = CGSize(width: iconSize * aspect, height: iconSize)
+						
+					}
+					
+					let imageRect = CGRect(
+						
+						x: (bounds.width - drawSize.width) / 2,
+						
+						y: 2 * verticalPadding + (iconSize - drawSize.height) / 2,
+						
+						width: drawSize.width,
+						
+						height: drawSize.height
+						
+					)
+					
+					tintColor.setFill()
+					
+					icon.withRenderingMode(.alwaysTemplate).draw(in: imageRect)
 
             tintColor.setFill()
             icon.withRenderingMode(.alwaysTemplate).draw(in: imageRect)

@@ -100,7 +100,7 @@ final class GlassTabBarView: UIView {
             segmentedControl.trailingAnchor.constraint(equalTo: segmentedGlassView.contentView.trailingAnchor, constant: -contentPadding),
             segmentedControl.topAnchor.constraint(equalTo: segmentedGlassView.contentView.topAnchor, constant: contentPadding),
             segmentedControl.bottomAnchor.constraint(equalTo: segmentedGlassView.contentView.bottomAnchor, constant: -contentPadding - segmentedControlBottomInsetAdjustment),
-
+		
             // FAB glass view
             fabGlassView.trailingAnchor.constraint(equalTo: containerEffectView.contentView.trailingAnchor),
             fabGlassView.topAnchor.constraint(equalTo: containerEffectView.contentView.topAnchor),
@@ -117,6 +117,9 @@ final class GlassTabBarView: UIView {
         // Set up the trailing constraint based on tab count
         segmentedTrailingConstraint = makeSegmentedTrailingConstraint()
         segmentedTrailingConstraint?.isActive = true
+			segmentedControl.setContentHuggingPriority(.required, for: .vertical)
+			segmentedControl.setContentCompressionResistancePriority(.required, for: .vertical)
+
     }
 
     /// Creates the appropriate trailing constraint for the segmented glass view.

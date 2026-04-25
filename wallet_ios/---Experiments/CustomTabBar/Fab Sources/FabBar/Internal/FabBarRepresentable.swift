@@ -15,6 +15,14 @@ struct FabBarRepresentable<Value: Hashable>: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
+	
+	func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIViewType, context: Context) -> CGSize {
+		
+		uiView.layoutIfNeeded()
+		
+		return uiView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+		
+	}
 
     func makeUIView(context: Context) -> GlassTabBarView {
         let images = tabs.compactMap { _ in
@@ -29,6 +37,11 @@ struct FabBarRepresentable<Value: Hashable>: UIViewRepresentable {
         control.selectedSegmentTintColor = segmentTintColor(for: control.traitCollection)
 
         control.addTarget(context.coordinator, action: #selector(context.coordinator.tabSelected(_:)), for: .valueChanged)
+			
+			control.layer.shadowColor = UIColor.baseBlue.cgColor
+			control.layer.shadowOpacity = 0.42
+			control.layer.shadowRadius = 0
+			control.layer.shadowOffset = .zero
 
         // Handle reselection (tapping already-selected segment)
         let coordinator = context.coordinator

@@ -13,7 +13,7 @@ struct FavContentView: View {
 	@State private var selectedTab: FabAppTab = .home
 	@State private var showingSheet = false
 	@State private var showingSettings = false
-	@State private var tabCount = 3
+	@State private var tabCount = 4
 	@State private var useNativeTabBar = false
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -93,8 +93,8 @@ struct FavContentView: View {
 			selection: $selectedTab,
 			tabs: visibleTabs,
 			action: FabBarAction(
-				systemImage: "plus",
-				accessibilityLabel: "Add"
+				systemImage: "barcode.viewfinder",
+				accessibilityLabel: "Scan"
 			) {
 				showingSheet = true
 			},

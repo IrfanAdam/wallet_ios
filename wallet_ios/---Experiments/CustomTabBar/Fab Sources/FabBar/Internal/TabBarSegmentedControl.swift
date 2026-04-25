@@ -137,12 +137,17 @@ final class TabBarSegmentedControl: UISegmentedControl {
                 contentView.translatesAutoresizingMaskIntoConstraints = false
                 segmentView.addSubview(contentView)
 
-                NSLayoutConstraint.activate([
-                    contentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
-                    contentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor),
-                    contentView.widthAnchor.constraint(equalToConstant: contentView.intrinsicContentSize.width),
-                    contentView.heightAnchor.constraint(equalToConstant: contentView.intrinsicContentSize.height),
-                ])
+//                NSLayoutConstraint.activate([
+//                    contentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
+//                    contentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor),
+//                    contentView.widthAnchor.constraint(equalToConstant: contentView.intrinsicContentSize.width),
+//                    contentView.heightAnchor.constraint(equalToConstant: contentView.intrinsicContentSize.height),
+//                ])
+							
+							NSLayoutConstraint.activate([
+								contentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
+								contentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor)
+							])
             }
 
             // Accent (active) content view on top, masked to the glass indicator
@@ -152,12 +157,17 @@ final class TabBarSegmentedControl: UISegmentedControl {
                 accentView.translatesAutoresizingMaskIntoConstraints = false
                 segmentView.addSubview(accentView)
 
-                NSLayoutConstraint.activate([
-                    accentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
-                    accentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor),
-                    accentView.widthAnchor.constraint(equalToConstant: accentView.intrinsicContentSize.width),
-                    accentView.heightAnchor.constraint(equalToConstant: accentView.intrinsicContentSize.height),
-                ])
+//                NSLayoutConstraint.activate([
+//                    accentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
+//                    accentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor),
+//                    accentView.widthAnchor.constraint(equalToConstant: accentView.intrinsicContentSize.width),
+//                    accentView.heightAnchor.constraint(equalToConstant: accentView.intrinsicContentSize.height),
+//                ])
+							
+							NSLayoutConstraint.activate([
+								accentView.centerXAnchor.constraint(equalTo: segmentView.centerXAnchor),
+								accentView.centerYAnchor.constraint(equalTo: segmentView.centerYAnchor)
+							])
 
                 // Start fully hidden; display link will reveal via mask
                 let maskLayer = CAShapeLayer()

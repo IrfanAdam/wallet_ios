@@ -60,6 +60,9 @@ public struct FabBar<Value: Hashable>: View {
         self.tabs = tabs
         self.action = action
     }
+	
+	@State private var measuredHeight: CGFloat = 0
+
 
     public var body: some View {
         if tabs.isEmpty {
@@ -74,6 +77,11 @@ public struct FabBar<Value: Hashable>: View {
                 action: action,
                 activeTab: $selection
             )
+						.background(
+							GeometryReader { proxy in
+								Color.clear.onAppear { measuredHeight = proxy.size.height }
+							}
+						)
             .frame(height: Constants.barHeight)
         }
     }
