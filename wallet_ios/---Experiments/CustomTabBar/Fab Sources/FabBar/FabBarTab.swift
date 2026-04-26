@@ -1,73 +1,59 @@
 import Foundation
 
-/// A tab configuration for FabBar.
-///
-/// Each tab represents an item in the tab bar with an icon and title.
-/// The tab is identified by a generic `Value` type that must conform to `Hashable`.
+@available(iOS 26.0, *)
+public enum FabBarIcon {
+	case system(name: String)
+	case asset(name: String, bundle: Bundle? = nil, rendering: Rendering = .template)
+	
+	public enum Rendering {
+		case template
+		case original
+	}
+}
+
 @available(iOS 26.0, *)
 public struct FabBarTab<Value: Hashable>: Identifiable {
-    public var id: Value { value }
-
-    /// The tab identifier.
-    public let value: Value
-
-    /// The title displayed below the icon.
-    public let title: String
-
-    /// The SF Symbol name for the icon. Used when `image` is nil.
-    public let systemImage: String?
-
-    /// The custom image name from a bundle. Takes precedence over `systemImage` when set.
-    public let image: String?
-
-    /// The bundle containing the custom image. Defaults to `.main` if not specified.
-    public let imageBundle: Bundle?
-
-    /// Called when the user taps this tab while it's already selected.
-    /// Useful for scroll-to-top or similar behaviors.
-    public let onReselect: (() -> Void)?
-
-    /// Creates a tab with an SF Symbol icon.
-    ///
-    /// - Parameters:
-    ///   - value: The tab identifier.
-    ///   - title: The title displayed below the icon.
-    ///   - systemImage: The SF Symbol name for the icon.
-    ///   - onReselect: Called when the user taps this tab while it's already selected.
-    public init(
-        value: Value,
-        title: String,
-        systemImage: String,
-        onReselect: (() -> Void)? = nil
-    ) {
-        self.value = value
-        self.title = title
-        self.systemImage = systemImage
-        self.image = nil
-        self.imageBundle = nil
-        self.onReselect = onReselect
-    }
-
-    /// Creates a tab with a custom image from a bundle.
-    ///
-    /// - Parameters:
-    ///   - value: The tab identifier.
-    ///   - title: The title displayed below the icon.
-    ///   - image: The custom image name.
-    ///   - imageBundle: The bundle containing the image. Defaults to `.main`.
-    ///   - onReselect: Called when the user taps this tab while it's already selected.
-    public init(
-        value: Value,
-        title: String,
-        image: String,
-        imageBundle: Bundle? = nil,
-        onReselect: (() -> Void)? = nil
-    ) {
-        self.value = value
-        self.title = title
-        self.systemImage = nil
-        self.image = image
-        self.imageBundle = imageBundle ?? .main
-        self.onReselect = onReselect
-    }
+	public var id: Value { value }
+	
+	/// The tab identifier.
+	public let value: Value
+	
+	/// The title displayed below the icon.
+	public let title: String
+	
+	/// Unified icon representation
+	public let icon: FabBarIcon
+	
+	/// Called when the user taps this tab while it's already selected.
+	public let onReselect: (() -> Void)?
+	
+	// MARK: - Initializers
+	
+	/// SF Symbol initializer
+	public init(
+		value: Value,
+		title: String,
+		systemImage: String,
+		onReselect: (() -> Void)? = nil
+	) {
+		self.value = value
+		self.title = title
+		self.icon = .system(name: systemImage)
+		self.onReselect = onReselect
+	}
+	
+	/// Custom asset initializer
+	public init(
+		value: Value,
+		title: String,
+		customIcon name: String,
+		bundle: Bundle? = nil,
+		rendering: FabBarIcon.Rendering = .template,
+		onReselect: (() -> Void)? = nil
+	) {
+		self.value = value
+		self.title = title
+		self.icon = .asset(name: name, bundle: bundle ?? .main, rendering: rendering)
+		self.onReselect = onReselect
+	}
 }

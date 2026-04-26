@@ -28,18 +28,31 @@ struct FavContentView: View {
 
 	private var visibleTabs: [FabBarTab<FabAppTab>] {
 		let allTabs: [FabBarTab<FabAppTab>] = [
-			FabBarTab(value: .home, title: "Home", systemImage: "house", onReselect: {
-				print("Reselected: home")
-			}),
-			FabBarTab(value: .explore, title: "Explore", systemImage: "map", onReselect: {
-				print("Reselected: explore")
-			}),
-			FabBarTab(value: .profile, title: "Profile", systemImage: "person", onReselect: {
-				print("Reselected: profile")
-			}),
-			FabBarTab(value: .activity, title: "Activity", systemImage: "bell", onReselect: {
-				print("Reselected: activity")
-			}),
+			FabBarTab(
+				value: .home,
+				title: "Home",
+				customIcon: "ph_house",
+				onReselect: { print("Reselected: home") }
+			),
+			FabBarTab(
+				value: .explore,
+				title: "Explore",
+				customIcon: "ph_trophy",
+				onReselect: { print("Reselected: explore") }
+			),
+			FabBarTab(
+				value: .activity,
+				title: "Activity",
+				customIcon: "ph_cardholder",
+				onReselect: { print("Reselected: activity") }
+			),
+			FabBarTab(
+				value: .profile,
+				title: "Profile",
+				customIcon: "LargeDP",
+				rendering: .original, // 👈 IMPORTANT for profile image
+				onReselect: { print("Reselected: profile") }
+			),
 		]
 		return Array(allTabs.prefix(tabCount))
 	}
@@ -55,7 +68,7 @@ struct FavContentView: View {
 								Button {
 									showingSettings = true
 								} label: {
-									Image(systemName: "gearshape")
+									Image(systemName: "gearshape" )
 								}
 							}
 
@@ -93,7 +106,8 @@ struct FavContentView: View {
 			selection: $selectedTab,
 			tabs: visibleTabs,
 			action: FabBarAction(
-				systemImage: "barcode.viewfinder",
+//				systemImage: "barcode.viewfinder",
+				image: "ph_custom-transfer-duotone",
 				accessibilityLabel: "Scan"
 			) {
 				showingSheet = true

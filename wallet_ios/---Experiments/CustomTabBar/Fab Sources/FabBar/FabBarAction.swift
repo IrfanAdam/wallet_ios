@@ -6,28 +6,49 @@ import Foundation
 /// morphing with the iOS 26 glass effect.
 @available(iOS 26.0, *)
 public struct FabBarAction {
-    /// The SF Symbol name for the button icon.
-    public let systemImage: String
-
-    /// The accessibility label for VoiceOver users.
-    public let accessibilityLabel: String
-
-    /// The action to perform when the button is tapped.
-    public let action: () -> Void
-
-    /// Creates a floating action button configuration.
-    ///
-    /// - Parameters:
-    ///   - systemImage: The SF Symbol name for the button icon.
-    ///   - accessibilityLabel: The accessibility label for VoiceOver users.
-    ///   - action: The action to perform when the button is tapped.
-    public init(
-        systemImage: String,
-        accessibilityLabel: String,
-        action: @escaping () -> Void
-    ) {
-        self.systemImage = systemImage
-        self.accessibilityLabel = accessibilityLabel
-        self.action = action
-    }
+	/// The SF Symbol name for the button icon.
+	public let systemImage: String?
+	
+	/// The custom image name from a bundle.
+	public let image: String?
+	
+	/// The bundle containing the custom image.
+	public let imageBundle: Bundle?
+	
+	/// The accessibility label for VoiceOver users.
+	public let accessibilityLabel: String
+	
+	/// The action to perform when the button is tapped.
+	public let action: () -> Void
+	
+	/// Creates a floating action button configuration.
+	///
+	/// - Parameters:
+	///   - systemImage: The SF Symbol name for the button icon.
+	///   - accessibilityLabel: The accessibility label for VoiceOver users.
+	///   - action: The action to perform when the button is tapped.
+	public init(
+		systemImage: String,
+		accessibilityLabel: String,
+		action: @escaping () -> Void
+	) {
+		self.systemImage = systemImage
+		self.image = nil
+		self.imageBundle = nil
+		self.accessibilityLabel = accessibilityLabel
+		self.action = action
+	}
+	
+	public init(
+		image: String,
+		imageBundle: Bundle? = nil,
+		accessibilityLabel: String,
+		action: @escaping () -> Void
+	) {
+		self.systemImage = nil
+		self.image = image
+		self.imageBundle = imageBundle ?? .main
+		self.accessibilityLabel = accessibilityLabel
+		self.action = action
+	}
 }
