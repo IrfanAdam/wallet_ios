@@ -130,10 +130,16 @@ final class TabItemContentView: UIView {
 				guard let cgImage = renderedIcon.cgImage else { return }
 				
 				let imageSize = CGSize(width: cgImage.width, height: cgImage.height)
-				
-				let gap: CGFloat = 1.5
-				let ringWidth: CGFloat = 1.5
-				
+
+
+				let borderSize: CGFloat = 1.5
+				let gap: CGFloat = borderSize                 // gap equals border
+				let ringWidth: CGFloat = borderSize
+				let imageInset: CGFloat = borderSize * 2
+
+				// Increase outer rect first so inset doesn't reduce visible image size
+				let expandedTargetRect = targetRect.insetBy(dx: -imageInset, dy: -imageInset)
+
 				// 🔥 Define inner image rect (smaller than 32x32)
 				let imageRect = targetRect.insetBy(dx: gap * 1.5, dy: gap * 1.5)
 				
