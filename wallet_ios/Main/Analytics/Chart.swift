@@ -15,6 +15,8 @@ struct RoundedDonut_Chart: View {
 						dataMax: 260
 					)
 					.frame(width: 400, height: 400)
+					
+					AlternatingBackgroundChart()
 				}
 				.padding(.vertical, 24)
 			}

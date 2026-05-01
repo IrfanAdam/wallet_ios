@@ -103,7 +103,7 @@ final class TabItemContentView: UIView {
 	// MARK: - Drawing
 	
 	override func draw(_ rect: CGRect) {
-		let tintColor = tintColor ?? .label
+		let tintColor = tintColor ?? .secondaryLabel
 		
 		let icon = loadIcon()
 		//        let textAttributes: [NSAttributedString.Key: Any] = [
@@ -188,7 +188,7 @@ final class TabItemContentView: UIView {
 				
 				let imageRect = CGRect(
 					x: (bounds.width - drawSize.width) / 2,
-					y: 2 * verticalPadding + (iconSize - drawSize.height) / 2,
+					y: (2 * verticalPadding) + (iconSize - drawSize.height) / 2,
 					width: drawSize.width,
 					height: drawSize.height
 				)

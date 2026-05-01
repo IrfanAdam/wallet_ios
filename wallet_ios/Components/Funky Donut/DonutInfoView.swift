@@ -172,6 +172,42 @@ struct DonutSelectionInfoView: View {
 				previousIndex = newValue
 			}
 		}
+		.gesture(
+			DragGesture(minimumDistance: 20)
+				.onEnded { value in
+					let horizontal = value.translation.width
+					
+					guard abs(horizontal) > 30 else { return } // ignore small drags
+					
+					let data = mainContext.animation.animatedData
+					
+					guard !data.isEmpty else { return }
+					
+					// Current index
+					let currentIndex: Int = {
+						if let selected = mainContext.interaction.selectedData,
+							 let idx = data.firstIndex(where: { $0.name == selected.name }) {
+							return idx
+						} else {
+							return previousIndex
+						}
+					}()
+					
+					var newIndex = currentIndex
+					
+					if horizontal < 0 {
+						newIndex = (currentIndex - 1 + data.count) % data.count
+					} else {
+						newIndex = (currentIndex + 1) % data.count
+					}
+					
+					guard newIndex != currentIndex else { return }
+					
+					withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+						mainContext.interaction.selectedData = data[newIndex]
+					}
+				}
+		)
 		.animation(.spring(response: 0.4, dampingFraction: 0.75), value: selectedIndex)
 	}
 }

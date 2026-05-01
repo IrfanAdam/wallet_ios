@@ -470,8 +470,6 @@ final class TabBarSegmentedControl: UISegmentedControl {
         originalIndex = nil
         super.touchesCancelled(touches, with: event)
     }
-	
-	
 }
 
 /// Weak-reference proxy that prevents `CADisplayLink` from retaining the segmented control.
