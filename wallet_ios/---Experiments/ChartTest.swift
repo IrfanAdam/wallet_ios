@@ -59,8 +59,12 @@ struct AlternatingBackgroundChart: View {
 				.position(by: .value("Type", "Sales"), axis: .horizontal, span: .inset(5))
 				.clipShape(RoundedRectangle(cornerRadius: 6))
 				.foregroundStyle(
-					(noneSelected || isSelected) ? Color.blue : Color.blue.opacity(0.56)
+					(noneSelected || isSelected) ? Color.blue : Color.blue.opacity(0.8)
 				)
+				.annotation(position: .overlay, spacing: 0) {
+					RoundedRectangle(cornerRadius: 6)
+						.strokeBorder(Color.black.opacity(0.32), lineWidth: isSelected ? 2 : 0)
+				}
 				
 				// MARK: - Target Bar
 				BarMark(
@@ -71,8 +75,12 @@ struct AlternatingBackgroundChart: View {
 				.position(by: .value("Type", "Target"), axis: .horizontal, span: .inset(5))
 				.clipShape(RoundedRectangle(cornerRadius: 6))
 				.foregroundStyle(
-					(noneSelected || isSelected) ? Color.green.opacity(0.9) : Color.green.opacity(0.56)
+					(noneSelected || isSelected) ? Color.green : Color.green.opacity(0.8)
 				)
+				.annotation(position: .overlay, spacing: 0) {
+					RoundedRectangle(cornerRadius: 6)
+						.strokeBorder(Color.black.opacity(0.32), lineWidth: isSelected ? 2 : 0)
+				}
 			}
 			
 			// MARK: - Background (alternating columns + selection highlight)
@@ -180,7 +188,7 @@ struct AlternatingBackgroundChart: View {
 								.foregroundStyle(
 									isSelected
 									? Color.black
-									: (noneSelected ? Color.black.opacity(0.7) : Color.black.opacity(0.3))
+									: (noneSelected ? Color.black.opacity(0.9) : Color.black.opacity(0.6))
 								)
 						}
 					}
