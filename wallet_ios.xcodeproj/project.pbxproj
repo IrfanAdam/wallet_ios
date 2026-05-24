@@ -101,6 +101,13 @@
 		EE10F20C2F24CE4E00944690 /* DataInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F20B2F24CE4800944690 /* DataInitializers.swift */; };
 		EE10F2172F2665A500944690 /* DynLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2162F26659E00944690 /* DynLayout.swift */; };
 		EE10F2192F2787B600944690 /* Page 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10F2182F2787B300944690 /* Page 2.swift */; };
+		EE514E022FC31BBE00FC3C97 /* StackDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E012FC31BB900FC3C97 /* StackDrag.swift */; };
+		EE514E062FC31BC200FC3C97 /* WalletAddCurrencyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E052FC31BC200FC3C97 /* WalletAddCurrencyButton.swift */; };
+		EE514E082FC31BC300FC3C97 /* WalletCardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E072FC31BC300FC3C97 /* WalletCardStack.swift */; };
+		EE514E0A2FC31BC400FC3C97 /* WalletCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E092FC31BC400FC3C97 /* WalletCardView.swift */; };
+		EE514E0C2FC31BC500FC3C97 /* WalletToolbarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0B2FC31BC500FC3C97 /* WalletToolbarContent.swift */; };
+		EE514E0E2FC31BC600FC3C97 /* WalletContentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */; };
+		EE514E102FC31BC700FC3C97 /* WalletTransactionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */; };
 		EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE58CE302F82A31B008E23A6 /* CustomArc.swift */; };
 		EE6623DB2F4AFA2800F17D74 /* SpinComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */; };
 		EE6623E32F4B046D00F17D74 /* SCSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623E22F4B046A00F17D74 /* SCSegments.swift */; };
@@ -230,6 +237,13 @@
 		EE10F20B2F24CE4800944690 /* DataInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializers.swift; sourceTree = "<group>"; };
 		EE10F2162F26659E00944690 /* DynLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynLayout.swift; sourceTree = "<group>"; };
 		EE10F2182F2787B300944690 /* Page 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Page 2.swift"; sourceTree = "<group>"; };
+		EE514E012FC31BB900FC3C97 /* StackDrag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackDrag.swift; sourceTree = "<group>"; };
+		EE514E052FC31BC200FC3C97 /* WalletAddCurrencyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddCurrencyButton.swift; sourceTree = "<group>"; };
+		EE514E072FC31BC300FC3C97 /* WalletCardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardStack.swift; sourceTree = "<group>"; };
+		EE514E092FC31BC400FC3C97 /* WalletCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardView.swift; sourceTree = "<group>"; };
+		EE514E0B2FC31BC500FC3C97 /* WalletToolbarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletToolbarContent.swift; sourceTree = "<group>"; };
+		EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContentPanel.swift; sourceTree = "<group>"; };
+		EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionCard.swift; sourceTree = "<group>"; };
 		EE58CE302F82A31B008E23A6 /* CustomArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomArc.swift; sourceTree = "<group>"; };
 		EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinComponent.swift; sourceTree = "<group>"; };
 		EE6623E22F4B046A00F17D74 /* SCSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegments.swift; sourceTree = "<group>"; };
@@ -521,6 +535,7 @@
 		15DA4B0A2EEBFD100046EBC6 /* ---Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				EE514E002FC31BAC00FC3C97 /* Wallet Stack */,
 				15C963BA2F1E123500960C5C /* ChartTest.swift */,
 				15A79E522F11195A000C6B4E /* RecursiveFullStack.swift */,
 				15DA4AFA2EEBFD100046EBC6 /* Stroke Pie.swift */,
@@ -659,6 +674,20 @@
 				15DA4B022EEBFD100046EBC6 /* Morphy2.swift */,
 			);
 			path = PageTransition;
+			sourceTree = "<group>";
+		};
+		EE514E002FC31BAC00FC3C97 /* Wallet Stack */ = {
+			isa = PBXGroup;
+			children = (
+				EE514E012FC31BB900FC3C97 /* StackDrag.swift */,
+				EE514E0B2FC31BC500FC3C97 /* WalletToolbarContent.swift */,
+				EE514E052FC31BC200FC3C97 /* WalletAddCurrencyButton.swift */,
+				EE514E072FC31BC300FC3C97 /* WalletCardStack.swift */,
+				EE514E092FC31BC400FC3C97 /* WalletCardView.swift */,
+				EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */,
+				EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */,
+			);
+			path = "Wallet Stack";
 			sourceTree = "<group>";
 		};
 		EE6623D82F4AF6E600F17D74 /* Games */ = {
@@ -1008,6 +1037,13 @@
 				15C963E82F322BE500960C5C /* PayProcessSheet.swift in Sources */,
 				15C964122F36403900960C5C /* RenderHelper.swift in Sources */,
 				15DA4B442EEBFD100046EBC6 /* wallet_iosApp.swift in Sources */,
+				EE514E022FC31BBE00FC3C97 /* StackDrag.swift in Sources */,
+				EE514E062FC31BC200FC3C97 /* WalletAddCurrencyButton.swift in Sources */,
+				EE514E082FC31BC300FC3C97 /* WalletCardStack.swift in Sources */,
+				EE514E0A2FC31BC400FC3C97 /* WalletCardView.swift in Sources */,
+				EE514E0C2FC31BC500FC3C97 /* WalletToolbarContent.swift in Sources */,
+				EE514E0E2FC31BC600FC3C97 /* WalletContentPanel.swift in Sources */,
+				EE514E102FC31BC700FC3C97 /* WalletTransactionCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
