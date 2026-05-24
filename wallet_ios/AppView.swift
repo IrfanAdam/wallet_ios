@@ -24,7 +24,7 @@ struct AppView: View {
 				Text("Analytics")
 			}
 
-			Tab {SeamlessPageNavDemo()} label: {
+			Tab {WalletDragRevealSample()} label: {
 				Image(systemName: "wallet.bifold.fill")
 				Text("Wallet")
 			}
