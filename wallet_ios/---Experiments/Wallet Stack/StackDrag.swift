@@ -4,13 +4,17 @@ import SwiftUI
 
 struct WalletDragRevealSample: View {
 	@State private var dragY: CGFloat = 0
+	@State private var cardDragY: CGFloat = 0
 	@State private var isExpanded = false
 	@State private var frontWalletIndex = 0
-	@State private var shufflePhase: WalletShufflePhase = .idle
+	@State private var isCardSettling = false
+	@State private var didSwitchCardDuringGesture = false
 	
 	private let collapsedPanelY: CGFloat = 120
-	private let expandedPanelY: CGFloat = 402
-	private let expandDistance: CGFloat = 224
+	private let expandedPanelY: CGFloat = 342
+	private let expandDistance: CGFloat = 176
+	private let cardForwardSwapDistance: CGFloat = 210
+	private let cardBackwardSwapDistance: CGFloat = 150
 	
 	private let wallets: [Wallet] = [
 		.init(currency: "USD", amount: "108.74", flag: "🇺🇸"),
@@ -25,25 +29,25 @@ struct WalletDragRevealSample: View {
 					.ignoresSafeArea()
 				
 				VStack(spacing: 0) {
-					if isExpanded || progress > 0.35 {
-						WalletAddCurrencyButton()
-							.padding(.top, 26)
-							.opacity(progress)
-					}
+					WalletAddCurrencyButton()
+						.padding(.top, 12 * addCurrencyProgress)
+						.opacity(addCurrencyProgress)
+						.scaleEffect(0.82 + (0.18 * addCurrencyProgress), anchor: .center)
 					Spacer()
 				}
+				.zIndex(1)
 				
 				WalletCardStack(
 					wallets: orderedWallets,
 					progress: progress,
-					frontIndex: frontWalletIndex,
-					shufflePhase: shufflePhase,
-					onSwap: swapWallet
+					cardDragY: cardDragY,
+					cardSwitchProgress: cardSwitchProgress,
+					onCardDragChanged: updateCardDrag,
+					onCardDragEnded: finishCardDrag
 				)
 					.padding(.horizontal, 12)
-					.padding(.top, 12)
+					.padding(.top, cardStackTopPadding)
 					.zIndex(0)
-					.gesture(panelDrag)
 				
 				WalletContentPanel(progress: progress)
 					.offset(y: panelOffsetY)
@@ -69,6 +73,35 @@ struct WalletDragRevealSample: View {
 	
 	private var panelOffsetY: CGFloat {
 		collapsedPanelY + (expandedPanelY - collapsedPanelY) * progress
+	}
+
+	private var cardStackTopPadding: CGFloat {
+		12 + (46 * progress)
+	}
+
+	private var addCurrencyProgress: CGFloat {
+		smoothstep(edge0: 0.28, edge1: 0.78, value: progress)
+	}
+
+	private var cardSwitchProgress: CGFloat {
+		max(0, min(1, abs(cardDragY) / cardSwapDistance))
+	}
+
+	private var cardSwapDistance: CGFloat {
+		cardDragY < 0 ? effectiveBackwardSwapDistance : effectiveForwardSwapDistance
+	}
+
+	private var effectiveForwardSwapDistance: CGFloat {
+		cardForwardSwapDistance - (48 * progress)
+	}
+
+	private var effectiveBackwardSwapDistance: CGFloat {
+		cardBackwardSwapDistance - (32 * progress)
+	}
+
+	private func smoothstep(edge0: CGFloat, edge1: CGFloat, value: CGFloat) -> CGFloat {
+		let x = max(0, min(1, (value - edge0) / (edge1 - edge0)))
+		return x * x * (3 - 2 * x)
 	}
 	
 	private var orderedWallets: [Wallet] {
@@ -97,31 +130,59 @@ struct WalletDragRevealSample: View {
 			}
 	}
 	
-	private func swapWallet(_ direction: WalletSwapDirection) {
-		guard !wallets.isEmpty, shufflePhase == .idle else { return }
+	private func updateCardDrag(_ value: DragGesture.Value) {
+		guard wallets.count > 1, !isCardSettling, !didSwitchCardDuringGesture else { return }
+		cardDragY = max(-effectiveBackwardSwapDistance, min(effectiveForwardSwapDistance, value.translation.height))
 		
-		withAnimation(.easeInOut(duration: 0.16)) {
-			shufflePhase = .departing(direction)
+		let direction: CGFloat = cardDragY < 0 ? -1 : 1
+		let distance = direction < 0 ? effectiveBackwardSwapDistance : effectiveForwardSwapDistance
+		if abs(cardDragY) > distance * 0.62 {
+			completeCardSwitch(direction: direction, distance: distance)
+		}
+	}
+	
+	private func finishCardDrag(_ value: DragGesture.Value) {
+		if didSwitchCardDuringGesture {
+			didSwitchCardDuringGesture = false
+			return
 		}
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
-			switch direction {
-			case .previous:
-				frontWalletIndex = (frontWalletIndex - 1 + wallets.count) % wallets.count
-			case .next:
-				frontWalletIndex = (frontWalletIndex + 1) % wallets.count
+		guard wallets.count > 1, !isCardSettling else { return }
+		
+		let direction: CGFloat = cardDragY < 0 ? -1 : 1
+		let distance = direction < 0 ? effectiveBackwardSwapDistance : effectiveForwardSwapDistance
+		let predicted = max(-effectiveBackwardSwapDistance, min(effectiveForwardSwapDistance, value.predictedEndTranslation.height))
+		let shouldSwitch = abs(cardDragY) > cardSwapDistance * 0.42 || abs(predicted) > cardSwapDistance * 0.66
+		
+		if shouldSwitch {
+			completeCardSwitch(direction: direction, distance: distance)
+		} else {
+			withAnimation(.spring(response: 0.34, dampingFraction: 0.82)) {
+				cardDragY = 0
 			}
-			
+		}
+	}
+	
+	private func completeCardSwitch(direction: CGFloat, distance: CGFloat) {
+		guard !isCardSettling else { return }
+		isCardSettling = true
+		didSwitchCardDuringGesture = true
+		
+		withAnimation(.spring(response: 0.28, dampingFraction: 0.86)) {
+			cardDragY = direction * distance
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.26) {
 			var transaction = Transaction()
 			transaction.disablesAnimations = true
 			withTransaction(transaction) {
-				shufflePhase = .arriving(direction)
-			}
-			
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.07) {
-				withAnimation(.easeOut(duration: 0.22)) {
-					shufflePhase = .idle
+				if direction < 0 {
+					frontWalletIndex = (frontWalletIndex - 1 + wallets.count) % wallets.count
+				} else {
+					frontWalletIndex = (frontWalletIndex + 1) % wallets.count
 				}
+				cardDragY = 0
+				isCardSettling = false
 			}
 		}
 	}

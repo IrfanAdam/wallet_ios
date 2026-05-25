@@ -7,12 +7,12 @@ struct WalletContentPanel: View {
 		VStack(spacing: 0) {
 			Capsule()
 				.fill(Color.black.opacity(0.12))
-				.frame(width: 62, height: 5)
-				.padding(.top, 8)
+				.frame(width: 62, height: 4)
+				.padding(.top, 4)
 				.opacity(progress > 0.15 ? 1 : 0)
 			
 			topOptionRow
-				.padding(.top, 8)
+				.padding(.top, 4)
 			
 			primaryActions
 				.padding(.top, 18)
@@ -29,7 +29,7 @@ struct WalletContentPanel: View {
 		}
 		.frame(maxWidth: .infinity)
 		.background(
-			UnevenRoundedRectangle(topLeadingRadius: 32, topTrailingRadius: 32)
+			UnevenRoundedRectangle(topLeadingRadius: 42, topTrailingRadius: 42)
 				.fill(.white)
 				.shadow(color: .black.opacity(0.08), radius: 18, y: -6)
 		)
