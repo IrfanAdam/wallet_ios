@@ -3,6 +3,7 @@ import SwiftUI
 struct WalletCardStack: View {
 	let wallets: [Wallet]
 	let progress: CGFloat
+	let overCollapseProgress: CGFloat
 	let cardDragY: CGFloat
 	let cardSwitchProgress: CGFloat
 	let onCardDragChanged: (DragGesture.Value) -> Void
@@ -20,6 +21,7 @@ struct WalletCardStack: View {
 						wallet: wallet,
 						isTopCard: index == 0,
 						progress: progress,
+						overCollapseProgress: overCollapseProgress,
 						cardHeight: cardHeight,
 						borderOpacity: borderOpacity(index)
 					)
@@ -36,7 +38,7 @@ struct WalletCardStack: View {
 						)
 						.shadow(color: .black.opacity(cardShadow(index)), radius: 18, y: 10)
 						.zIndex(cardZ(index))
-						.allowsHitTesting(index == 0)
+						.allowsHitTesting(true)
 						.highPriorityGesture(cardDrag)
 				}
 			}

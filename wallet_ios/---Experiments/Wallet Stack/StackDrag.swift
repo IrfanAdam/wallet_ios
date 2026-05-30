@@ -2,17 +2,23 @@ import SwiftUI
 
 // MARK: - Main View
 
+enum PanelState {
+	case compact
+	case collapsed
+	case dismissed
+}
+
 struct WalletDragRevealSample: View {
 	@State private var dragY: CGFloat = 0
 	@State private var cardDragY: CGFloat = 0
-	@State private var isExpanded = false
+	@State private var panelState: PanelState = .collapsed
+	@State private var screenHeight: CGFloat = 852
 	@State private var frontWalletIndex = 0
 	@State private var isCardSettling = false
 	@State private var didSwitchCardDuringGesture = false
 	
+	private let compactPanelY: CGFloat = 150
 	private let collapsedPanelY: CGFloat = 230
-	private let expandedPanelY: CGFloat = 420
-	private let expandDistance: CGFloat = 176
 	private let cardForwardSwapDistance: CGFloat = 210
 	private let cardBackwardSwapDistance: CGFloat = 150
 	
@@ -24,41 +30,114 @@ struct WalletDragRevealSample: View {
 	
 	var body: some View {
 		NavigationStack {
-			ZStack(alignment: .top) {
-				Color(red: 0.97, green: 0.95, blue: 0.92)
-					.ignoresSafeArea()
+			GeometryReader { outerProxy in
+				let currentHeight = outerProxy.size.height > 0 ? outerProxy.size.height : 852
 				
-				VStack(spacing: 0) {
-					WalletAddCurrencyButton()
-						.padding(.top, 72 * addCurrencyProgress)
-						.opacity(addCurrencyProgress)
-						.scaleEffect(0.82 + (0.18 * addCurrencyProgress), anchor: .center)
-					Spacer()
+				ZStack(alignment: .top) {
+					Color(red: 0.97, green: 0.95, blue: 0.92)
+						.ignoresSafeArea()
+						.contentShape(Rectangle())
+						.gesture(
+							DragGesture(minimumDistance: 8)
+								.onChanged { value in
+									guard panelState == .dismissed else { return }
+									dragY = min(0, value.translation.height)
+								}
+								.onEnded { value in
+									guard panelState == .dismissed else { return }
+									let baseOffset = screenHeight
+									let predictedOffset = baseOffset + value.predictedEndTranslation.height
+									
+									var targetState: PanelState = .dismissed
+									if predictedOffset < screenHeight - 120 {
+										if predictedOffset < collapsedPanelY + 40 {
+											targetState = .compact
+										} else {
+											targetState = .collapsed
+										}
+									}
+									
+									withAnimation(.spring(response: 0.34, dampingFraction: 0.84)) {
+										panelState = targetState
+										dragY = 0
+									}
+								}
+						)
+					
+					VStack(spacing: 0) {
+						WalletAddCurrencyButton()
+							.padding(.top, 24 * addCurrencyProgress)
+							.opacity(addCurrencyProgress)
+							.scaleEffect(0.82 + (0.18 * addCurrencyProgress), anchor: .center)
+						Spacer()
+					}
+					.zIndex(1)
+					
+					WalletCardStack(
+						wallets: orderedWallets,
+						progress: progress,
+						overCollapseProgress: overCollapseProgress,
+						cardDragY: cardDragY,
+						cardSwitchProgress: cardSwitchProgress,
+						onCardDragChanged: updateCardDrag,
+						onCardDragEnded: finishCardDrag
+					)
+						.padding(.horizontal, 12)
+						.padding(.top, cardStackTopPadding)
+						.zIndex(0)
+					
+					WalletContentPanel(progress: progress)
+						.offset(y: panelOffsetY)
+						.zIndex(2)
+						.gesture(panelDrag)
+					
+					if panelState == .dismissed {
+						VStack {
+							Spacer()
+							Color.clear
+								.frame(height: 80)
+								.contentShape(Rectangle())
+								.gesture(
+									DragGesture(minimumDistance: 8)
+										.onChanged { value in
+											dragY = min(0, value.translation.height)
+										}
+										.onEnded { value in
+											let baseOffset = screenHeight
+											let predictedOffset = baseOffset + value.predictedEndTranslation.height
+											
+											var targetState: PanelState = .dismissed
+											if predictedOffset < screenHeight - 120 {
+												if predictedOffset < collapsedPanelY + 40 {
+													targetState = .compact
+												} else {
+													targetState = .collapsed
+												}
+											}
+											
+											withAnimation(.spring(response: 0.34, dampingFraction: 0.84)) {
+												panelState = targetState
+												dragY = 0
+											}
+										}
+								)
+						}
+						.ignoresSafeArea()
+						.zIndex(3)
+					}
 				}
-				.zIndex(1)
-				
-				WalletCardStack(
-					wallets: orderedWallets,
-					progress: progress,
-					cardDragY: cardDragY,
-					cardSwitchProgress: cardSwitchProgress,
-					onCardDragChanged: updateCardDrag,
-					onCardDragEnded: finishCardDrag
-				)
-					.padding(.horizontal, 12)
-					.padding(.top, cardStackTopPadding)
-					.zIndex(0)
-				
-				WalletContentPanel(progress: progress)
-					.offset(y: panelOffsetY)
-					.zIndex(2)
-					.gesture(panelDrag)
-			}
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
-			.navigationTitle("")
-			.navigationBarTitleDisplayMode(.inline)
-			.toolbar {
-				WalletToolbarContent()
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
+				.navigationTitle("")
+				.navigationBarTitleDisplayMode(.inline)
+				.toolbar {
+					WalletToolbarContent()
+				}
+				.onAppear {
+					screenHeight = currentHeight
+				}
+				.onChange(of: currentHeight) { oldValue, newValue in
+					screenHeight = newValue
+				}
 			}
 		}
 	}
@@ -66,17 +145,27 @@ struct WalletDragRevealSample: View {
 	// MARK: - Computed
 	
 	private var progress: CGFloat {
-		let base = isExpanded ? expandDistance : 0
-		let openAmount = base + dragY
-		return max(0, min(1, openAmount / expandDistance))
+		let base = stableOffset(for: panelState)
+		let currentOffset = base + dragY
+		let clampedOffset = max(collapsedPanelY, min(screenHeight, currentOffset))
+		return (clampedOffset - collapsedPanelY) / (screenHeight - collapsedPanelY)
+	}
+	
+	private var overCollapseProgress: CGFloat {
+		let base = stableOffset(for: panelState)
+		let currentOffset = base + dragY
+		let overCollapseAmount = max(0, collapsedPanelY - currentOffset)
+		return min(1, overCollapseAmount / (collapsedPanelY - compactPanelY))
 	}
 	
 	private var panelOffsetY: CGFloat {
-		collapsedPanelY + (expandedPanelY - collapsedPanelY) * progress
+		let base = stableOffset(for: panelState)
+		return max(compactPanelY, min(screenHeight, base + dragY))
 	}
 
 	private var cardStackTopPadding: CGFloat {
-		72 + (46 * progress)
+		let base = 32 + (40 * progress)
+		return base - (12 * overCollapseProgress)
 	}
 
 	private var addCurrencyProgress: CGFloat {
@@ -109,22 +198,65 @@ struct WalletDragRevealSample: View {
 		return Array(wallets[frontWalletIndex...] + wallets[..<frontWalletIndex])
 	}
 	
+	private func stableOffset(for state: PanelState) -> CGFloat {
+		switch state {
+		case .compact:
+			return compactPanelY
+		case .collapsed:
+			return collapsedPanelY
+		case .dismissed:
+			return screenHeight
+		}
+	}
+	
 	// MARK: - Gesture
 	
 	private var panelDrag: some Gesture {
 		DragGesture(minimumDistance: 8)
 			.onChanged { value in
-				let base = isExpanded ? expandDistance : 0
-				let openAmount = max(0, min(expandDistance, base + value.translation.height))
-				dragY = openAmount - base
+				dragY = value.translation.height
 			}
 			.onEnded { value in
-				let base = isExpanded ? expandDistance : 0
-				let openAmount = max(0, min(expandDistance, base + value.translation.height))
-				let predicted = max(0, min(expandDistance, base + value.predictedEndTranslation.height))
-				let shouldExpand = openAmount > expandDistance * 0.45 || predicted > expandDistance * 0.7
+				let baseOffset = stableOffset(for: panelState)
+				let predictedOffset = baseOffset + value.predictedEndTranslation.height
+				
+				var targetState: PanelState = panelState
+				
+				switch panelState {
+				case .compact:
+					if predictedOffset > (compactPanelY + collapsedPanelY) / 2 {
+						if predictedOffset > (collapsedPanelY + screenHeight) * 0.45 {
+							targetState = .dismissed
+						} else {
+							targetState = .collapsed
+						}
+					} else {
+						targetState = .compact
+					}
+					
+				case .collapsed:
+					if predictedOffset < (compactPanelY + collapsedPanelY) / 2 {
+						targetState = .compact
+					} else if predictedOffset > (collapsedPanelY + screenHeight) * 0.45 {
+						targetState = .dismissed
+					} else {
+						targetState = .collapsed
+					}
+					
+				case .dismissed:
+					if predictedOffset < screenHeight - 120 {
+						if predictedOffset < collapsedPanelY + 40 {
+							targetState = .compact
+						} else {
+							targetState = .collapsed
+						}
+					} else {
+						targetState = .dismissed
+					}
+				}
+				
 				withAnimation(.spring(response: 0.34, dampingFraction: 0.84)) {
-					isExpanded = shouldExpand
+					panelState = targetState
 					dragY = 0
 				}
 			}

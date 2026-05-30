@@ -12,6 +12,7 @@ struct WalletCardView: View {
 	let wallet: Wallet
 	let isTopCard: Bool
 	let progress: CGFloat
+	let overCollapseProgress: CGFloat
 	let cardHeight: CGFloat
 	let borderOpacity: Double
 	
@@ -53,6 +54,8 @@ struct WalletCardView: View {
 				.overlay(Capsule().stroke(Color.white.opacity(0.25)))
 			}.padding(.vertical, 8)
 
+			Spacer()
+
 			if isTopCard {
 				HStack(spacing: 12) {
 					GlassOptionButton(systemName: "checkmark.seal") {
@@ -71,10 +74,11 @@ struct WalletCardView: View {
 						// TODO: settings action
 					}
 				}
-				.padding(.vertical, 8)
+				.padding(.bottom, 16)
+				.offset(y: -19 * (1 - progress) - 69 * overCollapseProgress)
+				.opacity(1 - overCollapseProgress)
+				.scaleEffect(1 - 0.15 * overCollapseProgress)
 			}
-
-			Spacer()
 		}
 		.padding(16)
 		.frame(maxWidth: .infinity)
@@ -97,9 +101,9 @@ struct WalletCardView: View {
 			.overlay(Circle().stroke(.white, lineWidth: 1))
 	}
 }
-
+ 
 // MARK: - GlassOptionButton
-
+ 
 struct GlassOptionButton: View {
     let systemName: String
     let action: () -> Void
@@ -107,10 +111,11 @@ struct GlassOptionButton: View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
+                .background(.ultraThinMaterial)
+                .clipShape(Circle())
         }
-				.padding(0)
         .accessibilityLabel(systemName)
-				.buttonStyle(.glass)
-				.symbolRenderingMode(.hierarchical)
     }
 }
