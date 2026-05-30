@@ -10,8 +10,8 @@ struct WalletDragRevealSample: View {
 	@State private var isCardSettling = false
 	@State private var didSwitchCardDuringGesture = false
 	
-	private let collapsedPanelY: CGFloat = 120
-	private let expandedPanelY: CGFloat = 342
+	private let collapsedPanelY: CGFloat = 230
+	private let expandedPanelY: CGFloat = 420
 	private let expandDistance: CGFloat = 176
 	private let cardForwardSwapDistance: CGFloat = 210
 	private let cardBackwardSwapDistance: CGFloat = 150
@@ -30,7 +30,7 @@ struct WalletDragRevealSample: View {
 				
 				VStack(spacing: 0) {
 					WalletAddCurrencyButton()
-						.padding(.top, 12 * addCurrencyProgress)
+						.padding(.top, 72 * addCurrencyProgress)
 						.opacity(addCurrencyProgress)
 						.scaleEffect(0.82 + (0.18 * addCurrencyProgress), anchor: .center)
 					Spacer()
@@ -76,11 +76,11 @@ struct WalletDragRevealSample: View {
 	}
 
 	private var cardStackTopPadding: CGFloat {
-		12 + (46 * progress)
+		72 + (46 * progress)
 	}
 
 	private var addCurrencyProgress: CGFloat {
-		smoothstep(edge0: 0.28, edge1: 0.78, value: progress)
+		smoothstep(edge0: 0.32, edge1: 0.78, value: progress)
 	}
 
 	private var cardSwitchProgress: CGFloat {

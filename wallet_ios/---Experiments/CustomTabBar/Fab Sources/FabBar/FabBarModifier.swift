@@ -21,7 +21,7 @@ struct FabBarModifier<Value: Hashable>: ViewModifier {
     /// Whether the FabBar should be displayed.
     /// Only shows on compact horizontal size class (iPhone) when visible.
     private var showsFabBar: Bool {
-        horizontalSizeClass == .compact && isVisible
+        horizontalSizeClass != .regular && isVisible
     }
 
     /// Total content margin needed to clear the FabBar.

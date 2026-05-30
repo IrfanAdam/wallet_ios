@@ -30,26 +30,21 @@ struct DataWidget: View {
                             .mask(StockLikeBackgroundShape()) // also keep it inside the shape
                         )
                 )
-                .frame(height: 220)   // 👈 important!
+                .frame(height: 180)   // 👈 important!
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            VStack(alignment: .leading, spacing: 8) {
 
-                Text("Portfolio")
-                    .font(.headline)
-                    .foregroundColor(.black)
+					VStack(alignment: .leading, spacing: 4) {
 
-                Text("$12,487.22")
-                    .font(.title.bold())
-                    .foregroundColor(.black)
+						Text("Portfolio")
+							.font(.headline)
 
-                Spacer()
+						Text("$12,487.22")
+							.font(.title.bold())
 
-
-            }
-            .padding(16)
-            // Force content inside same rounded container
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+					}
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.padding(16)
 
 
         }

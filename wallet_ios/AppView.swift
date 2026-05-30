@@ -2,8 +2,15 @@ import SwiftUI
 
 import UIKit
 
+enum AppTab: Hashable {
+	case home
+	case rewards
+	case wallet
+	case profile
+}
+
 struct AppView: View {
-	@State private var selectedTab = 0
+	@State private var selectedTab: AppTab = .home
 	@State private var showScan = false
 	@State private var searchText = ""
 	@State private var isSearchActive = false
@@ -11,36 +18,78 @@ struct AppView: View {
 	@State private var sheetController = AppSheetController()
 	@State private var screenHeight: CGFloat = 0
 
+	private var visibleTabs: [FabBarTab<AppTab>] {
+		[
+			FabBarTab(
+				value: .home,
+				title: "Home",
+				customIcon: "ph_house",
+				onReselect: { print("Reselected: home") }
+			),
+			FabBarTab(
+				value: .rewards,
+				title: "Rewards",
+				customIcon: "ph_trophy",
+				onReselect: { print("Reselected: rewards") }
+			),
+			FabBarTab(
+				value: .wallet,
+				title: "Wallet",
+				customIcon: "ph_cardholder",
+				onReselect: { print("Reselected: wallet") }
+			),
+			FabBarTab(
+				value: .profile,
+				title: "Profile",
+				customIcon: "LargeDP",
+				rendering: .original,
+				onReselect: { print("Reselected: profile") }
+			)
+		]
+	}
+
 	var body: some View {
 		@Bindable var controller = sheetController
-		TabView {
-			Tab {HomeView(sheetController: sheetController)} label: {
-				Image(systemName: "house.fill")
-				Text("Home")
+		ZStack {
+			Group {
+				HomeView(sheetController: sheetController)
+					.fabBarSafeAreaPadding()
 			}
+			.opacity(selectedTab == .home ? 1 : 0)
+			.disabled(selectedTab != .home)
 
-			Tab {RoundedDonut_Chart()} label: {
-				Image(systemName: "chart.bar.fill")
-				Text("Analytics")
+			Group {
+				RoundedDonut_Chart()
+					.fabBarSafeAreaPadding()
 			}
+			.opacity(selectedTab == .rewards ? 1 : 0)
+			.disabled(selectedTab != .rewards)
 
-			Tab {WalletDragRevealSample()} label: {
-				Image(systemName: "wallet.bifold.fill")
-				Text("Wallet")
+			Group {
+				WalletDragRevealSample()
+					.fabBarSafeAreaPadding()
 			}
-			
-			Tab {PeripheralLaunchSurface()} label: {
-				Image(systemName: "wrench.fill")
-				Text("Test")
-			}
+			.opacity(selectedTab == .wallet ? 1 : 0)
+			.disabled(selectedTab != .wallet)
 
-			Tab(role: .search) {SeamlessPageNavDemo()} label: {
-				if let uiImage = UIImage(named: "LargeDP")?.circularImage(size: 48) {
-					Image(uiImage: uiImage)
-				}
-				Text("Profile")
+			Group {
+				PeripheralLaunchSurface()
+					.fabBarSafeAreaPadding()
 			}
+			.opacity(selectedTab == .profile ? 1 : 0)
+			.disabled(selectedTab != .profile)
 		}
+		.fabBar(
+			selection: $selectedTab,
+			tabs: visibleTabs,
+			action: FabBarAction(
+				image: "ph_custom-transfer-duotone",
+				accessibilityLabel: "Scan"
+			) {
+				showScan = true
+			},
+			isVisible: true
+		)
 		.background(
 			WindowReader { screen in
 				screenHeight = screen.bounds.height
@@ -50,10 +99,12 @@ struct AppView: View {
 		.sheet(isPresented: sheetController.isPresentedBinding) {
 			PageSheetDemo()
 		}
+		.fullScreenCover(isPresented: $showScan) {
+			transactOpts().ignoresSafeArea()
+		}
 	}
 }
 
 #Preview {
     AppView()
 }
-

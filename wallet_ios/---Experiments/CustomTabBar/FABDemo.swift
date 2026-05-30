@@ -14,17 +14,7 @@ struct FavContentView: View {
 	@State private var showingSheet = false
 	@State private var showingSettings = false
 	@State private var tabCount = 4
-	@State private var useNativeTabBar = false
-	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
-
 	@Environment(\.dismiss) private var dismiss
-
-	private var tabBarVisibility: Visibility {
-		if useNativeTabBar {
-			return .visible
-		}
-		return horizontalSizeClass == .compact ? .hidden : .visible
-	}
 
 	private var visibleTabs: [FabBarTab<FabAppTab>] {
 		let allTabs: [FabBarTab<FabAppTab>] = [
@@ -58,8 +48,8 @@ struct FavContentView: View {
 	}
 
 	var body: some View {
-		TabView(selection: $selectedTab) {
-			Tab("Home", systemImage: "house.fill", value: FabAppTab.home) {
+		ZStack {
+			Group {
 				NavigationStack {
 					TabContentPlaceholder(title: "Home", systemImage: "house.fill")
 						.navigationTitle("Home")
@@ -82,44 +72,47 @@ struct FavContentView: View {
 						}
 				}
 				.fabBarSafeAreaPadding()
-				.toolbarVisibility(tabBarVisibility, for: .tabBar)
 			}
+			.opacity(selectedTab == .home ? 1 : 0)
+			.disabled(selectedTab != .home)
 
-			Tab("Explore", systemImage: "map.fill", value: FabAppTab.explore) {
+			Group {
 				ExploreTabView()
-					.toolbarVisibility(tabBarVisibility, for: .tabBar)
 			}
+			.opacity(selectedTab == .explore ? 1 : 0)
+			.disabled(selectedTab != .explore)
 
-			Tab("Profile", systemImage: "person.fill", value: FabAppTab.profile) {
+			Group {
 				TabContentView(title: "Profile", systemImage: "person.fill")
 					.fabBarSafeAreaPadding()
-					.toolbarVisibility(tabBarVisibility, for: .tabBar)
 			}
+			.opacity(selectedTab == .profile ? 1 : 0)
+			.disabled(selectedTab != .profile)
 
-			Tab("Activity", systemImage: "bell.fill", value: FabAppTab.activity) {
+			Group {
 				TabContentView(title: "Activity", systemImage: "bell.fill")
 					.fabBarSafeAreaPadding()
-					.toolbarVisibility(tabBarVisibility, for: .tabBar)
 			}
+			.opacity(selectedTab == .activity ? 1 : 0)
+			.disabled(selectedTab != .activity)
 		}
 		.fabBar(
 			selection: $selectedTab,
 			tabs: visibleTabs,
 			action: FabBarAction(
-//				systemImage: "barcode.viewfinder",
 				image: "ph_custom-transfer-duotone",
 				accessibilityLabel: "Scan"
 			) {
 				showingSheet = true
 			},
-			isVisible: !useNativeTabBar
+			isVisible: true
 		)
 		.sheet(isPresented: $showingSheet) {
 			Text("Sheet content")
 				.presentationDetents([.medium])
 		}
 		.sheet(isPresented: $showingSettings) {
-			SettingsView(tabCount: $tabCount, useNativeTabBar: $useNativeTabBar)
+			SettingsView(tabCount: $tabCount)
 				.presentationDetents([.medium])
 		}
 		.onChange(of: tabCount) {
@@ -134,24 +127,17 @@ struct FavContentView: View {
 @available(iOS 26.0, *)
 struct SettingsView: View {
 	@Binding var tabCount: Int
-	@Binding var useNativeTabBar: Bool
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				Section("Tab Bar") {
-					Toggle("Use Native Tab Bar", isOn: $useNativeTabBar)
-				}
-
-				if !useNativeTabBar {
-					Section("Number of Tabs") {
-						Picker("Number of Tabs", selection: $tabCount) {
-							Text("2").tag(2)
-							Text("3").tag(3)
-							Text("4").tag(4)
-						}
-						.pickerStyle(.segmented)
+				Section("Number of Tabs") {
+					Picker("Number of Tabs", selection: $tabCount) {
+						Text("2").tag(2)
+						Text("3").tag(3)
+						Text("4").tag(4)
 					}
+					.pickerStyle(.segmented)
 				}
 			}
 			.navigationTitle("Settings")

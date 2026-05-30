@@ -26,15 +26,49 @@ final class TabBarSegmentedControl: UISegmentedControl {
 	var onReselect: ((Int) -> Void)?
 	
 	override init(items: [Any]?) {
-		super.init(items: items)
-		accessibilityTraits = .tabBar
-	}
-	
+    super.init(items: items)
+    // Preserve the tab‑bar accessibility trait
+    accessibilityTraits = .tabBar
+    // ---- Shadow for the control itself ----
+    layer.shadowColor = UIColor.black.cgColor
+    layer.shadowOpacity = 0.15
+    layer.shadowRadius = 4
+    layer.shadowOffset = CGSize(width: 0, height: 2)
+    layer.masksToBounds = false
+}
+
+	private let glassTintView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = UIColor.systemGray.withAlphaComponent(0.01)
+		view.isUserInteractionEnabled = false
+		return view
+	}()
+
+
 	@available(*, unavailable)
 	required init?(coder: NSCoder) { fatalError() }
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
+		// Barely-visible glass tint behind all subviews
+		        if glassTintView.superview == nil {
+            insertSubview(glassTintView, at: 0)
+            NSLayoutConstraint.activate([
+                glassTintView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                glassTintView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                glassTintView.topAnchor.constraint(equalTo: topAnchor),
+                glassTintView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
+            // Add subtle shadow for depth separation
+            glassTintView.layer.shadowColor = UIColor.black.cgColor
+            glassTintView.layer.shadowOpacity = 0.15
+            glassTintView.layer.shadowRadius = 4
+            glassTintView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            glassTintView.layer.cornerRadius = bounds.height / 2
+            glassTintView.layer.masksToBounds = true
+        }
+		
 		wakeDisplayLink()
 		hideImages()
 		hideLabels(in: self)

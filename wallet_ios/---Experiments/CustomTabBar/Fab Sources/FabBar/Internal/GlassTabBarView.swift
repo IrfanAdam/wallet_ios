@@ -53,12 +53,14 @@ final class GlassTabBarView: UIView {
 		fabButton = button
 
 		super.init(frame: .zero)
+		// Apply shadow to the entire tab bar view for depth
 
 		tintAdjustmentMode = .automatic
 		fabGlassView.tintAdjustmentMode = .automatic
 		fabButton.tintAdjustmentMode = .automatic
 
 		setupViews(action: action)
+		applyShadow()
 	}
 
 	private func setupViews(action: FabBarAction) {
@@ -135,10 +137,26 @@ final class GlassTabBarView: UIView {
 	@available(*, unavailable)
 	required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+	// MARK: - Shadow Configuration
+	private func applyShadow() {
+		// Use a subtle black shadow with medium blur and a slight vertical offset.
+		layer.shadowColor = UIColor.black.cgColor
+		layer.shadowOpacity = 0.09
+		layer.shadowRadius = 10
+		layer.shadowOffset = CGSize(width: 0, height: 6)
+		layer.masksToBounds = false
+	}
+
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		segmentedGlassView.cornerConfiguration = .capsule()
 		fabGlassView.cornerConfiguration = .capsule()
+		// Optimize shadow rendering by setting a shadowPath matching the view's bounds.
+//		layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 36).cgPath
+		segmentedGlassView.layer.shadowPath = UIBezierPath(
+			roundedRect: segmentedGlassView.bounds,
+			cornerRadius: segmentedGlassView.bounds.height / 2
+		).cgPath
 	}
 
 	override func tintColorDidChange() {

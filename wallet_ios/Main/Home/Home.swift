@@ -32,7 +32,6 @@ extension EnvironmentValues {
 
 struct HomeView: View {
 	@State private var showDetails = false
-	@State private var showScan = false
 	@State private var showLiquidGlassTest = false
 	let sheetController: AppSheetController
 	var body: some View {
@@ -47,14 +46,6 @@ struct HomeView: View {
 					.sheet(isPresented: $showDetails) {
 						AnalyticsSheet()
 					}
-
-				VStack(alignment: .leading, spacing: 12) {
-					Text("Horizontal Scroll")
-						.font(.headline)
-						.padding(.horizontal, 20)
-
-					PaymentActionsGrid()
-				}
 
 				Button("Open Global Sheet") {
 					sheetController.present()
@@ -72,6 +63,15 @@ struct HomeView: View {
 						.background(Color.blue)
 						.cornerRadius(12)
 				}
+
+				VStack(alignment: .leading, spacing: 12) {
+					Text("Horizontal Scroll")
+						.font(.headline)
+						.padding(.horizontal, 20)
+
+					PaymentActionsGrid()
+				}
+
 			}
 			.navigationTitle("Home")
 			.navigationBarTitleDisplayMode(.inline)
@@ -84,11 +84,6 @@ struct HomeView: View {
 							.font(.title2)
 					}
 				}
-				ToolbarItem(placement: .navigationBarTrailing) {
-					Button("Test") {
-						showLiquidGlassTest = true
-					}
-				}
 
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button(action: {
@@ -98,23 +93,6 @@ struct HomeView: View {
 							.font(.title2)
 					}
 				}
-			}
-			.safeAreaInset(edge: .bottom, alignment: .trailing) {
-				Button {
-					showScan = true
-				} label: {
-					Image(systemName: "qrcode.viewfinder")
-						.font(.title.weight(.semibold))
-						.padding(.horizontal, 4)
-						.padding(.vertical, 8)
-				}
-				.buttonStyle(.glassProminent)
-				.padding(.horizontal, 24)
-				.padding(.vertical, 16)
-				.tint(.blue.opacity(0.9))
-			}
-			.fullScreenCover(isPresented: $showScan) {
-				transactOpts().ignoresSafeArea()
 			}
 			.fullScreenCover(isPresented: $showLiquidGlassTest) {
 				FavContentView()

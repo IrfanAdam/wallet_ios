@@ -34,25 +34,47 @@ struct WalletCardView: View {
 					.background(Color.white.opacity(0.14))
 					.clipShape(Circle())
 			}
-			
-			Spacer()
-			
-			HStack(spacing: 8) {
-				HStack(spacing: -8) {
-					avatar("D")
-					avatar("K")
+
+			HStack {
+				HStack(spacing: 8) {
+					HStack(spacing: -8) {
+						avatar("D")
+						avatar("K")
+					}
+					.padding(.leading, 3)
+
+					Image(systemName: "arrow.up.right")
+						.font(.system(size: 14, weight: .bold))
+						.foregroundStyle(.white.opacity(0.78))
 				}
-				.padding(.leading, 3)
-				
-				Image(systemName: "arrow.up.right")
-					.font(.system(size: 14, weight: .bold))
-					.foregroundStyle(.white.opacity(0.78))
+				.padding(4)
+				.background(Color.white.opacity(0.13))
+				.clipShape(Capsule())
+				.overlay(Capsule().stroke(Color.white.opacity(0.25)))
+			}.padding(.vertical, 8)
+
+			if isTopCard {
+				HStack(spacing: 12) {
+					GlassOptionButton(systemName: "checkmark.seal") {
+						// TODO: seal action
+					}
+					GlassOptionButton(systemName: "lock") {
+						// TODO: lock action
+					}
+					GlassOptionButton(systemName: "calendar.badge.checkmark") {
+						// TODO: calendar action
+					}
+					GlassOptionButton(systemName: "bell") {
+						// TODO: bell action
+					}
+					GlassOptionButton(systemName: "gearshape") {
+						// TODO: settings action
+					}
+				}
+				.padding(.vertical, 8)
 			}
-			.frame(height: 28)
-			.padding(.horizontal, 8)
-			.background(Color.white.opacity(0.13))
-			.clipShape(Capsule())
-			.overlay(Capsule().stroke(Color.white.opacity(0.25)))
+
+			Spacer()
 		}
 		.padding(16)
 		.frame(maxWidth: .infinity)
@@ -61,7 +83,7 @@ struct WalletCardView: View {
 		.clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
 		.overlay(
 			RoundedRectangle(cornerRadius: 36, style: .continuous)
-				.stroke(Color.white.opacity(borderOpacity), lineWidth: 2)
+				.stroke(Color(red: 0.97, green: 0.95, blue: 0.92), lineWidth: 2)
 		)
 	}
 	
@@ -74,4 +96,21 @@ struct WalletCardView: View {
 			.clipShape(Circle())
 			.overlay(Circle().stroke(.white, lineWidth: 1))
 	}
+}
+
+// MARK: - GlassOptionButton
+
+struct GlassOptionButton: View {
+    let systemName: String
+    let action: () -> Void
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: 16, weight: .semibold))
+        }
+				.padding(0)
+        .accessibilityLabel(systemName)
+				.buttonStyle(.glass)
+				.symbolRenderingMode(.hierarchical)
+    }
 }
