@@ -11,7 +11,7 @@ struct WalletContentPanel: View {
 				.padding(.top, 4)
 				.opacity(progress > 0.15 ? 1 : 0)
 
-			primaryActions.padding(.top, 16)
+			primaryActions.padding(.top, 8)
 
 				
 			statusChips

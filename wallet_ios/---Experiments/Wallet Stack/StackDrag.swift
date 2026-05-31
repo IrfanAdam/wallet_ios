@@ -12,15 +12,36 @@ struct WalletDragRevealSample: View {
 	@State private var dragY: CGFloat = 0
 	@State private var cardDragY: CGFloat = 0
 	@State private var panelState: PanelState = .collapsed
-	@State private var screenHeight: CGFloat = 852
+	@State private var screenHeight: CGFloat = 960
+	@State private var screenWidth: CGFloat = 393
 	@State private var frontWalletIndex = 0
 	@State private var isCardSettling = false
 	@State private var didSwitchCardDuringGesture = false
 	
-	private let compactPanelY: CGFloat = 150
-	private let collapsedPanelY: CGFloat = 230
+	private let cardPadding: CGFloat = 16
+	private let stackHorizontalPadding: CGFloat = 12
 	private let cardForwardSwapDistance: CGFloat = 210
 	private let cardBackwardSwapDistance: CGFloat = 150
+	
+	private var cardWidth: CGFloat {
+		screenWidth - (stackHorizontalPadding * 2)
+	}
+	
+	private var cardHeight: CGFloat {
+		cardWidth / (85.60 / 53.98)
+	}
+	
+	private var collapsedPanelY: CGFloat {
+		cardStackBaseTopPadding + cardHeight - cardPadding - 60
+	}
+	
+	private var compactPanelY: CGFloat {
+		collapsedPanelY - 70
+	}
+	
+	private var cardStackBaseTopPadding: CGFloat {
+		32
+	}
 	
 	private let wallets: [Wallet] = [
 		.init(currency: "USD", amount: "108.74", flag: "🇺🇸"),
@@ -32,6 +53,7 @@ struct WalletDragRevealSample: View {
 		NavigationStack {
 			GeometryReader { outerProxy in
 				let currentHeight = outerProxy.size.height > 0 ? outerProxy.size.height : 852
+				let currentWidth = outerProxy.size.width > 0 ? outerProxy.size.width : 393
 				
 				ZStack(alignment: .top) {
 					Color(red: 0.97, green: 0.95, blue: 0.92)
@@ -89,7 +111,9 @@ struct WalletDragRevealSample: View {
 					WalletContentPanel(progress: progress)
 						.offset(y: panelOffsetY)
 						.zIndex(2)
-						.gesture(panelDrag)
+						.simultaneousGesture(panelDrag)
+						.scrollDisabled(dragY > 4)
+					
 					
 					if panelState == .dismissed {
 						VStack {
@@ -97,7 +121,7 @@ struct WalletDragRevealSample: View {
 							Color.clear
 								.frame(height: 80)
 								.contentShape(Rectangle())
-								.gesture(
+								.simultaneousGesture(
 									DragGesture(minimumDistance: 8)
 										.onChanged { value in
 											dragY = min(0, value.translation.height)
@@ -134,9 +158,13 @@ struct WalletDragRevealSample: View {
 				}
 				.onAppear {
 					screenHeight = currentHeight
+					screenWidth = currentWidth
 				}
 				.onChange(of: currentHeight) { oldValue, newValue in
 					screenHeight = newValue
+				}
+				.onChange(of: currentWidth) { oldValue, newValue in
+					screenWidth = newValue
 				}
 			}
 		}
@@ -164,7 +192,7 @@ struct WalletDragRevealSample: View {
 	}
 
 	private var cardStackTopPadding: CGFloat {
-		let base = 32 + (40 * progress)
+		let base = cardStackBaseTopPadding + (40 * progress)
 		return base - (12 * overCollapseProgress)
 	}
 
@@ -219,13 +247,16 @@ struct WalletDragRevealSample: View {
 			.onEnded { value in
 				let baseOffset = stableOffset(for: panelState)
 				let predictedOffset = baseOffset + value.predictedEndTranslation.height
+				let dragDistance = value.translation.height
 				
 				var targetState: PanelState = panelState
 				
 				switch panelState {
 				case .compact:
-					if predictedOffset > (compactPanelY + collapsedPanelY) / 2 {
-						if predictedOffset > (collapsedPanelY + screenHeight) * 0.45 {
+					// Must drag down a meaningful amount to leave compact
+					if dragDistance > 40 {
+						// Only dismiss if flung very hard past collapsed
+						if predictedOffset > collapsedPanelY + 120 {
 							targetState = .dismissed
 						} else {
 							targetState = .collapsed
@@ -235,9 +266,10 @@ struct WalletDragRevealSample: View {
 					}
 					
 				case .collapsed:
-					if predictedOffset < (compactPanelY + collapsedPanelY) / 2 {
+					if predictedOffset < compactPanelY + 60 {
+						// Only go compact if dragged meaningfully upward
 						targetState = .compact
-					} else if predictedOffset > (collapsedPanelY + screenHeight) * 0.45 {
+					} else if predictedOffset > collapsedPanelY + 160 {
 						targetState = .dismissed
 					} else {
 						targetState = .collapsed
@@ -325,6 +357,5 @@ struct WalletDragRevealSample: View {
 struct WalletDragRevealSample_Previews: PreviewProvider {
 	static var previews: some View {
 		WalletDragRevealSample()
-			.previewDevice("iPhone 15 Pro")
 	}
 }

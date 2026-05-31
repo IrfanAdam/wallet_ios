@@ -17,7 +17,7 @@ struct WalletCardView: View {
 	let borderOpacity: Double
 	
 	var body: some View {
-		VStack(alignment: .leading, spacing: 0) {
+		VStack(alignment: .leading, spacing: 8) {
 			HStack(alignment: .top) {
 				HStack(alignment: .firstTextBaseline, spacing: 3) {
 						Text(wallet.amount)
@@ -37,27 +37,26 @@ struct WalletCardView: View {
 			}
 
 			HStack {
-				HStack(spacing: 8) {
+				HStack(spacing: 4) {
 					HStack(spacing: -8) {
 						avatar("D")
 						avatar("K")
 					}
-					.padding(.leading, 3)
 
 					Image(systemName: "arrow.up.right")
 						.font(.system(size: 14, weight: .bold))
 						.foregroundStyle(.white.opacity(0.78))
+						.padding(.horizontal, 2)
 				}
 				.padding(4)
 				.background(Color.white.opacity(0.13))
 				.clipShape(Capsule())
 				.overlay(Capsule().stroke(Color.white.opacity(0.25)))
-			}.padding(.vertical, 8)
-
-			Spacer()
+			}
 
 			if isTopCard {
-				HStack(spacing: 12) {
+				if progress > 0.5 { Spacer() }
+				HStack(spacing: 8) {
 					GlassOptionButton(systemName: "checkmark.seal") {
 						// TODO: seal action
 					}
@@ -74,15 +73,16 @@ struct WalletCardView: View {
 						// TODO: settings action
 					}
 				}
-				.padding(.bottom, 16)
-				.offset(y: -19 * (1 - progress) - 69 * overCollapseProgress)
+				.padding(.vertical, progress < 0.5 ? 8 : 0)
 				.opacity(1 - overCollapseProgress)
 				.scaleEffect(1 - 0.15 * overCollapseProgress)
+				if progress < 0.5 { Spacer() }
 			}
+
 		}
 		.padding(16)
 		.frame(maxWidth: .infinity)
-		.frame(height: cardHeight, alignment: .bottom)
+		.frame(height: cardHeight, alignment: .top)
 		.background(Color(red: 0.02, green: 0.29, blue: 0.62))
 		.clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
 		.overlay(

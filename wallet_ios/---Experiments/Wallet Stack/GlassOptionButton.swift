@@ -11,7 +11,6 @@ struct GlassOptionButton: View {
                 .frame(width: 44, height: 44)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
-                .shadow(color: .black.opacity(0.12), radius: 3, y: 1)
         }
         .accessibilityLabel(systemName)
     }
