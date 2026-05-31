@@ -101,21 +101,3 @@ struct WalletCardView: View {
 			.overlay(Circle().stroke(.white, lineWidth: 1))
 	}
 }
- 
-// MARK: - GlassOptionButton
- 
-struct GlassOptionButton: View {
-    let systemName: String
-    let action: () -> Void
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: 44, height: 44)
-                .background(.ultraThinMaterial)
-                .clipShape(Circle())
-        }
-        .accessibilityLabel(systemName)
-    }
-}

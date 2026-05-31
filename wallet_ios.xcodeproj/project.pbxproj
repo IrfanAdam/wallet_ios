@@ -108,6 +108,9 @@
 		EE514E0C2FC31BC500FC3C97 /* WalletToolbarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0B2FC31BC500FC3C97 /* WalletToolbarContent.swift */; };
 		EE514E0E2FC31BC600FC3C97 /* WalletContentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */; };
 		EE514E102FC31BC700FC3C97 /* WalletTransactionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */; };
+		EE514E122FC31BC800FC3C97 /* WalletAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E112FC31BC800FC3C97 /* WalletAccount.swift */; };
+		EE514E142FC31BC900FC3C97 /* WalletAccountGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E132FC31BC900FC3C97 /* WalletAccountGroupView.swift */; };
+		EE514E162FC31BCA00FC3C97 /* GlassOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE514E152FC31BCA00FC3C97 /* GlassOptionButton.swift */; };
 		EE58CE312F82A31F008E23A6 /* CustomArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE58CE302F82A31B008E23A6 /* CustomArc.swift */; };
 		EE6623DB2F4AFA2800F17D74 /* SpinComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */; };
 		EE6623E32F4B046D00F17D74 /* SCSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6623E22F4B046A00F17D74 /* SCSegments.swift */; };
@@ -244,6 +247,9 @@
 		EE514E0B2FC31BC500FC3C97 /* WalletToolbarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletToolbarContent.swift; sourceTree = "<group>"; };
 		EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContentPanel.swift; sourceTree = "<group>"; };
 		EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionCard.swift; sourceTree = "<group>"; };
+		EE514E112FC31BC800FC3C97 /* WalletAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAccount.swift; sourceTree = "<group>"; };
+		EE514E132FC31BC900FC3C97 /* WalletAccountGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAccountGroupView.swift; sourceTree = "<group>"; };
+		EE514E152FC31BCA00FC3C97 /* GlassOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassOptionButton.swift; sourceTree = "<group>"; };
 		EE58CE302F82A31B008E23A6 /* CustomArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomArc.swift; sourceTree = "<group>"; };
 		EE6623DA2F4AFA2500F17D74 /* SpinComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinComponent.swift; sourceTree = "<group>"; };
 		EE6623E22F4B046A00F17D74 /* SCSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSegments.swift; sourceTree = "<group>"; };
@@ -686,6 +692,9 @@
 				EE514E092FC31BC400FC3C97 /* WalletCardView.swift */,
 				EE514E0D2FC31BC600FC3C97 /* WalletContentPanel.swift */,
 				EE514E0F2FC31BC700FC3C97 /* WalletTransactionCard.swift */,
+				EE514E112FC31BC800FC3C97 /* WalletAccount.swift */,
+				EE514E132FC31BC900FC3C97 /* WalletAccountGroupView.swift */,
+				EE514E152FC31BCA00FC3C97 /* GlassOptionButton.swift */,
 			);
 			path = "Wallet Stack";
 			sourceTree = "<group>";
@@ -1044,6 +1053,9 @@
 				EE514E0C2FC31BC500FC3C97 /* WalletToolbarContent.swift in Sources */,
 				EE514E0E2FC31BC600FC3C97 /* WalletContentPanel.swift in Sources */,
 				EE514E102FC31BC700FC3C97 /* WalletTransactionCard.swift in Sources */,
+				EE514E122FC31BC800FC3C97 /* WalletAccount.swift in Sources */,
+				EE514E142FC31BC900FC3C97 /* WalletAccountGroupView.swift in Sources */,
+				EE514E162FC31BCA00FC3C97 /* GlassOptionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

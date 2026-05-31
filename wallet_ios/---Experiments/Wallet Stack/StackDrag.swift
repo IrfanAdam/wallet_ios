@@ -17,6 +17,11 @@ struct WalletDragRevealSample: View {
 	@State private var frontWalletIndex = 0
 	@State private var isCardSettling = false
 	@State private var didSwitchCardDuringGesture = false
+	@State private var selectedAccountIndex = 0
+	@State private var isAccountExpanded = false
+	@State private var toolbarTitle = "Main Group"
+	@State private var toolbarSubtitle = "Total CFA 14,0008"
+	@State private var isPanelLoading = false
 	
 	private let cardPadding: CGFloat = 16
 	private let stackHorizontalPadding: CGFloat = 12
@@ -43,10 +48,79 @@ struct WalletDragRevealSample: View {
 		32
 	}
 	
-	private let wallets: [Wallet] = [
-		.init(currency: "USD", amount: "108.74", flag: "🇺🇸"),
-		.init(currency: "CFA", amount: "43.59", flag: "🇿🇦"),
-		.init(currency: "INR", amount: "62.13", flag: "🇮🇳")
+	private let accounts: [WalletAccount] = [
+		.init(
+			name: "Main Account",
+			badge: "Default",
+			totalCurrency: "CFA",
+			totalAmount: "13,0008.74",
+			tint: Color(red: 0.02, green: 0.29, blue: 0.62),
+			rewardsCount: 3,
+			pendingCount: 2,
+			upcomingCount: 12,
+			wallets: [
+				.init(currency: "USD", amount: "108.74", flag: "🇺🇸"),
+				.init(currency: "CFA", amount: "43.59", flag: "🇿🇦"),
+				.init(currency: "INR", amount: "62.13", flag: "🇮🇳")
+			],
+			transactions: [
+				.init(title: "Split Payment Recieved", subtitle: "from Dilip Kumar", date: "7 Dec, 04:00pm", amount: "+ INR 65", icon: "arrow.down.left", avatar: "DK"),
+				.init(title: "Added Money", subtitle: "to Main Account INR wallet", date: "7 Dec, 03:18pm", amount: "+ INR 330", icon: "plus", avatar: "IN"),
+				.init(title: "Transfered to Bank", subtitle: "from CFA balance", date: "7 Dec, 01:42pm", amount: "- CFA 10,310", icon: "building.columns", avatar: "CF"),
+				.init(title: "Mobile Top Up", subtitle: "Airtel Africa from USD wallet", date: "7 Dec, 12:10pm", amount: "- USD 3.12", icon: "iphone", avatar: "AT")
+			]
+		),
+		.init(
+			name: "Travel Account",
+			badge: "Shared",
+			totalCurrency: "USD",
+			totalAmount: "2,840.12",
+			tint: Color(red: 0.10, green: 0.58, blue: 0.16),
+			rewardsCount: 1,
+			pendingCount: 1,
+			upcomingCount: 4,
+			wallets: [
+				.init(currency: "USD", amount: "840.12", flag: "🇺🇸"),
+				.init(currency: "EUR", amount: "430.00", flag: "🇪🇺"),
+				.init(currency: "CFA", amount: "91.42", flag: "🇿🇦")
+			],
+			transactions: [
+				.init(title: "Hotel Hold Released", subtitle: "Blue Orchid Suites", date: "8 Dec, 11:24am", amount: "+ USD 180", icon: "bed.double", avatar: "HO"),
+				.init(title: "Currency Exchange", subtitle: "Travel USD to EUR", date: "8 Dec, 09:12am", amount: "- USD 250", icon: "shuffle", avatar: "FX"),
+				.init(title: "Dinner Split", subtitle: "from Ama Mensah", date: "7 Dec, 09:40pm", amount: "+ EUR 48", icon: "fork.knife", avatar: "AM"),
+				.init(title: "Taxi Payment", subtitle: "Airport transfer", date: "7 Dec, 06:25pm", amount: "- USD 18", icon: "car", avatar: "TX")
+			]
+		),
+		.init(
+			name: "Savings Pot",
+			badge: "Locked",
+			totalCurrency: "INR",
+			totalAmount: "98,400.00",
+			tint: Color(red: 0.55, green: 0.34, blue: 0.14),
+			rewardsCount: 0,
+			pendingCount: 1,
+			upcomingCount: 3,
+			wallets: [
+				.init(currency: "INR", amount: "98,400.00", flag: "🇮🇳"),
+				.init(currency: "USD", amount: "240.18", flag: "🇺🇸"),
+				.init(currency: "CFA", amount: "63.40", flag: "🇿🇦")
+			],
+			transactions: [
+				.init(title: "Monthly Save", subtitle: "from Main Account", date: "5 Dec, 08:00am", amount: "+ INR 8,000", icon: "plus", avatar: "MS"),
+				.init(title: "Goal Boost", subtitle: "round-up transfer", date: "3 Dec, 06:18pm", amount: "+ INR 420", icon: "sparkles", avatar: "GB"),
+				.init(title: "Interest Added", subtitle: "monthly earnings", date: "1 Dec, 12:00am", amount: "+ INR 310", icon: "percent", avatar: "IA"),
+				.init(title: "Locked Transfer", subtitle: "scheduled savings rule", date: "30 Nov, 08:00am", amount: "+ INR 2,500", icon: "lock", avatar: "LT")
+			]
+		)
+	]
+	
+	private let groupTransactions: [WalletTransaction] = [
+		.init(title: "Travel Account Spend", subtitle: "Taxi Payment from USD wallet", date: "8 Dec, 06:25pm", amount: "- USD 18", icon: "car", avatar: "TR"),
+		.init(title: "Savings Pot Deposit", subtitle: "monthly save from Main Account", date: "8 Dec, 08:00am", amount: "+ INR 8,000", icon: "lock", avatar: "SV"),
+		.init(title: "Main Account Received", subtitle: "split payment from Dilip Kumar", date: "7 Dec, 04:00pm", amount: "+ INR 65", icon: "arrow.down.left", avatar: "MA"),
+		.init(title: "Currency Exchange", subtitle: "Travel Account USD to EUR", date: "7 Dec, 09:12am", amount: "- USD 250", icon: "shuffle", avatar: "FX"),
+		.init(title: "Bank Transfer", subtitle: "Main Account CFA balance", date: "6 Dec, 01:42pm", amount: "- CFA 10,310", icon: "building.columns", avatar: "BK"),
+		.init(title: "Interest Added", subtitle: "Savings Pot monthly earnings", date: "1 Dec, 12:00am", amount: "+ INR 310", icon: "percent", avatar: "IA")
 	]
 	
 	var body: some View {
@@ -93,22 +167,40 @@ struct WalletDragRevealSample: View {
 							.scaleEffect(0.82 + (0.18 * addCurrencyProgress), anchor: .center)
 						Spacer()
 					}
+					.opacity(isAccountExpanded ? 1 : 0)
 					.zIndex(1)
 					
-					WalletCardStack(
-						wallets: orderedWallets,
-						progress: progress,
-						overCollapseProgress: overCollapseProgress,
-						cardDragY: cardDragY,
-						cardSwitchProgress: cardSwitchProgress,
-						onCardDragChanged: updateCardDrag,
-						onCardDragEnded: finishCardDrag
-					)
-						.padding(.horizontal, 12)
-						.padding(.top, cardStackTopPadding)
-						.zIndex(0)
+					ZStack(alignment: .top) {
+						WalletAccountGroupView(
+							accounts: orderedAccounts,
+							selectedAccountID: selectedAccount.id,
+							onSelect: selectAccount
+						)
+						.opacity(isAccountExpanded ? 0 : 1)
+						.scaleEffect(isAccountExpanded ? 1.03 : 1, anchor: .top)
+						.offset(y: isAccountExpanded ? -10 : 0)
+						.allowsHitTesting(!isAccountExpanded)
+						
+						WalletCardStack(
+							wallets: orderedWallets,
+							progress: progress,
+							overCollapseProgress: overCollapseProgress,
+							cardDragY: cardDragY,
+							cardSwitchProgress: cardSwitchProgress,
+							onCardDragChanged: updateCardDrag,
+							onCardDragEnded: finishCardDrag
+						)
+						.opacity(isAccountExpanded ? 1 : 0)
+						.scaleEffect(isAccountExpanded ? 1 : 0.97, anchor: .top)
+						.offset(y: isAccountExpanded ? 0 : 10)
+						.allowsHitTesting(isAccountExpanded)
+					}
+					.padding(.horizontal, 12)
+					.padding(.top, cardStackTopPadding)
+					.animation(.easeInOut(duration: 0.24), value: isAccountExpanded)
+					.zIndex(1)
 					
-					WalletContentPanel(progress: progress)
+					WalletContentPanel(progress: progress, panelData: panelData, isLoading: isPanelLoading)
 						.offset(y: panelOffsetY)
 						.zIndex(2)
 						.simultaneousGesture(panelDrag)
@@ -154,7 +246,11 @@ struct WalletDragRevealSample: View {
 				.navigationTitle("")
 				.navigationBarTitleDisplayMode(.inline)
 				.toolbar {
-					WalletToolbarContent()
+					WalletToolbarContent(
+						title: toolbarTitle,
+						subtitle: toolbarSubtitle,
+						onBack: handleBack
+					)
 				}
 				.onAppear {
 					screenHeight = currentHeight
@@ -222,8 +318,36 @@ struct WalletDragRevealSample: View {
 	}
 	
 	private var orderedWallets: [Wallet] {
+		let wallets = selectedAccount.wallets
 		guard wallets.indices.contains(frontWalletIndex) else { return wallets }
 		return Array(wallets[frontWalletIndex...] + wallets[..<frontWalletIndex])
+	}
+	
+	private var selectedAccount: WalletAccount {
+		accounts[selectedAccountIndex]
+	}
+	
+	private var panelData: WalletPanelData {
+		if isAccountExpanded {
+			return WalletPanelData(
+				rewardsCount: selectedAccount.rewardsCount,
+				pendingCount: selectedAccount.pendingCount,
+				upcomingCount: selectedAccount.upcomingCount,
+				transactions: selectedAccount.transactions
+			)
+		}
+		
+		return WalletPanelData(
+			rewardsCount: accounts.reduce(0) { $0 + $1.rewardsCount },
+			pendingCount: accounts.reduce(0) { $0 + $1.pendingCount },
+			upcomingCount: accounts.reduce(0) { $0 + $1.upcomingCount },
+			transactions: groupTransactions
+		)
+	}
+	
+	private var orderedAccounts: [WalletAccount] {
+		guard accounts.indices.contains(selectedAccountIndex) else { return accounts }
+		return Array(accounts[selectedAccountIndex...] + accounts[..<selectedAccountIndex])
 	}
 	
 	private func stableOffset(for state: PanelState) -> CGFloat {
@@ -295,7 +419,7 @@ struct WalletDragRevealSample: View {
 	}
 	
 	private func updateCardDrag(_ value: DragGesture.Value) {
-		guard wallets.count > 1, !isCardSettling, !didSwitchCardDuringGesture else { return }
+		guard selectedAccount.wallets.count > 1, !isCardSettling, !didSwitchCardDuringGesture else { return }
 		cardDragY = max(-effectiveBackwardSwapDistance, min(effectiveForwardSwapDistance, value.translation.height))
 		
 		let direction: CGFloat = cardDragY < 0 ? -1 : 1
@@ -311,7 +435,7 @@ struct WalletDragRevealSample: View {
 			return
 		}
 		
-		guard wallets.count > 1, !isCardSettling else { return }
+		guard selectedAccount.wallets.count > 1, !isCardSettling else { return }
 		
 		let direction: CGFloat = cardDragY < 0 ? -1 : 1
 		let distance = direction < 0 ? effectiveBackwardSwapDistance : effectiveForwardSwapDistance
@@ -341,12 +465,63 @@ struct WalletDragRevealSample: View {
 			transaction.disablesAnimations = true
 			withTransaction(transaction) {
 				if direction < 0 {
-					frontWalletIndex = (frontWalletIndex - 1 + wallets.count) % wallets.count
+					frontWalletIndex = (frontWalletIndex - 1 + selectedAccount.wallets.count) % selectedAccount.wallets.count
 				} else {
-					frontWalletIndex = (frontWalletIndex + 1) % wallets.count
+					frontWalletIndex = (frontWalletIndex + 1) % selectedAccount.wallets.count
 				}
 				cardDragY = 0
 				isCardSettling = false
+			}
+		}
+	}
+	
+	private func selectAccount(_ index: Int) {
+		guard orderedAccounts.indices.contains(index) else { return }
+		guard let sourceIndex = accounts.firstIndex(where: { $0.id == orderedAccounts[index].id }) else { return }
+		let nextAccount = accounts[sourceIndex]
+		
+		showPanelLoading()
+		setToolbar(title: nextAccount.name, subtitle: "Total \(nextAccount.totalCurrency) 14,0008")
+		
+		withAnimation(.easeInOut(duration: 0.26)) {
+			selectedAccountIndex = sourceIndex
+			frontWalletIndex = 0
+			panelState = .collapsed
+			dragY = 0
+			cardDragY = 0
+			isAccountExpanded = true
+		}
+	}
+	
+	private func handleBack() {
+		guard isAccountExpanded else { return }
+		showPanelLoading()
+		setToolbar(title: "Main Group", subtitle: "Total \(selectedAccount.totalCurrency) 14,0008")
+		
+		withAnimation(.easeInOut(duration: 0.26)) {
+			panelState = .collapsed
+			dragY = 0
+			cardDragY = 0
+			isAccountExpanded = false
+		}
+	}
+	
+	private func setToolbar(title: String, subtitle: String) {
+		var transaction = Transaction()
+		transaction.disablesAnimations = true
+		
+		withTransaction(transaction) {
+			toolbarTitle = title
+			toolbarSubtitle = subtitle
+		}
+	}
+	
+	private func showPanelLoading() {
+		isPanelLoading = true
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+			withAnimation(.easeOut(duration: 0.18)) {
+				isPanelLoading = false
 			}
 		}
 	}

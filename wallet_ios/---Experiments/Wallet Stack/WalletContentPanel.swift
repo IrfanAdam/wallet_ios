@@ -2,6 +2,8 @@ import SwiftUI
 
 struct WalletContentPanel: View {
 	let progress: CGFloat
+	let panelData: WalletPanelData
+	let isLoading: Bool
 	
 	var body: some View {
 		VStack(spacing: 0) {
@@ -16,9 +18,11 @@ struct WalletContentPanel: View {
 				
 			statusChips
 				.padding(.top, 16)
+				.walletLoading(isLoading)
 			
 			recents
 				.padding(.top, 18)
+				.walletLoading(isLoading)
 		}
 		.frame(maxWidth: .infinity)
 		.background(
@@ -41,9 +45,9 @@ struct WalletContentPanel: View {
 	
 	private var statusChips: some View {
 		HStack(spacing: 8) {
-			WalletStatusChip(icon: "gift", text: "3", tint: .green)
-			WalletStatusChip(icon: "hourglass", text: "2 Pending", tint: .orange)
-			WalletStatusChip(icon: "clock.badge", text: "12 Upcoming", tint: .blue)
+			WalletStatusChip(icon: "gift", text: "\(panelData.rewardsCount)", tint: .green)
+			WalletStatusChip(icon: "hourglass", text: "\(panelData.pendingCount) Pending", tint: .orange)
+			WalletStatusChip(icon: "clock.badge", text: "\(panelData.upcomingCount) Upcoming", tint: .blue)
 			Spacer(minLength: 0)
 		}
 		.padding(.horizontal, 16)
@@ -51,16 +55,20 @@ struct WalletContentPanel: View {
 	
 	private var recents: some View {
 		VStack(spacing: 0) {
-			WalletTransactionCard(title: "Split Payment Recieved", subtitle: "from Dilip Kumar", date: "7 Dec, 04:00pm", amount: "INR 65", icon: "arrow.down.left", avatar: "DK")
-			Divider().padding(.leading, 16)
-			
-			WalletTransactionCard(title: "Added Money", subtitle: "to *********7890", date: "7 Dec, 04:00pm", amount: "+ INR 330", icon: "plus", avatar: "AM")
-			Divider().padding(.leading, 16)
-			
-			WalletTransactionCard(title: "Transfered to Bank", subtitle: "from Oluwaseun Oluwatoyin Adedeji", date: "7 Dec, 04:00pm", amount: "- INR 10,310", icon: "building.columns", avatar: "TB")
-			Divider().padding(.leading, 16)
-			
-			WalletTransactionCard(title: "Top Up", subtitle: "to Airtel - 12312123", date: "7 Dec, 04:00pm", amount: "- INR 260", icon: "iphone", avatar: "AT")
+			ForEach(Array(panelData.transactions.enumerated()), id: \.element.id) { index, transaction in
+				WalletTransactionCard(
+					title: transaction.title,
+					subtitle: transaction.subtitle,
+					date: transaction.date,
+					amount: transaction.amount,
+					icon: transaction.icon,
+					avatar: transaction.avatar
+				)
+				
+				if index < panelData.transactions.count - 1 {
+					Divider().padding(.leading, 16)
+				}
+			}
 			
 			HStack(spacing: 8) {
 				Text("see all transactions")
@@ -72,6 +80,47 @@ struct WalletContentPanel: View {
 			.padding(.bottom, 240)
 		}
 		.padding(.horizontal, 8)
+	}
+}
+
+private struct WalletLoadingModifier: ViewModifier {
+	let isLoading: Bool
+	@State private var isAnimating = false
+	
+	func body(content: Content) -> some View {
+		content
+			.redacted(reason: isLoading ? .placeholder : [])
+			.overlay {
+				if isLoading {
+					GeometryReader { proxy in
+						LinearGradient(
+							colors: [
+								.white.opacity(0),
+								.white.opacity(0.55),
+								.white.opacity(0)
+							],
+							startPoint: .leading,
+							endPoint: .trailing
+						)
+						.frame(width: proxy.size.width * 0.55)
+						.offset(x: isAnimating ? proxy.size.width * 1.15 : -proxy.size.width * 0.65)
+					}
+					.mask(content.redacted(reason: .placeholder))
+					.allowsHitTesting(false)
+				}
+			}
+			.onAppear {
+				withAnimation(.linear(duration: 1.05).repeatForever(autoreverses: false)) {
+					isAnimating = true
+				}
+			}
+			.animation(.easeInOut(duration: 0.16), value: isLoading)
+	}
+}
+
+private extension View {
+	func walletLoading(_ isLoading: Bool) -> some View {
+		modifier(WalletLoadingModifier(isLoading: isLoading))
 	}
 }
 
