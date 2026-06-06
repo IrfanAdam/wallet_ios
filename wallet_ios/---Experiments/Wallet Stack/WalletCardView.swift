@@ -15,6 +15,7 @@ struct WalletCardView: View {
 	let overCollapseProgress: CGFloat
 	let cardHeight: CGFloat
 	let borderOpacity: Double
+	let tintColor: Color
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
@@ -83,11 +84,11 @@ struct WalletCardView: View {
 		.padding(16)
 		.frame(maxWidth: .infinity)
 		.frame(height: cardHeight, alignment: .top)
-		.background(Color(red: 0.02, green: 0.29, blue: 0.62))
+		.background(tintColor)
 		.clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
 		.overlay(
 			RoundedRectangle(cornerRadius: 36, style: .continuous)
-				.stroke(Color(red: 0.97, green: 0.95, blue: 0.92), lineWidth: 2)
+				.stroke(Color(red: 0.97, green: 0.95, blue: 0.92), lineWidth: 1.5)
 		)
 	}
 	

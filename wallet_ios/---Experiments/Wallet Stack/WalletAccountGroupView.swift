@@ -5,6 +5,15 @@ struct WalletAccountGroupView: View {
 	let selectedAccountID: WalletAccount.ID
 	let onSelect: (Int) -> Void
 	
+	// Transition properties with default values
+	var tappedIndex: Int? = nil
+	var tappedCardOffset: CGFloat = 0.0
+	var tappedCardScale: CGFloat = 1.0
+	var otherCardsOpacity: Double = 1.0
+	var otherCardsOffsetShift: CGFloat = 0.0
+	
+	@State private var pressedIndex: Int? = nil
+	
 	var body: some View {
 		GeometryReader { proxy in
 			let cardWidth = proxy.size.width
@@ -12,13 +21,49 @@ struct WalletAccountGroupView: View {
 			
 			ZStack(alignment: .top) {
 				ForEach(Array(accounts.enumerated()), id: \.element.id) { index, account in
+					let isTapped = (tappedIndex == index)
+					let isPressed = (pressedIndex == index)
+					
+					let baseScale = isTapped ? tappedCardScale : groupCardScale(index)
+					let scale = isPressed ? baseScale * 0.95 : baseScale
+					
+					let baseOffsetY = isTapped ? tappedCardOffset : groupCardY(index)
+					let offsetY = isTapped ? baseOffsetY : baseOffsetY + otherCardsOffsetShift
+					
 					WalletAccountGroupCard(account: account, cardHeight: cardHeight)
-						.offset(y: groupCardY(index))
-						.scaleEffect(groupCardScale(index), anchor: .top)
-						.zIndex(Double(accounts.count - index))
-						.onTapGesture {
-							onSelect(index)
-						}
+						.offset(y: offsetY)
+						.scaleEffect(scale, anchor: .top)
+						.opacity(isTapped ? 1.0 : otherCardsOpacity)
+						.zIndex(isTapped ? 100 : Double(accounts.count - index))
+						.gesture(
+							DragGesture(minimumDistance: 0)
+								.onChanged { value in
+									guard tappedIndex == nil else { return }
+									let dragDistance = sqrt(value.translation.width * value.translation.width + value.translation.height * value.translation.height)
+									if dragDistance > 30 {
+										if pressedIndex != nil {
+											withAnimation(.spring(response: 0.2, dampingFraction: 0.8)) {
+												pressedIndex = nil
+											}
+										}
+									} else {
+										if pressedIndex == nil {
+											withAnimation(.spring(response: 0.15, dampingFraction: 0.85)) {
+												pressedIndex = index
+											}
+										}
+									}
+								}
+								.onEnded { value in
+									guard tappedIndex == nil else { return }
+									if pressedIndex == index {
+										withAnimation(.spring(response: 0.15, dampingFraction: 0.85)) {
+											pressedIndex = nil
+										}
+										onSelect(index)
+									}
+								}
+						)
 				}
 			}
 			.frame(width: cardWidth, height: cardHeight + 52, alignment: .top)
@@ -35,9 +80,11 @@ struct WalletAccountGroupView: View {
 		let collapsed = [1.0, 0.96, 0.92]
 		return collapsed[index]
 	}
+	
+
 }
 
-private struct WalletAccountGroupCard: View {
+struct WalletAccountGroupCard: View {
 	let account: WalletAccount
 	let cardHeight: CGFloat
 	

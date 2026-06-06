@@ -8,6 +8,9 @@ struct WalletCardStack: View {
 	let cardSwitchProgress: CGFloat
 	let onCardDragChanged: (DragGesture.Value) -> Void
 	let onCardDragEnded: (DragGesture.Value) -> Void
+	let tintColor: Color
+	let revealProgress: CGFloat
+	let topCardOpacity: Double
 	
 	var body: some View {
 		GeometryReader { proxy in
@@ -23,7 +26,8 @@ struct WalletCardStack: View {
 						progress: progress,
 						overCollapseProgress: overCollapseProgress,
 						cardHeight: cardHeight,
-						borderOpacity: borderOpacity(index)
+						borderOpacity: borderOpacity(index),
+						tintColor: tintColor
 					)
 						.offset(
 							x: cardX(index),
@@ -37,6 +41,7 @@ struct WalletCardStack: View {
 							perspective: 0.65
 						)
 						.shadow(color: .black.opacity(cardShadow(index)), radius: 18, y: 10)
+						.opacity(index == 0 ? topCardOpacity : 1.0)
 						.zIndex(cardZ(index))
 						.allowsHitTesting(true)
 						.highPriorityGesture(cardDrag)
@@ -55,22 +60,22 @@ struct WalletCardStack: View {
 		let current = slotY(index, cardHeight: cardHeight)
 		let target = slotY(targetIndex(for: index), cardHeight: cardHeight)
 		
+		let base: CGFloat
 		if dragDirection > 0, index == 0 {
 			let repositionProgress = smoothstep(edge0: 0.58, edge1: 1, value: cardSwitchProgress)
 			let visibleDragY = current + cardDragAmount
-			return visibleDragY + (target - visibleDragY) * repositionProgress
-		}
-
-		if dragDirection < 0, index == wallets.count - 1 {
+			base = visibleDragY + (target - visibleDragY) * repositionProgress
+		} else if dragDirection < 0, index == wallets.count - 1 {
 			let disappearProgress = smoothstep(edge0: 0.08, edge1: 0.52, value: cardSwitchProgress)
 			let emergeProgress = smoothstep(edge0: 0.64, edge1: 1, value: cardSwitchProgress)
 			let hiddenY = reverseHiddenY(cardHeight: cardHeight)
 			let dippedY = current + (hiddenY - current) * disappearProgress
-			return dippedY + (target - dippedY) * emergeProgress
+			base = dippedY + (target - dippedY) * emergeProgress
+		} else {
+			base = current + (target - current) * slotTransitionProgress(for: index)
 		}
 		
-		let interpolated = current + (target - current) * slotTransitionProgress(for: index)
-		return interpolated
+		return base * revealProgress
 	}
 	
 	private func slotY(_ index: Int, cardHeight: CGFloat) -> CGFloat {
@@ -84,23 +89,32 @@ struct WalletCardStack: View {
 	private func cardScale(_ index: Int) -> CGFloat {
 		let current = slotScale(index)
 		let target = slotScale(targetIndex(for: index))
+
 		let base = current + (target - current) * slotTransitionProgress(for: index)
-		
+
+		let scale: CGFloat
 		if dragDirection < 0, index == wallets.count - 1 {
 			let shrinkProgress = smoothstep(edge0: 0.08, edge1: 0.52, value: cardSwitchProgress)
 			let emergeProgress = smoothstep(edge0: 0.64, edge1: 1, value: cardSwitchProgress)
 			let hiddenScale = current * 0.88
 			let dippedScale = current + (hiddenScale - current) * shrinkProgress
-			return dippedScale + (target - dippedScale) * emergeProgress
+			scale = dippedScale + (target - dippedScale) * emergeProgress
+
+		} else if index == activeCardIndex {
+			// Ease the pulse so it doesn't race at the start
+			let pulseProgress = smoothstep(edge0: 0.0, edge1: 1.0, value: cardSwitchProgress)
+			let pulse = 0.018 * (1 - abs((pulseProgress * 2) - 1))
+			scale = base + pulse
+
+		} else {
+			scale = base
 		}
-		
-		if index == activeCardIndex {
-			return base + 0.018 * (1 - abs((cardSwitchProgress * 2) - 1))
-		}
-		
-		return base
+
+		// Protect against revealProgress collapsing the scale effect
+		guard revealProgress > 0 else { return 1.0 }
+		return 1.0 + (scale - 1.0) * revealProgress
 	}
-	
+
 	private func slotScale(_ index: Int) -> CGFloat {
 		let collapsed = [1.0, 0.96, 0.92]
 		let expanded  = [1.0, 1.0,  1.0]

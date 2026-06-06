@@ -8,6 +8,17 @@ enum PanelState {
 	case dismissed
 }
 
+enum TransitionPhase: String {
+	case group
+	case fadingOutGroup
+	case movingToHero
+	case emergingCurrencies
+	case expanded
+	case collapsingCurrencies
+	case movingToGroup
+	case fadingInGroup
+}
+
 struct WalletDragRevealSample: View {
 	@State private var dragY: CGFloat = 0
 	@State private var cardDragY: CGFloat = 0
@@ -22,6 +33,23 @@ struct WalletDragRevealSample: View {
 	@State private var toolbarTitle = "Main Group"
 	@State private var toolbarSubtitle = "Total CFA 14,0008"
 	@State private var isPanelLoading = false
+	
+	// Transition State Variables
+	@State private var transitionPhase: TransitionPhase = .group
+	@State private var tappedGroupIndex: Int? = nil
+	@State private var tappedCardOffset: CGFloat = 0.0
+	@State private var tappedCardScale: CGFloat = 1.0
+	@State private var tappedCardOpacity: Double = 1.0
+	@State private var otherCardsOpacity: Double = 1.0
+	@State private var otherCardsOffsetShift: CGFloat = 0.0
+	@State private var otherCardsDispersalProgress: CGFloat = 0.0
+	@State private var currencyRevealProgress: CGFloat = 1.0
+	@State private var transitionCarrierAccount: WalletAccount? = nil
+	@State private var transitionCarrierOffset: CGFloat = 0.0
+	@State private var transitionCarrierScale: CGFloat = 1.0
+	@State private var transitionCarrierOpacity: Double = 0.0
+	@State private var stackTopCardOpacity: Double = 1.0
+	@State private var originalSelectedAccountIndex: Int = 0
 	
 	private let cardPadding: CGFloat = 16
 	private let stackHorizontalPadding: CGFloat = 12
@@ -128,6 +156,8 @@ struct WalletDragRevealSample: View {
 			GeometryReader { outerProxy in
 				let currentHeight = outerProxy.size.height > 0 ? outerProxy.size.height : 852
 				let currentWidth = outerProxy.size.width > 0 ? outerProxy.size.width : 393
+				let liveCardWidth = currentWidth - (stackHorizontalPadding * 2)
+				let liveCardHeight = liveCardWidth / (85.60 / 53.98)
 				
 				ZStack(alignment: .top) {
 					Color(red: 0.97, green: 0.95, blue: 0.92)
@@ -174,11 +204,15 @@ struct WalletDragRevealSample: View {
 						WalletAccountGroupView(
 							accounts: orderedAccounts,
 							selectedAccountID: selectedAccount.id,
-							onSelect: selectAccount
+							onSelect: selectAccount,
+							tappedIndex: tappedGroupIndex,
+							tappedCardOffset: tappedCardOffset,
+							tappedCardScale: tappedCardScale,
+							otherCardsOpacity: otherCardsOpacity,
+							otherCardsOffsetShift: otherCardsOffsetShift
 						)
 						.opacity(isAccountExpanded ? 0 : 1)
-						.scaleEffect(isAccountExpanded ? 1.03 : 1, anchor: .top)
-						.offset(y: isAccountExpanded ? -10 : 0)
+						.animation(nil, value: isAccountExpanded)
 						.allowsHitTesting(!isAccountExpanded)
 						
 						WalletCardStack(
@@ -188,16 +222,26 @@ struct WalletDragRevealSample: View {
 							cardDragY: cardDragY,
 							cardSwitchProgress: cardSwitchProgress,
 							onCardDragChanged: updateCardDrag,
-							onCardDragEnded: finishCardDrag
+							onCardDragEnded: finishCardDrag,
+							tintColor: selectedAccount.tint,
+							revealProgress: (transitionPhase == .emergingCurrencies || transitionPhase == .collapsingCurrencies) ? currencyRevealProgress : 1.0,
+							topCardOpacity: stackTopCardOpacity
 						)
 						.opacity(isAccountExpanded ? 1 : 0)
-						.scaleEffect(isAccountExpanded ? 1 : 0.97, anchor: .top)
-						.offset(y: isAccountExpanded ? 0 : 10)
+						.animation(nil, value: isAccountExpanded)
 						.allowsHitTesting(isAccountExpanded)
+						
+						if let transitionCarrierAccount {
+							WalletAccountGroupCard(account: transitionCarrierAccount, cardHeight: liveCardHeight)
+								.offset(y: transitionCarrierOffset)
+								.scaleEffect(transitionCarrierScale, anchor: .top)
+								.opacity(transitionCarrierOpacity)
+								.allowsHitTesting(false)
+								.zIndex(200)
+						}
 					}
 					.padding(.horizontal, 12)
 					.padding(.top, cardStackTopPadding)
-					.animation(.easeInOut(duration: 0.24), value: isAccountExpanded)
 					.zIndex(1)
 					
 					WalletContentPanel(progress: progress, panelData: panelData, isLoading: isPanelLoading)
@@ -315,6 +359,18 @@ struct WalletDragRevealSample: View {
 	private func smoothstep(edge0: CGFloat, edge1: CGFloat, value: CGFloat) -> CGFloat {
 		let x = max(0, min(1, (value - edge0) / (edge1 - edge0)))
 		return x * x * (3 - 2 * x)
+	}
+
+	private func groupCardY(_ index: Int) -> CGFloat {
+		let collapsed = [0, -12, -24]
+		guard collapsed.indices.contains(index) else { return 0 }
+		return CGFloat(collapsed[index])
+	}
+	
+	private func groupCardScale(_ index: Int) -> CGFloat {
+		let collapsed = [1.0, 0.96, 0.92]
+		guard collapsed.indices.contains(index) else { return 1.0 }
+		return collapsed[index]
 	}
 	
 	private var orderedWallets: [Wallet] {
@@ -480,29 +536,86 @@ struct WalletDragRevealSample: View {
 		guard let sourceIndex = accounts.firstIndex(where: { $0.id == orderedAccounts[index].id }) else { return }
 		let nextAccount = accounts[sourceIndex]
 		
-		showPanelLoading()
-		setToolbar(title: nextAccount.name, subtitle: "Total \(nextAccount.totalCurrency) 14,0008")
+		tappedGroupIndex = index
+		tappedCardOffset = groupCardY(index)
+		tappedCardScale = groupCardScale(index)
+		otherCardsOpacity = 1.0
+		otherCardsOffsetShift = 0.0
+		transitionPhase = .fadingOutGroup
 		
-		withAnimation(.easeInOut(duration: 0.26)) {
+		// Phase 1: Selected card moves to hero, other cards move up and fade away
+		withAnimation(.spring(response: 0.32, dampingFraction: 0.72)) {
+			tappedCardOffset = 0.0
+			tappedCardScale = 1.0
+			otherCardsOpacity = 0.0
+			otherCardsOffsetShift = -45.0
+		}
+		
+		// Phase 2: Overlap/Emerge the currency stack (triggered halfway through Phase 1)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
+			guard tappedGroupIndex == index else { return }
+			transitionPhase = .emergingCurrencies
+			
+			originalSelectedAccountIndex = selectedAccountIndex
 			selectedAccountIndex = sourceIndex
 			frontWalletIndex = 0
 			panelState = .collapsed
 			dragY = 0
 			cardDragY = 0
-			isAccountExpanded = true
+			
+			currencyRevealProgress = 0.0
+			
+			withAnimation(.spring(response: 0.38, dampingFraction: 0.70)) {
+				isAccountExpanded = true
+				currencyRevealProgress = 1.0
+			}
+			
+			showPanelLoading()
+			setToolbar(title: nextAccount.name, subtitle: "Total \(nextAccount.totalCurrency) 14,0008")
+			
+			// Phase 3: Finalize expansion
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.38) {
+				guard transitionPhase == .emergingCurrencies else { return }
+				transitionPhase = .expanded
+			}
 		}
 	}
 	
 	private func handleBack() {
 		guard isAccountExpanded else { return }
+		
+		// Set transition phase to collapsing currencies
+		transitionPhase = .collapsingCurrencies
+		
+		selectedAccountIndex = originalSelectedAccountIndex
+		
+		let targetOffset = groupCardY(tappedGroupIndex ?? 0)
+		let targetScale = groupCardScale(tappedGroupIndex ?? 0)
+		
+		// Run all animations simultaneously and instinctively with a bouncy spring!
+		withAnimation(.spring(response: 0.38, dampingFraction: 0.74)) {
+			// 1. Collapse currency cards back behind the foremost card
+			currencyRevealProgress = 0.0
+			
+			// 2. Cross-fade group view back in
+			isAccountExpanded = false
+			
+			// 3. Translate foremost card back to its group slot
+			tappedCardOffset = targetOffset
+			tappedCardScale = targetScale
+			
+			// 4. Reset other card offsets and fade them in
+			otherCardsOffsetShift = 0.0
+			otherCardsOpacity = 1.0
+		}
+		
 		showPanelLoading()
 		setToolbar(title: "Main Group", subtitle: "Total \(selectedAccount.totalCurrency) 14,0008")
 		
-		withAnimation(.easeInOut(duration: 0.26)) {
-			panelState = .collapsed
-			dragY = 0
-			cardDragY = 0
-			isAccountExpanded = false
+		// End the transition phase after the animation duration (0.38s)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.38) {
+			transitionPhase = .group
+			tappedGroupIndex = nil
 		}
 	}
 	
@@ -513,6 +626,15 @@ struct WalletDragRevealSample: View {
 		withTransaction(transaction) {
 			toolbarTitle = title
 			toolbarSubtitle = subtitle
+		}
+	}
+	
+	private func setAccountExpanded(_ expanded: Bool) {
+		var transaction = Transaction()
+		transaction.disablesAnimations = true
+		
+		withTransaction(transaction) {
+			isAccountExpanded = expanded
 		}
 	}
 	
